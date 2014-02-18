@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class ReservasView {
 	
-	private Integer idCategoria;
+	private Long idCategoria;
 	
 	private Date chegada;
 	
@@ -30,11 +30,11 @@ public class ReservasView {
 	
 	private String celularHospede;
 
-	public Integer getIdCategoria() {
+	public Long getIdCategoria() {
 		return idCategoria;
 	}
 
-	public void setIdCategoria(Integer idCategoria) {
+	public void setIdCategoria(Long idCategoria) {
 		this.idCategoria = idCategoria;
 	}
 
@@ -110,11 +110,11 @@ public class ReservasView {
 		this.emailHospede = emailHospede;
 	}
 
-	public String getCdiadeHospede() {
+	public String getCidadeHospede() {
 		return cdiadeHospede;
 	}
 
-	public void setCdiadeHospede(String cdiadeHospede) {
+	public void setCidadeHospede(String cdiadeHospede) {
 		this.cdiadeHospede = cdiadeHospede;
 	}
 

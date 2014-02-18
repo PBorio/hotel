@@ -70,6 +70,92 @@ public class ReservaTest {
 		Assert.assertTrue(fevereiro.overlaps(periodo));
 		Assert.assertTrue(periodo.overlaps(fevereiro));
 	}
+	
+	@Test
+	public void seADataCaiNoPeriodoEntreInicioEFimDaReservaIndicaReservado(){
+
+		DateTime carnaval = new DateTime(2014, 3, 4, 0, 0, 0);
+		DateTime primeiroDeMarco = new DateTime(2014,3,1,0,0,0);
+		DateTime quinzeDeMarco = new DateTime(2014,3,15,0,0,0);
+		
+		Reserva reserva = new Reserva();
+		reserva.setInicio(primeiroDeMarco);
+		reserva.setFim(quinzeDeMarco);
+		
+		Assert.assertTrue(reserva.contemAData(carnaval));
+	}
+	
+	@Test
+	public void seADataCaiNumPeriodoForaDoInicioEFimDaReservaIndicaNaoReservado(){
+
+		DateTime carnaval = new DateTime(2014, 3, 4, 0, 0, 0);
+		DateTime dezessesisDeMarco = new DateTime(2014,3,16,0,0,0);
+		DateTime trintaDeMarco = new DateTime(2014,3,30,0,0,0);
+		
+		Reserva reserva = new Reserva();
+		reserva.setInicio(dezessesisDeMarco);
+		reserva.setFim(trintaDeMarco);
+		
+		Assert.assertFalse(reserva.contemAData(carnaval));
+	}
+	
+	@Test
+	public void umaReservaDeveSaberSeOutraReservaEhParaOMesmoPeriodo(){
+		
+		DateTime sabadoCarnaval = new DateTime(2014,3, 1,0,0,0);
+		DateTime tercaCarnaval = new DateTime(2014, 3, 4, 0, 0, 0);
+		DateTime primeiroDeMarco = new DateTime(2014,3,1,0,0,0);
+		DateTime trintaDeMarco = new DateTime(2014,3,30,0,0,0);
+		
+		Reserva reservaMarco = new Reserva();
+		reservaMarco.setInicio(primeiroDeMarco);
+		reservaMarco.setFim(trintaDeMarco);
+		
+		Reserva reservaCarnaval = new Reserva();
+		reservaCarnaval.setInicio(sabadoCarnaval);
+		reservaCarnaval.setFim(tercaCarnaval);
+		
+		Assert.assertTrue(reservaMarco.coincideCom(reservaCarnaval));
+		
+	}
+	
+	@Test
+	public void umaReservaDeveSaberSeOutraReservaNaoEhParaOMesmoPeriodo(){
+		
+		DateTime sabadoCarnaval = new DateTime(2014,3, 1,0,0,0);
+		DateTime tercaCarnaval = new DateTime(2014, 3, 4, 0, 0, 0);
+		DateTime dezessesisDeMarco = new DateTime(2014,3,16,0,0,0);
+		DateTime trintaDeMarco = new DateTime(2014,3,30,0,0,0);
+		
+		Reserva reservaMarco = new Reserva();
+		reservaMarco.setInicio(dezessesisDeMarco);
+		reservaMarco.setFim(trintaDeMarco);
+		
+		Reserva reservaCarnaval = new Reserva();
+		reservaCarnaval.setInicio(sabadoCarnaval);
+		reservaCarnaval.setFim(tercaCarnaval);
+		
+		Assert.assertFalse(reservaMarco.coincideCom(reservaCarnaval));
+	}
+	
+	@Test
+	public void seUmaReservaComecaAntesDeOutraETerminaDepoisDeveConsiderarQueCoincide(){
+		DateTime sabadoCarnaval = new DateTime(2014,3, 1,0,0,0);
+		DateTime tercaCarnaval = new DateTime(2014, 3, 4, 0, 0, 0);
+		DateTime primeiroDeFevereiro = new DateTime(2014,2,1,0,0,0);
+		DateTime trintaDeMarco = new DateTime(2014,3,30,0,0,0);
+		
+		Reserva reservaMarco = new Reserva();
+		reservaMarco.setInicio(primeiroDeFevereiro);
+		reservaMarco.setFim(trintaDeMarco);
+		
+		Reserva reservaCarnaval = new Reserva();
+		reservaCarnaval.setInicio(sabadoCarnaval);
+		reservaCarnaval.setFim(tercaCarnaval);
+		
+		Assert.assertTrue(reservaCarnaval.coincideCom(reservaMarco));
+	}
+
 
 }
 
