@@ -1,0 +1,104 @@
+
+#container1 {
+    float:left;
+    width:100%;
+}
+
+.colunaData{
+  text-align: center;
+  float:left;
+  width:10%;  
+}
+
+.registroData{
+  background-color: pink;
+  #margin:2px;
+  #margin-left:4px;
+  #margin-right:4px;
+  cursor: default;
+  border: 1px solid black;
+}
+
+.colunaQuarto{
+    text-align: center;
+    float:left;
+    width:8%;
+}
+
+.colunaChale {
+    text-align: center;
+    float:left;
+    width:5%;
+}
+
+.colunaChale h4{
+  background-color: #C2D1F0;
+}
+
+.colunaSuiteMaster {
+    text-align: center;
+    float:left;
+    width:5%;
+}
+
+.colunaSuiteMaster h4{
+    background-color: #B3D580;
+}
+
+.colunaSuiteSuperior {
+    text-align: center;
+    float:left;
+    width:5%;
+}
+
+.colunaSuiteSuperior h4{
+    background-color: #FFCC99;
+}
+
+.colunaSuiteStandard{
+   text-align: center;
+    float:left;
+    width:5%;
+}
+
+.colunaSuiteStandard h4{
+    background-color: #E1C7E1;
+}
+
+.colunaSuiteInferior{
+   text-align: center;
+    float:left;
+    width:5%;
+}
+
+.colunaSuiteInferior h4{
+    background-color: #FFCC99;
+}
+
+.colunaEconomico{
+  text-align: center;
+  float:left;
+  width:5%;
+}
+
+.colunaEconomico h4{
+    background-color: #E69999;
+}
+
+
+
+.livre{
+  background-color: #008000;
+  border: 1px solid black;
+  cursor: default;
+}
+
+
+.over{
+  border: 1px solid black;
+  box-shadow:5px 4px 10px #ccc;
+  -moz-box-shadow:5px 4px 10px #ccc;
+  padding: 10px;
+  margin: 10px;
+  cursor: pointer;
+}

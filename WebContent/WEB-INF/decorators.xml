@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="/decorators">
+    <excludes>
+   		<pattern>/*/rel565.jsp</pattern>
+        <pattern>/*/login.jsp</pattern>
+    </excludes>
+	 <decorator name="principal" page="principal.jsp">
+	     <pattern>*</pattern>
+	 </decorator>
+	 
+	 <decorator name="bootstrap" page="bootstrap.jsp">
+	     <pattern>**/pedidos333/**</pattern>
+	 </decorator>
+	
+</decorators>
