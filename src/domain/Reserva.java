@@ -1,5 +1,8 @@
 package domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +14,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
+import org.joda.time.Days;
 import org.joda.time.Interval;
 
 @Entity
@@ -56,6 +60,8 @@ public class Reserva {
 	@Column(name="cancelamento")
 	@Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	private DateTime cancelamento;
+
+	private Double valorDiaria;
 
 	public void setInicio(DateTime inicio) {
 		this.inicio = inicio;
@@ -133,8 +139,13 @@ public class Reserva {
 		this.cancelamento = cancelamento;
 	}
 	
-	public boolean contemAData(DateTime carnaval) {
-		return new Interval(inicio, fim).contains(carnaval);
+	public boolean contemAData(DateTime dia) {
+		
+		dia = dia.withTime(0, 0, 0, 0);
+		if (dia.equals(inicio.withTime(0, 0, 0, 0)) || dia.equals(fim.withTime(0, 0, 0, 0)))
+			return true;
+		
+		return new Interval(inicio, fim).contains(dia);
 	}
 
 	public boolean coincideCom(Reserva outraReserva) {
@@ -157,6 +168,25 @@ public class Reserva {
 
 	public void setQuarto(Quarto quarto) {
 		this.quarto = quarto;
+	}
+
+	public Double getValorDiaria() {
+		return this.valorDiaria;
+	}
+
+	public void setValorDiaria(Double valor) {
+		this.valorDiaria = valor;
+	}
+
+	public Double getValorReserva() {
+		Integer numeroDeDias =  Days.daysBetween(inicio, fim).getDays();
+		
+		Double valorReservas = ((double)numeroDeDias * this.valorDiaria);
+		if (valorReservas.equals(new Double(0.0)))
+	  		return valorReservas;
+		
+	  	BigDecimal bd = new BigDecimal(valorReservas.toString());
+	  	return bd.setScale(2, RoundingMode.HALF_EVEN).doubleValue();
 	}
 
 }

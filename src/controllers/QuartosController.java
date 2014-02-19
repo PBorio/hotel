@@ -8,7 +8,6 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
-import br.com.caelum.vraptor.Validator;
 import domain.Categoria;
 import domain.Quarto;
 
@@ -21,7 +20,7 @@ public class QuartosController {
 	private CategoriaRepositorio categoriaRepositorio;
 //	private Validator validator;
 
-	public QuartosController(Result result, QuartoRepositorio quartoRepositorio, CategoriaRepositorio categoriaRepositorio, Validator validator) {
+	public QuartosController(Result result, QuartoRepositorio quartoRepositorio, CategoriaRepositorio categoriaRepositorio) {
 		this.result = result;
 		this.quartoRepositorio = quartoRepositorio;
 //		this.validator = validator;

@@ -5,6 +5,8 @@ import org.joda.time.Interval;
 import org.junit.Assert;
 import org.junit.Test;
 
+import domain.helpers.FakeReserva;
+
 public class ReservaTest {
 
 	@Test
@@ -154,6 +156,14 @@ public class ReservaTest {
 		reservaCarnaval.setFim(tercaCarnaval);
 		
 		Assert.assertTrue(reservaCarnaval.coincideCom(reservaMarco));
+	}
+	
+	@Test
+	public void oValorDaReservaEhValorDaDiariaVezesONumeroDeDiasDaReserva(){
+		Reserva r = new FakeReserva().iniciandoEm("01/03/2014").terminandoEm("04/03/2014").build();
+		r.setValorDiaria(10.2);
+		
+		Assert.assertEquals((Double)30.6, r.getValorReserva());
 	}
 
 

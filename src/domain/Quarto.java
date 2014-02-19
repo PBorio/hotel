@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Where;
+import org.joda.time.DateTime;
 
 @Entity
 @Table(name="quartos")
@@ -84,6 +85,14 @@ public class Quarto {
 	public boolean possuiReservasNoMesmoPeriodo(Reserva reserva) {
 		for (Reserva r : this.reservas){
 			if (r.coincideCom(reserva))
+				return true;
+		}
+		return false;
+	}
+	
+	public boolean possuiReservaNoDia(DateTime dia){
+		for (Reserva r : this.reservas){
+			if (r.contemAData(dia))
 				return true;
 		}
 		return false;

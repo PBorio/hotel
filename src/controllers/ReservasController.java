@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -16,6 +17,7 @@ import domain.Hospede;
 import domain.Quarto;
 import domain.Reserva;
 import domain.servicos.ServicoDeReserva;
+import domain.servicos.StatusDeReservasNoDia;
 
 @Resource
 public class ReservasController {
@@ -80,6 +82,18 @@ public class ReservasController {
 		disponivel.addReserva(reserva);
 		reservaRepositorio.salva(reserva);
 		
+	}
+	
+	public void consulta(){
+		Quarto q = new Quarto();
+		q.setNumero("001");
+		List<Quarto> qs = new ArrayList<Quarto>();
+		StatusDeReservasNoDia status = new StatusDeReservasNoDia(new DateTime(), qs);
+		
+		List<StatusDeReservasNoDia> statuses = new ArrayList<StatusDeReservasNoDia>();
+		statuses.add(status);
+		
+		result.include("statusDeReservaNoDiaList", status);
 	}
 
 }
