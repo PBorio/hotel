@@ -32,7 +32,7 @@ public class Quarto {
 	@JoinColumn(name="categoria_id")
 	private Categoria categoria;
 
-	@OneToMany
+	@OneToMany(mappedBy="quarto")
 	@Where(clause="(checkin is null and cancelamento is null)")
 	private Set<Reserva> reservas = new HashSet<Reserva>();
 	
@@ -74,5 +74,42 @@ public class Quarto {
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+
+	public void addReserva(Reserva reserva) {
+		reserva.setQuarto(this);
+		this.reservas.add(reserva);
+	}
+
+	public boolean possuiReservasNoMesmoPeriodo(Reserva reserva) {
+		for (Reserva r : this.reservas){
+			if (r.coincideCom(reserva))
+				return true;
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Quarto other = (Quarto) obj;
+		if (id == null) 
+			return false;
+		if (!id.equals(other.id))
+			return false;
+		return true;
 	}
 }

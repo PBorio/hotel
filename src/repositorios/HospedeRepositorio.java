@@ -10,9 +10,9 @@ public interface HospedeRepositorio {
 	
 	public Hospede buscaPorId(Long id);
 	
-	void salva(Hospede quarto);
+	void salva(Hospede hospede);
 	
-	void atualiza(Hospede quarto);
+	void atualiza(Hospede hospede);
 
 	Hospede buscaPorEmail(String email);
 

@@ -1,20 +1,60 @@
 package domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
 
+@Entity
+@Table(name="reservas")
 public class Reserva {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	
+	@Column(name="inicio")
+	@Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	private DateTime inicio;
+	
+	@Column(name="fim")
+	@Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	private DateTime fim;
+	
+	@Column(name="numero_adultos")
 	private Integer numeroAdultos;
+	
+	@Column(name="numero_criancas_05")
 	private Integer numeroCriancas0a5;
+	
+	@Column(name="numero_criancas_6_16")
 	private Integer numeroCriancas6a16;
+	
+	@Column(name="numero_criancas_17_18")
 	private Integer numeroCriacas17a18;
+	
+	@ManyToOne
+	@JoinColumn(name="hospede_id")
 	private Hospede hospede;
 	
+	@ManyToOne
+	@JoinColumn(name="quarto_id")
+	private Quarto quarto;
+	
+	@Column(name="checkin")
+	@Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	private DateTime checkin;
 	
+	@Column(name="cancelamento")
+	@Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	private DateTime cancelamento;
 
 	public void setInicio(DateTime inicio) {
@@ -101,6 +141,22 @@ public class Reserva {
 		Interval destaReserva = new Interval(inicio, fim);
 		Interval daOutraReserva = new Interval(outraReserva.getInicio(), outraReserva.getFim());
 		return destaReserva.overlaps(daOutraReserva);
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Quarto getQuarto() {
+		return quarto;
+	}
+
+	public void setQuarto(Quarto quarto) {
+		this.quarto = quarto;
 	}
 
 }

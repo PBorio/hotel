@@ -21,7 +21,7 @@ public class QuartoDAO extends DAO<Quarto> implements QuartoRepositorio {
 	public List<Quarto> buscaPorCategoria(Categoria categoria) {
 		StringBuilder hql = new StringBuilder();
 		hql.append(" from Quarto q ");
-		hql.append(" join fetch q.reservas reserva ");
+		hql.append(" left join fetch q.reservas reserva ");
 		hql.append(" where q.categoria.id = ? ");
 		
 		Query query = getEntityManager().createQuery(hql.toString());

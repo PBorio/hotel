@@ -15,6 +15,7 @@ import domain.Categoria;
 import domain.Hospede;
 import domain.Quarto;
 import domain.Reserva;
+import domain.servicos.ServicoDeReserva;
 
 @Resource
 public class ReservasController {
@@ -63,17 +64,21 @@ public class ReservasController {
 			hospede.setEmail(reservasView.getEmailHospede());
 			hospede.setTelefone(reservasView.getTelefoneHospede());
 			hospede.setCelular(reservasView.getCelularHospede());
+			hospedeRepositorio.salva(hospede);
+		}else{
+			hospedeRepositorio.atualiza(hospede);
 		}
 		
 		reserva.setHospede(hospede);
 		
-//		Quarto selecionado = null;
-//		for (Quarto quarto : quartos){
-//			for (Reserva r : quarto.getReservas()){
-//				if (r.coincideCom(reserva))
-//					sele
-//			}
-//		}
+		ServicoDeReserva servicoReserva = new ServicoDeReserva(quartos);
+		Quarto disponivel = servicoReserva.quartoDisponivelParaAReserva(reserva);
+		
+		if (disponivel == null)
+			throw new RuntimeException("Não há quarto disponível para esta reserva");
+		
+		disponivel.addReserva(reserva);
+		reservaRepositorio.salva(reserva);
 		
 	}
 
