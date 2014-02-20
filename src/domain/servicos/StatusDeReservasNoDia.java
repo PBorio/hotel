@@ -5,7 +5,6 @@ import java.util.List;
 import org.joda.time.DateTime;
 
 import domain.Quarto;
-import domain.Reserva;
 import domain.servicos.tipos.TipoStatusQuarto;
 
 
@@ -27,21 +26,13 @@ public class StatusDeReservasNoDia {
 		return result;
 	}
 	
-//	public List<TipoStatusQuarto> getStatusDosQuartos(){
-//		List<TipoStatusQuarto> result = new ArrayList<TipoStatusQuarto>();
-//		for (Quarto quarto : quartos){
-//			result.add(new StatusQuarto(quarto).statusNaData(dia));
-//		}
-//		return result;
-//	}
-//	
-//	public List<Reserva> getReservas(){
-//		List<Reserva> reservas = new ArrayList<Reserva>();
-//		for (Quarto q : this.quartos){
-//			reservas.add(q.reservaNaData(dia));
-//		}
-//		return reservas;
-//	}
+	public List<TipoStatusQuarto> getStatusDosQuartos(){
+		List<TipoStatusQuarto> result = new ArrayList<TipoStatusQuarto>();
+		for (Quarto quarto : quartos){
+			result.add(new StatusQuarto(quarto,dia).getTipoStatusNaData());
+		}
+		return result;
+	}
 	
 	public List<Quarto> getQuartos(){
 		return this.quartos;
