@@ -19,21 +19,29 @@ public class StatusDeReservasNoDia {
 		this.quartos = quartos;
 	}
 
-	public List<TipoStatusQuarto> getStatusDosQuartos(){
-		List<TipoStatusQuarto> result = new ArrayList<TipoStatusQuarto>();
+	public List<StatusQuarto> getStatusQuartos(){
+		List<StatusQuarto> result = new ArrayList<StatusQuarto>();
 		for (Quarto quarto : quartos){
-			result.add(new StatusQuarto(quarto).statusNaData(dia));
+			result.add(new StatusQuarto(quarto,dia));
 		}
 		return result;
 	}
 	
-	public List<Reserva> getReservas(){
-		List<Reserva> reservas = new ArrayList<Reserva>();
-		for (Quarto q : this.quartos){
-			reservas.add(q.reservaNaData(dia));
-		}
-		return reservas;
-	}
+//	public List<TipoStatusQuarto> getStatusDosQuartos(){
+//		List<TipoStatusQuarto> result = new ArrayList<TipoStatusQuarto>();
+//		for (Quarto quarto : quartos){
+//			result.add(new StatusQuarto(quarto).statusNaData(dia));
+//		}
+//		return result;
+//	}
+//	
+//	public List<Reserva> getReservas(){
+//		List<Reserva> reservas = new ArrayList<Reserva>();
+//		for (Quarto q : this.quartos){
+//			reservas.add(q.reservaNaData(dia));
+//		}
+//		return reservas;
+//	}
 	
 	public List<Quarto> getQuartos(){
 		return this.quartos;

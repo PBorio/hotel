@@ -26,9 +26,10 @@
      	      <c:if test="${not status.fimDeSemana}">class="registroFimSemana"</c:if> >
      	    <joda:format value="${status.dia}" pattern="E, dd/MM/yyyy"/>
      	  </td>
-     	  <c:forEach var="tipo" items="${status.statusDosQuartos}">
-     	    <td class="${tipo.description}">
-     	      ${tipo.description}
+     	  <c:forEach var="statusQuarto" items="${status.statusQuartos}">
+     	    <td class="${statusQuarto.tipoStatusNaData.description}">
+     	      <c:if test="${statusQuarto.reserva.id == null}">${statusQuarto.tipoStatusNaData.description}</c:if>
+     	      <c:if test="${statusQuarto.reserva.id != null}"><a href="<c:url value='/reservas/${statusQuarto.reserva.id}'/>">${statusQuarto.tipoStatusNaData.description}</a></li></c:if>
      	    </td>
      	  </c:forEach>
      	</tr>

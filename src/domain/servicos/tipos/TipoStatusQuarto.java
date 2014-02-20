@@ -3,8 +3,8 @@ package domain.servicos.tipos;
 
 public enum TipoStatusQuarto implements Tipo
 {
-  LIVRE(0, "Livre"),
-  RESERVADO(1, "Reservado");   
+  LIVRE(0, "L"),
+  RESERVADO(1, "R");   
   
   private final Integer value;   
   private final String description;

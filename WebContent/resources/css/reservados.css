@@ -99,13 +99,13 @@
     background-color: #E69999;
 }
 
-.Livre{
+.L{
   background-color: #008000;
   border: 1px solid black;
   cursor: default;
 }
 
-.Reservado{
+.R{
   background-color: #FF0000;
   border: 1px solid black;
   cursor: default;
