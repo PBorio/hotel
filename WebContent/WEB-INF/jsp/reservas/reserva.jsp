@@ -9,6 +9,7 @@
 </head>
 <body>
     <div class="content-reservas">
+				
 		<form method="post" action='<c:url value="/reservas/salva"/>'>
 					
 					<div class="reservas-box01">
@@ -16,7 +17,13 @@
 						<h3>Solicite Orçamento, Sem Compromisso</h3>
 						
 						<fieldset>
-							
+						    <p>
+								<c:forEach var="error" items="${errors}">
+								  <p class="mensagem">
+										${error.message}
+									</p>
+							    </c:forEach>
+							</p>
 							<p>
 								<select id="reservasView.idCategoria" name="reservasView.idCategoria" >  
 				                    <option> Categorias...</option>  
@@ -119,22 +126,28 @@
 						
 						<fieldset>
 							<p>
-								<input name="reservasView.nomeHospede" type="text" id="reservasView.nomeHospede"  value="Nome" />		
+							    <span>Nome: </span>
+								<input name="reservasView.nomeHospede" type="text" id="reservasView.nomeHospede"  />		
 							</p>
 							<p>
-								<input name=reservasView.sobrenomeHospede type="text" id="reservasView.sobrenomeHospede" value="Sobrenome" />		
+								 <span>Sobrenome: </span>
+								<input name=reservasView.sobrenomeHospede type="text" id="reservasView.sobrenomeHospede" />		
 							</p>
 							<p class="half">
-								<input name="reservasView.emailHospede" type="text" id="reservasView.emailHospede" value="E-mail" />		
+								 <span>Email: </span>
+								<input name="reservasView.emailHospede" type="text" id="reservasView.emailHospede" />		
 							</p>
 							<p class="half">
-								<input name="reservasView.cidadeHospede" type="text" id="reservasView.cidadeHospede" value="Cidade de origem" />		
+							    <span>Cidade: </span>
+								<input name="reservasView.cidadeHospede" type="text" id="reservasView.cidadeHospede" />		
 							</p>
 							<p class="half">
-								<input name="reservasView.telefoneHospede" type="text" id="reservasView.telefoneHospede" value="Telefone" />		
+								<span>Telefone: </span>
+								<input name="reservasView.telefoneHospede" type="text" id="reservasView.telefoneHospede" />		
 							</p>
 							<p class="half">
-								<input name="reservasView.celularHospede" type="text" id="reservasView.celularHospede" value="Celular" />		
+								<span>Celular: </span>
+								<input name="reservasView.celularHospede" type="text" id="reservasView.celularHospede" />		
 							</p>
 						</fieldset>
 						

@@ -24,6 +24,7 @@ public class DAO<T> {
 	}
 
 	public T buscaPorId(Long id) {
+		if (id == null) return null;
 		return entityManager.find(classe, id);
 	}
 

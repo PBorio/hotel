@@ -14,11 +14,15 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.Validator;
+import br.com.caelum.vraptor.validator.ValidationMessage;
+import controllers.validators.ReservaValidation;
 import controllers.views.reservas.ReservasView;
 import domain.Categoria;
 import domain.Hospede;
 import domain.Quarto;
 import domain.Reserva;
+import domain.exceptions.HotelException;
 import domain.servicos.ServicoDeCalculoDePrecos;
 import domain.servicos.ServicoDeReserva;
 import domain.servicos.StatusDeReservasNoDia;
@@ -32,19 +36,22 @@ public class ReservasController {
 	private HospedeRepositorio hospedeRepositorio;
 	private ReservaRepositorio reservaRepositorio;
 	private PoliticaPrecoRepositorio politicaPrecoRepositorio;
+	private Validator validator;
 
 	public ReservasController(Result result, 
 			                  CategoriaRepositorio categoriaRepositorio, 
 			                  QuartoRepositorio quartoRepositorio, 
 			                  HospedeRepositorio hospedeRepositorio,
 			                  ReservaRepositorio reservaRepositorio,
-			                  PoliticaPrecoRepositorio politicaPrecoRepositorio){
+			                  PoliticaPrecoRepositorio politicaPrecoRepositorio,
+			                  Validator validator){
 		this.result = result;
 		this.categoriaRepositorio = categoriaRepositorio;
 		this.quartoRepositorio = quartoRepositorio;
 		this.hospedeRepositorio = hospedeRepositorio;
 		this.reservaRepositorio = reservaRepositorio;
 		this.politicaPrecoRepositorio = politicaPrecoRepositorio;
+		this.validator = validator;
 	}
 	
 	public void reserva(){
@@ -53,47 +60,66 @@ public class ReservasController {
 	
 	public void salva(ReservasView reservasView){
 		
-		Categoria categoria = categoriaRepositorio.buscaPorId(reservasView.getIdCategoria());
-		List<Quarto> quartos = quartoRepositorio.buscaPorCategoria(categoria);
-		
-		Reserva reserva = new Reserva();
-		reserva.setInicio(new DateTime(reservasView.getChegada().getTime()));
-		reserva.setFim(new DateTime(reservasView.getSaida().getTime()));
-		reserva.setNumeroAdultos(reservasView.getNumeroAdultos());
-		reserva.setNumeroCriancas0a5(reservasView.getNumeroCriancas0a5());
-		reserva.setNumeroCriancas6a16(reservasView.getNumeroCriancas6a16());
-		reserva.setNumeroCriancas17a18(reservasView.getNumeroCriacas17a18());
-		
-		Hospede hospede = hospedeRepositorio.buscaPorEmail(reservasView.getEmailHospede());
+		try{
+			ReservaValidation validation = new ReservaValidation(validator, reservasView);
+			validator = validation.criarValidacoes();
 			
-		if (hospede == null){
-			hospede = new Hospede();
-			hospede.setNome(reservasView.getNomeHospede()+" "+reservasView.getSobrenomeHospede());
-			hospede.setCidade(reservasView.getCidadeHospede());
-			hospede.setEmail(reservasView.getEmailHospede());
-			hospede.setTelefone(reservasView.getTelefoneHospede());
-			hospede.setCelular(reservasView.getCelularHospede());
-			hospedeRepositorio.salva(hospede);
-		}else{
-			hospedeRepositorio.atualiza(hospede);
+			if (validator.hasErrors()){
+				result.include("reserva",reservasView);
+				result.include("categoriaList",this.categoriaRepositorio.buscaTodos());
+			    validator.onErrorUsePageOf(this).reserva();
+			}
+			
+			Categoria categoria = categoriaRepositorio.buscaPorId(reservasView.getIdCategoria());
+			List<Quarto> quartos = quartoRepositorio.buscaPorCategoria(categoria);
+			
+			Reserva reserva = new Reserva();
+			reserva.setInicio(new DateTime(reservasView.getChegada().getTime()));
+			reserva.setFim(new DateTime(reservasView.getSaida().getTime()));
+			reserva.setNumeroAdultos(reservasView.getNumeroAdultos());
+			reserva.setNumeroCriancas0a5(reservasView.getNumeroCriancas0a5());
+			reserva.setNumeroCriancas6a16(reservasView.getNumeroCriancas6a16());
+			reserva.setNumeroCriancas17a18(reservasView.getNumeroCriacas17a18());
+			
+			Hospede hospede = hospedeRepositorio.buscaPorEmail(reservasView.getEmailHospede());
+				
+			if (hospede == null){
+				hospede = new Hospede();
+				hospede.setNome(reservasView.getNomeHospede()+" "+reservasView.getSobrenomeHospede());
+				hospede.setCidade(reservasView.getCidadeHospede());
+				hospede.setEmail(reservasView.getEmailHospede());
+				hospede.setTelefone(reservasView.getTelefoneHospede());
+				hospede.setCelular(reservasView.getCelularHospede());
+				hospedeRepositorio.salva(hospede);
+			}else{
+				hospedeRepositorio.atualiza(hospede);
+			}
+			
+			reserva.setHospede(hospede);
+			
+			ServicoDeReserva servicoReserva = new ServicoDeReserva(quartos);
+			Quarto disponivel = servicoReserva.quartoDisponivelParaAReserva(reserva);
+			
+			if (disponivel == null)
+				throw new HotelException("Não há quarto disponível para esta reserva");
+			
+			disponivel.addReserva(reserva);
+			
+			ServicoDeCalculoDePrecos servicoPrecos = new ServicoDeCalculoDePrecos(politicaPrecoRepositorio.buscaTodos());
+			servicoPrecos.calcularEInformarValorNaReserva(reserva);
+			
+			reservaRepositorio.salva(reserva);
+			result.include("reserva", reserva);
+			result.of(this).show(reserva.getId());
+			
+		}catch(HotelException e){
+			result.include("reserva",reservasView);
+			result.include("categoriaList",this.categoriaRepositorio.buscaTodos());
+			validator.add(new ValidationMessage(e.getMessage(),"erro.no.reserva",e.getMessage()));
+			validator.onErrorUsePageOf(this).reserva();
 		}
 		
-		reserva.setHospede(hospede);
 		
-		ServicoDeReserva servicoReserva = new ServicoDeReserva(quartos);
-		Quarto disponivel = servicoReserva.quartoDisponivelParaAReserva(reserva);
-		
-		if (disponivel == null)
-			throw new RuntimeException("Não há quarto disponível para esta reserva");
-		
-		disponivel.addReserva(reserva);
-		
-		ServicoDeCalculoDePrecos servicoPrecos = new ServicoDeCalculoDePrecos(politicaPrecoRepositorio.buscaTodos());
-		servicoPrecos.calcularEInformarValorNaReserva(reserva);
-		
-		reservaRepositorio.salva(reserva);
-		result.include("reserva", reserva);
-		result.of(this).show(reserva.getId());
 	}
 	
 	public void consulta(){

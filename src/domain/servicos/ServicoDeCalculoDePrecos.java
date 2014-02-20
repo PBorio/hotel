@@ -7,6 +7,7 @@ import org.joda.time.DateTime;
 import domain.Categoria;
 import domain.PoliticaDePrecos;
 import domain.Reserva;
+import domain.exceptions.HotelException;
 
 public class ServicoDeCalculoDePrecos {
 
@@ -34,11 +35,15 @@ public class ServicoDeCalculoDePrecos {
 		
 		if (naoEncontrouPoliticaParaAReserva(valorDaDiaria)){
 			PoliticaDePrecos politicaPadrao = getPoliticaPadraoParaACategoria(reserva.getQuarto().getCategoria());
+			
+			if (politicaPadrao == null)
+				throw new HotelException("Não há política de preços para a categoria: "+reserva.getQuarto().getCategoria().getDescricao());
+			
 			valorDaDiaria = politicaPadrao.getValorDiaria();
 		}
 		
 		if (naoEncontrouPoliticaParaAReserva(valorDaDiaria))
-			throw new RuntimeException("Não há política de preços para a categoria: "+reserva.getQuarto().getCategoria().getDescricao());
+			throw new HotelException("Não há política de preços para a categoria: "+reserva.getQuarto().getCategoria().getDescricao());
 		
 		reserva.setValorDiaria(valorDaDiaria);
 	}
