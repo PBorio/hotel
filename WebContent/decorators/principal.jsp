@@ -31,25 +31,25 @@
 		<nav>
 			<ul>
 				<li>
-					<a href="acomodacoes.php" id="nav-acomodacoes">Acomodações</a>
-					<ul id="sub-nav">
-						<li><a href="#" id="bt-todos">todos</a></li>
-						<li><a href="#" id="bt-suites">suítes</a></li>
-						<li><a href="#" id="bt-chales">chalés</a></li>
-						<li><a href="#" id="bt-quartos">quartos</a></li>
-					</ul>
+					<a href="<c:url value='/quartos/list'/>" id="nav-acomodacoes">Quartos</a>
 				</li>
-				<li><a href="pousada.php" id="nav-pousada">Pousada</a></li>
-				<li><a href="reservas.php" id="nav-reservas">Contato</a></li>
-				<li><a href="https://docs.google.com/spreadsheet/pub?key=0Apk7EaelX8_HdGdzZFlpZXd0eFlkUXYxNGFMZW8zZ1E&single=true&gid=1&output=html" id="nav-contato">Tarifas</a></li>
-				
-				<li class="fone"><img src="<c:url value='/resources/imagens/info-fone.png'/>" alt="Infomações e Reservas: 55 41 3426-8009"></li>
+				<li><a href="<c:url value='/categorias/list'/>" id="nav-pousada">Categorias</a></li>
+				<li><a href="<c:url value='/politicas/list'/>" id="nav-reservas">Preços</a></li>
+				<li><a href="<c:url value='/reservas/reserva'/>" id="nav-contato">Reservas</a></li>
+				<li><a href="<c:url value='/reservas/consulta'/>">Consulta</a></li>
 			</ul>
 		</nav>
-
+		 <nav>
+	  <ul>
+		<li><a href="<c:url value='/quartos/list'/>" id="menu-quarto">Quartos</a></li>
+		<li><a href="<c:url value='/categorias/list'/>" id="menu-cat">Categorias</a></li>
+		<li><a href="<c:url value='/reservas/reserva'/>" id="menu-reservas">Reservas</a></li>
+		<li><a href="<c:url value='/politicas/list'/>" id="menu-preco">Preços</a></li>
+		<li><a href="<c:url value='/reservas/consulta'/>" id="menu-consulta">Consultas</a></li>
+	</ul>
+	</nav>
 		<div class="clear"></div>
 	</header>
-	
 	<section class="inner">
 		<div class="content-inner content-form">
 		  <decorator:body/>

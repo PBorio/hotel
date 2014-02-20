@@ -31,8 +31,8 @@ public class ServicoDeCalculoDePrecosTest {
 		
 		PoliticaDePrecos politica = new PoliticaDePrecos();
 		politica.setCategoria(categoria);
-		politica.setInicio(parser.parseData("01/04/2014"));
-		politica.setFim(parser.parseData("30/04/2014"));
+		politica.setInicio(parser.parseData("01/04/2014").toDate());
+		politica.setFim(parser.parseData("30/04/2014").toDate());
 		politica.setValorDiaria(50.0);
 		
 		List<PoliticaDePrecos> politicas = new ArrayList<PoliticaDePrecos>();
@@ -58,14 +58,14 @@ public class ServicoDeCalculoDePrecosTest {
 		
 		PoliticaDePrecos politica = new PoliticaDePrecos();
 		politica.setCategoria(categoria);
-		politica.setInicio(parser.parseData("06/04/2014"));
-		politica.setFim(parser.parseData("30/04/2014"));
+		politica.setInicio(parser.parseData("06/04/2014").toDate());
+		politica.setFim(parser.parseData("30/04/2014").toDate());
 		politica.setValorDiaria(50.0);
 		
 		PoliticaDePrecos padrao = new PoliticaDePrecos();
 		padrao.setCategoria(categoria);
-		padrao.setInicio(parser.parseData("01/04/2013"));
-		padrao.setFim(parser.parseData("31/12/2013"));
+		padrao.setInicio(parser.parseData("01/04/2013").toDate());
+		padrao.setFim(parser.parseData("31/12/2013").toDate());
 		padrao.setValorDiaria(40.0);
 		padrao.setPadrao(true);
 		
@@ -94,14 +94,14 @@ public class ServicoDeCalculoDePrecosTest {
 		
 		PoliticaDePrecos politica = new PoliticaDePrecos();
 		politica.setCategoria(categoria);
-		politica.setInicio(parser.parseData("06/04/2014"));
-		politica.setFim(parser.parseData("30/04/2014"));
+		politica.setInicio(parser.parseData("06/04/2014").toDate());
+		politica.setFim(parser.parseData("30/04/2014").toDate());
 		politica.setValorDiaria(50.0);
 		
 		PoliticaDePrecos padrao = new PoliticaDePrecos();
 		padrao.setCategoria(categoria);
-		padrao.setInicio(parser.parseData("01/04/2013"));
-		padrao.setFim(parser.parseData("31/12/2013"));
+		padrao.setInicio(parser.parseData("01/04/2013").toDate());
+		padrao.setFim(parser.parseData("31/12/2013").toDate());
 		padrao.setValorDiaria(40.0);
 		padrao.setPadrao(false);
 		
@@ -130,14 +130,14 @@ public class ServicoDeCalculoDePrecosTest {
 		
 		PoliticaDePrecos politica = new PoliticaDePrecos();
 		politica.setCategoria(categoria);
-		politica.setInicio(parser.parseData("01/04/2014"));
-		politica.setFim(parser.parseData("30/04/2014"));
+		politica.setInicio(parser.parseData("01/04/2014").toDate());
+		politica.setFim(parser.parseData("30/04/2014").toDate());
 		politica.setValorDiaria(50.0);
 		
 		PoliticaDePrecos padrao = new PoliticaDePrecos();
 		padrao.setCategoria(categoria);
-		padrao.setInicio(parser.parseData("01/04/2013"));
-		padrao.setFim(parser.parseData("31/12/2013"));
+		padrao.setInicio(parser.parseData("01/04/2013").toDate());
+		padrao.setFim(parser.parseData("31/12/2013").toDate());
 		padrao.setValorDiaria(40.0);
 		padrao.setPadrao(true);
 		

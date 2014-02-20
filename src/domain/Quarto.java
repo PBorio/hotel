@@ -15,6 +15,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Where;
 import org.joda.time.DateTime;
 
+import domain.nulos.ReservaNull;
+
 @Entity
 @Table(name="quartos")
 public class Quarto {
@@ -96,6 +98,14 @@ public class Quarto {
 				return true;
 		}
 		return false;
+	}
+	
+	public Reserva reservaNaData(DateTime dia){
+		for (Reserva r : this.reservas){
+			if (r.contemAData(dia))
+				return r;
+		}
+		return new ReservaNull();
 	}
 
 	@Override

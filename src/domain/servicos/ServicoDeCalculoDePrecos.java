@@ -2,6 +2,8 @@ package domain.servicos;
 
 import java.util.List;
 
+import org.joda.time.DateTime;
+
 import domain.Categoria;
 import domain.PoliticaDePrecos;
 import domain.Reserva;
@@ -22,8 +24,8 @@ public class ServicoDeCalculoDePrecos {
 				continue;
 			
 			Reserva periodoDaPoliticaDePrecos = new Reserva();
-			periodoDaPoliticaDePrecos.setInicio(politica.getInicio());
-			periodoDaPoliticaDePrecos.setFim(politica.getFim());
+			periodoDaPoliticaDePrecos.setInicio(new DateTime(politica.getInicio().getTime()));
+			periodoDaPoliticaDePrecos.setFim(new DateTime(politica.getFim()));
 			
 			if (reserva.coincideCom(periodoDaPoliticaDePrecos))
 				valorDaDiaria = politica.getValorDiaria();

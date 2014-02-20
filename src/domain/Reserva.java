@@ -23,7 +23,7 @@ public class Reserva {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	
 	@Column(name="inicio")
 	@Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
@@ -61,6 +61,7 @@ public class Reserva {
 	@Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	private DateTime cancelamento;
 
+	@Column(name="valor_diaria")
 	private Double valorDiaria;
 
 	public void setInicio(DateTime inicio) {
@@ -71,11 +72,11 @@ public class Reserva {
 		this.fim = fim;
 	}
 	
-	private DateTime getInicio() {
+	public DateTime getInicio() {
 		return inicio;
 	}
 	
-	private DateTime getFim() {
+	public DateTime getFim() {
 		return fim;
 	}
 
@@ -154,11 +155,11 @@ public class Reserva {
 		return destaReserva.overlaps(daOutraReserva);
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

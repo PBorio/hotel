@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import domain.helpers.FakeReserva;
+import domain.servicos.helpers.ParserDeStringParaData;
 
 public class ReservaTest {
 
@@ -166,6 +167,12 @@ public class ReservaTest {
 		Assert.assertEquals((Double)30.6, r.getValorReserva());
 	}
 
+	@Test
+	public void teste(){
+		DateTime dia = new ParserDeStringParaData().parseData("23/02/2013");
+		System.out.println(dia.dayOfWeek().getAsText());
+//		Assert.assertTrue(dia.dayOfWeek());;
+	}
 
 }
 

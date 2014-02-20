@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
- <%@taglib prefix="joda" uri="http://www.joda.org/joda/time/tags" %>
- 
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,8 +9,8 @@
 <title>Cadastro de Políticas de Preços</title>
 </head>
 <body>
-	 <form action='<c:url value="/quartos/salva"/>' method="post">
-	    <input type="hidden" name="quarto.id" value="${quarto.id}" />
+	 <form action='<c:url value="/politicas/salva"/>' method="post">
+	    <input type="hidden" name="politicaDePrecos.id" value="${politicaDePrecos.id}" />
 	    <c:if test="${not empty mensagem}">
 			<p class="mensagem">
 				${mensagem}
@@ -36,20 +35,18 @@
 		   </p>
 		    <p class="half">
 				<span>Inicio:</span>
-				 <joda:format value="${politicaDePrecos.inicio}" style="SM" />
-				<input type="text" name="politicaDePrecos.inicio" id="politicaDePrecos.inicio" value="${politicaDePrecos.inicio}" />
+				<input type="text" name="politicaDePrecos.inicio" id="politicaDePrecos.inicio" value="<fmt:formatDate value='${politicaDePrecos.inicio}'/>" />
 		   </p>
 		    <p class="half">
 				<span>Fim:</span>
-				<joda:format value="${politicaDePrecos.fim}" style="SM" />
-				<input type="text" name="politicaDePrecos.fim" id="politicaDePrecos.fim" value="${politicaDePrecos.fim}"/>
+				<input type="text" name="politicaDePrecos.fim" id="politicaDePrecos.fim" value="<fmt:formatDate value='${politicaDePrecos.fim}'/>"/>
 		   </p>
 		   <p class="half">
 		        <span>Valor: </span>
 				<input type="text" name="politicaDePrecos.valorDiaria" id="politicaDePrecos.valorDiaria" value="${politicaDePrecos.valorDiaria}" />
 		   </p>
 		    <p class="half">
-				<span>Observação:</span>
+				<span>Padrão:</span>
 				<input type="checkbox" name="politicaDePrecos.padrao" id="politicaDePrecos.padrao" checked="${politicaDePrecos.padrao}" />
 		   </p>
 		    <p>

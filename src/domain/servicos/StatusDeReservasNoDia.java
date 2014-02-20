@@ -5,6 +5,7 @@ import java.util.List;
 import org.joda.time.DateTime;
 
 import domain.Quarto;
+import domain.Reserva;
 import domain.servicos.tipos.TipoStatusQuarto;
 
 
@@ -26,6 +27,14 @@ public class StatusDeReservasNoDia {
 		return result;
 	}
 	
+	public List<Reserva> getReservas(){
+		List<Reserva> reservas = new ArrayList<Reserva>();
+		for (Quarto q : this.quartos){
+			reservas.add(q.reservaNaData(dia));
+		}
+		return reservas;
+	}
+	
 	public List<Quarto> getQuartos(){
 		return this.quartos;
 	}
@@ -33,5 +42,10 @@ public class StatusDeReservasNoDia {
 	public DateTime getDia(){
 		return this.dia;
 	}
+	
+	public boolean isFimDeSemana(){
+		return (this.dia.getDayOfWeek() == 6 || this.dia.getDayOfWeek() == 7);
+	}
+	
 	
 }

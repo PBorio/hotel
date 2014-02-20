@@ -19,5 +19,5 @@ public class StatusQuarto {
 		else
 			return TipoStatusQuarto.LIVRE;
 	}
-
+	
 }

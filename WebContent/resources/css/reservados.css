@@ -1,7 +1,23 @@
 
-#container1 {
+#containerConsulta {
     float:left;
     width:100%;
+}
+
+#containerConsulta table{
+	padding: 0;
+	margin: 0;
+	border-spacing: 0;
+}
+
+#containerConsulta td{
+	padding: 0;
+	margin: 0;
+}
+
+#containerConsulta tr{
+	padding: 0;
+	margin: 0;
 }
 
 .colunaData{
@@ -12,27 +28,25 @@
 
 .registroData{
   background-color: pink;
-  #margin:2px;
-  #margin-left:4px;
-  #margin-right:4px;
+  cursor: default;
+  border: 1px solid black;
+}
+
+.registroFimSemana{
+  background-color: #fce5cd;
   cursor: default;
   border: 1px solid black;
 }
 
 .colunaQuarto{
     text-align: center;
-    float:left;
-    width:8%;
+    background-color: #C2D1F0;
 }
 
 .colunaChale {
     text-align: center;
     float:left;
     width:5%;
-}
-
-.colunaChale h4{
-  background-color: #C2D1F0;
 }
 
 .colunaSuiteMaster {
@@ -85,10 +99,14 @@
     background-color: #E69999;
 }
 
-
-
-.livre{
+.Livre{
   background-color: #008000;
+  border: 1px solid black;
+  cursor: default;
+}
+
+.Reservado{
+  background-color: #FF0000;
   border: 1px solid black;
   cursor: default;
 }
@@ -97,7 +115,6 @@
 .over{
   border: 1px solid black;
   box-shadow:5px 4px 10px #ccc;
-  -moz-box-shadow:5px 4px 10px #ccc;
   padding: 10px;
   margin: 10px;
   cursor: pointer;

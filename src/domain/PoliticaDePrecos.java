@@ -1,26 +1,51 @@
 package domain;
 
-import org.joda.time.DateTime;
+import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="politica_precos")
 public class PoliticaDePrecos {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	private String descricao;
+	
+	@ManyToOne
+	@JoinColumn(name="categoria_id")
 	private Categoria categoria;
-	private DateTime fim;
-	private DateTime inicio;
+	
+	@Column(name="inicio")
+	private Date inicio;
+	
+	@Column(name="fim")
+	private Date fim;
+	
+	@Column(name="valor_diaria")
 	private Double valorDiaria;
+	
+	@Column(name="padrao")
 	private boolean padrao = false;
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
 
-	public void setInicio(DateTime inicio) {
+	public void setInicio(Date inicio) {
 		this.inicio = inicio;
 	}
 
-	public void setFim(DateTime fim) {
+	public void setFim(Date fim) {
 		this.fim = fim;
 	}
 
@@ -28,11 +53,11 @@ public class PoliticaDePrecos {
 		return categoria;
 	}
 
-	public DateTime getFim() {
+	public Date getFim() {
 		return fim;
 	}
 
-	public DateTime getInicio() {
+	public Date getInicio() {
 		return inicio;
 	}
 
@@ -40,7 +65,7 @@ public class PoliticaDePrecos {
 		this.valorDiaria = valor;
 	}
 
-	public double getValorDiaria() {
+	public Double getValorDiaria() {
 		return valorDiaria;
 	}
 

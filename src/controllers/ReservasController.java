@@ -7,8 +7,11 @@ import org.joda.time.DateTime;
 
 import repositorios.CategoriaRepositorio;
 import repositorios.HospedeRepositorio;
+import repositorios.PoliticaPrecoRepositorio;
 import repositorios.QuartoRepositorio;
 import repositorios.ReservaRepositorio;
+import br.com.caelum.vraptor.Get;
+import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import controllers.views.reservas.ReservasView;
@@ -16,6 +19,7 @@ import domain.Categoria;
 import domain.Hospede;
 import domain.Quarto;
 import domain.Reserva;
+import domain.servicos.ServicoDeCalculoDePrecos;
 import domain.servicos.ServicoDeReserva;
 import domain.servicos.StatusDeReservasNoDia;
 
@@ -27,17 +31,20 @@ public class ReservasController {
 	private QuartoRepositorio quartoRepositorio;
 	private HospedeRepositorio hospedeRepositorio;
 	private ReservaRepositorio reservaRepositorio;
+	private PoliticaPrecoRepositorio politicaPrecoRepositorio;
 
 	public ReservasController(Result result, 
 			                  CategoriaRepositorio categoriaRepositorio, 
 			                  QuartoRepositorio quartoRepositorio, 
 			                  HospedeRepositorio hospedeRepositorio,
-			                  ReservaRepositorio reservaRepositorio){
+			                  ReservaRepositorio reservaRepositorio,
+			                  PoliticaPrecoRepositorio politicaPrecoRepositorio){
 		this.result = result;
 		this.categoriaRepositorio = categoriaRepositorio;
 		this.quartoRepositorio = quartoRepositorio;
 		this.hospedeRepositorio = hospedeRepositorio;
 		this.reservaRepositorio = reservaRepositorio;
+		this.politicaPrecoRepositorio = politicaPrecoRepositorio;
 	}
 	
 	public void reserva(){
@@ -80,20 +87,44 @@ public class ReservasController {
 			throw new RuntimeException("Não há quarto disponível para esta reserva");
 		
 		disponivel.addReserva(reserva);
-		reservaRepositorio.salva(reserva);
 		
+		ServicoDeCalculoDePrecos servicoPrecos = new ServicoDeCalculoDePrecos(politicaPrecoRepositorio.buscaTodos());
+		servicoPrecos.calcularEInformarValorNaReserva(reserva);
+		
+		reservaRepositorio.salva(reserva);
+		result.include("reserva", reserva);
+		result.of(this).show(reserva.getId());
 	}
 	
 	public void consulta(){
-		Quarto q = new Quarto();
-		q.setNumero("001");
-		List<Quarto> qs = new ArrayList<Quarto>();
-		StatusDeReservasNoDia status = new StatusDeReservasNoDia(new DateTime(), qs);
 		
+		DateTime inicioPeriodo = new DateTime();
+		DateTime fimPeriodo = inicioPeriodo.plusDays(30);
+		
+		List<Quarto> quartos = quartoRepositorio.buscaTodos();
 		List<StatusDeReservasNoDia> statuses = new ArrayList<StatusDeReservasNoDia>();
-		statuses.add(status);
 		
-		result.include("statusDeReservaNoDiaList", status);
+		StatusDeReservasNoDia statusDoPrimeiroDia = new StatusDeReservasNoDia(inicioPeriodo, quartos);
+		statuses.add(statusDoPrimeiroDia);
+		
+		DateTime proximoDia = inicioPeriodo.plusDays(1);
+		while (proximoDia.isBefore(fimPeriodo)){
+			StatusDeReservasNoDia status = new StatusDeReservasNoDia(proximoDia, quartos);
+			statuses.add(status);
+			proximoDia = proximoDia.plusDays(1);
+		}
+		
+		StatusDeReservasNoDia statusDoUltimoDia = new StatusDeReservasNoDia(fimPeriodo, quartos);
+		statuses.add(statusDoUltimoDia);
+		
+		result.include("statusDeReservaNoDiaList", statuses);
+	}
+	
+	@Get
+	@Path("/reservas/{id}")
+	public void show(Long id) {
+		Reserva reserva = reservaRepositorio.buscaPorId(id);
+		result.include("reserva", reserva);
 	}
 
 }
