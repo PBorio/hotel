@@ -259,7 +259,8 @@ ul#acomodacoes ul.icons li{ background:none; display:inline; float:left; height:
 .content-form form fieldset p.half select{ background:url(../imagens/reservas-input-half.png) 0 0 no-repeat; width:200px;}
 .content-form form fieldset p.half input[type="text"]{ background:url(../imagens/reservas-input-half.png) 0 0 no-repeat; width:190px;}
 
-
+.content-form #botao-voltar{background:url(../imagens/bot-adicionar.gif) no-repeat; background-position:0 0; display:block; font-size:1px; height:24px; margin:0 0 10px 172px; overflow:hidden; text-indent:-9999em; width:238px;}
+.content-form #botao-voltar{ background-position:0 -34px;}
 
 
 /* RESERVAS */

@@ -35,8 +35,6 @@
 				                </select>  	
 							</p>
 							
-							<a href="#" id="adicionar-acomodacao">Deseja adicionar mais uma acomodação?</a>							
-							
                             <p class="half">
 								<input name="reservasView.chegada" type="text" id="reservasView.chegada" />		
 							</p>
