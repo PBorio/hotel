@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Where;
 import org.joda.time.DateTime;
 
-import domain.nulos.ReservaNull;
+import domain.nulos.ReservaNulo;
 
 @Entity
 @Table(name="quartos")
@@ -105,7 +105,7 @@ public class Quarto {
 			if (r.contemAData(dia))
 				return r;
 		}
-		return new ReservaNull();
+		return new ReservaNulo();
 	}
 
 	@Override

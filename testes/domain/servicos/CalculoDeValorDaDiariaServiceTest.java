@@ -13,7 +13,7 @@ import domain.Reserva;
 import domain.helpers.FakeReserva;
 import domain.servicos.helpers.ParserDeStringParaData;
 
-public class ServicoDeCalculoDePrecosTest {
+public class CalculoDeValorDaDiariaServiceTest {
 	
 	private ParserDeStringParaData parser = new ParserDeStringParaData();
 	
@@ -38,7 +38,7 @@ public class ServicoDeCalculoDePrecosTest {
 		List<PoliticaDePrecos> politicas = new ArrayList<PoliticaDePrecos>();
 		politicas.add(politica);
 		
-		ServicoDeCalculoDePrecos servico = new ServicoDeCalculoDePrecos(politicas);
+		CalculoDeValorDaDiariaService servico = new CalculoDeValorDaDiariaService(politicas);
 		servico.calcularEInformarValorNaReserva(reserva);
 		
 		Assert.assertEquals((Double)50.0, reserva.getValorDiaria());
@@ -73,12 +73,11 @@ public class ServicoDeCalculoDePrecosTest {
 		politicas.add(politica);
 		politicas.add(padrao);
 		
-		ServicoDeCalculoDePrecos servico = new ServicoDeCalculoDePrecos(politicas);
+		CalculoDeValorDaDiariaService servico = new CalculoDeValorDaDiariaService(politicas);
 		servico.calcularEInformarValorNaReserva(reserva);
 		
 		Assert.assertEquals((Double)40.0, reserva.getValorDiaria());
 	}
-	
 	
 	@Test(expected=RuntimeException.class)
 	public void seNenhumaPoliticaForEncontradaParaOPeriodoValorENaoHouverUmaPadraoDeveLancarExcecao(){
@@ -109,12 +108,11 @@ public class ServicoDeCalculoDePrecosTest {
 		politicas.add(politica);
 		politicas.add(padrao);
 		
-		ServicoDeCalculoDePrecos servico = new ServicoDeCalculoDePrecos(politicas);
+		CalculoDeValorDaDiariaService servico = new CalculoDeValorDaDiariaService(politicas);
 		servico.calcularEInformarValorNaReserva(reserva);
 		
 		Assert.assertEquals((Double)40.0, reserva.getValorDiaria());
 	}
-	
 	
 	@Test
 	public void havendoUmaPoliticaPadraoEOutraParaOPeriodoDaReservaOPrecoConsideradoEhODaReserva(){
@@ -145,7 +143,7 @@ public class ServicoDeCalculoDePrecosTest {
 		politicas.add(politica);
 		politicas.add(padrao);
 		
-		ServicoDeCalculoDePrecos servico = new ServicoDeCalculoDePrecos(politicas);
+		CalculoDeValorDaDiariaService servico = new CalculoDeValorDaDiariaService(politicas);
 		servico.calcularEInformarValorNaReserva(reserva);
 		
 		Assert.assertEquals((Double)50.0, reserva.getValorDiaria());

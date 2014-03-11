@@ -1,8 +1,5 @@
 package domain;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,12 +11,14 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
-import org.joda.time.Days;
 import org.joda.time.Interval;
+
+import domain.interfaces.CalculavelPorPeriodo;
+import domain.servicos.CalculoDeValorPorPeriodoService;
 
 @Entity
 @Table(name="reservas")
-public class Reserva {
+public class Reserva implements CalculavelPorPeriodo {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,7 +42,7 @@ public class Reserva {
 	private Integer numeroCriancas6a16;
 	
 	@Column(name="numero_criancas_17_18")
-	private Integer numeroCriacas17a18;
+	private Integer numeroCriancas17a18;
 	
 	@ManyToOne
 	@JoinColumn(name="hospede_id")
@@ -64,6 +63,31 @@ public class Reserva {
 	@Column(name="valor_diaria")
 	private Double valorDiaria;
 
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Quarto getQuarto() {
+		return quarto;
+	}
+
+	public void setQuarto(Quarto quarto) {
+		this.quarto = quarto;
+	}
+
+	public Double getValorDiaria() {
+		return this.valorDiaria;
+	}
+
+	public void setValorDiaria(Double valor) {
+		this.valorDiaria = valor;
+	}
+	
 	public void setInicio(DateTime inicio) {
 		this.inicio = inicio;
 	}
@@ -105,15 +129,15 @@ public class Reserva {
 	}
 
 	public void setNumeroCriancas17a18(Integer numeroCriacas17a18) {
-		this.numeroCriacas17a18 = numeroCriacas17a18;
+		this.numeroCriancas17a18 = numeroCriacas17a18;
 	}
 
 	public Integer getNumeroCriacas17a18() {
-		return numeroCriacas17a18;
+		return numeroCriancas17a18;
 	}
 
 	public void setNumeroCriacas17a18(Integer numeroCriacas17a18) {
-		this.numeroCriacas17a18 = numeroCriacas17a18;
+		this.numeroCriancas17a18 = numeroCriacas17a18;
 	}
 
 	public void setHospede(Hospede hospede) {
@@ -155,39 +179,10 @@ public class Reserva {
 		return destaReserva.overlaps(daOutraReserva);
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Quarto getQuarto() {
-		return quarto;
-	}
-
-	public void setQuarto(Quarto quarto) {
-		this.quarto = quarto;
-	}
-
-	public Double getValorDiaria() {
-		return this.valorDiaria;
-	}
-
-	public void setValorDiaria(Double valor) {
-		this.valorDiaria = valor;
-	}
+	
 
 	public Double getValorReserva() {
-		Integer numeroDeDias =  Days.daysBetween(inicio, fim).getDays();
-		
-		Double valorReservas = ((double)numeroDeDias * this.valorDiaria);
-		if (valorReservas.equals(new Double(0.0)))
-	  		return valorReservas;
-		
-	  	BigDecimal bd = new BigDecimal(valorReservas.toString());
-	  	return bd.setScale(2, RoundingMode.HALF_EVEN).doubleValue();
+		return new CalculoDeValorPorPeriodoService().calcularValor(this);
 	}
 
 }

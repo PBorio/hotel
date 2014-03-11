@@ -23,7 +23,7 @@ import domain.Hospede;
 import domain.Quarto;
 import domain.Reserva;
 import domain.exceptions.HotelException;
-import domain.servicos.ServicoDeCalculoDePrecos;
+import domain.servicos.CalculoDeValorDaDiariaService;
 import domain.servicos.ServicoDeReserva;
 import domain.servicos.StatusDeReservasNoDia;
 
@@ -105,7 +105,7 @@ public class ReservasController {
 			
 			disponivel.addReserva(reserva);
 			
-			ServicoDeCalculoDePrecos servicoPrecos = new ServicoDeCalculoDePrecos(politicaPrecoRepositorio.buscaTodos());
+			CalculoDeValorDaDiariaService servicoPrecos = new CalculoDeValorDaDiariaService(politicaPrecoRepositorio.buscaTodos());
 			servicoPrecos.calcularEInformarValorNaReserva(reserva);
 			
 			reservaRepositorio.salva(reserva);

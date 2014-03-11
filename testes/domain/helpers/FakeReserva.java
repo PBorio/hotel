@@ -2,6 +2,8 @@ package domain.helpers;
 
 import org.joda.time.DateTime;
 
+import domain.Hospede;
+import domain.Quarto;
 import domain.Reserva;
 import domain.servicos.helpers.ParserDeStringParaData;
 
@@ -25,9 +27,23 @@ public class FakeReserva {
 		return reserva;
 	}
 	
+	public FakeReserva paraOHospede(String nome) {
+		Hospede hospede = new Hospede();
+		hospede.setNome(nome);
+		reserva.setHospede(hospede);
+		return this;
+	}
+	
 	private DateTime parseData(String stringDaData) {
 		DateTime data = new ParserDeStringParaData().parseData(stringDaData);
 		return data;
 	}
+
+	public FakeReserva noQuarto(String numero) {
+		Quarto quarto = new Quarto();
+		quarto.setNumero(numero);
+		return this;
+	}
+	
 
 }

@@ -9,11 +9,11 @@ import domain.PoliticaDePrecos;
 import domain.Reserva;
 import domain.exceptions.HotelException;
 
-public class ServicoDeCalculoDePrecos {
+public class CalculoDeValorDaDiariaService {
 
 	private List<PoliticaDePrecos> politicas;
 
-	public ServicoDeCalculoDePrecos(List<PoliticaDePrecos> politicas) {
+	public CalculoDeValorDaDiariaService(List<PoliticaDePrecos> politicas) {
 		this.politicas = politicas;
 	}
 
