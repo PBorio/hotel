@@ -23,10 +23,6 @@ public class FakeReserva {
 		return this;
 	}
 	
-	public Reserva build(){
-		return reserva;
-	}
-	
 	public FakeReserva paraOHospede(String nome) {
 		Hospede hospede = new Hospede();
 		hospede.setNome(nome);
@@ -34,16 +30,27 @@ public class FakeReserva {
 		return this;
 	}
 	
-	private DateTime parseData(String stringDaData) {
-		DateTime data = new ParserDeStringParaData().parseData(stringDaData);
-		return data;
-	}
-
 	public FakeReserva noQuarto(String numero) {
 		Quarto quarto = new Quarto();
 		quarto.setNumero(numero);
 		return this;
 	}
+
+	public FakeReserva comValorDaDiariaDe(double valor) {
+		reserva.setValorDiaria(valor);
+		return this;
+	}
+	
+	public Reserva build(){
+		return reserva;
+	}
+	
+	private DateTime parseData(String stringDaData) {
+		DateTime data = new ParserDeStringParaData().parseData(stringDaData);
+		return data;
+	}
+
+	
 	
 
 }

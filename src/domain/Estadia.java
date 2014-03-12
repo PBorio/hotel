@@ -1,24 +1,35 @@
 package domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.joda.time.DateTime;
 
+import domain.exceptions.DataFechamentoNaoInformadoException;
 import domain.interfaces.CalculavelPorPeriodo;
 import domain.nulos.ReservaNulo;
 import domain.servicos.CalculoDeValorPorPeriodoService;
 
 public class Estadia implements CalculavelPorPeriodo {
 
+	
+	private Set<Hospede> hospedes = new HashSet<Hospede>();
+	private Set<ServicoPrestado> servicosPrestados = new HashSet<ServicoPrestado>();
+	private Set<Consumo> consumos = new HashSet<Consumo>();
+	
 	private Reserva reserva = new ReservaNulo();
-	private List<Hospede> hospedes = new ArrayList<Hospede>();
 	private Quarto quarto;
 	private DateTime dataCheckin;
 	private DateTime previsaoCheckout;
 	private DateTime dataCheckout;
 	private DateTime dataCancelamento;
 	private Double valorDiaria;
+	
+	
 
 	public void aPartirDaReserva(Reserva reserva) {
 		this.reserva = reserva;
@@ -50,7 +61,7 @@ public class Estadia implements CalculavelPorPeriodo {
 	}
 
 	public List<Hospede> getHospedes() {
-		return this.hospedes;
+		return new ArrayList<Hospede>(this.hospedes);
 	}
 
 	public void setDataCheckin(DateTime dataCheckin) {
@@ -111,5 +122,53 @@ public class Estadia implements CalculavelPorPeriodo {
 			
 		return new CalculoDeValorPorPeriodoService().calcularValorAteAData(this, data);
 	}
+
+	public Double getValorDosServicos() {
+		Double result = 0.0;
+		for (ServicoPrestado s : servicosPrestados){
+			result += s.getValor();
+		}
+		BigDecimal bd = new BigDecimal(result.toString());
+	  	return bd.setScale(2, RoundingMode.HALF_EVEN).doubleValue();
+	}
+	
+	public Double getValorConsumido() {
+		Double result = 0.0;
+		for (Consumo consumo : consumos){
+			result += consumo.getValor();
+		}
+		BigDecimal bd = new BigDecimal(result.toString());
+	  	return bd.setScale(2, RoundingMode.HALF_EVEN).doubleValue();
+	}
+
+	public void addServicoPrestado(ServicoPrestado servicoPrestado) {
+		this.servicosPrestados.add(servicoPrestado);
+	}
+
+	public void addConsumo(Consumo consumo) {
+		this.consumos.add(consumo);
+	}
+
+	public Double getValorDaEstadiaFechada() {
+		
+		if (dataCheckout == null)
+			throw new DataFechamentoNaoInformadoException("Estadia em aberto");
+		
+		Double result = valorAteAData(this.dataCheckout)+getValorDosServicos()+getValorConsumido();
+		BigDecimal bd = new BigDecimal(result.toString());
+	  	return bd.setScale(2, RoundingMode.HALF_EVEN).doubleValue();
+	}
+
+	public Double getValorDaEstadiaNaData(DateTime data) {
+		
+		if (dataCheckout != null)
+			data = dataCheckout;
+		
+		Double result = valorAteAData(data)+getValorDosServicos()+getValorConsumido();
+		BigDecimal bd = new BigDecimal(result.toString());
+	  	return bd.setScale(2, RoundingMode.HALF_EVEN).doubleValue();
+	}
+
+	
 
 }
