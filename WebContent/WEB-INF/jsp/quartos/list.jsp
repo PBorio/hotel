@@ -65,21 +65,21 @@
 			<!-- End .content-box-header -->
 
 					
-			<table>
+			<table class="table table-bordered data-table dataTable">
 	
 				<thead>
 					<tr>
-						<th width="10%">Número</th>
-						<th width="70%">Descrição</th>
-						<th width="10%"></th>
+						<th class="ui-state-default" width="10%">Número</th>
+						<th class="ui-state-default" width="70%">Descrição</th>
+						<th class="ui-state-default" width="10%"></th>
 					</tr>
 	
 				</thead>
 				
 				<tbody>
 					<c:forEach var="quarto" items="${quartoList}">
-						<tr id="quarto-${quarto.id}">
-							<td><a href="<c:url value='/quartos/${quarto.id}'/>" title="title">${quarto.numero}</a></td>
+						<tr class="gradeA" id="quarto-${quarto.id}">
+							<td class="sorting_1"><a href="<c:url value='/quartos/${quarto.id}'/>" title="title">${quarto.numero}</a></td>
 							<td><a href="<c:url value='/quartos/${quarto.id}'/>" title="title">${quarto.descricao}</a></td>
 							<td>
 								<a href="" title="Delete"
