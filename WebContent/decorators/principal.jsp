@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Unicorn Admin</title>
+		<title><decorator:title default="Weblogia"/></title>
 		<meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css'/>" type="text/css" media="screen"/>
@@ -12,6 +12,9 @@
 		<link rel="stylesheet" href="<c:url value='/resources/css/fullcalendar.css'/>" type="text/css" media="screen" />	
 		<link rel="stylesheet" href="<c:url value='/resources/css/unicorn.main.css'/>" type="text/css" media="screen" />
 		<link rel="stylesheet" href="<c:url value='/resources/css/unicorn.grey.css'/>"  class="skin-color" />
+		<link rel="stylesheet" href="<c:url value='/resources/css/kanban.css'/>" type="text/css" />
+		<decorator:head />
+		
 	</head>
 	<body>
 		
@@ -88,15 +91,17 @@
 				</div>
 			</div>
 
-            <script src="js/excanvas.min.js"></script>
-            <script src="js/jquery.min.js"></script>
-            <script src="js/jquery.ui.custom.js"></script>
-            <script src="js/bootstrap.min.js"></script>
-            <script src="js/jquery.flot.min.js"></script>
-            <script src="js/jquery.flot.resize.min.js"></script>
-            <script src="js/jquery.peity.min.js"></script>
-            <script src="js/fullcalendar.min.js"></script>
-            <script src="js/unicorn.js"></script>
-            <script src="js/unicorn.dashboard.js"></script>
+            <script src="/resources/scripts/excanvas.min.js"></script>
+            <script src="/resources/scripts/jquery.min.js"></script>
+            <script src="/resources/scripts/jquery.ui.custom.js"></script>
+            <script src="/resources/scripts/bootstrap.min.js"></script>
+            <script src="/resources/scripts/jquery.flot.min.js"></script>
+            <script src="/resources/scripts/jquery.flot.resize.min.js"></script>
+            <script src="/resources/scripts/jquery.peity.min.js"></script>
+            <script src="/resources/scripts/fullcalendar.min.js"></script>
+            <script src="/resources/scripts/unicorn.js"></script>
+            <script src="/resources/scripts/unicorn.dashboard.js"></script>
+            
+           
 	</body>
 </html>
