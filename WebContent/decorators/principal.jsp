@@ -7,12 +7,12 @@
 		<title><decorator:title default="Weblogia"/></title>
 		<meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css'/>" type="text/css" media="screen"/>
-		<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap-responsive.min.css'/>" type="text/css" media="screen" />
-		<link rel="stylesheet" href="<c:url value='/resources/css/fullcalendar.css'/>" type="text/css" media="screen" />	
-		<link rel="stylesheet" href="<c:url value='/resources/css/unicorn.main.css'/>" type="text/css" media="screen" />
+		<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css'/>" />
+		<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap-responsive.min.css'/>" />
+		<link rel="stylesheet" href="<c:url value='/resources/css/fullcalendar.css'/>" />	
+		<link rel="stylesheet" href="<c:url value='/resources/css/unicorn.main.css'/>" />
 		<link rel="stylesheet" href="<c:url value='/resources/css/unicorn.grey.css'/>"  class="skin-color" />
-		<link rel="stylesheet" href="<c:url value='/resources/css/kanban.css'/>" type="text/css" />
+		<link rel="stylesheet" href="<c:url value='/resources/css/kanban.css'/>" />
 		<decorator:head />
 		
 	</head>
