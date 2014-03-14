@@ -4,33 +4,6 @@
 <head>
 <title>Categorias</title>
 
-<script type="text/javascript">
-
-// $(function(){
-	
-//    CriarPaginacao("<c:url value='/produtos/getPaginas.json'/>","/produtos/list");	
-	
-// });
-
-//    function remove(id){
-// 	   $.get('remove?id=' + id, function(){
-// 		   //alert('Pedido removido com sucesso!!');
-// 		   $('#quadro-'+id).fadeOut('slow');
-// 	   });
-//    }
-   
-//    function edit(){
-// 	   var firstBox = $("input:checked").get(0);
-//   		if( firstBox == undefined){
-//   			alert("Nenhum produto foi selecionado!!!");
-//   		}
-//   		else{
-//   			$("#icon-edit").prop("href","<c:url value='/produtos/"+ firstBox.id.substring(8,firstBox.id.length) +"'/>");
-//   		}
-//     }
-
-</script>
-
 </head>
 
 <body>
@@ -63,14 +36,14 @@
 			</div>
 			<!-- End .content-box-header -->
 
-			<table>
+			<table class="table table-bordered data-table dataTable">
 
 				<thead>
 					<tr>
-						<th width="40%">Descrição</th>
-						<th width="40%">Categoria</th>
-						<th width="20%">Valor</th>
-						<th width="20%"></th>
+						<th class="ui-state-default" width="40%">Descrição</th>
+						<th class="ui-state-default" width="40%">Categoria</th>
+						<th class="ui-state-default" width="20%">Valor</th>
+						<th class="ui-state-default" width="20%"></th>
 					</tr>
 
 				</thead>

@@ -4,33 +4,6 @@
 <head>
 <title>Quartos</title>
 
-<script type="text/javascript">
-
-// $(function(){
-	
-//    CriarPaginacao("<c:url value='/produtos/getPaginas.json'/>","/produtos/list");	
-	
-// });
-
-//    function remove(id){
-// 	   $.get('remove?id=' + id, function(){
-// 		   //alert('Pedido removido com sucesso!!');
-// 		   $('#quadro-'+id).fadeOut('slow');
-// 	   });
-//    }
-   
-//    function edit(){
-// 	   var firstBox = $("input:checked").get(0);
-//   		if( firstBox == undefined){
-//   			alert("Nenhum produto foi selecionado!!!");
-//   		}
-//   		else{
-//   			$("#icon-edit").prop("href","<c:url value='/produtos/"+ firstBox.id.substring(8,firstBox.id.length) +"'/>");
-//   		}
-//     }
-
-</script>
-
 </head>
 
 <body>

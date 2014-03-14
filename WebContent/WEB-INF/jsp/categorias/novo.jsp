@@ -8,27 +8,39 @@
 <title>Cadastro de Categorias</title>
 </head>
 <body>
-	 <form action='<c:url value="/categorias/salva"/>' method="post">
-	    <input type="hidden" name="categoria.id" value="${categoria.id}" />
+	   
 	    <c:if test="${not empty mensagem}">
 			<p class="mensagem">
 				${mensagem}
 			</p>
 		</c:if>
-		<h3>Cadastro de Categorias</h3>
-		<fieldset>
-		   <p class="half">
-		        <span>Descrição: </span>
-				<input type="text" name="categoria.descricao" id="categoria.descricao" value="${categoria.descricao}" />
-		   </p>
-		   <p class="half">
-				<span>Observação:</span>
-				<textarea name="categoria.observacao" id="categoria.observacao">${categoria.observacao}</textarea>
-		   </p>
-		    <p>
-		   		<input type="submit" value="Salvar" />
-		   	</p>
-	  </fieldset>
-	</form>
+		<div class="widget-title">
+			<span class="icon">
+				<i class="icon-align-justify"></i>									
+			</span>
+			<h5>Cadastro de Quartos</h5>
+		</div>
+		<div class="widget-box">
+			<div class="widget-content nopadding">
+			  <form class="form-horizontal" action='<c:url value="/categorias/salva"/>' method="post">
+			  	  <input type="hidden" name="categoria.id" value="${categoria.id}" />
+			  	  <div class="control-group">
+						<label class="control-label">Descrição:</label>
+						<div class="controls">
+							<input type="text" name="categoria.descricao" id="categoria.descricao" value="${categoria.descricao}" />
+						</div>
+				  </div> 
+				  <div class="control-group">
+						<label class="control-label">Observação:</label>
+						<div class="controls">
+							<textarea name="categoria.observacao" id="categoria.observacao">${categoria.observacao}</textarea>
+						</div>
+				  </div> 
+				  <div class="form-actions">
+						<button type="submit" class="btn btn-primary">Salvar</button>
+				  </div>
+			  </form>
+			 </div>
+		</div>
 </body>
 </html>
