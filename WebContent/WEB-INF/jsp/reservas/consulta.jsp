@@ -29,7 +29,7 @@
      	  <c:forEach var="statusQuarto" items="${status.statusQuartos}">
      	    <td class="${statusQuarto.tipoStatusNaData.description}">
      	      <c:if test="${statusQuarto.reserva.id == null}">${statusQuarto.tipoStatusNaData.description}</c:if>
-     	      <c:if test="${statusQuarto.reserva.id != null}"><a href="<c:url value='/reservas/${statusQuarto.reserva.id}'/>">${statusQuarto.tipoStatusNaData.description}</a></li></c:if>
+     	      <c:if test="${statusQuarto.reserva.id != null}"><a href="<c:url value='/reservas/${statusQuarto.reserva.id}'/>">${statusQuarto.tipoStatusNaData.description}</a></c:if>
      	    </td>
      	  </c:forEach>
      	</tr>

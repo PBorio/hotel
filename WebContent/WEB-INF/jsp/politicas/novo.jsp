@@ -70,20 +70,21 @@
 				  <div class="control-group">
 						<label class="control-label">Padrão:</label>
 						<div class="controls">
+						    <div class="checker">
 							<label>
-							  <div class="checker">
 							    <span>
 							  		<input type="checkbox" name="politicaDePrecos.padrao" id="politicaDePrecos.padrao" checked="${politicaDePrecos.padrao}" style="opacity: 0" />
 							  	</span>
-							  </div>
-							 </label>
+							</label>
+							</div>
 						</div>
 				  </div> 
 				  <div class="form-actions">
 						<button type="submit" class="btn btn-primary">Salvar</button>
 				  </div>
 			  </form>
-		   
+		   </div>
+		 </div>
 		  
 		   
 </body>
