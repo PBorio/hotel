@@ -13,4 +13,6 @@ public interface ReservaRepositorio {
 	
 	void atualiza(Reserva reserva);
 
+	List<Reserva> buscarPorNomeDoHospede(String pesquisa);
+
 }

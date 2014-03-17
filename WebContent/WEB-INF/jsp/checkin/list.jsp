@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Quartos</title>
+<title>Reservas</title>
 
 </head>
 
@@ -36,7 +36,20 @@
 
 			</div>
 			<!-- End .content-box-header -->
-
+			<div class="widget-box">
+				<div class="widget-content nopadding">
+					<form action="<c:url value='/checkin/pesquisar'/>" class="form-horizontal">
+				     <div class="control-group">
+						<label class="control-label">Nome do Hóspede:</label>
+						<div class="controls">
+						    <input type="text" name="pesquisa">
+							<input value="Pesquisar" type="submit" class="button" id="btnPesquisa" >
+						</div>
+					</div>
+					
+					</form>
+				</div>
+			</div>
 					
 			<table class="table table-bordered data-table dataTable">
 	
