@@ -37,5 +37,9 @@ public class CheckinController {
 		result.include("reservaList",reservaList );
 		result.of(this).list();
 	}
+	
+	public Reserva checkin(){
+		return new Reserva();
+	}
 
 }
