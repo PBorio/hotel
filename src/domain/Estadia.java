@@ -17,7 +17,9 @@ import domain.servicos.CalculoDeValorPorPeriodoService;
 public class Estadia implements CalculavelPorPeriodo {
 
 	
-	private Set<Hospede> hospedes = new HashSet<Hospede>();
+	private Long id;
+	
+	private Set<HospedeDaEstadia> hospedes = new HashSet<HospedeDaEstadia>();
 	private Set<ServicoPrestado> servicosPrestados = new HashSet<ServicoPrestado>();
 	private Set<Consumo> consumos = new HashSet<Consumo>();
 	
@@ -33,7 +35,7 @@ public class Estadia implements CalculavelPorPeriodo {
 
 	public void aPartirDaReserva(Reserva reserva) {
 		this.reserva = reserva;
-		this.hospedes.add(reserva.getHospede());
+		this.addHospede(reserva.getHospede());
 		this.quarto = reserva.getQuarto();
 		this.dataCheckin = reserva.getInicio();
 		this.previsaoCheckout = reserva.getFim();
@@ -61,7 +63,13 @@ public class Estadia implements CalculavelPorPeriodo {
 	}
 
 	public List<Hospede> getHospedes() {
-		return new ArrayList<Hospede>(this.hospedes);
+		
+		List<Hospede> result = new ArrayList<Hospede>();
+		
+		for (HospedeDaEstadia h : hospedes){
+			result.add(h.getHospede());
+		}
+		return result;
 	}
 
 	public void setDataCheckin(DateTime dataCheckin) {
@@ -69,7 +77,8 @@ public class Estadia implements CalculavelPorPeriodo {
 	}
 
 	public void addHospede(Hospede hospede) {
-		this.hospedes.add(hospede);
+		HospedeDaEstadia hospedeEstadia = new HospedeDaEstadia(this,hospede);
+		this.hospedes.add(hospedeEstadia);
 	}
 
 	public void setQuarto(Quarto quarto) {
@@ -167,6 +176,14 @@ public class Estadia implements CalculavelPorPeriodo {
 		Double result = valorAteAData(data)+getValorDosServicos()+getValorConsumido();
 		BigDecimal bd = new BigDecimal(result.toString());
 	  	return bd.setScale(2, RoundingMode.HALF_EVEN).doubleValue();
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	

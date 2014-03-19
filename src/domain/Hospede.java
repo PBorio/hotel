@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="hospedes")
@@ -19,6 +20,16 @@ public class Hospede {
 	private String email;
 	private String telefone;
 	private String celular;
+	
+	@Transient
+	private String endereco;
+	
+	@Transient
+	private Long cpf;
+	
+	@Transient
+	private Long rg;
+	
 
 	public void setNome(String nome) {
 		this.nome = nome;
@@ -90,6 +101,38 @@ public class Hospede {
 		if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public String getCpfComMascara() {
+		return String.valueOf(cpf);
+	}
+
+	public void setCpf(Long cpf) {
+		this.cpf = cpf;
+	}
+	
+	public Long getCpf(){
+		return this.cpf;
+	}
+
+	public String getRgComMascara() {
+		return String.valueOf(rg);
+	}
+
+	public void setRg(Long rg) {
+		this.rg = rg;
+	}
+	
+	public Long getRg(){
+		return this.rg;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
 
 }

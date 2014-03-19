@@ -73,7 +73,7 @@
 						    <div class="checker">
 							<label>
 							    <span>
-							  		<input type="checkbox" name="politicaDePrecos.padrao" id="politicaDePrecos.padrao" checked="${politicaDePrecos.padrao}" style="opacity: 0" />
+							  		<input type="checkbox" name="politicaDePrecos.padrao" id="politicaDePrecos.padrao"/>
 							  	</span>
 							</label>
 							</div>

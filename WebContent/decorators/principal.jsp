@@ -47,11 +47,12 @@
 		<div id="sidebar">
 			<a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard</a>
 			<ul>
+				<li class="active"><a href="<c:url value='/checkin/list'/>"><i class="icon icon-home"></i> <span>Checkin</span></a></li>
+				<li class="active"><a href="<c:url value='/reservas/reserva'/>"><i class="icon icon-home"></i> <span>Reservas</span></a></li>
+				<li class="active"><a href="<c:url value='/reservas/consulta'/>"><i class="icon icon-home"></i> <span>Consulta</span></a></li>
 				<li class="active"><a href="<c:url value='/quartos/list'/>"><i class="icon icon-home"></i> <span>Quartos</span></a></li>
 				<li class="active"><a href="<c:url value='/categorias/list'/>"><i class="icon icon-home"></i> <span>Categorias</span></a></li>
 				<li class="active"><a href="<c:url value='/politicas/list'/>"><i class="icon icon-home"></i> <span>Preços</span></a></li>
-				<li class="active"><a href="<c:url value='/reservas/reserva'/>"><i class="icon icon-home"></i> <span>Reservas</span></a></li>
-				<li class="active"><a href="<c:url value='/reservas/consulta'/>"><i class="icon icon-home"></i> <span>Consulta</span></a></li>
 			</ul>
 		
 		</div>

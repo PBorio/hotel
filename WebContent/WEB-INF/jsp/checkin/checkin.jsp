@@ -24,51 +24,59 @@
 		<div class="widget-box">
 			<div class="widget-content nopadding">
 			  <form class="form-horizontal" action='<c:url value="/checkin/salva"/>' method="post">
-		    		<input type="hidden" name="reserva.id" value="${reserva.id}" />
+		    		<input type="hidden" name="estadia.id" value="${estadia.id}" />
+		    		<input type="hidden" name="hospede.id" value="${hospede.id}" />
 					<div class="control-group">
 						<label class="control-label">Quarto:</label>
 						<div class="controls">
-							<input id="reserva.quarto.numero" type="text" name="reserva.quarto.numero" value="${reserva.quarto.numero}" readonly="true" />
+							<input id="estadia.quarto.numero" type="text" name="estadia.quarto.numero" value="${estadia.quarto.numero}" readonly="true" />
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">Hóspede:</label>
 						<div class="controls">
-							<input type="text" name="reserva.hospede.nome" id="reserva.hospede.nome" value="${reserva.hospede.nome}" readonly="true" />
+							<input type="text" name="hospede.nome" id="hospede.nome" value="${hospede.nome}" readonly="true" />
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Email:</label>
+						<div class="controls">
+							<input type="text" name="hospede.email" id="hospede.email" value="${hospede.email}" />
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">CPF:</label>
 						<div class="controls">
-							<input type="text" name="reserva.hospede.nome" id="reserva.hospede.nome" value="${reserva.hospede.nome}" />
+							<input type="text" name="hospede.cpf" id="hospede.cpf" value="${hospede.cpf}" />
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">RG:</label>
 						<div class="controls">
-							<input type="text" name="reserva.hospede.nome" id="reserva.hospede.nome" value="${reserva.hospede.nome}" />
+							<input type="text" name="hospede.rg" id="hospede.rg" value="${hospede.rg}" />
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">Endereço:</label>
 						<div class="controls">
-							<input type="text" name="reserva.hospede.nome" id="reserva.hospede.nome" value="${reserva.hospede.nome}" />
+							<input type="text" name="hospede.endereco" id="hospede.endereco" value="${hospede.endereco}" />
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">Telefone:</label>
 						<div class="controls">
-							<input type="text" name="reserva.hospede.nome" id="reserva.hospede.nome" value="${reserva.hospede.nome}" />
+							<input type="text" name="hospede.telefone" id="hospede.telefone" value="${hospede.telefone}" />
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">Celular:</label>
 						<div class="controls">
-							<input type="text" name="reserva.hospede.nome" id="reserva.hospede.nome" value="${reserva.hospede.nome}" />
+							<input type="text" name="hospede.celular" id="hospede.celular" value="${hospede.celular}" />
 						</div>
 					</div>
 					 <div class="form-actions">
-						<button type="submit" class="btn btn-primary">Salvar</button>
+					 	<button type="submit" class="btn btn-primary">Cadastrar Outro Hóspede</button>
+						<button type="submit" class="btn btn-primary">Concluir</button>
 					</div>
 			  </form>
 			</div>
