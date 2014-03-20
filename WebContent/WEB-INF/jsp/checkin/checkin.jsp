@@ -26,6 +26,7 @@
 			  <form class="form-horizontal" action='<c:url value="/checkin/salva"/>' method="post">
 		    		<input type="hidden" name="estadia.id" value="${estadia.id}" />
 		    		<input type="hidden" name="hospede.id" value="${hospede.id}" />
+		    		<input type="hidden" name="estadia.quarto.id" value="${estadia.quarto.id}" />
 					<div class="control-group">
 						<label class="control-label">Quarto:</label>
 						<div class="controls">

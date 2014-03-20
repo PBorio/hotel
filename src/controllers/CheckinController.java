@@ -3,6 +3,8 @@ package controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.joda.time.DateTime;
+
 import repositorios.EstadiaRepositorio;
 import repositorios.HospedeRepositorio;
 import repositorios.ReservaRepositorio;
@@ -75,6 +77,7 @@ public class CheckinController {
 		
 		estadia.addHospede(hospede);
 		if (estadia.getId() == null){
+			estadia.setDataCheckin(new DateTime());
 			estadiaRepositorio.salva(estadia);
 		}else{
 			estadiaRepositorio.atualiza(estadia);

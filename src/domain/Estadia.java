@@ -7,6 +7,19 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 import domain.exceptions.DataFechamentoNaoInformadoException;
@@ -14,21 +27,48 @@ import domain.interfaces.CalculavelPorPeriodo;
 import domain.nulos.ReservaNulo;
 import domain.servicos.CalculoDeValorPorPeriodoService;
 
+@Entity
+@Table(name="estadias")
 public class Estadia implements CalculavelPorPeriodo {
 
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@OneToMany(mappedBy="estadia", cascade=CascadeType.ALL)
 	private Set<HospedeDaEstadia> hospedes = new HashSet<HospedeDaEstadia>();
+	
+	@Transient
 	private Set<ServicoPrestado> servicosPrestados = new HashSet<ServicoPrestado>();
+	
+	@Transient
 	private Set<Consumo> consumos = new HashSet<Consumo>();
 	
+	@ManyToOne
+	@JoinColumn(name="reserva_id")
 	private Reserva reserva = new ReservaNulo();
+	
+	@ManyToOne
+	@JoinColumn(name="quarto_id")
 	private Quarto quarto;
+	
+	@Column(name="data_checkin")
+	@Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	private DateTime dataCheckin;
+	
+	@Column(name="previsao_checkout")
+	@Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	private DateTime previsaoCheckout;
+	
+	@Column(name="data_checkout")
+	@Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	private DateTime dataCheckout;
+	
+	@Column(name="data_cancelamento")
+	@Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	private DateTime dataCancelamento;
+	
+	@Column(name="valor_diaria")
 	private Double valorDiaria;
 	
 	
