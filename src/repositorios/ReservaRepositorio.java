@@ -15,4 +15,6 @@ public interface ReservaRepositorio {
 
 	List<Reserva> buscarPorNomeDoHospede(String pesquisa);
 
+	List<Reserva> buscaReservasEmAberto();
+
 }

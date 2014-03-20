@@ -85,6 +85,10 @@ public class Estadia implements CalculavelPorPeriodo {
 	public Reserva getReserva() {
 		return reserva;
 	}
+	
+	public void setReserva(Reserva reserva){
+		this.reserva = reserva;
+	}
 
 	public Quarto getQuarto() {
 		return quarto;

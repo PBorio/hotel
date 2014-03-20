@@ -27,10 +27,17 @@
 		    		<input type="hidden" name="estadia.id" value="${estadia.id}" />
 		    		<input type="hidden" name="hospede.id" value="${hospede.id}" />
 		    		<input type="hidden" name="estadia.quarto.id" value="${estadia.quarto.id}" />
+		    		<input type="hidden" name="estadia.reserva.id" value="${estadia.quarto.id}" />
 					<div class="control-group">
 						<label class="control-label">Quarto:</label>
 						<div class="controls">
 							<input id="estadia.quarto.numero" type="text" name="estadia.quarto.numero" value="${estadia.quarto.numero}" readonly="true" />
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Valor da Diária:</label>
+						<div class="controls">
+							<input id="estadia.valorDiaria" type="text" name="estadia.valorDiaria" value="${estadia.valorDiaria}" />
 						</div>
 					</div>
 					<div class="control-group">

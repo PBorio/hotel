@@ -36,7 +36,7 @@ public class CheckinController {
 	}
 	
 	public List<Reserva> list(){
-		return reservaRepositorio.buscaTodos();
+		return reservaRepositorio.buscaReservasEmAberto();
 	}
 	
 	@Get
