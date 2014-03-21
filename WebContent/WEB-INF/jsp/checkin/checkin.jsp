@@ -23,15 +23,15 @@
 		</div>
 		<div class="widget-box">
 			<div class="widget-content nopadding">
-			  <form class="form-horizontal" action='<c:url value="/checkin/salva"/>' method="post">
+			  <form class="form-horizontal" method="post">
 		    		<input type="hidden" name="estadia.id" value="${estadia.id}" />
 		    		<input type="hidden" name="hospede.id" value="${hospede.id}" />
 		    		<input type="hidden" name="estadia.quarto.id" value="${estadia.quarto.id}" />
-		    		<input type="hidden" name="estadia.reserva.id" value="${estadia.quarto.id}" />
+		    		<input type="hidden" name="estadia.reserva.id" value="${estadia.reserva.id}" />
 					<div class="control-group">
 						<label class="control-label">Quarto:</label>
 						<div class="controls">
-							<input id="estadia.quarto.numero" type="text" name="estadia.quarto.numero" value="${estadia.quarto.numero}" readonly="true" />
+							<input id="estadia.quarto.numero" type="text" name="estadia.quarto.numero" value="${estadia.quarto.numero}" readonly="readonly" />
 						</div>
 					</div>
 					<div class="control-group">
@@ -43,7 +43,7 @@
 					<div class="control-group">
 						<label class="control-label">Hóspede:</label>
 						<div class="controls">
-							<input type="text" name="hospede.nome" id="hospede.nome" value="${hospede.nome}" readonly="true" />
+							<input type="text" name="hospede.nome" id="hospede.nome" value="${hospede.nome}" readonly="readonly" />
 						</div>
 					</div>
 					<div class="control-group">
@@ -83,8 +83,8 @@
 						</div>
 					</div>
 					 <div class="form-actions">
-					 	<button type="submit" class="btn btn-primary">Cadastrar Outro Hóspede</button>
-						<button type="submit" class="btn btn-primary">Concluir</button>
+					 	<button type="button" class="btn btn-primary" onClick="this.form.action='<c:url value="/checkin/salva"/>';this.form.submit()">Cadastrar Outro Hóspede</button>
+						<button type="button" class="btn btn-primary" onClick="this.form.action='<c:url value="/checkin/salva"/>';this.form.submit()">Concluir</button>
 					</div>
 			  </form>
 			</div>
