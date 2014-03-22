@@ -67,6 +67,26 @@ public class CheckinController {
 		result.of(this).checkin();
 	}
 	
+	public void salvaEPreparaMaisHospedes(Estadia estadia, Hospede hospede){
+		
+		if (hospede.getId() == null){
+			hospedeRepositorio.salva(hospede);
+		}else{
+			hospedeRepositorio.atualiza(hospede);
+		}
+		
+		estadia.addHospede(hospede);
+		if (estadia.getId() == null){
+			estadia.setDataCheckin(new DateTime());
+			estadiaRepositorio.salva(estadia);
+		}else{
+			estadiaRepositorio.atualiza(estadia);
+		}
+		
+		result.include("mensagem", "Estadia criada com sucesso!");
+		result.redirectTo(PainelController.class).painel();
+	}
+	
 	public void salva(Estadia estadia, Hospede hospede){
 		
 		if (hospede.getId() == null){
@@ -84,7 +104,7 @@ public class CheckinController {
 		}
 		
 		result.include("mensagem", "Estadia criada com sucesso!");
-		result.redirectTo(this).list();
+		result.redirectTo(PainelController.class).painel();
 	}
 
 }
