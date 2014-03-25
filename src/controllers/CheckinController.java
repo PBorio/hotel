@@ -83,8 +83,10 @@ public class CheckinController {
 			estadiaRepositorio.atualiza(estadia);
 		}
 		
+		result.include("estadia", estadia);
+		result.include("hospede", new Hospede());
 		result.include("mensagem", "Estadia criada com sucesso!");
-		result.redirectTo(PainelController.class).painel();
+		result.of(this).checkin();
 	}
 	
 	public void salva(Estadia estadia, Hospede hospede){
@@ -95,6 +97,7 @@ public class CheckinController {
 			hospedeRepositorio.atualiza(hospede);
 		}
 		
+		estadia = estadiaRepositorio.buscaPorId(estadia.getId());
 		estadia.addHospede(hospede);
 		if (estadia.getId() == null){
 			estadia.setDataCheckin(new DateTime());

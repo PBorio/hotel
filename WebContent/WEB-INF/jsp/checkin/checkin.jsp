@@ -43,7 +43,7 @@
 					<div class="control-group">
 						<label class="control-label">Hóspede:</label>
 						<div class="controls">
-							<input type="text" name="hospede.nome" id="hospede.nome" value="${hospede.nome}" readonly="readonly" />
+							<input type="text" name="hospede.nome" id="hospede.nome" value="${hospede.nome}" />
 						</div>
 					</div>
 					<div class="control-group">
@@ -83,7 +83,7 @@
 						</div>
 					</div>
 					 <div class="form-actions">
-					 	<button type="button" class="btn btn-primary" onClick="this.form.action='<c:url value="/checkin/salva"/>';this.form.submit()">Cadastrar Outro Hóspede</button>
+					 	<button type="button" class="btn btn-primary" onClick="this.form.action='<c:url value="/checkin/salvaEPreparaMaisHospedes"/>';this.form.submit()">Cadastrar Outro Hóspede</button>
 						<button type="button" class="btn btn-primary" onClick="this.form.action='<c:url value="/checkin/salva"/>';this.form.submit()">Concluir</button>
 					</div>
 			  </form>
