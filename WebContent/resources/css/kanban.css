@@ -61,39 +61,34 @@ box-shadow:5px 4px 10px #ccc;
 	
 }
 
-.correcao{
-  -moz-border-radius: 15px;
-  border-radius: 15px;
-  background-color: pink;
-  margin:2px;
-  margin-left:4px;
-  margin-right:4px;
-  cursor: default;
+.painel{
+	display: inline-block;
+	columns: 100px 5;
+    -webkit-columns : 100px 2;
 }
 
-.melhoria{
-  -moz-border-radius: 15px;
-  border-radius: 15px;
-  background-color: #85ACD1;
-  margin: 2px;
-  margin-left:4px;
-  margin-right:4px;
-  cursor: default;
+.quarto{
+	  -moz-border-radius: 15px;
+	  border-radius: 15px;
+	  background-color: blue;
+	  margin:2px;
+	  margin-left:4px;
+	  margin-right:4px;
+	  width: 220px;
+	  height: 200px;
+	  cursor: default;
+	  display: inline-block;
 }
 
-.duvida{
-  -moz-border-radius: 15px;
-  border-radius: 15px;
-  background-color: #FFED84;
-  margin: 2px;
-  margin-left:4px;
-  margin-right:4px;
-  cursor: default;
+.numeroQuarto{
+	display: block;
+	padding-top: 80px;
+	color: white;
+	font-size: 55px;
+	
 }
-
 
 .over{
-  border: 1px solid black;
   box-shadow:5px 4px 10px #ccc;
   -moz-box-shadow:5px 4px 10px #ccc;
   padding: 10px;

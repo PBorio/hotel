@@ -14,7 +14,6 @@
 		<link rel="stylesheet" href="<c:url value='/resources/css/select2.css' />" />
 		<link rel="stylesheet" href="<c:url value='/resources/css/uniform.css'/>" />
 		<link rel="stylesheet" href="<c:url value='/resources/css/unicorn.grey.css'/>"  class="skin-color" />
-		<link rel="stylesheet" href="<c:url value='/resources/css/kanban.css'/>" />
 		<decorator:head />
 		
 	</head>

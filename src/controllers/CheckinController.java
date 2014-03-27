@@ -97,7 +97,9 @@ public class CheckinController {
 			hospedeRepositorio.atualiza(hospede);
 		}
 		
-		estadia = estadiaRepositorio.buscaPorId(estadia.getId());
+		if (estadia.getId() != null)
+			estadia = estadiaRepositorio.buscaPorId(estadia.getId());
+		
 		estadia.addHospede(hospede);
 		if (estadia.getId() == null){
 			estadia.setDataCheckin(new DateTime());

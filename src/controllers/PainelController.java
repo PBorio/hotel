@@ -3,14 +3,26 @@ package controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import domain.Quarto;
+import repositorios.EstadiaRepositorio;
 import br.com.caelum.vraptor.Resource;
+import br.com.caelum.vraptor.Result;
+import domain.Estadia;
 
 @Resource
 public class PainelController {
 
-	public List<Quarto> painel(){
-		return new ArrayList<Quarto>();
+	private EstadiaRepositorio estadiaRepositorio;
+	private Result result;
+
+	public PainelController(EstadiaRepositorio estadiaRepositorio, Result result){
+		this.estadiaRepositorio = estadiaRepositorio;
+		this.result = result;
+		
+	}
+	
+	public List<Estadia> painel(){
+		List<Estadia> estadias = estadiaRepositorio.estadiasAbertas();
+		return estadias;
 	}
 	
 }
