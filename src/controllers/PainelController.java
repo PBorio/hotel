@@ -1,6 +1,5 @@
 package controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import repositorios.EstadiaRepositorio;
@@ -12,6 +11,7 @@ import domain.Estadia;
 public class PainelController {
 
 	private EstadiaRepositorio estadiaRepositorio;
+	@SuppressWarnings("unused")
 	private Result result;
 
 	public PainelController(EstadiaRepositorio estadiaRepositorio, Result result){
