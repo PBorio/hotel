@@ -58,13 +58,12 @@ box-shadow:5px 4px 10px #ccc;
 	text-align: center;
     float:left;
     width:16%;
-	
 }
 
 .painel{
 	display: inline-block;
-	columns: 100px 5;
-    -webkit-columns : 100px 2;
+	columns: 100px 3;
+    -webkit-columns : 100px 3;
 }
 
 .quarto{
@@ -91,7 +90,9 @@ box-shadow:5px 4px 10px #ccc;
 .over{
   box-shadow:5px 4px 10px #ccc;
   -moz-box-shadow:5px 4px 10px #ccc;
-  padding: 10px;
-  margin: 10px;
+  -webkit-box-shadow:5px 4px 10px #ccc;
+  padding: 2px;
+  margin: 2px;
   cursor: pointer;
+  background-color: #4683EA;
 }
