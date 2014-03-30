@@ -7,6 +7,36 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Estadia</title>
+
+
+<script type="text/javascript">
+	
+jQuery(document).ready(function() {
+	
+	var nContItems = 0;
+	$("#adiciona-produto").bind('click', function() {
+			addConsumos(false,nContItems);
+	        nContItems++;
+	});
+});
+
+function addConsumos(isRebuilding,nContItems) {
+	
+	cHtml = '<tr id="row-'+ nContItems + '" class="alt-row-son" >'
+	        + '<input id="consumo-id-'+ nContItems +'" type="hidden" name="estadia.consumos[].id"> </input>'
+			+ '<input id="produto-id-'+ nContItems +'" type="hidden" name="estadia.consumos[].produto.id"> </input>'
+			+ '<td> <input id="descricao-'+ nContItems +'" type="text" class="text-input s70-input" name="estadia.consumos[].produto.descricao"> </input> </td>'
+			+ '<td> <input id="quantidade-'+ nContItems +'" type="text" dir="rtl" class="text-input s70-input" name="estadia.consumos[].quantidade" > </input> </td>'
+			+ '<td> <label id="preco-'+ nContItems +'" type="text" dir="rtl" class="text-input s70-input" name="estadia.consumos[].preco" > </label> </td>'
+			+ '<td> <label id="total-'+ nContItems +'"> </label> </td>'
+			+ '<td> <a id="delete-' + nContItems + '" href="javascript:" title="Delete" tabindex="-1"> <img src="../resources/images/icons/cross.png" alt="Delete" tabindex="-1"/> </a> </td>'
+			+ '<td></td>'
+			+ '</tr>';
+
+	$("#consumos").append(cHtml);
+}
+	
+</script>
 </head>
 <body>
 	 
@@ -46,6 +76,29 @@
 							<input id="estadia.dataCheckin" type="text" name="estadia.dataCheckin" value="<joda:format pattern='dd/MM/yyyy' value='${estadia.dataCheckin}'/>" readonly="readonly" />
 						</div>
 					</div>
+					<div class="widget-title">
+						<span class="icon">
+							<i class="icon-align-justify"></i>									
+						</span>
+						<h5>Consumo</h5>
+					</div>
+					<table id="consumos">
+						<thead>
+							<tr>
+								<th width="40%">Descrição</th>
+								<th width="15%">Quantidade</th>
+								<th width="15%">Preço</th>
+								<th width="15%">Total</th>
+								<th width="5%"> Deletar</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					
+					<div class="form-actions">
+						<button type="button" id="adiciona-produto" class="btn btn-primary">Adicionar Consumo</button>
+				    </div>
 			  </form>
 			</div>
 		</div>

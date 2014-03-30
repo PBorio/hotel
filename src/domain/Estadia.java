@@ -201,6 +201,10 @@ public class Estadia implements CalculavelPorPeriodo {
 	public void addConsumo(Consumo consumo) {
 		this.consumos.add(consumo);
 	}
+	
+	public List<Consumo> getConsumos(){
+		return new ArrayList<Consumo>(consumos);
+	}
 
 	public Double getValorDaEstadiaFechada() {
 		

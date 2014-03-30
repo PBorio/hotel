@@ -14,6 +14,7 @@
 		<link rel="stylesheet" href="<c:url value='/resources/css/select2.css' />" />
 		<link rel="stylesheet" href="<c:url value='/resources/css/uniform.css'/>" />
 		<link rel="stylesheet" href="<c:url value='/resources/css/unicorn.grey.css'/>"  class="skin-color" />
+		<script src=" <c:url value='/resources/scripts/jquery-1.7.1.min.js'/>"></script>
 		<decorator:head />
 		
 	</head>
@@ -93,16 +94,16 @@
 				</div>
 			</div>
 
-            <script src="/resources/scripts/excanvas.min.js"></script>
-            <script src="/resources/scripts/jquery.min.js"></script>
-            <script src="/resources/scripts/jquery.ui.custom.js"></script>
-            <script src="/resources/scripts/bootstrap.min.js"></script>
-            <script src="/resources/scripts/jquery.flot.min.js"></script>
-            <script src="/resources/scripts/jquery.flot.resize.min.js"></script>
-            <script src="/resources/scripts/jquery.peity.min.js"></script>
-            <script src="/resources/scripts/fullcalendar.min.js"></script>
-            <script src="/resources/scripts/unicorn.js"></script>
-            <script src="/resources/scripts/unicorn.dashboard.js"></script>
+            <script src="<c:url value='/resources/scripts/excanvas.min.js'/>"></script>
+            <script src="<c:url value='/resources/scripts/jquery.min.js'/>"></script>
+            <script src="<c:url value='/resources/scripts/jquery.ui.custom.js'/>"></script>
+            <script src="<c:url value='/resources/scripts/bootstrap.min.js'/>"></script>
+            <script src="<c:url value='/resources/scripts/jquery.flot.min.js'/>"></script>
+            <script src="<c:url value='/resources/scripts/jquery.flot.resize.min.js'/>"></script>
+            <script src="<c:url value='/resources/scripts/jquery.peity.min.js'/>"></script>
+            <script src="<c:url value='/resources/scripts/fullcalendar.min.js'/>"></script>
+            <script src="<c:url value='/resources/scripts/unicorn.js'/>"></script>
+            <script src="<c:url value='/resources/scripts/unicorn.dashboard.js'/>"></script>
             
            
 	</body>

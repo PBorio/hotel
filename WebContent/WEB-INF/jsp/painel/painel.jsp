@@ -4,8 +4,7 @@
 <head>
    <title>Painel</title>        
    <link rel="stylesheet" href="<c:url value='/resources/css/kanban.css'/>" />
-   <script src=" <c:url value='/resources/scripts/jquery-1.7.1.min.js'/>"></script> 
-		<script type="text/javascript">                                         
+	<script type="text/javascript">                                         
 		   jQuery(document).ready(function() {
 				jQuery('.quarto').hover(mouseOver, mouseOut);
 		   });                   
