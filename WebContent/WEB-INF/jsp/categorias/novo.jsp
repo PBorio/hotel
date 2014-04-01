@@ -8,37 +8,47 @@
 <title>Cadastro de Categorias</title>
 </head>
 <body>
-	   
-	    <c:if test="${not empty mensagem}">
-			<p class="mensagem">
-				${mensagem}
-			</p>
-		</c:if>
-		<div class="widget-title">
-			<span class="icon">
-				<i class="icon-align-justify"></i>									
-			</span>
-			<h5>Cadastro de Quartos</h5>
+	   <c:if test="${not empty mensagem}">
+		<div class="alert alert-success">
+			${mensagem}
 		</div>
-		<div class="widget-box">
-			<div class="widget-content nopadding">
+		</c:if>
+		<c:if test="${not empty erro}">
+			<div class="alert alert-danger">
+				${erro}
+			</div>
+		</c:if>
+		<div class="container">
+			<div class="header">
+			<ul class="nav nav-pills pull-right">
+				<li class="active"><a href="/">Home</a></li>
+			</ul>
+			</div>
 			  <form class="form-horizontal" action='<c:url value="/categorias/salva"/>' method="post">
-			  	  <input type="hidden" name="categoria.id" value="${categoria.id}" />
-			  	  <div class="control-group">
-						<label class="control-label">Descrição:</label>
+			  	<fieldset>
+					<legend>Categorias</legend>
+				  	  <input type="hidden" name="categoria.id" value="${categoria.id}" />
+				  	  <div class="control-group">
+							<label class="control-label">Descrição:</label>
+							<div class="controls">
+								<input type="text" name="categoria.descricao" id="categoria.descricao" value="${categoria.descricao}" />
+							</div>
+					  </div> 
+					  <div class="control-group">
+							<label class="control-label">Observação:</label>
+							<div class="controls">
+								<textarea name="categoria.observacao" id="categoria.observacao">${categoria.observacao}</textarea>
+							</div>
+					  </div> 
+					  <div class="control-group">
+						<label class="control-label" for="singlebutton"></label>
 						<div class="controls">
-							<input type="text" name="categoria.descricao" id="categoria.descricao" value="${categoria.descricao}" />
+							<button id="singlebutton" name="singlebutton" class="btn btn-primary">
+								Salvar
+							</button>
 						</div>
-				  </div> 
-				  <div class="control-group">
-						<label class="control-label">Observação:</label>
-						<div class="controls">
-							<textarea name="categoria.observacao" id="categoria.observacao">${categoria.observacao}</textarea>
-						</div>
-				  </div> 
-				  <div class="form-actions">
-						<button type="submit" class="btn btn-primary">Salvar</button>
-				  </div>
+					 </div>
+				 </fieldset>
 			  </form>
 			 </div>
 		</div>

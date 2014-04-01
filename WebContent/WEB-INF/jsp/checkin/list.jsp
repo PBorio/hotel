@@ -7,34 +7,26 @@
 </head>
 
 <body>
-
-
-		<ul class="shortcut-buttons-set">
-			<!-- Replace the icons URL's with your own -->
-
-			<li><a class="shortcut-button"
-				href="<c:url value='/quartos/novo'/>"><span> <img class="novo" src="../resources/imagens/icons/novo32.png"/><br />
-						Sem Reserva
-				</span></a></li>
-		</ul>
-		<!-- End .shortcut-buttons-set -->
-		<div class="clear"></div>
-		<!-- End .clear -->
-		
-		<br>
-
-
-			<div class="content-box-header">
-				<c:if test="${not empty mensagem}">
-					<p class="mensagem">
-						${mensagem}
-					</p>
-				</c:if>
-				<h3>Reservas</h3>
-
-				<div class="clear"></div>
-
+		<c:if test="${not empty mensagem}">
+		<div class="alert alert-success">
+			${mensagem}
+		</div>
+		</c:if>
+		<c:if test="${not empty erro}">
+			<div class="alert alert-danger">
+				${erro}
 			</div>
+		</c:if>
+		
+		<div class="container">
+			<div class="header">
+				<ul class="nav nav-pills pull-right">
+					<li class="active"><a href="<c:url value='/quartos/novo'/>">Sem Reserva</a></li>
+					<li class="active"><a href="/">Home</a></li>
+				</ul>
+				<h3 class="text-muted">Checkin</h3>
+			</div>
+
 			<!-- End .content-box-header -->
 			<div class="widget-box">
 				<div class="widget-content nopadding">
@@ -51,9 +43,9 @@
 				</div>
 			</div>
 					
-			<table class="table table-bordered data-table dataTable">
-	
-				<thead>
+			<table class="table table-striped table-bordered" id="example"
+					cellpadding="0" cellspacing="0" border="0" width="100%">
+				<thead> 
 					<tr>
 						<th class="ui-state-default" width="20%">Quarto</th>
 						<th class="ui-state-default" width="50%">Hóspede</th>
@@ -62,7 +54,7 @@
 	
 				</thead>
 				
-				<tbody>
+				<tfoot>
 					<c:forEach var="reserva" items="${reservaList}">
 						<tr class="gradeA" id="reserva-${reserva.id}">
 							<td class="sorting_1"><a href="<c:url value='/checkin/${reserva.id}'/>" title="title">${reserva.quarto.numero}</a></td>
@@ -70,8 +62,8 @@
 							<td>${reserva.inicio}</td>
 						</tr>
 					</c:forEach>
-				</tbody>
+				</tfoot>
 			</table>
-
+		</div>
 </body>
 </html>

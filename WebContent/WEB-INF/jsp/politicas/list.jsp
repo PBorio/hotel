@@ -7,48 +7,38 @@
 </head>
 
 <body>
-
-
-		<ul class="shortcut-buttons-set">
-			<!-- Replace the icons URL's with your own -->
-
-			<li><a class="shortcut-button"
-				href="<c:url value='/politicas/novo'/>"><span> <img class="novo" src="../resources/imagens/icons/novo32.png"/><br />
-						Novo
-				</span></a></li>
-		</ul>
-		<!-- End .shortcut-buttons-set -->
-		<div class="clear"></div>
-		<!-- End .clear -->
-		
-		<br/>
-
-			<div class="content-box-header">
-				<c:if test="${not empty mensagem}">
-					<p class="mensagem">
-						${mensagem}
-					</p>
-				</c:if>
-				<h3>Políticas de Preço</h3>
-
-				<div class="clear"></div>
-
+		<c:if test="${not empty mensagem}">
+			<div class="alert alert-success">
+				${mensagem}
 			</div>
-			<!-- End .content-box-header -->
-
-			<table class="table table-bordered data-table dataTable">
-
-				<thead>
+		</c:if>
+		<c:if test="${not empty erro}">
+			<div class="alert alert-danger">
+				${erro}
+			</div>
+		</c:if>
+		
+		<div class="container">
+			<div class="header">
+				<ul class="nav nav-pills pull-right">
+					<li class="active"><a href="<c:url value='/politicas/novo'/>">Nova Política</a></li>
+					<li class="active"><a href="/">Home</a></li>
+				</ul>
+				<h3 class="text-muted">Políticas de Preço</h3>
+			</div>
+		
+			<table class="table table-striped table-bordered" id="example"
+					cellpadding="0" cellspacing="0" border="0" width="100%">
+				<thead> 
 					<tr>
 						<th class="ui-state-default" width="40%">Descrição</th>
 						<th class="ui-state-default" width="40%">Categoria</th>
 						<th class="ui-state-default" width="20%">Valor</th>
 						<th class="ui-state-default" width="20%"></th>
 					</tr>
-
 				</thead>
 				
-				<tbody>
+				<tfoot>
 					<c:forEach var="politicaDePrecos" items="${politicaDePrecosList}">
 						<tr id="categoria-${categoria.id}">
 							<td><a href="<c:url value='/politicas/${politicaDePrecos.id}'/>" title="title">${politicaDePrecos.descricao}</a></td>
@@ -57,13 +47,12 @@
 							<td>
 								<a href="" title="Delete"
 								onclick="remove(${politicaDePrecos.id}); return false;"><img width="16px" height="16px"
-									src="<c:url value="/resources/imagens/icons/cross.png"/>"
-									alt="Delete"/></a> 
+									src="<c:url value="/resources/imagens/icons/cross.png"/>" alt="Delete"/></a> 
 							</td>
 						</tr>
 					</c:forEach>
-				</tbody>
+				</tfoot>
 			</table>
-
+	</div>
 </body>
 </html>

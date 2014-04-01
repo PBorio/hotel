@@ -10,19 +10,24 @@
 </head>
 <body>
 	    <c:if test="${not empty mensagem}">
-			<p class="mensagem">
-				${mensagem}
-			</p>
-		</c:if>
-		<div class="widget-title">
-			<span class="icon">
-				<i class="icon-align-justify"></i>									
-			</span>
-			<h5>Cadastro de Políticas de Preço</h5>
+		<div class="alert alert-success">
+			${mensagem}
 		</div>
-		<div class="widget-box">
-			<div class="widget-content nopadding">
-			  <form class="form-horizontal" action='<c:url value="/politicas/salva"/>' method="post">
+		</c:if>
+		<c:if test="${not empty erro}">
+			<div class="alert alert-danger">
+				${erro}
+			</div>
+		</c:if>
+		<div class="container">
+			<div class="header">
+				<ul class="nav nav-pills pull-right">
+					<li class="active"><a href="/">Home</a></li>
+				</ul>
+			</div>
+		  <form class="form-horizontal" action='<c:url value="/politicas/salva"/>' method="post">
+		  	<fieldset>
+				<legend>Políticas de Preço</legend>
 			     <input type="hidden" name="politicaDePrecos.id" value="${politicaDePrecos.id}" />
 			     <div class="control-group">
 						<label class="control-label">Descrição:</label>
@@ -79,12 +84,16 @@
 							</div>
 						</div>
 				  </div> 
-				  <div class="form-actions">
-						<button type="submit" class="btn btn-primary">Salvar</button>
-				  </div>
-			  </form>
-		   </div>
-		 </div>
+				 	<div class="control-group">
+						<label class="control-label" for="singlebutton"></label>
+						<div class="controls">
+							<button id="singlebutton" name="singlebutton" class="btn btn-primary">
+								Salvar
+							</button>
+						</div>
+					</div>
+			</fieldset>
+		  </form>
 		  
 		   
 </body>

@@ -10,9 +10,14 @@
 <body>
 	 
 	    <c:if test="${not empty mensagem}">
-			<p class="mensagem">
-				${mensagem}
-			</p>
+		<div class="alert alert-success">
+			${mensagem}
+		</div>
+		</c:if>
+		<c:if test="${not empty erro}">
+			<div class="alert alert-danger">
+				${erro}
+			</div>
 		</c:if>
 
 		<div class="widget-title">
@@ -21,9 +26,15 @@
 			</span>
 			<h5>Checkin</h5>
 		</div>
-		<div class="widget-box">
-			<div class="widget-content nopadding">
-			  <form class="form-horizontal" method="post">
+		<div class="container">
+			<div class="header">
+			<ul class="nav nav-pills pull-right">
+				<li class="active"><a href="/">Home</a></li>
+			</ul>
+			</div>
+			  <form class="form-horizontal" action='<c:url value="/categorias/salva"/>' method="post">
+			  	<fieldset>
+					<legend>Checkin</legend>
 		    		<input type="hidden" name="estadia.id" value="${estadia.id}" />
 		    		<input type="hidden" name="hospede.id" value="${hospede.id}" />
 		    		<input type="hidden" name="estadia.quarto.id" value="${estadia.quarto.id}" />
@@ -82,10 +93,22 @@
 							<input type="text" name="hospede.celular" id="hospede.celular" value="${hospede.celular}" />
 						</div>
 					</div>
-					 <div class="form-actions">
-					 	<button type="button" class="btn btn-primary" onClick="this.form.action='<c:url value="/checkin/salvaEPreparaMaisHospedes"/>';this.form.submit()">Cadastrar Outro Hóspede</button>
-						<button type="button" class="btn btn-primary" onClick="this.form.action='<c:url value="/checkin/salva"/>';this.form.submit()">Concluir</button>
-					</div>
+					 <div class="control-group">
+						<label class="control-label" for="singlebutton"></label>
+						<div class="controls">
+							<button id="singlebutton" name="singlebutton" class="btn btn-primary">
+								Salvar
+							</button>
+						</div>
+						<label class="control-label" for="singlebutton"></label>
+						<div class="controls">
+							<button type="button" id="outroHospede" name="outroHospede" class="btn btn-primary" onClick="this.form.action='<c:url value="/checkin/salvaEPreparaMaisHospedes"/>';this.form.submit()">
+								Cadastrar Outro Hóspede
+							</button>
+							<button type="button" id="concluir" name="concluir" class="btn btn-primary" onClick="this.form.action='<c:url value="/checkin/salva"/>';this.form.submit()">Concluir</button>
+						</div>
+					 </div>
+				</fieldset>
 			  </form>
 			</div>
 		</div>

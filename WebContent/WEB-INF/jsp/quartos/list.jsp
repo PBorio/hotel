@@ -7,63 +7,47 @@
 </head>
 
 <body>
-
-
-		<ul class="shortcut-buttons-set">
-			<!-- Replace the icons URL's with your own -->
-
-			<li><a class="shortcut-button"
-				href="<c:url value='/quartos/novo'/>"><span> <img class="novo" src="../resources/imagens/icons/novo32.png"/><br />
-						Novo
-				</span></a></li>
-		</ul>
-		<!-- End .shortcut-buttons-set -->
-		<div class="clear"></div>
-		<!-- End .clear -->
-		
-		<br>
-
-
-			<div class="content-box-header">
-				<c:if test="${not empty mensagem}">
-					<p class="mensagem">
-						${mensagem}
-					</p>
-				</c:if>
-				<h3>Quartos</h3>
-
-				<div class="clear"></div>
-
-			</div>
-			<!-- End .content-box-header -->
-
-					
-			<table class="table table-bordered data-table dataTable">
+	<c:if test="${not empty mensagem}">
+		<div class="alert alert-success">
+			${mensagem}
+		</div>
+	</c:if>
+	<c:if test="${not empty erro}">
+		<div class="alert alert-danger">
+			${erro}
+		</div>
+	</c:if>
+	<div class="container">
+		<div class="header">
+			<ul class="nav nav-pills pull-right">
+				<li class="active"><a href="<c:url value='/quartos/novo'/>">Novo Quarto</a></li>
+				<li class="active"><a href="/">Home</a></li>
+			</ul>
+			<h3 class="text-muted">Quartos</h3>
+		</div>
 	
-				<thead>
+		<table class="table table-striped table-bordered" id="example"
+				cellpadding="0" cellspacing="0" border="0" width="100%">
+			<thead> 
 					<tr>
 						<th class="ui-state-default" width="10%">Número</th>
 						<th class="ui-state-default" width="70%">Descrição</th>
 						<th class="ui-state-default" width="10%"></th>
 					</tr>
 	
-				</thead>
+			</thead>
+			<tfoot>
+			   <c:forEach var="quarto" items="${quartoList}">
+			    <tr>
+					<th <a href="<c:url value='/quartos/${quarto.id}'/>" title="title">${quarto.numero}</a></th>
+					<th><a href="<c:url value='/quartos/${quarto.id}'/>" title="title">${quarto.descricao}</a></th>
+					<th><a href="" title="Delete" onclick="remove(${quarto.id}); return false;"><img width="16px" height="16px"
+						   src="<c:url value="/resources/imagens/icons/cross.png"/>" alt="Delete" /></a></th>
+				</tr>
+				</c:forEach>
+			</tfoot>
 				
-				<tbody>
-					<c:forEach var="quarto" items="${quartoList}">
-						<tr class="gradeA" id="quarto-${quarto.id}">
-							<td class="sorting_1"><a href="<c:url value='/quartos/${quarto.id}'/>" title="title">${quarto.numero}</a></td>
-							<td><a href="<c:url value='/quartos/${quarto.id}'/>" title="title">${quarto.descricao}</a></td>
-							<td>
-								<a href="" title="Delete"
-								onclick="remove(${quarto.id}); return false;"><img width="16px" height="16px"
-									src="<c:url value="/resources/imagens/icons/cross.png"/>"
-									alt="Delete" /></a> 
-							</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-
+		</table>
+	</div>
 </body>
 </html>
