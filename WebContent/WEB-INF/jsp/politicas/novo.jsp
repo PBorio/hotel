@@ -94,7 +94,12 @@
 					</div>
 			</fieldset>
 		  </form>
-		  
-		   
+
+<script type="text/javascript">
+     $(function () {
+         $('#politicaDePrecos.inicio').datetimepicker();
+         alert($('#politicaDePrecos.inicio'));
+     });
+</script> 
 </body>
 </html>
