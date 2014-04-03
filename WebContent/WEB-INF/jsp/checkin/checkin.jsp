@@ -39,73 +39,69 @@
 		    		<input type="hidden" name="hospede.id" value="${hospede.id}" />
 		    		<input type="hidden" name="estadia.quarto.id" value="${estadia.quarto.id}" />
 		    		<input type="hidden" name="estadia.reserva.id" value="${estadia.reserva.id}" />
-					<div class="control-group">
-						<label class="control-label">Quarto:</label>
-						<div class="controls">
-							<input id="estadia.quarto.numero" type="text" name="estadia.quarto.numero" value="${estadia.quarto.numero}" readonly="readonly" />
+					<div class="form-group">
+						<label class="control-label col-xs-2">Quarto:</label>
+						<div class="col-xs-10">
+							<input id="estadia.quarto.numero" type="text" class="col-xs-10" name="estadia.quarto.numero" value="${estadia.quarto.numero}" readonly="readonly" />
 						</div>
 					</div>
-					<div class="control-group">
-						<label class="control-label">Valor da Diária:</label>
-						<div class="controls">
-							<input id="estadia.valorDiaria" type="text" name="estadia.valorDiaria" value="${estadia.valorDiaria}" />
+					<div class="form-group">
+						<label class="control-label col-xs-2">Valor Diária:</label>
+						<div class="col-xs-10">
+							<input id="estadia.valorDiaria" type="text" class="col-xs-10" name="estadia.valorDiaria" value="${estadia.valorDiaria}" />
 						</div>
 					</div>
-					<div class="control-group">
-						<label class="control-label">Hóspede:</label>
-						<div class="controls">
-							<input type="text" name="hospede.nome" id="hospede.nome" value="${hospede.nome}" />
+					<div class="form-group">
+						<label class="control-label col-xs-2" >Hóspede:</label>
+						<div class="col-xs-10">
+							<input type="text" class="col-xs-10" name="hospede.nome" id="hospede.nome" value="${hospede.nome}" />
 						</div>
 					</div>
-					<div class="control-group">
-						<label class="control-label">Email:</label>
-						<div class="controls">
-							<input type="text" name="hospede.email" id="hospede.email" value="${hospede.email}" />
+					<div class="form-group">
+						<label class="control-label col-xs-2">Email:</label>
+						<div class="col-xs-10">
+							<input type="text" class="col-xs-10" name="hospede.email" id="hospede.email" value="${hospede.email}" />
 						</div>
 					</div>
-					<div class="control-group">
-						<label class="control-label">CPF:</label>
-						<div class="controls">
-							<input type="text" name="hospede.cpf" id="hospede.cpf" value="${hospede.cpf}" />
+					<div class="form-group">
+						<label class="control-label col-xs-2">CPF:</label>
+						<div class="col-xs-10">
+							<input type="text" class="col-xs-10" name="hospede.cpf" id="hospede.cpf" value="${hospede.cpf}" />
 						</div>
 					</div>
-					<div class="control-group">
-						<label class="control-label">RG:</label>
-						<div class="controls">
-							<input type="text" name="hospede.rg" id="hospede.rg" value="${hospede.rg}" />
+					<div class="form-group">
+						<label class="control-label col-xs-2">RG:</label>
+						<div class="col-xs-10">
+							<input type="text" class="col-xs-10" name="hospede.rg" id="hospede.rg" value="${hospede.rg}" />
 						</div>
 					</div>
-					<div class="control-group">
-						<label class="control-label">Endereço:</label>
-						<div class="controls">
-							<input type="text" name="hospede.endereco" id="hospede.endereco" value="${hospede.endereco}" />
+					<div class="form-group">
+						<label class="control-label col-xs-2">Endereço:</label>
+						<div class="col-xs-10">
+							<input type="text" class="col-xs-10" name="hospede.endereco" id="hospede.endereco" value="${hospede.endereco}" />
 						</div>
 					</div>
-					<div class="control-group">
-						<label class="control-label">Telefone:</label>
-						<div class="controls">
-							<input type="text" name="hospede.telefone" id="hospede.telefone" value="${hospede.telefone}" />
+					<div class="form-group">
+						<label class="control-label col-xs-2">Telefone:</label>
+						<div class="col-xs-10">
+							<input type="text" class="col-xs-10" name="hospede.telefone" id="hospede.telefone" value="${hospede.telefone}" />
 						</div>
 					</div>
-					<div class="control-group">
-						<label class="control-label">Celular:</label>
-						<div class="controls">
-							<input type="text" name="hospede.celular" id="hospede.celular" value="${hospede.celular}" />
+					<div class="form-group">
+						<label class="control-label col-xs-2">Celular:</label>
+						<div class="col-xs-10">
+							<input type="text" class="col-xs-10" name="hospede.celular" id="hospede.celular" value="${hospede.celular}" />
 						</div>
 					</div>
-					 <div class="control-group">
-						<label class="control-label" for="singlebutton"></label>
-						<div class="controls">
-							<button id="singlebutton" name="singlebutton" class="btn btn-primary">
-								Salvar
-							</button>
-						</div>
-						<label class="control-label" for="singlebutton"></label>
-						<div class="controls">
+					 <div class="form-group">
+						<label class="control-label col-xs-2" for="singlebutton"></label>
+						<div class="col-xs-10">
 							<button type="button" id="outroHospede" name="outroHospede" class="btn btn-primary" onClick="this.form.action='<c:url value="/checkin/salvaEPreparaMaisHospedes"/>';this.form.submit()">
 								Cadastrar Outro Hóspede
 							</button>
-							<button type="button" id="concluir" name="concluir" class="btn btn-primary" onClick="this.form.action='<c:url value="/checkin/salva"/>';this.form.submit()">Concluir</button>
+							<button type="button" id="concluir" name="concluir" class="btn btn-primary" onClick="this.form.action='<c:url value="/checkin/salva"/>';this.form.submit()">
+								Concluir
+							</button>
 						</div>
 					 </div>
 				</fieldset>

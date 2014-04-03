@@ -29,16 +29,16 @@
 	 		<input type="hidden" name="quarto.id" value="${quarto.id}" />
 			<fieldset>
 				<legend>Quarto</legend>
-	 			<div class="control-group">
-	 				<label class="control-label">Número:</label>
-					<div class="controls">
-						<input id="quarto.numero" type="text" name="quarto.numero" value="${quarto.numero}" />
+	 			<div class="form-group">
+	 				<label class="control-label col-xs-2">Número:</label>
+					<div class="col-xs-10">
+						<input id="quarto.numero" class="col-xs-10" type="text" name="quarto.numero" value="${quarto.numero}" />
 					</div>
 				</div>
-				<div class="control-group">
-					<label class="control-label">Categoria:</label>
-					<div class="controls">
-						<select id="quarto.categoria.id" name="quarto.categoria.id" >   
+				<div class="form-group">
+					<label class="control-label col-xs-2">Categoria:</label>
+					<div class="col-xs-10">
+						<select id="quarto.categoria.id" name="quarto.categoria.id" class="col-xs-10" >   
 		                    <option> Categorias...</option>  
 		                    <c:forEach var="categoria" items="${categoriaList}">  
 		                        <option value="${categoria.id}" <c:if test="${categoria.id == quarto.categoria.id}">selected="true"</c:if>> 
@@ -48,23 +48,23 @@
 		                </select>
 					</div>
 				</div>
-				<div class="control-group">
-					<label class="control-label">Descrição:</label>
-					<div class="controls">
-						<input type="text" name="quarto.descricao" id="quarto.descricao" value="${quarto.descricao}" />
+				<div class="form-group">
+					<label class="control-label col-xs-2">Descrição:</label>
+					<div class="col-xs-10">
+						<input type="text" class="col-xs-10" name="quarto.descricao" id="quarto.descricao" value="${quarto.descricao}" />
 					</div>
 				</div>
-				<div class="control-group">
-					<label class="control-label">Observação:</label>
-					<div class="controls">
-						<textarea name="quarto.observacao" id="quarto.observacao">${quarto.observacao}</textarea>
+				<div class="form-group">
+					<label class="control-label col-xs-2">Observação:</label>
+					<div class="col-xs-10">
+						<textarea name="quarto.observacao" class="col-xs-10" id="quarto.observacao">${quarto.observacao}</textarea>
 					</div>
 				</div>
 				
-				<div class="control-group">
-					<label class="control-label" for="singlebutton"></label>
-					<div class="controls">
-						<button id="singlebutton" name="singlebutton" class="btn btn-primary">
+				<div class="form-group">
+					<label class="control-label col-xs-2" for="singlebutton"></label>
+					<div class="col-xs-10">
+						<button id="singlebutton" name="singlebutton" class="btn btn-primary btn-lg">
 							Salvar
 						</button>
 					</div>

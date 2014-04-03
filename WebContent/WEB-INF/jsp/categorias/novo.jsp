@@ -28,22 +28,22 @@
 			  	<fieldset>
 					<legend>Categorias</legend>
 				  	  <input type="hidden" name="categoria.id" value="${categoria.id}" />
-				  	  <div class="control-group">
-							<label class="control-label">Descrição:</label>
-							<div class="controls">
-								<input type="text" name="categoria.descricao" id="categoria.descricao" value="${categoria.descricao}" />
+				  	  <div class="form-group">
+							<label class="control-label col-xs-2">Descrição:</label>
+							<div class="col-xs-10">
+								<input type="text" class="col-xs-10" name="categoria.descricao" id="categoria.descricao" value="${categoria.descricao}" />
 							</div>
 					  </div> 
-					  <div class="control-group">
-							<label class="control-label">Observação:</label>
-							<div class="controls">
-								<textarea name="categoria.observacao" id="categoria.observacao">${categoria.observacao}</textarea>
+					  <div class="form-group">
+							<label class="control-label col-xs-2">Observação:</label>
+							<div class="col-xs-10">
+								<textarea name="categoria.observacao" id="categoria.observacao" class="col-xs-10">${categoria.observacao}</textarea>
 							</div>
 					  </div> 
-					  <div class="control-group">
-						<label class="control-label" for="singlebutton"></label>
-						<div class="controls">
-							<button id="singlebutton" name="singlebutton" class="btn btn-primary">
+					  <div class="form-group">
+						<label class="control-label col-xs-2" for="singlebutton"></label>
+						<div class="col-xs-10">
+							<button id="singlebutton" name="singlebutton" class="btn btn-primary btn-lg">
 								Salvar
 							</button>
 						</div>

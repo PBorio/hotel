@@ -25,8 +25,8 @@ function addConsumos(isRebuilding,nContItems) {
 	cHtml = '<tr id="row-'+ nContItems + '" class="alt-row-son" >'
 	        + '<input id="consumo-id-'+ nContItems +'" type="hidden" name="estadia.consumos[].id"> </input>'
 			+ '<input id="produto-id-'+ nContItems +'" type="hidden" name="estadia.consumos[].produto.id"> </input>'
-			+ '<td> <input id="descricao-'+ nContItems +'" type="text" class="text-input s70-input" name="estadia.consumos[].produto.descricao"> </input> </td>'
-			+ '<td> <input id="quantidade-'+ nContItems +'" type="text" dir="rtl" class="text-input s70-input" name="estadia.consumos[].quantidade" > </input> </td>'
+			+ '<td> <input id="descricao-'+ nContItems +'" type="text" class="col-xs-10" class="text-input s70-input" name="estadia.consumos[].produto.descricao"> </input> </td>'
+			+ '<td> <input id="quantidade-'+ nContItems +'" type="text" class="col-xs-10" dir="rtl" class="text-input s70-input" name="estadia.consumos[].quantidade" > </input> </td>'
 			+ '<td> <label id="preco-'+ nContItems +'" type="text" dir="rtl" class="text-input s70-input" name="estadia.consumos[].preco" > </label> </td>'
 			+ '<td> <label id="total-'+ nContItems +'"> </label> </td>'
 			+ '<td> <a id="delete-' + nContItems + '" href="javascript:" title="Delete" tabindex="-1"> <img src="../resources/images/icons/cross.png" alt="Delete" tabindex="-1"/> </a> </td>'
@@ -56,24 +56,24 @@ function addConsumos(isRebuilding,nContItems) {
 			<div class="widget-content nopadding">
 			  <form class="form-horizontal" method="post">
 		    		<input type="hidden" name="estadia.id" value="${estadia.id}" />
-					<div class="control-group">
-						<label class="control-label">Quarto:</label>
-						<div class="controls">
-							<input id="estadia.quarto.numero" type="text" name="estadia.quarto.numero" value="${estadia.quarto.numero}" readonly="readonly" />
+					<div class="form-group">
+						<label class="control-label col-xs-2">Quarto:</label>
+						<div class="col-xs-10">
+							<input id="estadia.quarto.numero" type="text" class="col-xs-10" name="estadia.quarto.numero" value="${estadia.quarto.numero}" readonly="readonly" />
 						</div>
 					</div>
 					<c:forEach var="hospede" items="${estadia.hospedes}">
-						<div class="control-group">
-							<label class="control-label">Hospede:</label>
-							<div class="controls">
-								<input id="estadia.quarto.numero" type="text" name="estadia.quarto.numero" value="${hospede.nome}" readonly="readonly" />
+						<div class="form-group">
+							<label class="control-label col-xs-2">Hospede:</label>
+							<div class="col-xs-10">
+								<input id="estadia.quarto.numero" type="text" class="col-xs-10" name="estadia.quarto.numero" value="${hospede.nome}" readonly="readonly" />
 							</div>
 						</div>
 					</c:forEach>
-					<div class="control-group">
-						<label class="control-label">Checkin:</label>
-						<div class="controls">
-							<input id="estadia.dataCheckin" type="text" name="estadia.dataCheckin" value="<joda:format pattern='dd/MM/yyyy' value='${estadia.dataCheckin}'/>" readonly="readonly" />
+					<div class="form-group">
+						<label class="control-label col-xs-2">Checkin:</label>
+						<div class="col-xs-10">
+							<input id="estadia.dataCheckin" type="text" class="col-xs-10" name="estadia.dataCheckin" value="<joda:format pattern='dd/MM/yyyy' value='${estadia.dataCheckin}'/>" readonly="readonly" />
 						</div>
 					</div>
 					<div class="widget-title">

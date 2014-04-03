@@ -29,16 +29,16 @@
 		  	<fieldset>
 				<legend>Políticas de Preço</legend>
 			     <input type="hidden" name="politicaDePrecos.id" value="${politicaDePrecos.id}" />
-			     <div class="control-group">
-						<label class="control-label">Descrição:</label>
-						<div class="controls">
-							<input id="politicaDePrecos.descricao" type="text" name="politicaDePrecos.descricao" value="${politicaDePrecos.descricao}" />
+			     <div class="form-group">
+						<label class="control-label col-xs-2">Descrição:</label>
+						<div class="col-xs-10">
+							<input id="politicaDePrecos.descricao" type="text" class="col-xs-10" name="politicaDePrecos.descricao" value="${politicaDePrecos.descricao}" />
 						</div>
 				  </div> 
-				  <div class="control-group">
-						<label class="control-label">Categoria:</label>
-						<div class="controls">
-							<select id="politicaDePrecos.categoria.id" name="politicaDePrecos.categoria.id" >  
+				  <div class="form-group">
+						<label class="control-label col-xs-2">Categoria:</label>
+						<div class="col-xs-10">
+							<select id="politicaDePrecos.categoria.id" name="politicaDePrecos.categoria.id" class="col-xs-10">  
 			                    <option> Categorias...</option>  
 			                    <c:forEach var="categoria" items="${categoriaList}">  
 			                        <option value="${categoria.id}" <c:if test="${categoria.id == politicaDePrecos.categoria.id}">selected="true"</c:if>> 
@@ -48,45 +48,45 @@
 			                </select> 
 						</div>
 				 </div>
-				<div class="control-group">
-					<label class="control-label">Observação:</label>
-					<div class="controls">
-						<textarea name="categoria.observacao" id="categoria.observacao">${categoria.observacao}</textarea>
+				<div class="form-group">
+					<label class="control-label col-xs-2">Observação:</label>
+					<div class="col-xs-10">
+						<textarea name="categoria.observacao" id="categoria.observacao" class="col-xs-10">${categoria.observacao}</textarea>
 					</div>
 				</div>
-				<div class="control-group">
-						<label class="control-label">Inicio:</label>
-						<div class="controls">
-							<input type="text" name="politicaDePrecos.inicio" id="politicaDePrecos.inicio" value="<fmt:formatDate value='${politicaDePrecos.inicio}'/>" />
+				<div class="form-group">
+						<label class="control-label col-xs-2">Inicio:</label>
+						<div class="col-xs-10">
+							<input type="text" class="col-xs-10" name="politicaDePrecos.inicio" id="politicaDePrecos.inicio" value="<fmt:formatDate value='${politicaDePrecos.inicio}'/>" />
 						</div>
 				  </div> 
-				  <div class="control-group">
-						<label class="control-label">Fim:</label>
-						<div class="controls">
-							<input type="text" name="politicaDePrecos.fim" id="politicaDePrecos.fim" value="<fmt:formatDate value='${politicaDePrecos.fim}'/>"/>
+				  <div class="form-group">
+						<label class="control-label col-xs-2">Fim:</label>
+						<div class="col-xs-10">
+							<input type="text" class="col-xs-10" name="politicaDePrecos.fim" id="politicaDePrecos.fim" value="<fmt:formatDate value='${politicaDePrecos.fim}'/>"/>
 						</div>
 				  </div> 
-				  <div class="control-group">
-						<label class="control-label">Valor:</label>
-						<div class="controls">
-							<input type="text" name="politicaDePrecos.valorDiaria" id="politicaDePrecos.valorDiaria" value="${politicaDePrecos.valorDiaria}" />
+				  <div class="form-group">
+						<label class="control-label col-xs-2">Valor:</label>
+						<div class="col-xs-10">
+							<input type="text" class="col-xs-10" name="politicaDePrecos.valorDiaria" id="politicaDePrecos.valorDiaria" value="${politicaDePrecos.valorDiaria}" />
 						</div>
 				  </div> 
-				  <div class="control-group">
-						<label class="control-label">Padrão:</label>
-						<div class="controls">
+				  <div class="form-group">
+						<label class="control-label col-xs-2">Padrão:</label>
+						<div class="col-xs-10">
 						    <div class="checker">
 							<label>
 							    <span>
-							  		<input type="checkbox" name="politicaDePrecos.padrao" id="politicaDePrecos.padrao"/>
+							  		<input type="checkbox" name="politicaDePrecos.padrao" id="politicaDePrecos.padrao" value="${politicaDePrecos.padrao}" checked="${politicaDePrecos.padrao}"/>
 							  	</span>
 							</label>
 							</div>
 						</div>
 				  </div> 
-				 	<div class="control-group">
+				 	<div class="control-group col-xs-2">
 						<label class="control-label" for="singlebutton"></label>
-						<div class="controls">
+						<div class="col-xs-10">
 							<button id="singlebutton" name="singlebutton" class="btn btn-primary">
 								Salvar
 							</button>
