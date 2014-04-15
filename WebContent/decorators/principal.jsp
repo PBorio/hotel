@@ -9,11 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.css'/>" />
 		<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap-theme.css'/>" />
-		<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap-datetimepicker.css'/>" />
 		<script src=" <c:url value='/resources/scripts/jquery-1.7.1.min.js'/>"></script>
-	 	<script src="<c:url value='/resources/scripts/bootstrap.min.js'/>"></script>
-        <script src="<c:url value='/resources/scripts/moment.js'/>"></script>
-        <script src="<c:url value='/resources/scripts/bootstrap-datetimepicker.min.js'/>"></script>
 		<decorator:head />
 		
 	</head>

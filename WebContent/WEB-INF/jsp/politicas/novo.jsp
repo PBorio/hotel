@@ -7,6 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Cadastro de Políticas de Preços</title>
+<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/datepicker.css'/>" />
 </head>
 <body>
 	    <c:if test="${not empty mensagem}">
@@ -32,7 +34,7 @@
 			     <div class="form-group">
 						<label class="control-label col-xs-2">Descrição:</label>
 						<div class="col-xs-10">
-							<input id="politicaDePrecos.descricao" type="text" class="col-xs-10" name="politicaDePrecos.descricao" value="${politicaDePrecos.descricao}" />
+							<input id="descricao" type="text" class="col-xs-10" name="politicaDePrecos.descricao" value="${politicaDePrecos.descricao}" />
 						</div>
 				  </div> 
 				  <div class="form-group">
@@ -94,12 +96,17 @@
 					</div>
 			</fieldset>
 		  </form>
-
+<script src="<c:url value='/resources/scripts/bootstrap.min.js'/>"></script>
+<script src="<c:url value='/resources/scripts/bootstrap-datepicker.js'/>"></script>
 <script type="text/javascript">
-     $(function () {
-         $('#politicaDePrecos.inicio').datetimepicker();
-         alert($('#politicaDePrecos.inicio'));
-     });
-</script> 
+$(function(){
+	$('#politicaDePrecos\\.inicio').datepicker({
+		format: 'dd/mm/yyyy'
+	});
+	$('#politicaDePrecos\\.fim').datepicker({
+		format: 'dd/mm/yyyy'
+	});
+});
+</script>
 </body>
 </html>
