@@ -39,7 +39,7 @@
 			<tfoot>
 			   <c:forEach var="quarto" items="${quartoList}">
 			    <tr>
-					<th <a href="<c:url value='/quartos/${quarto.id}'/>" title="title">${quarto.numero}</a></th>
+					<th> <a href="<c:url value='/quartos/${quarto.id}'/>" title="title">${quarto.numero}</a></th>
 					<th><a href="<c:url value='/quartos/${quarto.id}'/>" title="title">${quarto.descricao}</a></th>
 					<th><a href="" title="Delete" onclick="remove(${quarto.id}); return false;"><img width="16px" height="16px"
 						   src="<c:url value="/resources/imagens/icons/cross.png"/>" alt="Delete" /></a></th>

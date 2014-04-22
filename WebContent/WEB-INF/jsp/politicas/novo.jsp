@@ -96,6 +96,7 @@
 					</div>
 			</fieldset>
 		  </form>
+	</div>
 <script src="<c:url value='/resources/scripts/bootstrap.min.js'/>"></script>
 <script src="<c:url value='/resources/scripts/bootstrap-datepicker.js'/>"></script>
 <script type="text/javascript">
