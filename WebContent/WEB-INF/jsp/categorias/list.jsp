@@ -47,6 +47,6 @@
 					</c:forEach>
 				</tfoot>
 			</table>
-
+	</div>
 </body>
 </html>
