@@ -153,4 +153,20 @@ public class ReservasController {
 		result.include("reserva", reserva);
 	}
 
+	public void quartosDisponiveis(ReservasView reservasView){
+		System.out.println(reservasView.getChegada());
+		System.out.println(reservasView.getSaida());
+		
+		Reserva reserva = new Reserva();
+		reserva.setInicio(new DateTime(reservasView.getChegada().getTime()));
+		reserva.setFim(new DateTime(reservasView.getSaida().getTime()));
+		
+		List<Quarto> quartos = quartoRepositorio.buscaTodos();
+		ServicoDeReserva servicoReserva = new ServicoDeReserva(quartos);
+		
+		List<Quarto> quartosDisponiveis = servicoReserva.quartosDisponiveisParaAReserva(reserva);
+		
+		result.include("quartoList", quartosDisponiveis);
+		result.of(this).reserva();
+	}
 }

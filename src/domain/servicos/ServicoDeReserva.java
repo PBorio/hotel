@@ -1,5 +1,6 @@
 package domain.servicos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import domain.Quarto;
@@ -20,6 +21,16 @@ public class ServicoDeReserva {
 			}
 		}
 		return null;
+	}
+
+	public List<Quarto> quartosDisponiveisParaAReserva(Reserva reserva) {
+		List<Quarto> disponiveis = new ArrayList<Quarto>();
+		for (Quarto q : quartos){
+			if (!q.possuiReservasNoMesmoPeriodo(reserva)){
+				disponiveis.add(q);
+			}
+		}
+		return disponiveis;
 	}
 
 //	public boolean qua(DateTime carnaval) {

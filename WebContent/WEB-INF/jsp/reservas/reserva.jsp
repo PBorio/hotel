@@ -23,24 +23,40 @@
 		</c:if>
 	<div class="container">
 		 <div class="row">
-	        <div class="col-md-4">
-	             <form class="form-horizontal" action='<c:url value="/politicas/salva"/>' method="post">
+	        <div class="col-lg-4">
+	             <form class="form-horizontal" action='<c:url value="/reservas/quartosDisponiveis"/>' method="post">
 	             	<div class="form-group">
 						<label class="col-sm-2">Inicio:</label>
 						<div class="col-sm-7">
-							<input type="text" style="font-size: 14px;" class="col-sm-10" name="reserva.inicio" id="reserva.inicio" value="<fmt:formatDate value='${politicaDePrecos.inicio}'/>" />
+							<input type="text" style="font-size: 14px;" class="col-sm-10" name="reservasView.chegada" id="reservasView.chegada" value="<fmt:formatDate value='${reservaView.chegada}'/>" />
 						</div>
 					  </div> 
 					  <div class="form-group">
 							<label class="col-sm-2">Fim:</label>
 							<div class="col-sm-7">
-								<input type="text" style="font-size: 14px;" class="col-sm-10" name="reserva.fim" id="reserva.fim" value="<fmt:formatDate value='${politicaDePrecos.fim}'/>"/>
+								<input type="text" style="font-size: 14px;" class="col-sm-10" name="reservasView.saida" id="reservasView.saida" value="<fmt:formatDate value='${reservaView.saida}'/>"/>
 							</div>
 					  </div> 
+					  <div class="control-group col-xs-2">
+						<label class="control-label" for="singlebutton"></label>
+						<div class="col-xs-10">
+							<button id="singlebutton" name="singlebutton" class="btn btn-primary">
+								Enviar
+							</button>
+						</div>
+					</div>
 	             </form>
 	        </div>
-	        <div class="col-md-8">
-	            Body content
+	        <div class="col-lg-8">
+	            <c:forEach var="quarto" items="${quartoList}">
+	            	<div class="col-lg-12">
+	               	   <div class="col-lg-4"><img alt="${quarto.numero}" src="<c:url value='/resources/imagens/imagensold/home-player.png'/>"></div>
+	               	   <div class="col-lg-8">
+	               	      <div class="col-md-4">${quarto.numero}</div>
+	               	      <div class="col-md-8">${quarto.descricao}</div> 
+	               	    </div>
+	               </div>
+	            </c:forEach>
 	        </div>
     	</div>
 	</div>
@@ -49,10 +65,10 @@
 <script src="<c:url value='/resources/scripts/bootstrap-datepicker.js'/>"></script>
 <script type="text/javascript">
 	$(function(){
-		$('#reserva\\.inicio').datepicker({
+		$('#reservasView\\.chegada').datepicker({
 			format: 'dd/mm/yyyy'
 		});
-		$('#reserva\\.fim').datepicker({
+		$('#reservasView\\.saida').datepicker({
 			format: 'dd/mm/yyyy'
 		});
 	});
