@@ -31,13 +31,11 @@ public class DAO<T> {
 	@Transactional()
 	public void salva(T t) {
 		entityManager.persist(t);		
-		
 	}
 	
 	@Transactional()
 	public void atualiza(T t) {
 		entityManager.merge(t);		
-		
 	}
 
 	@SuppressWarnings("unchecked")

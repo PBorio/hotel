@@ -25,10 +25,16 @@
 			</ul>
 			</div>
 	 	
-	 	<form class="form-horizontal" action='<c:url value="/quartos/salva"/>' method="post">
+	 	<form class="form-horizontal" action='<c:url value="/quartos/salva"/>' method="post" enctype="multipart/form-data">
 	 		<input type="hidden" name="quarto.id" value="${quarto.id}" />
 			<fieldset>
 				<legend>Quarto</legend>
+				<div class="form-group">
+	 				<label class="control-label col-xs-2">Foto:</label>
+					<div class="col-xs-10">
+						<input type="file" id="foto" class="col-xs-10" name="foto" />
+					</div>
+				</div>
 	 			<div class="form-group">
 	 				<label class="control-label col-xs-2">Número:</label>
 					<div class="col-xs-10">

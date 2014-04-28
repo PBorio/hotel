@@ -9,6 +9,11 @@
 <title>Faça sua Reserva</title>
 <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/datepicker.css'/>" />
+<style type="text/css">
+	.clear{
+	   clear: both;
+	}
+</style>
 </head>
 <body>
 		<c:if test="${not empty mensagem}">
@@ -54,7 +59,8 @@
 	               	   <div class="col-lg-8">
 	               	      <div class="col-md-4">${quarto.numero}</div>
 	               	      <div class="col-md-8">${quarto.descricao}</div> 
-	               	    </div>
+	               	   </div>
+	               	   <div class='clear'></div>
 	               </div>
 	            </c:forEach>
 	        </div>

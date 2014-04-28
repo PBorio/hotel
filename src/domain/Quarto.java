@@ -1,5 +1,6 @@
 package domain;
 
+import java.net.URI;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -38,6 +39,8 @@ public class Quarto {
 	@OneToMany(mappedBy="quarto")
 	@Where(clause="(checkin is null and cancelamento is null)")
 	private Set<Reserva> reservas = new HashSet<Reserva>();
+
+	private String foto;
 	
 	public Long getId() {
 		return id;
@@ -130,5 +133,13 @@ public class Quarto {
 		if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public void setFoto(URI foto) {
+		this.foto = foto == null ? null : foto.toString();
+	}
+
+	public String getFoto() {
+		return foto;
 	}
 }
