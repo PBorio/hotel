@@ -83,7 +83,7 @@ public class Quarto {
 	}
 
 	public void addReserva(Reserva reserva) {
-		reserva.setQuarto(this);
+		reserva.addQuarto(this);
 		this.reservas.add(reserva);
 	}
 

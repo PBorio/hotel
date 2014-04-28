@@ -1,5 +1,8 @@
 package domain.servicos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.joda.time.DateTime;
 
 import domain.Estadia;
@@ -30,10 +33,15 @@ public class Checkin {
 		return new Checkin(reserva);
 	}
 
-	public Estadia iniciarEstadiaAPartirDeUmaReserva() {
-		Estadia estadia = new Estadia();
-		estadia.aPartirDaReserva(this.reserva);
-		return estadia;
+	public List<Estadia> iniciarEstadiasAPartirDeUmaReserva() {
+		
+		List<Estadia> estadias = new ArrayList<Estadia>();
+		for (Quarto quarto : reserva.getQuartos()){
+			Estadia estadia = new Estadia();
+			estadia.aPartirDaReservaEQuarto(this.reserva, quarto);
+			estadias.add(estadia);
+		}
+		return estadias;
 	}
 	
 	public Estadia iniciarEstadiaSemReserva() {

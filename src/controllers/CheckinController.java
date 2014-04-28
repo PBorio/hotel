@@ -60,9 +60,9 @@ public class CheckinController {
 	public void edit(Long id) {
 		
 		Reserva reserva = reservaRepositorio.buscaPorId(id);
-		Estadia estadia = Checkin.checkinAPartirDeUmaReserva(reserva).iniciarEstadiaAPartirDeUmaReserva();
+		List<Estadia> estadias = Checkin.checkinAPartirDeUmaReserva(reserva).iniciarEstadiasAPartirDeUmaReserva();
 		
-		result.include("estadia", estadia);
+		result.include("estadiaList", estadias);
 		result.include("hospede", reserva.getHospede());
 		result.of(this).checkin();
 	}

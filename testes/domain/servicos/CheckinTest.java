@@ -19,7 +19,7 @@ public class CheckinTest {
 		reserva.setHospede(new Hospede());
 		
 		Checkin checkin = Checkin.checkinAPartirDeUmaReserva(reserva);
-		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();
+		Estadia estadia = checkin.iniciarEstadiasAPartirDeUmaReserva();
 		Assert.assertNotNull(estadia.getHospedes().get(0));
 	}
 	
@@ -32,7 +32,7 @@ public class CheckinTest {
 		reserva.setHospede(joao);
 		
 		Checkin checkin = Checkin.checkinAPartirDeUmaReserva(reserva);
-		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();
+		Estadia estadia = checkin.iniciarEstadiasAPartirDeUmaReserva();
 		Assert.assertEquals("Joao", estadia.getHospedes().get(0).getNome());
 	}
 	
@@ -42,12 +42,11 @@ public class CheckinTest {
 		Quarto _101 = new Quarto();
 		_101.setNumero("101");
 		
-		Reserva reserva = new FakeReserva().iniciandoEm("10/03/2014").terminandoEm("15/03/2014").build();
+		Reserva reserva = new FakeReserva().iniciandoEm("10/03/2014").terminandoEm("15/03/2014").paraOQuarto(_101).build();
 		reserva.setHospede(new Hospede());
-		reserva.setQuarto(_101);
 		
 		Checkin checkin = Checkin.checkinAPartirDeUmaReserva(reserva);
-		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();
+		Estadia estadia = checkin.iniciarEstadiasAPartirDeUmaReserva();
 		Assert.assertEquals("101", estadia.getQuarto().getNumero());
 		
 		
@@ -57,13 +56,12 @@ public class CheckinTest {
 	public void oValorDaDiariaDaEstadiaSeraODaReserva(){
 		
 		
-		Reserva reserva = new FakeReserva().iniciandoEm("10/03/2014").terminandoEm("15/03/2014").build();
+		Reserva reserva = new FakeReserva().iniciandoEm("10/03/2014").terminandoEm("15/03/2014").paraOQuarto(new Quarto()).build();
 		reserva.setHospede(new Hospede());
-		reserva.setQuarto(new Quarto());
 		reserva.setValorDiaria(10.0);
 		
 		Checkin checkin = Checkin.checkinAPartirDeUmaReserva(reserva);
-		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();
+		Estadia estadia = checkin.iniciarEstadiasAPartirDeUmaReserva();
 		Assert.assertEquals((Double)10.0, estadia.getValorDiaria());
 		
 		

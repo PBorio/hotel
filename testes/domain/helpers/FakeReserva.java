@@ -50,6 +50,11 @@ public class FakeReserva {
 		return data;
 	}
 
+	public FakeReserva paraOQuarto(Quarto quarto) {
+		reserva.addQuarto(quarto);
+		return this;
+	}
+
 	
 	
 

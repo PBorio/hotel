@@ -18,7 +18,7 @@ public class CalculoDeValorDaDiariaServiceTest {
 	private ParserDeStringParaData parser = new ParserDeStringParaData();
 	
 	@Test
-	public void oValorDaReservaEhDeAcordoComAPoliticaDePrecosDaCategoriaDoQuarto(){
+	public void oValorDaReservaEhDeAcordoComAPoliticaDePrecosDaCategoriaDosQuartos(){
 		Categoria categoria = new Categoria();
 		categoria.setId(1l);
 		
@@ -26,8 +26,7 @@ public class CalculoDeValorDaDiariaServiceTest {
 		quarto.setId(1l);
 		quarto.setCategoria(categoria);
 		
-		Reserva reserva = new FakeReserva().iniciandoEm("01/04/2014").terminandoEm("05/04/2014").build();
-		reserva.setQuarto(quarto);
+		Reserva reserva = new FakeReserva().iniciandoEm("01/04/2014").terminandoEm("05/04/2014").paraOQuarto(quarto).build();
 		
 		PoliticaDePrecos politica = new PoliticaDePrecos();
 		politica.setCategoria(categoria);
@@ -53,8 +52,7 @@ public class CalculoDeValorDaDiariaServiceTest {
 		quarto.setId(1l);
 		quarto.setCategoria(categoria);
 		
-		Reserva reserva = new FakeReserva().iniciandoEm("01/04/2014").terminandoEm("05/04/2014").build();
-		reserva.setQuarto(quarto);
+		Reserva reserva = new FakeReserva().iniciandoEm("01/04/2014").terminandoEm("05/04/2014").paraOQuarto(quarto).build();
 		
 		PoliticaDePrecos politica = new PoliticaDePrecos();
 		politica.setCategoria(categoria);
@@ -88,8 +86,7 @@ public class CalculoDeValorDaDiariaServiceTest {
 		quarto.setId(1l);
 		quarto.setCategoria(categoria);
 		
-		Reserva reserva = new FakeReserva().iniciandoEm("01/04/2014").terminandoEm("05/04/2014").build();
-		reserva.setQuarto(quarto);
+		Reserva reserva = new FakeReserva().iniciandoEm("01/04/2014").terminandoEm("05/04/2014").paraOQuarto(quarto).build();
 		
 		PoliticaDePrecos politica = new PoliticaDePrecos();
 		politica.setCategoria(categoria);
@@ -123,8 +120,7 @@ public class CalculoDeValorDaDiariaServiceTest {
 		quarto.setId(1l);
 		quarto.setCategoria(categoria);
 		
-		Reserva reserva = new FakeReserva().iniciandoEm("01/04/2014").terminandoEm("05/04/2014").build();
-		reserva.setQuarto(quarto);
+		Reserva reserva = new FakeReserva().iniciandoEm("01/04/2014").terminandoEm("05/04/2014").paraOQuarto(quarto).build();
 		
 		PoliticaDePrecos politica = new PoliticaDePrecos();
 		politica.setCategoria(categoria);

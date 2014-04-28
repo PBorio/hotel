@@ -26,7 +26,7 @@ public class ReservaTest {
 	}
 	
 	@Test
-	public void oPrimeiroTrimestreContemOMesDeFevereiros() {
+	public void oPrimeiroTrimestreContemOMesDeFevereiro() {
 		DateTime inicio = new DateTime(2014, 2, 1, 0, 0, 0);
 		DateTime fim = new DateTime(2014, 2 , 28, 0, 0, 0);
 		
@@ -166,5 +166,13 @@ public class ReservaTest {
 		Assert.assertEquals((Double)30.6, r.getValorReserva());
 	}
 
+	@Test
+	public void umaReservaPodeTerMaisDeUmQuarto(){
+		Reserva reserva = new FakeReserva().iniciandoEm("01/03/2014").terminandoEm("04/03/2014").build();
+		Quarto q1 = new Quarto();
+		Quarto q2 = new Quarto();
+		reserva.addQuarto(q1);
+		reserva.addQuarto(q2);
+	}
 }
 

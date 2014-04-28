@@ -73,10 +73,10 @@ public class Estadia implements CalculavelPorPeriodo {
 	
 	
 
-	public void aPartirDaReserva(Reserva reserva) {
+	public void aPartirDaReservaEQuarto(Reserva reserva, Quarto quarto) {
 		this.reserva = reserva;
 		this.addHospede(reserva.getHospede());
-		this.quarto = reserva.getQuarto();
+		this.quarto = quarto;
 		this.dataCheckin = reserva.getInicio();
 		this.previsaoCheckout = reserva.getFim();
 		this.valorDiaria = reserva.getValorDiaria();

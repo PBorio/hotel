@@ -1,5 +1,10 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -48,9 +53,11 @@ public class Reserva implements CalculavelPorPeriodo {
 	@JoinColumn(name="hospede_id")
 	private Hospede hospede;
 	
-	@ManyToOne
-	@JoinColumn(name="quarto_id")
-	private Quarto quarto;
+//	@ManyToOne
+//	@JoinColumn(name="quarto_id")
+//	private Quarto quarto;
+	
+	private Set<QuartoDaReserva> quartosDaReserva = new HashSet<QuartoDaReserva>();
 	
 	@Column(name="checkin")
 	@Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
@@ -72,13 +79,13 @@ public class Reserva implements CalculavelPorPeriodo {
 		this.id = id;
 	}
 
-	public Quarto getQuarto() {
-		return quarto;
-	}
-
-	public void setQuarto(Quarto quarto) {
-		this.quarto = quarto;
-	}
+//	public Quarto getQuarto() {
+//		return quarto;
+//	}
+//
+//	public void setQuarto(Quarto quarto) {
+//		this.quarto = quarto;
+//	}
 
 	public Double getValorDiaria() {
 		return this.valorDiaria;
@@ -179,10 +186,21 @@ public class Reserva implements CalculavelPorPeriodo {
 		return destaReserva.overlaps(daOutraReserva);
 	}
 
-	
-
 	public Double getValorReserva() {
 		return new CalculoDeValorPorPeriodoService().calcularValor(this);
+	}
+
+	public void addQuarto(Quarto quarto) {
+		QuartoDaReserva quartoDaReserva = new QuartoDaReserva(this, quarto);
+		this.quartosDaReserva.add(quartoDaReserva);
+	}
+
+	public List<Quarto> getQuartos() {
+		List<Quarto> result = new ArrayList<Quarto>();
+		for (QuartoDaReserva quartoReserva : this.quartosDaReserva){
+			result.add(quartoReserva.getQuarto());
+		}
+		return result;
 	}
 
 }
