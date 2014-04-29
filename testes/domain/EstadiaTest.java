@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.List;
+
 import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Test;
@@ -52,10 +54,10 @@ public class EstadiaTest {
 		reserva.setValorDiaria(10.0);
 		
 		Checkin checkin = Checkin.checkinAPartirDeUmaReserva(reserva);
-		Estadia estadia = checkin.iniciarEstadiasAPartirDeUmaReserva();
+		List<Estadia> estadias = checkin.iniciarEstadiasAPartirDeUmaReserva();
 		
 		DateTime hoje = new ParserDeStringParaData().parseData("11/03/2014");
-		Assert.assertEquals((Double)20.0, estadia.valorAteAData(hoje));
+		Assert.assertEquals((Double)20.0, estadias.get(0).valorAteAData(hoje));
 	}
 	
 	@Test
@@ -83,7 +85,8 @@ public class EstadiaTest {
 	public void oValorDosServicosDaEstadiaEhASomaDosValoresDosServicosPrestados(){
 		Reserva reserva = 
 				new FakeReserva().iniciandoEm("12/03/2014").terminandoEm("19/03/2014").paraOHospede("Joao").noQuarto("1").comValorDaDiariaDe(10.0).build();
-		Estadia estadia = Checkin.checkinAPartirDeUmaReserva(reserva).iniciarEstadiasAPartirDeUmaReserva();
+		List<Estadia> estadias = Checkin.checkinAPartirDeUmaReserva(reserva).iniciarEstadiasAPartirDeUmaReserva();
+		Estadia estadia = estadias.get(0);
 		
 		ServicoPrestado servicoPrestado = new ServicoPrestado();
 		servicoPrestado.setValor(10.0);
@@ -97,8 +100,9 @@ public class EstadiaTest {
 	public void tendoUmServicoDe10EUmDe5OTotalDosServicosSera15(){
 		Reserva reserva = 
 				new FakeReserva().iniciandoEm("12/03/2014").terminandoEm("19/03/2014").paraOHospede("Joao").noQuarto("1").comValorDaDiariaDe(10.0).build();
-		Estadia estadia = Checkin.checkinAPartirDeUmaReserva(reserva).iniciarEstadiasAPartirDeUmaReserva();
-		
+		 List<Estadia> estadias= Checkin.checkinAPartirDeUmaReserva(reserva).iniciarEstadiasAPartirDeUmaReserva();
+		 Estadia estadia = estadias.get(0);
+		 
 		ServicoPrestado servicoPrestado = new ServicoPrestado();
 		servicoPrestado.setValor(10.0);
 		
@@ -115,7 +119,8 @@ public class EstadiaTest {
 	public void seAEstadiaNaoUtilizouServicosOValorDosServicosEhZero(){
 		Reserva reserva = 
 				new FakeReserva().iniciandoEm("12/03/2014").terminandoEm("19/03/2014").paraOHospede("Joao").noQuarto("1").comValorDaDiariaDe(10.0).build();
-		Estadia estadia = Checkin.checkinAPartirDeUmaReserva(reserva).iniciarEstadiasAPartirDeUmaReserva();
+		List<Estadia> estadias = Checkin.checkinAPartirDeUmaReserva(reserva).iniciarEstadiasAPartirDeUmaReserva();
+		Estadia estadia = estadias.get(0);
 		
 		Assert.assertEquals((Double)0.0, estadia.getValorDosServicos());
 	}
@@ -124,7 +129,8 @@ public class EstadiaTest {
 	public void oValorDoConsumoEhASomaDosProdutosConsumidosDuranteAEstadia(){
 		Reserva reserva = 
 				new FakeReserva().iniciandoEm("12/03/2014").terminandoEm("19/03/2014").paraOHospede("Joao").noQuarto("1").comValorDaDiariaDe(10.0).build();
-		Estadia estadia = Checkin.checkinAPartirDeUmaReserva(reserva).iniciarEstadiasAPartirDeUmaReserva();
+		List<Estadia> estadias = Checkin.checkinAPartirDeUmaReserva(reserva).iniciarEstadiasAPartirDeUmaReserva();
+		Estadia estadia = estadias.get(0);
 		
 		Consumo consumo = new FakeConsumo("Bebida").comValorDe(25.0).build();
 		
@@ -137,7 +143,8 @@ public class EstadiaTest {
 	public void oValorConsumidoParaUmProdutoDe30EOutroDe10Eh40(){
 		Reserva reserva = 
 				new FakeReserva().iniciandoEm("12/03/2014").terminandoEm("19/03/2014").paraOHospede("Joao").noQuarto("1").comValorDaDiariaDe(10.0).build();
-		Estadia estadia = Checkin.checkinAPartirDeUmaReserva(reserva).iniciarEstadiasAPartirDeUmaReserva();
+		List<Estadia> estadias = Checkin.checkinAPartirDeUmaReserva(reserva).iniciarEstadiasAPartirDeUmaReserva();
+		Estadia estadia = estadias.get(0);
 		
 		Consumo consumo = new FakeConsumo("Bebida").comValorDe(30.0).build();
 		Consumo outroConsumo = new FakeConsumo("Lanche").comValorDe(10.0).build();
@@ -153,7 +160,8 @@ public class EstadiaTest {
 		
 		Reserva reserva = 
 				new FakeReserva().iniciandoEm("12/03/2014").terminandoEm("14/03/2014").paraOHospede("Joao").noQuarto("1").comValorDaDiariaDe(10.0).build();
-		Estadia estadia = Checkin.checkinAPartirDeUmaReserva(reserva).iniciarEstadiasAPartirDeUmaReserva();
+		List<Estadia> estadias = Checkin.checkinAPartirDeUmaReserva(reserva).iniciarEstadiasAPartirDeUmaReserva();
+		Estadia estadia = estadias.get(0);
 		
 		ServicoPrestado servicoPrestado = new ServicoPrestado();
 		servicoPrestado.setValor(10.0);
@@ -180,7 +188,8 @@ public class EstadiaTest {
 		
 		Reserva reserva = 
 				new FakeReserva().iniciandoEm("12/03/2014").terminandoEm("14/03/2014").paraOHospede("Joao").noQuarto("1").comValorDaDiariaDe(10.0).build();
-		Estadia estadia = Checkin.checkinAPartirDeUmaReserva(reserva).iniciarEstadiasAPartirDeUmaReserva();
+		List<Estadia> estadias = Checkin.checkinAPartirDeUmaReserva(reserva).iniciarEstadiasAPartirDeUmaReserva();
+		Estadia estadia = estadias.get(0);
 		
 		estadia.getValorDaEstadiaFechada();
 		
@@ -192,7 +201,8 @@ public class EstadiaTest {
 		
 		Reserva reserva = 
 				new FakeReserva().iniciandoEm("12/03/2014").terminandoEm("14/03/2014").paraOHospede("Joao").noQuarto("1").comValorDaDiariaDe(10.0).build();
-		Estadia estadia = Checkin.checkinAPartirDeUmaReserva(reserva).iniciarEstadiasAPartirDeUmaReserva();
+		List<Estadia> estadias = Checkin.checkinAPartirDeUmaReserva(reserva).iniciarEstadiasAPartirDeUmaReserva();
+		Estadia estadia = estadias.get(0);
 		
 		ServicoPrestado servicoPrestado = new ServicoPrestado();
 		servicoPrestado.setValor(10.0);

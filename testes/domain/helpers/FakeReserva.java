@@ -33,6 +33,7 @@ public class FakeReserva {
 	public FakeReserva noQuarto(String numero) {
 		Quarto quarto = new Quarto();
 		quarto.setNumero(numero);
+		reserva.addQuarto(quarto);
 		return this;
 	}
 
