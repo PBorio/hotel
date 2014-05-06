@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
@@ -52,11 +53,8 @@ public class Reserva implements CalculavelPorPeriodo {
 	@ManyToOne
 	@JoinColumn(name="hospede_id")
 	private Hospede hospede;
-	
-//	@ManyToOne
-//	@JoinColumn(name="quarto_id")
-//	private Quarto quarto;
-	
+
+	@OneToMany(mappedBy="reserva")
 	private Set<QuartoDaReserva> quartosDaReserva = new HashSet<QuartoDaReserva>();
 	
 	@Column(name="checkin")
@@ -192,6 +190,7 @@ public class Reserva implements CalculavelPorPeriodo {
 
 	public void addQuarto(Quarto quarto) {
 		QuartoDaReserva quartoDaReserva = new QuartoDaReserva(this, quarto);
+		quarto.addReserva(quartoDaReserva);
 		this.quartosDaReserva.add(quartoDaReserva);
 	}
 

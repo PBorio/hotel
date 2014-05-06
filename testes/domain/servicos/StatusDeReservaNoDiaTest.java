@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import domain.Quarto;
+import domain.Reserva;
 import domain.helpers.FakeReserva;
 import domain.servicos.helpers.ParserDeStringParaData;
 import domain.servicos.tipos.TipoStatusQuarto;
@@ -35,12 +36,14 @@ public class StatusDeReservaNoDiaTest {
 	public void oStatusDeveIndicarQueUmQuartoEstaLivreEOutroReservado(){
 		DateTime dia = parser.parseData("21/02/2014");
 		
+		Reserva reserva = new FakeReserva().iniciandoEm("15/02/2014").terminandoEm("21/02/2014").build();
+		
 		Quarto _001 = new Quarto();
 		_001.setId(1l);
 		
 		Quarto _002 = new Quarto();
 		_002.setId(2l);
-		_002.addReserva(new FakeReserva().iniciandoEm("15/02/2014").terminandoEm("21/02/2014").build());		
+		reserva.addQuarto(_002);
 		
 		quartos.add(_001);
 		quartos.add(_002);

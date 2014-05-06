@@ -20,10 +20,12 @@ import controllers.validators.ReservaValidation;
 import controllers.views.reservas.ReservasView;
 import domain.Categoria;
 import domain.Hospede;
+import domain.PoliticaDePrecos;
 import domain.Quarto;
 import domain.Reserva;
 import domain.exceptions.HotelException;
 import domain.servicos.CalculoDeValorDaDiariaService;
+import domain.servicos.InformativoService;
 import domain.servicos.ServicoDeReserva;
 import domain.servicos.StatusDeReservasNoDia;
 
@@ -103,7 +105,7 @@ public class ReservasController {
 			if (disponivel == null)
 				throw new HotelException("Não há quarto disponível para esta reserva");
 			
-			disponivel.addReserva(reserva);
+			reserva.addQuarto(disponivel);
 			
 			CalculoDeValorDaDiariaService servicoPrecos = new CalculoDeValorDaDiariaService(politicaPrecoRepositorio.buscaTodos());
 			servicoPrecos.calcularEInformarValorNaReserva(reserva);
@@ -154,17 +156,17 @@ public class ReservasController {
 	}
 
 	public void quartosDisponiveis(ReservasView reservasView){
-		System.out.println(reservasView.getChegada());
-		System.out.println(reservasView.getSaida());
 		
 		Reserva reserva = new Reserva();
 		reserva.setInicio(new DateTime(reservasView.getChegada().getTime()));
 		reserva.setFim(new DateTime(reservasView.getSaida().getTime()));
 		
 		List<Quarto> quartos = quartoRepositorio.buscaTodos();
-		ServicoDeReserva servicoReserva = new ServicoDeReserva(quartos);
+		List<PoliticaDePrecos> politicas = politicaPrecoRepositorio.buscaTodos();
 		
+		ServicoDeReserva servicoReserva = new ServicoDeReserva(quartos);
 		List<Quarto> quartosDisponiveis = servicoReserva.quartosDisponiveisParaAReserva(reserva);
+		List<InformativoDeQuartos> quartosParaReserva = new InformativoService(politicas).criarInformativoDeQuartos(quartosDisponiveis);
 		
 		result.include("quartoList", quartosDisponiveis);
 		result.of(this).reserva();

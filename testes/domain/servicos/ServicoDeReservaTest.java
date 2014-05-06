@@ -17,9 +17,10 @@ public class ServicoDeReservaTest {
 	public void seNenhumQuartoEstaDisponivelNoPeriodoDaReservaOServicoRetornaNulo(){
 		
 		Reserva reserva = criarReserva("01/03/2014", "06/03/2014");
+		Reserva outraReserva = criarReserva("01/02/2014", "15/03/2014");
 		
 		Quarto quarto = new Quarto();
-		quarto.addReserva(criarReserva("01/02/2014", "15/03/2014"));
+		outraReserva.addQuarto(quarto);
 		
 		List<Quarto> quartos = new ArrayList<Quarto>();
 		quartos.add(quarto);
@@ -32,9 +33,10 @@ public class ServicoDeReservaTest {
 	public void casoHajaQuartoDisponivelNoPeriodoDaReservaOPrimeiroSeraIndicado(){
 
 		Reserva reserva = criarReserva("01/03/2014", "06/03/2014"); 
+		Reserva outra = criarReserva("15/03/2014", "31/03/2014");
 		
 		Quarto quarto = new Quarto();
-		quarto.addReserva(criarReserva("15/03/2014", "31/03/2014"));
+		outra.addQuarto(quarto);
 		
 		List<Quarto> quartos = new ArrayList<Quarto>();
 		quartos.add(quarto);
@@ -46,15 +48,17 @@ public class ServicoDeReservaTest {
 	@Test
 	public void seUmQuartoNaoTiverDisponibilidadeEUmSegundoTiverOServicoDeReservaRetornaOSegundo(){
 
-		Reserva reserva = criarReserva("01/03/2014", "06/03/2014"); 
+		Reserva reserva = criarReserva("01/03/2014", "06/03/2014");
+		Reserva deUmAQuinzeDeMarco = criarReserva("01/03/2014", "15/03/2014");
+		Reserva deDezesseisATreintaEUm = criarReserva("16/03/2014", "31/03/2014");
 		
 		Quarto quarto = new Quarto();
 		quarto.setId(1l);
-		quarto.addReserva(criarReserva("01/03/2014", "15/03/2014"));
+		deUmAQuinzeDeMarco.addQuarto(quarto);
 		
 		Quarto outroQuarto = new Quarto();
 		outroQuarto.setId(2l);
-		outroQuarto.addReserva(criarReserva("16/03/2014", "31/03/2014"));
+		deDezesseisATreintaEUm.addQuarto(outroQuarto);
 		
 		List<Quarto> quartos = new ArrayList<Quarto>();
 		quartos.add(quarto);

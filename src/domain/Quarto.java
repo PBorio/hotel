@@ -13,7 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Where;
 import org.joda.time.DateTime;
 
 import domain.nulos.ReservaNulo;
@@ -37,8 +36,7 @@ public class Quarto {
 	private Categoria categoria;
 
 	@OneToMany(mappedBy="quarto")
-	@Where(clause="(checkin is null and cancelamento is null)")
-	private Set<Reserva> reservas = new HashSet<Reserva>();
+	private Set<QuartoDaReserva> reservas = new HashSet<QuartoDaReserva>();
 
 	private String foto;
 	
@@ -82,13 +80,13 @@ public class Quarto {
 		this.categoria = categoria;
 	}
 
-	public void addReserva(Reserva reserva) {
-		reserva.addQuarto(this);
+	public void addReserva(QuartoDaReserva reserva) {
 		this.reservas.add(reserva);
 	}
 
 	public boolean possuiReservasNoMesmoPeriodo(Reserva reserva) {
-		for (Reserva r : this.reservas){
+		for (QuartoDaReserva q : this.reservas){
+			Reserva r = q.getReserva();
 			if (r.coincideCom(reserva))
 				return true;
 		}
@@ -96,7 +94,8 @@ public class Quarto {
 	}
 	
 	public boolean possuiReservaNoDia(DateTime dia){
-		for (Reserva r : this.reservas){
+		for (QuartoDaReserva q : this.reservas){
+			Reserva r = q.getReserva();
 			if (r.contemAData(dia))
 				return true;
 		}
@@ -104,7 +103,8 @@ public class Quarto {
 	}
 	
 	public Reserva reservaNaData(DateTime dia){
-		for (Reserva r : this.reservas){
+		for (QuartoDaReserva q : this.reservas){
+			Reserva r = q.getReserva();
 			if (r.contemAData(dia))
 				return r;
 		}
