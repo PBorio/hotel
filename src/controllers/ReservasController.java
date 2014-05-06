@@ -17,6 +17,7 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.validator.ValidationMessage;
 import controllers.validators.ReservaValidation;
+import controllers.views.reservas.InformativoDeQuartos;
 import controllers.views.reservas.ReservasView;
 import domain.Categoria;
 import domain.Hospede;
@@ -28,6 +29,7 @@ import domain.servicos.CalculoDeValorDaDiariaService;
 import domain.servicos.InformativoService;
 import domain.servicos.ServicoDeReserva;
 import domain.servicos.StatusDeReservasNoDia;
+import domain.servicos.helpers.Periodo;
 
 @Resource
 public class ReservasController {
@@ -157,18 +159,20 @@ public class ReservasController {
 
 	public void quartosDisponiveis(ReservasView reservasView){
 		
-		Reserva reserva = new Reserva();
-		reserva.setInicio(new DateTime(reservasView.getChegada().getTime()));
-		reserva.setFim(new DateTime(reservasView.getSaida().getTime()));
+		Reserva reservaComTodosOsQuartos = new Reserva();
+		reservaComTodosOsQuartos.setInicio(new DateTime(reservasView.getChegada().getTime()));
+		reservaComTodosOsQuartos.setFim(new DateTime(reservasView.getSaida().getTime()));
 		
 		List<Quarto> quartos = quartoRepositorio.buscaTodos();
 		List<PoliticaDePrecos> politicas = politicaPrecoRepositorio.buscaTodos();
 		
 		ServicoDeReserva servicoReserva = new ServicoDeReserva(quartos);
-		List<Quarto> quartosDisponiveis = servicoReserva.quartosDisponiveisParaAReserva(reserva);
-		List<InformativoDeQuartos> quartosParaReserva = new InformativoService(politicas).criarInformativoDeQuartos(quartosDisponiveis);
+		List<Quarto> quartosDisponiveis = servicoReserva.quartosDisponiveisParaAReserva(reservaComTodosOsQuartos);
 		
-		result.include("quartoList", quartosDisponiveis);
+		Periodo periodo = new Periodo(reservaComTodosOsQuartos.getInicio(), reservaComTodosOsQuartos.getFim());
+		List<InformativoDeQuartos> quartosParaReserva = new InformativoService(politicas).criarInformativoDeQuartos(periodo,quartosDisponiveis);
+		
+		result.include("quartoList", quartosParaReserva);
 		result.of(this).reserva();
 	}
 }

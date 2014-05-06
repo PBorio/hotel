@@ -54,6 +54,7 @@
 	        </div>
 	        <div class="col-lg-8">
 	            <c:forEach var="quarto" items="${quartoList}">
+	            	${quarto.valorDaDiaria}
 	            	<div class="col-lg-12">
 	               	   <div class="col-lg-4"><img alt="${quarto.numero}" src="<c:url value='/resources/imagens/imagensold/home-player.png'/>"></div>
 	               	   <div class="col-lg-8">

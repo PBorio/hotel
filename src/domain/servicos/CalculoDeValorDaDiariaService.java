@@ -9,6 +9,7 @@ import domain.PoliticaDePrecos;
 import domain.Quarto;
 import domain.Reserva;
 import domain.exceptions.HotelException;
+import domain.servicos.helpers.Periodo;
 
 public class CalculoDeValorDaDiariaService {
 
@@ -65,6 +66,34 @@ public class CalculoDeValorDaDiariaService {
 
 	private boolean naoEncontrouPoliticaParaAReserva(Double valorDaReserva) {
 		return valorDaReserva.doubleValue() == 0.0;
+	}
+
+	public Double calcularValorDaDiaria(Periodo periodo, Quarto quarto) {
+		Double valorDaDiaria = 0.0;
+		
+			for (PoliticaDePrecos politica : this.politicas){
+				if (!politica.getCategoria().equals(quarto.getCategoria()))
+					continue;
+				
+				Periodo outroPeriodo = new Periodo(new DateTime(politica.getInicio()), new DateTime(politica.getFim()));
+				if (periodo.coincideCom(outroPeriodo))
+					valorDaDiaria = politica.getValorDiaria();
+				
+			}
+			
+			if (naoEncontrouPoliticaParaAReserva(valorDaDiaria)){
+				PoliticaDePrecos politicaPadrao = getPoliticaPadraoParaACategoria(quarto.getCategoria());
+				
+				if (politicaPadrao == null)
+					throw new HotelException("Não há política de preços para a categoria: "+quarto.getCategoria().getDescricao());
+				
+				valorDaDiaria = politicaPadrao.getValorDiaria();
+			}
+			
+			if (naoEncontrouPoliticaParaAReserva(valorDaDiaria))
+				throw new HotelException("Não há política de preços para a categoria: "+quarto.getCategoria().getDescricao());
+			
+			return valorDaDiaria;
 	}
 
 }

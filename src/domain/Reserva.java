@@ -21,6 +21,7 @@ import org.joda.time.Interval;
 
 import domain.interfaces.CalculavelPorPeriodo;
 import domain.servicos.CalculoDeValorPorPeriodoService;
+import domain.servicos.helpers.Periodo;
 
 @Entity
 @Table(name="reservas")
@@ -179,9 +180,9 @@ public class Reserva implements CalculavelPorPeriodo {
 	}
 
 	public boolean coincideCom(Reserva outraReserva) {
-		Interval destaReserva = new Interval(inicio, fim);
-		Interval daOutraReserva = new Interval(outraReserva.getInicio(), outraReserva.getFim());
-		return destaReserva.overlaps(daOutraReserva);
+		Periodo periodoDestaReserva = new Periodo(inicio, fim);
+		Periodo periodoDaOutraReserva = new Periodo(outraReserva.getInicio(), outraReserva.getFim());
+		return periodoDestaReserva.coincideCom(periodoDaOutraReserva);
 	}
 
 	public Double getValorReserva() {

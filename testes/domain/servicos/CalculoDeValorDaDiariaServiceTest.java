@@ -12,6 +12,7 @@ import domain.Quarto;
 import domain.Reserva;
 import domain.helpers.FakeReserva;
 import domain.servicos.helpers.ParserDeStringParaData;
+import domain.servicos.helpers.Periodo;
 
 public class CalculoDeValorDaDiariaServiceTest {
 	
@@ -145,4 +146,38 @@ public class CalculoDeValorDaDiariaServiceTest {
 		Assert.assertEquals((Double)50.0, reserva.getValorDiaria());
 	}
 
+	@Test
+	public void aoReceberUmQuartoEUmPeriodoParaCalculoOCalculoDeValorDaDiariaDeveCalcularOValorDaDiariaDaqueleQuartoParaOPeriodo(){
+		Categoria categoria = new Categoria();
+		categoria.setId(1l);
+		
+		Quarto quarto = new Quarto();
+		quarto.setId(1l);
+		quarto.setCategoria(categoria);
+		
+		Periodo periodo = new Periodo(parser.parseData("01/04/2014"), parser.parseData("05/04/2014"));
+		
+		PoliticaDePrecos politica = new PoliticaDePrecos();
+		politica.setCategoria(categoria);
+		politica.setInicio(parser.parseData("01/04/2014").toDate());
+		politica.setFim(parser.parseData("30/04/2014").toDate());
+		politica.setValorDiaria(50.0);
+		
+		PoliticaDePrecos padrao = new PoliticaDePrecos();
+		padrao.setCategoria(categoria);
+		padrao.setInicio(parser.parseData("01/04/2013").toDate());
+		padrao.setFim(parser.parseData("31/12/2013").toDate());
+		padrao.setValorDiaria(40.0);
+		padrao.setPadrao(true);
+		
+		List<PoliticaDePrecos> politicas = new ArrayList<PoliticaDePrecos>();
+		politicas.add(politica);
+		politicas.add(padrao);
+		
+		CalculoDeValorDaDiariaService servico = new CalculoDeValorDaDiariaService(politicas);
+		Double valorDiaria = servico.calcularValorDaDiaria(periodo, quarto);
+		
+		Assert.assertEquals((Double)50.0, valorDiaria);
+	}
+	
 }
