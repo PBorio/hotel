@@ -96,3 +96,9 @@ box-shadow:5px 4px 10px #ccc;
   cursor: pointer;
   background-color: #4683EA;
 }
+
+.divreserva{
+  border-color: #3D83C0;
+  border-width: 1px;
+  border-style: solid;
+}

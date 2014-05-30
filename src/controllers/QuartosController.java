@@ -84,6 +84,12 @@ public class QuartosController {
 	public Download foto(Long id){
 		Quarto quarto = quartoRepositorio.buscaPorId(id);
 		Arquivo foto =  arquivosRepositorio.recupera(quarto.getFoto());
+		
+		if (foto == null){
+			result.notFound();
+			return null;
+		}
+		
 		return new ByteArrayDownload(foto.getConteudo(), foto.getContentType(), foto.getNome());
 	}
 

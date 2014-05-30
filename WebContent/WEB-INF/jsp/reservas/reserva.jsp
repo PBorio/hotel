@@ -7,8 +7,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Faça sua Reserva</title>
+
 <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.css'/>" />
 <link rel="stylesheet" href="<c:url value='/resources/css/datepicker.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/kanban.css'/>" />
 <style type="text/css">
 	.clear{
 	   clear: both;
@@ -55,13 +57,18 @@
 	        <div class="col-lg-8">
 	            <c:forEach var="quarto" items="${quartoList}">
 	            	
-	            	<div class="col-lg-12">
+	            	<div class="col-lg-12 divreserva">
 	               	   <div class="col-lg-4"><img alt="${quarto.numero}" src="${linkTo[QuartosController].foto[quarto.id] }"></div>
 	               	   <div class="col-lg-8">
 	               	      <div class="col-md-4">${quarto.numero}</div>
 	               	      <div class="col-md-8">${quarto.descricao}</div> 
 	               	      <div class="col-md-4">Valor:</div>
 	               	      <div class="col-md-8">${quarto.valorDaDiaria}</div>
+	               	      <div class="col-md-12">
+							<button type="button" name="singlebutton" class="btn btn-primary">
+								Reservar
+							</button>
+						</div>
 	               	   </div>
 	               	   <div class='clear'></div>
 	               </div>
