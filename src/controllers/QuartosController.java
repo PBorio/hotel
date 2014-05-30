@@ -12,6 +12,8 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.interceptor.download.ByteArrayDownload;
+import br.com.caelum.vraptor.interceptor.download.Download;
 import br.com.caelum.vraptor.interceptor.multipart.UploadedFile;
 
 import com.google.common.io.ByteStreams;
@@ -75,6 +77,14 @@ public class QuartosController {
 	public void novo() {
 		result.include("categoriaList", categoriaRepositorio.buscaTodos());
 		result.include("quarto", novoQuarto());
+	}
+	
+	@Get
+	@Path("/quartos/{id}/foto")
+	public Download foto(Long id){
+		Quarto quarto = quartoRepositorio.buscaPorId(id);
+		Arquivo foto =  arquivosRepositorio.recupera(quarto.getFoto());
+		return new ByteArrayDownload(foto.getConteudo(), foto.getContentType(), foto.getNome());
 	}
 
 	private Quarto novoQuarto() {

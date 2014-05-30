@@ -139,7 +139,8 @@ public class Quarto {
 		this.foto = foto == null ? null : foto.toString();
 	}
 
-	public String getFoto() {
-		return foto;
+	public URI getFoto() {
+		if (foto == null) return null;
+		return URI.create(foto);
 	}
 }

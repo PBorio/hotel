@@ -35,6 +35,13 @@
 						<input type="file" id="foto" class="col-xs-10" name="foto" />
 					</div>
 				</div>
+				<div class="form-group">
+	 				<label class="control-label col-xs-2">Foto:</label>
+					<div class="col-xs-10">
+						<img src="${linkTo[QuartosController].foto[quarto.id] }" width="70" height="100">
+					</div>
+				</div>
+
 	 			<div class="form-group">
 	 				<label class="control-label col-xs-2">Número:</label>
 					<div class="col-xs-10">

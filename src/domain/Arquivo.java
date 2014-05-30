@@ -25,6 +25,8 @@ public class Arquivo {
 	
 	private Date dataModificacao;
 	
+	public Arquivo(){}
+	
 	public Arquivo(String nome, byte[] conteudo, String contentType, Date dataModificacao){
 		this.nome = nome;
 		this.conteudo = conteudo;
