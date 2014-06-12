@@ -21,7 +21,7 @@ public class InformativoService {
 		List<InformativoDeQuartos> informativos = new ArrayList<InformativoDeQuartos>();
 		for (Quarto quarto : quartosDisponiveis){
 			Double valorDaDiaria = calculoValorDiaria.calcularValorDaDiaria(periodo, quarto);
-			InformativoDeQuartos info = new InformativoDeQuartos(quarto.getId(), quarto.getNumero(), quarto.getDescricao(), valorDaDiaria);
+			InformativoDeQuartos info = new InformativoDeQuartos(quarto.getId(), quarto.getNumero(), quarto.getDescricao(), valorDaDiaria, periodo.getInicio(), periodo.getFim());
 			informativos.add(info);
 		}
 		return informativos;

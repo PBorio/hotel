@@ -1,7 +1,15 @@
 package controllers.views.reservas;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import domain.Quarto;
+import br.com.caelum.vraptor.ioc.Component;
+import br.com.caelum.vraptor.ioc.SessionScoped;
+
+@Component
+@SessionScoped
 public class ReservasView {
 	
 	private Long idCategoria;
@@ -24,11 +32,13 @@ public class ReservasView {
 	
 	private String emailHospede;
 	
-	private String cdiadeHospede;
+	private String cidadeHospede;
 	
 	private String telefoneHospede;
 	
 	private String celularHospede;
+	
+	private List<Quarto> quartos = new ArrayList<Quarto>();
 
 	public Long getIdCategoria() {
 		return idCategoria;
@@ -111,11 +121,11 @@ public class ReservasView {
 	}
 
 	public String getCidadeHospede() {
-		return cdiadeHospede;
+		return cidadeHospede;
 	}
 
 	public void setCidadeHospede(String cdiadeHospede) {
-		this.cdiadeHospede = cdiadeHospede;
+		this.cidadeHospede = cdiadeHospede;
 	}
 
 	public String getTelefoneHospede() {
@@ -133,7 +143,13 @@ public class ReservasView {
 	public void setCelularHospede(String celularHospede) {
 		this.celularHospede = celularHospede;
 	}
-	
-	
+
+	public List<Quarto> getQuartos() {
+		return quartos;
+	}
+
+	public void addQuarto(Quarto quarto) {
+		quartos.add(quarto);
+	}
 
 }

@@ -35,13 +35,13 @@
 	             	<div class="form-group">
 						<label class="col-sm-2">Inicio:</label>
 						<div class="col-sm-7">
-							<input type="text" style="font-size: 14px;" class="col-sm-10" name="reservasView.chegada" id="reservasView.chegada" value="<fmt:formatDate value='${reservaView.chegada}'/>" />
+							<input type="text" style="font-size: 14px;" class="col-sm-10" name="chegada" id="chegada" value="<fmt:formatDate value='${reservasView.chegada}'/>" />
 						</div>
 					  </div> 
 					  <div class="form-group">
 							<label class="col-sm-2">Fim:</label>
 							<div class="col-sm-7">
-								<input type="text" style="font-size: 14px;" class="col-sm-10" name="reservasView.saida" id="reservasView.saida" value="<fmt:formatDate value='${reservaView.saida}'/>"/>
+								<input type="text" style="font-size: 14px;" class="col-sm-10" name="saida" id="saida" value="<fmt:formatDate value='${reservasView.saida}'/>"/>
 							</div>
 					  </div> 
 					  <div class="control-group col-xs-2">
@@ -65,9 +65,14 @@
 	               	      <div class="col-md-4">Valor:</div>
 	               	      <div class="col-md-8">${quarto.valorDaDiaria}</div>
 	               	      <div class="col-md-12">
-							<button type="button" name="singlebutton" class="btn btn-primary">
-								Reservar
-							</button>
+		               	      <form class="form-horizontal" action='<c:url value="/reservas/reservar"/>' method="post">
+		               	        <input type="hidden" name="reservasView.chegada" value="<fmt:formatDate value='${quarto.inicio}'/>" />
+		               	        <input type="hidden" name="reservasView.saida" value="<fmt:formatDate value='${quarto.fim}'/>" />
+		               	        <input type="hidden" name="quarto.id" value="${quarto.id}" />
+								<button name="singlebutton" class="btn btn-primary">
+									Reservar
+								</button>
+							  </form>
 						</div>
 	               	   </div>
 	               	   <div class='clear'></div>
@@ -81,10 +86,10 @@
 <script src="<c:url value='/resources/scripts/bootstrap-datepicker.js'/>"></script>
 <script type="text/javascript">
 	$(function(){
-		$('#reservasView\\.chegada').datepicker({
+		$('#chegada').datepicker({
 			format: 'dd/mm/yyyy'
 		});
-		$('#reservasView\\.saida').datepicker({
+		$('#saida').datepicker({
 			format: 'dd/mm/yyyy'
 		});
 	});

@@ -31,6 +31,13 @@
 					<li><a href="<c:url value='/categorias/list'/>">Categorias</a></li>
 					<li><a href="<c:url value='/politicas/list'/>">Preços</a></li>
 				</ul>
+				<div class="nav navbar-nav navbar-right">
+					<div class="panel panel-default">
+						<c:if test="${not empty reservasView}">
+							${reservasView}
+						</c:if>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

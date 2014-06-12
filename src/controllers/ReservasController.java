@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -41,6 +42,7 @@ public class ReservasController {
 	private ReservaRepositorio reservaRepositorio;
 	private PoliticaPrecoRepositorio politicaPrecoRepositorio;
 	private Validator validator;
+	private ReservasView reservasView;
 
 	public ReservasController(Result result, 
 			                  CategoriaRepositorio categoriaRepositorio, 
@@ -48,7 +50,8 @@ public class ReservasController {
 			                  HospedeRepositorio hospedeRepositorio,
 			                  ReservaRepositorio reservaRepositorio,
 			                  PoliticaPrecoRepositorio politicaPrecoRepositorio,
-			                  Validator validator){
+			                  Validator validator,
+			                  ReservasView reservasView){
 		this.result = result;
 		this.categoriaRepositorio = categoriaRepositorio;
 		this.quartoRepositorio = quartoRepositorio;
@@ -56,13 +59,32 @@ public class ReservasController {
 		this.reservaRepositorio = reservaRepositorio;
 		this.politicaPrecoRepositorio = politicaPrecoRepositorio;
 		this.validator = validator;
+		this.reservasView = reservasView;
 	}
 	
 	public void reserva(){
-		result.include("categoriaList", categoriaRepositorio.buscaTodos());
 	}
 	
-	public void salva(ReservasView reservasView){
+	public void reservar(Quarto quarto){
+		
+		try{
+			quarto = quartoRepositorio.buscaPorId(quarto.getId());
+			reservasView.addQuarto(quarto);
+			result.of(this).showReserva();
+			
+		}catch(HotelException e){
+			result.include("reserva",reservasView);
+			result.include("categoriaList",this.categoriaRepositorio.buscaTodos());
+			validator.add(new ValidationMessage(e.getMessage(),"erro.no.reserva",e.getMessage()));
+			validator.onErrorUsePageOf(this).reserva();
+		}
+	}
+	
+	public void showReserva() {
+		
+	}
+
+	public void confirmar(){
 		
 		try{
 			ReservaValidation validation = new ReservaValidation(validator, reservasView);
@@ -157,7 +179,10 @@ public class ReservasController {
 		result.include("reserva", reserva);
 	}
 
-	public void quartosDisponiveis(ReservasView reservasView){
+	public void quartosDisponiveis(Date chegada, Date saida){
+		
+		reservasView.setChegada(chegada);
+		reservasView.setSaida(saida);
 		
 		Reserva reservaComTodosOsQuartos = new Reserva();
 		reservaComTodosOsQuartos.setInicio(new DateTime(reservasView.getChegada().getTime()));
