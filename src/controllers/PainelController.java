@@ -21,6 +21,8 @@ public class PainelController {
 		
 	}
 	
+	@Get
+	@Path("/")
 	public List<Estadia> painel(){
 		List<Estadia> estadias = estadiaRepositorio.estadiasAbertas();
 		return estadias;

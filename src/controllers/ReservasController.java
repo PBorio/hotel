@@ -1,7 +1,6 @@
 package controllers;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -19,6 +18,7 @@ import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.validator.ValidationMessage;
 import controllers.validators.ReservaValidation;
 import controllers.views.reservas.InformativoDeQuartos;
+import controllers.views.reservas.ParametrosReserva;
 import controllers.views.reservas.ReservasView;
 import domain.Categoria;
 import domain.Hospede;
@@ -179,10 +179,14 @@ public class ReservasController {
 		result.include("reserva", reserva);
 	}
 
-	public void quartosDisponiveis(Date chegada, Date saida){
+	public void quartosDisponiveis(ParametrosReserva parametrosReserva){
 		
-		reservasView.setChegada(chegada);
-		reservasView.setSaida(saida);
+		reservasView.setChegada(parametrosReserva.getChegada());
+		reservasView.setSaida(parametrosReserva.getSaida());
+		reservasView.setNumeroAdultos(parametrosReserva.getNumeroAdultos());
+		reservasView.setNumeroCriancas0a5(parametrosReserva.getNumeroCriancas0a5());
+		reservasView.setNumeroCriancas6a16(parametrosReserva.getNumeroCriancas6a16());
+		reservasView.setNumeroCriacas17a18(parametrosReserva.getNumeroCriancas17a18());
 		
 		Reserva reservaComTodosOsQuartos = new Reserva();
 		reservaComTodosOsQuartos.setInicio(new DateTime(reservasView.getChegada().getTime()));

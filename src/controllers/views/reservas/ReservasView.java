@@ -151,5 +151,9 @@ public class ReservasView {
 	public void addQuarto(Quarto quarto) {
 		quartos.add(quarto);
 	}
+	
+	public Double getValorReserva(){
+		return 0.0;
+	}
 
 }
