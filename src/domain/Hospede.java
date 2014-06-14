@@ -29,6 +29,8 @@ public class Hospede {
 	
 	@Transient
 	private Long rg;
+
+	private String sobrenome;
 	
 
 	public void setNome(String nome) {
@@ -133,6 +135,14 @@ public class Hospede {
 
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
+	}
+
+	public String getSobrenome() {
+		return this.sobrenome;
+	}
+
+	public void setSobrenome(String sobrenome) {
+		this.sobrenome = sobrenome;
 	}
 
 }

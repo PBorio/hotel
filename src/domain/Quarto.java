@@ -113,6 +113,7 @@ public class Quarto {
 
 	@Override
 	public int hashCode() {
+		if (id == null) return super.hashCode();
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());

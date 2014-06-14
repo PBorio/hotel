@@ -49,17 +49,17 @@
 							<div class="col-sm-6">
 								<select name="parametrosReserva.numeroAdultos" style="font-size: 14px;">
 									<option value="">Nº de adultos</option>
-									<option value="0" <c:if test="${0 == parametrosReserva.numeroAdultos}">selected="true"</c:if>>0</option>
-									<option value="1" <c:if test="${1 == parametrosReserva.numeroAdultos}">selected="true"</c:if>>01</option>
-									<option value="2" <c:if test="${2 == parametrosReserva.numeroAdultos}">selected="true"</c:if>>02</option>
-									<option value="3" <c:if test="${3 == parametrosReserva.numeroAdultos}">selected="true"</c:if>>03</option>
-									<option value="4" <c:if test="${4 == parametrosReserva.numeroAdultos}">selected="true"</c:if>>04</option>
-                                    <option value="5" <c:if test="${5 == parametrosReserva.numeroAdultos}">selected="true"</c:if>>05</option>
-									<option value="6" <c:if test="${6 == parametrosReserva.numeroAdultos}">selected="true"</c:if>>06</option>
-									<option value="7" <c:if test="${7 == parametrosReserva.numeroAdultos}">selected="true"</c:if>>07</option>
-									<option value="8" <c:if test="${8 == parametrosReserva.numeroAdultos}">selected="true"</c:if>>08</option>
-									<option value="9" <c:if test="${9 == parametrosReserva.numeroAdultos}">selected="true"</c:if>>09</option>
-									<option value="10" <c:if test="${10 == parametrosReserva.numeroAdultos}">selected="true"</c:if>>10</option>
+									<option value="0" <c:if test="${0 == reservasView.numeroAdultos}">selected="true"</c:if>>0</option>
+									<option value="1" <c:if test="${1 == reservasView.numeroAdultos}">selected="true"</c:if>>01</option>
+									<option value="2" <c:if test="${2 == reservasView.numeroAdultos}">selected="true"</c:if>>02</option>
+									<option value="3" <c:if test="${3 == reservasView.numeroAdultos}">selected="true"</c:if>>03</option>
+									<option value="4" <c:if test="${4 == reservasView.numeroAdultos}">selected="true"</c:if>>04</option>
+                                    <option value="5" <c:if test="${5 == reservasView.numeroAdultos}">selected="true"</c:if>>05</option>
+									<option value="6" <c:if test="${6 == reservasView.numeroAdultos}">selected="true"</c:if>>06</option>
+									<option value="7" <c:if test="${7 == reservasView.numeroAdultos}">selected="true"</c:if>>07</option>
+									<option value="8" <c:if test="${8 == reservasView.numeroAdultos}">selected="true"</c:if>>08</option>
+									<option value="9" <c:if test="${9 == reservasView.numeroAdultos}">selected="true"</c:if>>09</option>
+									<option value="10" <c:if test="${10 == reservasView.numeroAdultos}">selected="true"</c:if>>10</option>
 								</select>
 							</div>
 					  </div> 
@@ -68,17 +68,17 @@
 							<div class="col-sm-6">
 								<select name="parametrosReserva.numeroCriancas0a5" style="font-size: 14px;">
 									<option value="">Nº de crianças (0-5)</option>
-									<option value="0" <c:if test="${0 == parametrosReserva.numeroCriancas0a5}">selected="true"</c:if>>0 ${parametrosReserva.numeroCriancas0a5}</option>
-									<option value="1" <c:if test="${1 == parametrosReserva.numeroCriancas0a5}">selected="true"</c:if>>01</option>
-									<option value="2" <c:if test="${2 == parametrosReserva.numeroCriancas0a5}">selected="true"</c:if>>02</option>
-									<option value="3" <c:if test="${3 == parametrosReserva.numeroCriancas0a5}">selected="true"</c:if>>03</option>
-									<option value="4" <c:if test="${4 == parametrosReserva.numeroCriancas0a5}">selected="true"</c:if>>04</option>
-                                    <option value="5" <c:if test="${5 == parametrosReserva.numeroCriancas0a5}">selected="true"</c:if>>05</option>
-									<option value="6" <c:if test="${6 == parametrosReserva.numeroCriancas0a5}">selected="true"</c:if>>06</option>
-									<option value="7" <c:if test="${7 == parametrosReserva.numeroCriancas0a5}">selected="true"</c:if>>07</option>
-									<option value="8" <c:if test="${8 == parametrosReserva.numeroCriancas0a5}">selected="true"</c:if>>08</option>
-									<option value="9" <c:if test="${9 == parametrosReserva.numeroCriancas0a5}">selected="true"</c:if>>09</option>
-									<option value="10" <c:if test="${10 == parametrosReserva.numeroCriancas0a5}">selected="true"</c:if>>10</option>
+									<option value="0" <c:if test="${0 == reservasView.numeroCriancas0a5}">selected="true"</c:if>>0</option>
+									<option value="1" <c:if test="${1 == reservasView.numeroCriancas0a5}">selected="true"</c:if>>01</option>
+									<option value="2" <c:if test="${2 == reservasView.numeroCriancas0a5}">selected="true"</c:if>>02</option>
+									<option value="3" <c:if test="${3 == reservasView.numeroCriancas0a5}">selected="true"</c:if>>03</option>
+									<option value="4" <c:if test="${4 == reservasView.numeroCriancas0a5}">selected="true"</c:if>>04</option>
+                                    <option value="5" <c:if test="${5 == reservasView.numeroCriancas0a5}">selected="true"</c:if>>05</option>
+									<option value="6" <c:if test="${6 == reservasView.numeroCriancas0a5}">selected="true"</c:if>>06</option>
+									<option value="7" <c:if test="${7 == reservasView.numeroCriancas0a5}">selected="true"</c:if>>07</option>
+									<option value="8" <c:if test="${8 == reservasView.numeroCriancas0a5}">selected="true"</c:if>>08</option>
+									<option value="9" <c:if test="${9 == reservasView.numeroCriancas0a5}">selected="true"</c:if>>09</option>
+									<option value="10" <c:if test="${10 == reservasView.numeroCriancas0a5}">selected="true"</c:if>>10</option>
 								</select>
 							</div>
 					  </div> 
@@ -87,17 +87,17 @@
 							<div class="col-sm-6">
 								<select name="parametrosReserva.numeroCriancas6a16" style="font-size: 14px;">
 									<option value="">Nº de crianças (6-16)</option>
-									<option value="0" <c:if test="${0 == parametrosReserva.numeroCriancas6a16}">selected="true"</c:if>>0</option>
-									<option value="1" <c:if test="${1 == parametrosReserva.numeroCriancas6a16}">selected="true"</c:if>>01</option>
-									<option value="2" <c:if test="${2 == parametrosReserva.numeroCriancas6a16}">selected="true"</c:if>>02</option>
-									<option value="3" <c:if test="${3 == parametrosReserva.numeroCriancas6a16}">selected="true"</c:if>>03</option>
-									<option value="4" <c:if test="${4 == parametrosReserva.numeroCriancas6a16}">selected="true"</c:if>>04</option>
-                                    <option value="5" <c:if test="${5 == parametrosReserva.numeroCriancas6a16}">selected="true"</c:if>>05</option>
-									<option value="6" <c:if test="${6 == parametrosReserva.numeroCriancas6a16}">selected="true"</c:if>>06</option>
-									<option value="7" <c:if test="${7 == parametrosReserva.numeroCriancas6a16}">selected="true"</c:if>>07</option>
-									<option value="8" <c:if test="${8 == parametrosReserva.numeroCriancas6a16}">selected="true"</c:if>>08</option>
-									<option value="9" <c:if test="${9 == parametrosReserva.numeroCriancas6a16}">selected="true"</c:if>>09</option>
-									<option value="10" <c:if test="${10 == parametrosReserva.numeroCriancas6a16}">selected="true"</c:if>>10</option>
+									<option value="0" <c:if test="${0 == reservasView.numeroCriancas6a16}">selected="true"</c:if>>0</option>
+									<option value="1" <c:if test="${1 == reservasView.numeroCriancas6a16}">selected="true"</c:if>>01</option>
+									<option value="2" <c:if test="${2 == reservasView.numeroCriancas6a16}">selected="true"</c:if>>02</option>
+									<option value="3" <c:if test="${3 == reservasView.numeroCriancas6a16}">selected="true"</c:if>>03</option>
+									<option value="4" <c:if test="${4 == reservasView.numeroCriancas6a16}">selected="true"</c:if>>04</option>
+                                    <option value="5" <c:if test="${5 == reservasView.numeroCriancas6a16}">selected="true"</c:if>>05</option>
+									<option value="6" <c:if test="${6 == reservasView.numeroCriancas6a16}">selected="true"</c:if>>06</option>
+									<option value="7" <c:if test="${7 == reservasView.numeroCriancas6a16}">selected="true"</c:if>>07</option>
+									<option value="8" <c:if test="${8 == reservasView.numeroCriancas6a16}">selected="true"</c:if>>08</option>
+									<option value="9" <c:if test="${9 == reservasView.numeroCriancas6a16}">selected="true"</c:if>>09</option>
+									<option value="10" <c:if test="${10 == reservasView.numeroCriancas6a16}">selected="true"</c:if>>10</option>
 								</select>
 							</div>
 					  </div> 
@@ -106,17 +106,17 @@
 							<div class="col-sm-6">
 								<select name="parametrosReserva.numeroCriancas17a18" style="font-size: 14px;" >
 									<option value="">Nº de crianças (16-18)</option>
-									<option value="0" <c:if test="${0 == parametrosReserva.numeroCriancas17a18}">selected="true"</c:if>>0</option>
-									<option value="1" <c:if test="${1 == parametrosReserva.numeroCriancas17a18}">selected="true"</c:if>>01</option>
-									<option value="2" <c:if test="${2 == parametrosReserva.numeroCriancas17a18}">selected="true"</c:if>>02</option>
-									<option value="3" <c:if test="${3 == parametrosReserva.numeroCriancas17a18}">selected="true"</c:if>>03</option>
-									<option value="4" <c:if test="${4 == parametrosReserva.numeroCriancas17a18}">selected="true"</c:if>>04</option>
-                                    <option value="5" <c:if test="${5 == parametrosReserva.numeroCriancas17a18}">selected="true"</c:if>>05</option>
-									<option value="6" <c:if test="${6 == parametrosReserva.numeroCriancas17a18}">selected="true"</c:if>>06</option>
-									<option value="7" <c:if test="${7 == parametrosReserva.numeroCriancas17a18}">selected="true"</c:if>>07</option>
-									<option value="8" <c:if test="${8 == parametrosReserva.numeroCriancas17a18}">selected="true"</c:if>>08</option>
-									<option value="9" <c:if test="${9 == parametrosReserva.numeroCriancas17a18}">selected="true"</c:if>>09</option>
-									<option value="10" <c:if test="${10 == parametrosReserva.numeroCriancas17a18}">selected="true"</c:if>>10</option>
+									<option value="0" <c:if test="${0 == reservasView.numeroCriancas17a18}">selected="true"</c:if>>0</option>
+									<option value="1" <c:if test="${1 == reservasView.numeroCriancas17a18}">selected="true"</c:if>>01</option>
+									<option value="2" <c:if test="${2 == reservasView.numeroCriancas17a18}">selected="true"</c:if>>02</option>
+									<option value="3" <c:if test="${3 == reservasView.numeroCriancas17a18}">selected="true"</c:if>>03</option>
+									<option value="4" <c:if test="${4 == reservasView.numeroCriancas17a18}">selected="true"</c:if>>04</option>
+                                    <option value="5" <c:if test="${5 == reservasView.numeroCriancas17a18}">selected="true"</c:if>>05</option>
+									<option value="6" <c:if test="${6 == reservasView.numeroCriancas17a18}">selected="true"</c:if>>06</option>
+									<option value="7" <c:if test="${7 == reservasView.numeroCriancas17a18}">selected="true"</c:if>>07</option>
+									<option value="8" <c:if test="${8 == reservasView.numeroCriancas17a18}">selected="true"</c:if>>08</option>
+									<option value="9" <c:if test="${9 == reservasView.numeroCriancas17a18}">selected="true"</c:if>>09</option>
+									<option value="10" <c:if test="${10 == reservasView.numeroCriancas17a18}">selected="true"</c:if>>10</option>
 								</select>
 							</div>
 					  </div> 

@@ -1,1 +1,3 @@
 arrumar layout da tela de reserva
+
+ver porque o check box da Politica de Precos não esta funcionando

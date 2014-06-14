@@ -16,14 +16,11 @@ public class ReservaValidation {
 	
 	public Validator criarValidacoes(){
 		
-		if (reservaView.getIdCategoria() == null)
+		if (reservaView.getQuartos().isEmpty())
 			validator.add(new ValidationMessage("Quarto é obrigatório", "quarto"));
 		
-		if (reservaView.getNomeHospede() == null)
+		if (reservaView.getHospedeResponsavel() == null)
 			validator.add(new ValidationMessage("Nome é obrigatorio", "hospede"));
-		
-		if (reservaView.getSobrenomeHospede() == null)
-			validator.add(new ValidationMessage("Sobrenome é obrigatorio", "hospede"));
 		
 		if (reservaView.getChegada() == null)
 			validator.add(new ValidationMessage("Data de Chegada é obrigatória", "inicio"));

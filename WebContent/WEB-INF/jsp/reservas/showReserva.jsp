@@ -9,34 +9,75 @@
 <title>Reserva</title>
 </head>
 <body>
-  <c:forEach var="quarto" items="${reservasView.quartos}">
-	<div class="form-group">
-		<label class="control-label col-xs-2">Quarto:</label>
-		<div class="col-xs-10">
-			<input type="text" class="col-xs-10" value="${quarto.numero}" readonly="readonly" />
-		</div>
+  <div class="container">
+			<div class="header">
+				<ul class="nav nav-pills pull-right">
+					<li class="active"><a href="/">Limpar</a></li>
+				</ul>
+			</div>
+		<fieldset>
+	  	  <legend>Responsável pela Reserva</legend>
+		  <c:forEach var="quarto" items="${reservasView.quartos}">
+			<div class="form-group">
+				<label class="control-label col-xs-2">Quarto:</label>
+				<div class="col-xs-10">
+					<input type="text" class="col-xs-10" value="${quarto.numero}" readonly="readonly" />
+				</div>
+			</div>
+		  </c:forEach>
+		  <div class="form-group">
+				<label class="control-label col-xs-2">Adultos:</label>
+				<div class="col-xs-10">
+					<input type="text" class="col-xs-10" value="${reservasView.numeroAdultos}" readonly="readonly" />
+				</div>
+		  </div>
+		  <div class="form-group">
+				<label class="control-label col-xs-2">0 a 5 anos:</label>
+				<div class="col-xs-10">
+					<input type="text" class="col-xs-10" value="${reservasView.numeroCriancas0a5}" readonly="readonly" />
+				</div>
+		 </div>
+		 <div class="form-group">
+				<label class="control-label col-xs-2">6 a 16 anos:</label>
+				<div class="col-xs-10">
+					<input type="text" class="col-xs-10" value="${reservasView.numeroCriancas6a16}" readonly="readonly" />
+				</div>
+		 </div>
+		  <div class="form-group">
+				<label class="control-label col-xs-2">17 a 18 anos:</label>
+				<div class="col-xs-10">
+					<input type="text" class="col-xs-10" value="${reservasView.numeroCriancas17a18}" readonly="readonly" />
+				</div>
+		 </div>
+		 <div class="form-group">
+				<label class="control-label col-xs-2">Início:</label>
+				<div class="col-xs-10">
+					<input type="text" class="col-xs-10" value="<fmt:formatDate value='${reservasView.chegada}'/>" readonly="readonly" />
+				</div>
+		 </div>
+		 <div class="form-group">
+				<label class="control-label col-xs-2">Fim:</label>
+				<div class="col-xs-10">
+					<input type="text" class="col-xs-10" value="<fmt:formatDate value='${reservasView.saida}'/>" readonly="readonly" />
+				</div>
+		 </div>
+		 <div class="form-group">
+				<label class="control-label col-xs-2">Valor:</label>
+				<div class="col-xs-10">
+					<input type="text" class="col-xs-10" value="${reservasView.valorReserva}" readonly="readonly" />
+				</div>
+		 </div>
+		  <div class="nav-bar">
+			<div class="header">
+				<ul class="nav nav-pills pull-right">
+					<li class="active"><a href="<c:url value='/reservas/responsavelReserva'/>">Continuar</a></li>
+				</ul>
+				<ul class="nav nav-pills pull-right">
+					<li class="active"><a href="<c:url value='/reservas/reserva'/>">Procurar Mais Quartos</a></li>
+				</ul>
+			</div>
+		  </div>
+	 </fieldset>
 	</div>
-  </c:forEach>
-  <h3>Número de Adultos:&nbsp;${reservasView.numeroAdultos}</h3>
-  <h3>Número de Crianças de 0 a 5 anos:&nbsp;${reservasView.numeroCriancas0a5}</h3>
-  <h3>Número de Crianças de 6 a 16 anos:&nbsp;${reservasView.numeroCriancas6a16}</h3>
-  <h3>Número de Crianças de 17 e 18 anos:&nbsp;${reservasView.numeroCriacas17a18}</h3>
-  <h3>Início:&nbsp; <fmt:formatDate value='${reservasView.chegada}'/></h3>
-  <h3>Fim:&nbsp; <fmt:formatDate value='${reservasView.saida}'/></h3> 
-  <h3>Valor:&nbsp; ${reservasView.valorReserva}</h3>
-  <div class="nav-bar">
-  	<div class="navbar-header">
-		<button type="button" class="navbar-toggle"
-				data-toggle="collapse" data-target=".navbar-collapse">
-		</button>
-		<a class="navbar-brand" href="<c:url value='/reservas/reserva'/>">Procurar Mais Quartos</a>
-	</div>
-	<div class="navbar-header">
-		<button type="button" class="navbar-toggle"
-				data-toggle="collapse" data-target=".navbar-collapse">
-		</button>
-		<a class="navbar-brand" href="<c:url value='/reservas/hospedeReserva'/>">Continuar</a>
-	</div>
-  </div>
 </body>
 </html>

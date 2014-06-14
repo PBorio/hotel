@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import domain.Hospede;
 import domain.Quarto;
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.SessionScoped;
@@ -26,19 +27,9 @@ public class ReservasView {
 	
 	private Integer numeroAdultos;
 	
-	private String nomeHospede;
-	
-	private String sobrenomeHospede;
-	
-	private String emailHospede;
-	
-	private String cidadeHospede;
-	
-	private String telefoneHospede;
-	
-	private String celularHospede;
-	
 	private List<Quarto> quartos = new ArrayList<Quarto>();
+
+	private Hospede hospedeResponsavel;
 
 	public Long getIdCategoria() {
 		return idCategoria;
@@ -80,11 +71,11 @@ public class ReservasView {
 		this.numeroCriancas6a16 = numeroCriancas6a16;
 	}
 
-	public Integer getNumeroCriacas17a18() {
+	public Integer getNumeroCriancas17a18() {
 		return numeroCriacas17a18;
 	}
 
-	public void setNumeroCriacas17a18(Integer numeroCriacas17a18) {
+	public void setNumeroCriancas17a18(Integer numeroCriacas17a18) {
 		this.numeroCriacas17a18 = numeroCriacas17a18;
 	}
 
@@ -96,64 +87,39 @@ public class ReservasView {
 		this.numeroAdultos = numeroAdultos;
 	}
 
-	public String getNomeHospede() {
-		return nomeHospede;
-	}
-
-	public void setNomeHospede(String nomeHospede) {
-		this.nomeHospede = nomeHospede;
-	}
-
-	public String getSobrenomeHospede() {
-		return sobrenomeHospede;
-	}
-
-	public void setSobrenomeHospede(String sobrenomeHospede) {
-		this.sobrenomeHospede = sobrenomeHospede;
-	}
-
-	public String getEmailHospede() {
-		return emailHospede;
-	}
-
-	public void setEmailHospede(String emailHospede) {
-		this.emailHospede = emailHospede;
-	}
-
-	public String getCidadeHospede() {
-		return cidadeHospede;
-	}
-
-	public void setCidadeHospede(String cdiadeHospede) {
-		this.cidadeHospede = cdiadeHospede;
-	}
-
-	public String getTelefoneHospede() {
-		return telefoneHospede;
-	}
-
-	public void setTelefoneHospede(String telefoneHospede) {
-		this.telefoneHospede = telefoneHospede;
-	}
-
-	public String getCelularHospede() {
-		return celularHospede;
-	}
-
-	public void setCelularHospede(String celularHospede) {
-		this.celularHospede = celularHospede;
-	}
-
 	public List<Quarto> getQuartos() {
 		return quartos;
 	}
 
 	public void addQuarto(Quarto quarto) {
-		quartos.add(quarto);
+		if (!quartos.contains(quarto))
+			quartos.add(quarto);
 	}
 	
 	public Double getValorReserva(){
 		return 0.0;
+	}
+
+	public void setHospedeResponsavel(Hospede hospede) {
+		this.hospedeResponsavel = hospede;
+	}
+
+	public Hospede getHospedeResponsavel() {
+		return this.hospedeResponsavel;
+	}
+
+	public String getEmailHospede() {
+		if (this.hospedeResponsavel == null)
+			return null;
+		
+		return this.hospedeResponsavel.getEmail();
+	}
+
+	public String getTelefoneHospede() {
+		if (this.hospedeResponsavel == null)
+			return null;
+		
+		return this.hospedeResponsavel.getTelefone();
 	}
 
 }

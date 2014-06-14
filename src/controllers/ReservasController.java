@@ -20,7 +20,6 @@ import controllers.validators.ReservaValidation;
 import controllers.views.reservas.InformativoDeQuartos;
 import controllers.views.reservas.ParametrosReserva;
 import controllers.views.reservas.ReservasView;
-import domain.Categoria;
 import domain.Hospede;
 import domain.PoliticaDePrecos;
 import domain.Quarto;
@@ -84,9 +83,29 @@ public class ReservasController {
 		
 	}
 
-	public void confirmar(){
+	public void confirmar(Hospede hospede){
 		
 		try{
+			if (hospede.getEmail() == null)
+				throw new HotelException("Email não informado");
+			
+			Hospede hospedeExistente = hospedeRepositorio.buscaPorEmail(hospede.getEmail());
+			
+			if (hospedeExistente == null){
+				hospedeExistente = new Hospede();
+				hospedeExistente.setNome(hospede.getNome());
+				hospedeExistente.setSobrenome(hospede.getSobrenome());
+				hospedeExistente.setCidade(hospede.getCidade());
+				hospedeExistente.setEmail(hospede.getEmail());
+				hospedeExistente.setTelefone(hospede.getTelefone());
+				hospedeExistente.setCelular(hospede.getCelular());
+				hospedeRepositorio.salva(hospedeExistente);
+			}else{
+				hospedeRepositorio.atualiza(hospedeExistente);
+			}
+			
+			reservasView.setHospedeResponsavel(hospedeExistente);
+			
 			ReservaValidation validation = new ReservaValidation(validator, reservasView);
 			validator = validation.criarValidacoes();
 			
@@ -96,40 +115,21 @@ public class ReservasController {
 			    validator.onErrorUsePageOf(this).reserva();
 			}
 			
-			Categoria categoria = categoriaRepositorio.buscaPorId(reservasView.getIdCategoria());
-			List<Quarto> quartos = quartoRepositorio.buscaPorCategoria(categoria);
-			
 			Reserva reserva = new Reserva();
 			reserva.setInicio(new DateTime(reservasView.getChegada().getTime()));
 			reserva.setFim(new DateTime(reservasView.getSaida().getTime()));
 			reserva.setNumeroAdultos(reservasView.getNumeroAdultos());
 			reserva.setNumeroCriancas0a5(reservasView.getNumeroCriancas0a5());
 			reserva.setNumeroCriancas6a16(reservasView.getNumeroCriancas6a16());
-			reserva.setNumeroCriancas17a18(reservasView.getNumeroCriacas17a18());
+			reserva.setNumeroCriancas17a18(reservasView.getNumeroCriancas17a18());
 			
-			Hospede hospede = hospedeRepositorio.buscaPorEmail(reservasView.getEmailHospede());
-				
-			if (hospede == null){
-				hospede = new Hospede();
-				hospede.setNome(reservasView.getNomeHospede()+" "+reservasView.getSobrenomeHospede());
-				hospede.setCidade(reservasView.getCidadeHospede());
-				hospede.setEmail(reservasView.getEmailHospede());
-				hospede.setTelefone(reservasView.getTelefoneHospede());
-				hospede.setCelular(reservasView.getCelularHospede());
-				hospedeRepositorio.salva(hospede);
-			}else{
-				hospedeRepositorio.atualiza(hospede);
+			reserva.setHospede(hospedeExistente);
+			
+			//TODO Verificar disponibilidade
+			for (Quarto quarto : reservasView.getQuartos()){
+				quarto = quartoRepositorio.buscaPorId(quarto.getId());
+				reserva.addQuarto(quarto);
 			}
-			
-			reserva.setHospede(hospede);
-			
-			ServicoDeReserva servicoReserva = new ServicoDeReserva(quartos);
-			Quarto disponivel = servicoReserva.quartoDisponivelParaAReserva(reserva);
-			
-			if (disponivel == null)
-				throw new HotelException("Não há quarto disponível para esta reserva");
-			
-			reserva.addQuarto(disponivel);
 			
 			CalculoDeValorDaDiariaService servicoPrecos = new CalculoDeValorDaDiariaService(politicaPrecoRepositorio.buscaTodos());
 			servicoPrecos.calcularEInformarValorNaReserva(reserva);
@@ -186,7 +186,7 @@ public class ReservasController {
 		reservasView.setNumeroAdultos(parametrosReserva.getNumeroAdultos());
 		reservasView.setNumeroCriancas0a5(parametrosReserva.getNumeroCriancas0a5());
 		reservasView.setNumeroCriancas6a16(parametrosReserva.getNumeroCriancas6a16());
-		reservasView.setNumeroCriacas17a18(parametrosReserva.getNumeroCriancas17a18());
+		reservasView.setNumeroCriancas17a18(parametrosReserva.getNumeroCriancas17a18());
 		
 		Reserva reservaComTodosOsQuartos = new Reserva();
 		reservaComTodosOsQuartos.setInicio(new DateTime(reservasView.getChegada().getTime()));
@@ -204,4 +204,6 @@ public class ReservasController {
 		result.include("quartoList", quartosParaReserva);
 		result.of(this).reserva();
 	}
+	
+	public void responsavelReserva(){}
 }
