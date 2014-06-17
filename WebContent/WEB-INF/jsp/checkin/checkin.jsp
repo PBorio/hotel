@@ -52,9 +52,15 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-xs-2" >Hóspede:</label>
+						<label class="control-label col-xs-2" >Nome:</label>
 						<div class="col-xs-10">
 							<input type="text" class="col-xs-10" name="hospede.nome" id="hospede.nome" value="${hospede.nome}" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-xs-2" >Sobrenome:</label>
+						<div class="col-xs-10">
+							<input type="text" class="col-xs-10" name="hospede.sobrenome" id="hospede.sobrenome" value="${hospede.sobrenome}" />
 						</div>
 					</div>
 					<div class="form-group">

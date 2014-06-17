@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -55,7 +56,7 @@ public class Reserva implements CalculavelPorPeriodo {
 	@JoinColumn(name="hospede_id")
 	private Hospede hospede;
 
-	@OneToMany(mappedBy="reserva")
+	@OneToMany(mappedBy="reserva", cascade=CascadeType.ALL)
 	private Set<QuartoDaReserva> quartosDaReserva = new HashSet<QuartoDaReserva>();
 	
 	@Column(name="checkin")

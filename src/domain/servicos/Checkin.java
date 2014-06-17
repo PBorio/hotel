@@ -1,8 +1,5 @@
 package domain.servicos;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.joda.time.DateTime;
 
 import domain.Estadia;
@@ -18,8 +15,9 @@ public class Checkin {
 	private DateTime dataCheckin;
 	private Double valorDiaria;
 
-	private Checkin(Reserva reserva) {
+	private Checkin(Reserva reserva, Quarto quarto) {
 		this.reserva = reserva;
+		this.quarto = quarto;
 	}
 
 	private Checkin(Quarto quarto, Hospede hospede, DateTime dataCheckin, Double valorDiaria) {
@@ -29,19 +27,14 @@ public class Checkin {
 		this.valorDiaria = valorDiaria;
 	}
 
-	public static Checkin checkinAPartirDeUmaReserva(Reserva reserva) {
-		return new Checkin(reserva);
+	public static Checkin checkinAPartirDeUmaReserva(Reserva reserva, Quarto quarto) {
+		return new Checkin(reserva, quarto);
 	}
 
-	public List<Estadia> iniciarEstadiasAPartirDeUmaReserva() {
-		
-		List<Estadia> estadias = new ArrayList<Estadia>();
-		for (Quarto quarto : reserva.getQuartos()){
-			Estadia estadia = new Estadia();
-			estadia.aPartirDaReservaEQuarto(this.reserva, quarto);
-			estadias.add(estadia);
-		}
-		return estadias;
+	public Estadia iniciarEstadiaAPartirDeUmaReserva() {
+		Estadia estadia = new Estadia();
+		estadia.aPartirDaReservaEQuarto(this.reserva, quarto);
+		return estadia;
 	}
 	
 	public Estadia iniciarEstadiaSemReserva() {

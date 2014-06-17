@@ -95,12 +95,17 @@ public class ReservasController {
 				hospedeExistente = new Hospede();
 				hospedeExistente.setNome(hospede.getNome());
 				hospedeExistente.setSobrenome(hospede.getSobrenome());
-				hospedeExistente.setCidade(hospede.getCidade());
 				hospedeExistente.setEmail(hospede.getEmail());
+				hospedeExistente.setCidade(hospede.getCidade());
 				hospedeExistente.setTelefone(hospede.getTelefone());
 				hospedeExistente.setCelular(hospede.getCelular());
 				hospedeRepositorio.salva(hospedeExistente);
 			}else{
+				hospedeExistente.setNome(hospede.getNome());
+				hospedeExistente.setSobrenome(hospede.getSobrenome());
+				hospedeExistente.setCidade(hospede.getCidade());
+				hospedeExistente.setTelefone(hospede.getTelefone());
+				hospedeExistente.setCelular(hospede.getCelular());
 				hospedeRepositorio.atualiza(hospedeExistente);
 			}
 			

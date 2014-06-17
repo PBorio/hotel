@@ -21,7 +21,7 @@
 			<div class="header">
 				<ul class="nav nav-pills pull-right">
 					<li class="active"><a href="<c:url value='/categorias/novo'/>">Nova Categoria</a></li>
-					<li class="active"><a href="/">Home</a></li>
+					<li class="active"><a href="<c:url value='/'/>">Home</a></li>
 				</ul>
 				<h3 class="text-muted">Categorias</h3>
 			</div>

@@ -1,7 +1,5 @@
 package domain.servicos;
 
-import java.util.List;
-
 import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Test;
@@ -16,13 +14,16 @@ import domain.servicos.helpers.ParserDeStringParaData;
 public class CheckinTest {
 	
 	@Test
-	public void oCheckinVaiCriarEstadiasComBaseNosDadosDaReserva(){
+	public void oCheckinVaiCriarUmaEstadiaParaUmaReservaEUmQuarto(){
 		Reserva reserva = new FakeReserva().iniciandoEm("10/03/2014").terminandoEm("15/03/2014").noQuarto("1").build();
+		
+		Quarto quarto = reserva.getQuartos().get(0);
+		
 		reserva.setHospede(new Hospede());
 		
-		Checkin checkin = Checkin.checkinAPartirDeUmaReserva(reserva);
-		List<Estadia> estadias = checkin.iniciarEstadiasAPartirDeUmaReserva();
-		Assert.assertNotNull(estadias.get(0).getHospedes().get(0));
+		Checkin checkin = Checkin.checkinAPartirDeUmaReserva(reserva, quarto);
+		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();
+		Assert.assertNotNull(estadia);
 	}
 	
 	@Test
@@ -33,9 +34,11 @@ public class CheckinTest {
 		Reserva reserva = new FakeReserva().iniciandoEm("10/03/2014").terminandoEm("15/03/2014").noQuarto("1").build();
 		reserva.setHospede(joao);
 		
-		Checkin checkin = Checkin.checkinAPartirDeUmaReserva(reserva);
-		List<Estadia> estadias = checkin.iniciarEstadiasAPartirDeUmaReserva();
-		Assert.assertEquals("Joao", estadias.get(0).getHospedes().get(0).getNome());
+		Quarto quarto = reserva.getQuartos().get(0);
+		
+		Checkin checkin = Checkin.checkinAPartirDeUmaReserva(reserva, quarto);
+		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();
+		Assert.assertEquals("Joao", estadia.getHospedes().get(0).getNome());
 	}
 	
 	@Test
@@ -47,9 +50,9 @@ public class CheckinTest {
 		Reserva reserva = new FakeReserva().iniciandoEm("10/03/2014").terminandoEm("15/03/2014").paraOQuarto(_101).build();
 		reserva.setHospede(new Hospede());
 		
-		Checkin checkin = Checkin.checkinAPartirDeUmaReserva(reserva);
-		List<Estadia> estadias = checkin.iniciarEstadiasAPartirDeUmaReserva();
-		Assert.assertEquals("101", estadias.get(0).getQuarto().getNumero());
+		Checkin checkin = Checkin.checkinAPartirDeUmaReserva(reserva, _101);
+		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();
+		Assert.assertEquals("101", estadia.getQuarto().getNumero());
 		
 		
 	}
@@ -62,9 +65,11 @@ public class CheckinTest {
 		reserva.setHospede(new Hospede());
 		reserva.setValorDiaria(10.0);
 		
-		Checkin checkin = Checkin.checkinAPartirDeUmaReserva(reserva);
-		List<Estadia> estadias = checkin.iniciarEstadiasAPartirDeUmaReserva();
-		Assert.assertEquals((Double)10.0, estadias.get(0).getValorDiaria());
+		Quarto quarto = reserva.getQuartos().get(0);
+		
+		Checkin checkin = Checkin.checkinAPartirDeUmaReserva(reserva, quarto);
+		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();
+		Assert.assertEquals((Double)10.0, estadia.getValorDiaria());
 		
 	}
 	

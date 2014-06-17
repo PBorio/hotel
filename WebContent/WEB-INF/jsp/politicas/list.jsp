@@ -22,7 +22,7 @@
 			<div class="header">
 				<ul class="nav nav-pills pull-right">
 					<li class="active"><a href="<c:url value='/politicas/novo'/>">Nova Política</a></li>
-					<li class="active"><a href="/">Home</a></li>
+					<li class="active"><a href="<c:url value='/'/>">Home</a></li>
 				</ul>
 				<h3 class="text-muted">Políticas de Preço</h3>
 			</div>
