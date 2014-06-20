@@ -92,29 +92,30 @@
        <div class="reservas-box02">
             <h3>Escolha um quarto para sua Reserva</h3>
             <fieldset>
-            	<c:forEach var="quarto" items="${quartoList}">
-           	
-            	<div class="col-lg-12 divreserva">
-               	   <div class="col-lg-4"><img alt="${quarto.numero}" src="${linkTo[QuartosController].foto[quarto.id] }"></div>
-               	   <div class="col-lg-8">
-               	      <div class="col-md-4">${quarto.numero}</div>
-               	      <div class="col-md-8">${quarto.descricao}</div> 
-               	      <div class="col-md-4">Valor:</div>
-               	      <div class="col-md-8">${quarto.valorDaDiaria}</div>
-               	      <div class="col-md-12">
-	               	      <form class="form-horizontal" action='<c:url value="/reservas/reservar"/>' method="post">
-	               	        <input type="hidden" name="reservasView.chegada" value="<fmt:formatDate value='${quarto.inicio}'/>" />
-	               	        <input type="hidden" name="reservasView.saida" value="<fmt:formatDate value='${quarto.fim}'/>" />
-	               	        <input type="hidden" name="quarto.id" value="${quarto.id}" />
-	               	        <p>
-								<input type="submit" name="Reservar" value="Enviar"/>
-							</p>
-						  </form>
-					</div>
-               	   </div>
-               	   <div class='clear'></div>
-               </div>
-            </c:forEach>
+            	<div class="places">
+            		<c:forEach var="quarto" items="${quartoList}">
+	           		<article>
+						<h2>${quarto.numero}</h2>
+						<img alt="${quarto.numero}" src="${linkTo[QuartosController].foto[quarto.id] }">
+						<div class='clear'></div>
+						<p>
+							${quarto.descricao}
+						</p>
+						<p>
+						  Valor:${quarto.valorDaDiaria}
+						</p>
+               	      <form class="form-horizontal" action='<c:url value="/reservas/reservar"/>' method="post">
+               	        <input type="hidden" name="reservasView.chegada" value="<fmt:formatDate value='${quarto.inicio}'/>" />
+               	        <input type="hidden" name="reservasView.saida" value="<fmt:formatDate value='${quarto.fim}'/>" />
+               	        <input type="hidden" name="quarto.id" value="${quarto.id}" />
+               	        <p>
+							<input type="submit" name="Reservar" value="Enviar"/>
+						</p>
+					  </form>
+						<div class='clear'></div>
+					</article>
+            	</c:forEach>
+			</div>
             </fieldset>
             <div class='clear'></div>
        </div>

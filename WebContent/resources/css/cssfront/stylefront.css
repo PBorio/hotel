@@ -295,6 +295,7 @@ ul#acomodacoes ul.icons li{ background:none; display:inline; float:left; height:
 
 .reservas-box02{ margin:0 0 0 -20px; padding:25px 0 20px 30px; position:relative; width:880px;}
 .reservas-box02 h3{background:url(../../imagens/imagensfront/reservas-02.png) 0 0 no-repeat;}
+.reservas-box02 h2{font-family:'FelipeRegular'; font-size:16px; color:#0f4e8c}
 
 .reservas-box03{ background:#c8e3fe; margin:0 0 0 -20px; padding:25px 0 20px 30px; position:relative; width:880px;}
 .reservas-box03 h3{background:url(../../imagens/imagensfront/reservas-03.png) 0 0 no-repeat;}
@@ -311,7 +312,12 @@ ul#acomodacoes ul.icons li{ background:none; display:inline; float:left; height:
 
 .reservas-box03{ background:#c8e3fe; margin:0 0 0 -20px; padding:25px 0 20px 30px; position:relative; width:880px;}
 .reservas-box03 h3{background:url(../../imagens/imagensfront/reservas-03.png) 0 0 no-repeat;}
+.reservas-box03 legend{font-family:'FelipeRegular'; font-size:14px; color:#0f4e8c}
 
 .reservas-box04{ margin:0 0 0 -20px; padding:25px 0 20px 30px; position:relative; width:880px;}
 .reservas-box04 h3{background:url(../../imagens/imagensfront/reservas-04.png) 0 0 no-repeat;}
-.reservas-box04 span{color:#0f4e8c; display:inline-block; font-size:11px;}
+.reservas-box04 span{color:#0f4e8c; display:inline-block; font-size:11px; }
+
+
+article h2 {border-bottom: 1px dashed #0f4e8c; margin: 0;}
+
