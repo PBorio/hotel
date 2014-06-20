@@ -12,52 +12,80 @@
   <div class="reservas-box03">
         <h3>Informações da Reserva</h3>
 		<fieldset>
-		  <c:forEach var="quarto" items="${reservasView.quartos}">
-		  	<p>
-		  		<label>Quarto:</label>
-				<input type="text" value="${quarto.numero}" readonly="readonly" />
-			</p>
-		  </c:forEach>
-		  <p>
-				<label>Adultos:</label>
-				<input type="text" value="${reservasView.numeroAdultos}" readonly="readonly" />
-		  </p>
-		  <p>
-				<label>0 a 5 anos:</label>
-				<input type="text" value="${reservasView.numeroCriancas0a5}" readonly="readonly" />
-		  </p>
-		  <p>
-				<label>6 a 16 anos:</label>
-				<input type="text" value="${reservasView.numeroCriancas6a16}" readonly="readonly" />
-		  </p>
-		  <p>
-				<label>17 a 18 anos:</label>
-				<input type="text" class="col-xs-10" value="${reservasView.numeroCriancas17a18}" readonly="readonly" />
-		  </p>
-		  <p>
+		  <fieldset>
+		  	  <legend>Quartos</legend>
+			  <c:forEach var="quarto" items="${reservasView.quartos}">
+			  	<p>
+					<input type="text" value="${quarto.numero}" readonly="readonly" />
+				</p>
+			  </c:forEach>
+		  </fieldset>
+		   <p class="half">
 				<label>Início:</label>
 				<input type="text" value="<fmt:formatDate value='${reservasView.chegada}'/>" readonly="readonly" />
 		  </p>
-		  <p>
+		  <p class="half">
 				<label>Fim:</label>
 				<input type="text" value="<fmt:formatDate value='${reservasView.saida}'/>" readonly="readonly" />
+		  </p>
+		  <p class="half">
+				<label>Adultos:</label>
+				<input type="text" value="${reservasView.numeroAdultos}" readonly="readonly" />
+		  </p>
+		  <p class="half">
+				<label>0 a 5 anos:</label>
+				<input type="text" value="${reservasView.numeroCriancas0a5}" readonly="readonly" />
+		  </p>
+		  <p class="half">
+				<label>6 a 16 anos:</label>
+				<input type="text" value="${reservasView.numeroCriancas6a16}" readonly="readonly" />
+		  </p>
+		  <p class="half">
+				<label>17 a 18 anos:</label>
+				<input type="text" class="col-xs-10" value="${reservasView.numeroCriancas17a18}" readonly="readonly" />
 		  </p>
 		  <p>
 				<label>Valor:</label>
 				<input type="text" class="col-xs-10" value="${reservasView.valorReserva}" readonly="readonly" />
 		  </p>
-		  <div class="nav-bar">
+		  <fieldset>
+		  <legend>Informações do Responsável</legend>
+			  <form class="form-horizontal" action='<c:url value="/reservas/confirmar"/>' method="post">
+		  	   <input type="hidden" name="hospede.id" value="${hospede.id}" />
+			        <p>
+			        	<input id="nome" placeholder="Nome" type="text" name="hospede.nome" value="${hospede.nome}" />
+			        </p>
+			        <p>
+			        	<input id="nome" type="text" placeholder="Sobrenome" name="hospede.sobrenome" value="${hospede.sobrenome}" />
+			        </p>
+			         <p>
+			        	<input id="email" type="text" placeholder="Email" name="hospede.email" value="${hospede.email}" />
+			        </p>
+			        <p>
+			        	<input id="cidade" type="text" placeholder="Cidade" name="hospede.cidade" value="${hospede.cidade}" />
+			        </p>
+			        <p>
+			        	<input id="telefone" type="text" placeholder="Telefone" name="hospede.telefone" value="${hospede.telefone}" />
+			        </p>
+			        <p>
+			        	<input id="celular" type="text" placeholder="Celular" name="hospede.celular" value="${hospede.celular}" />
+			        </p>
+			        <p>
+			        	<input type="submit" name="Salvar" value="Salvar"/>
+			        </p>
+		        <div class="clear"></div>
+			 </form>
+		 </fieldset>
+	 </fieldset>
+	  <div class="clear"></div>
+	</div>
+			  <div class="nav-bar">
 			<div class="header">
-				<ul class="nav nav-pills pull-right">
-					<li class="active"><a href="<c:url value='/reservas/responsavelReserva'/>">Continuar</a></li>
-				</ul>
 				<ul class="nav nav-pills pull-right">
 					<li class="active"><a href="<c:url value='/reservas/reserva'/>">Procurar Mais Quartos</a></li>
 				</ul>
 			</div>
 		  </div>
-	  </fieldset>
-	  <div class="clear"></div>
-	</div>
+	
 </body>
 </html>

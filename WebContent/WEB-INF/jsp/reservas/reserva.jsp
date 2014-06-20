@@ -25,7 +25,7 @@
 					<option value="2" <c:if test="${2 == reservasView.numeroAdultos}">selected="true"</c:if>>02</option>
 					<option value="3" <c:if test="${3 == reservasView.numeroAdultos}">selected="true"</c:if>>03</option>
 					<option value="4" <c:if test="${4 == reservasView.numeroAdultos}">selected="true"</c:if>>04</option>
-                                <option value="5" <c:if test="${5 == reservasView.numeroAdultos}">selected="true"</c:if>>05</option>
+                    <option value="5" <c:if test="${5 == reservasView.numeroAdultos}">selected="true"</c:if>>05</option>
 					<option value="6" <c:if test="${6 == reservasView.numeroAdultos}">selected="true"</c:if>>06</option>
 					<option value="7" <c:if test="${7 == reservasView.numeroAdultos}">selected="true"</c:if>>07</option>
 					<option value="8" <c:if test="${8 == reservasView.numeroAdultos}">selected="true"</c:if>>08</option>
