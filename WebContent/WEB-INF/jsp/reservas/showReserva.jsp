@@ -9,64 +9,43 @@
 <title>Reserva</title>
 </head>
 <body>
-  <div class="container">
-			<div class="header">
-				<ul class="nav nav-pills pull-right">
-					<li class="active"><a href="/">Limpar</a></li>
-				</ul>
-			</div>
+  <div class="reservas-box03">
+        <h3>Informações da Reserva</h3>
 		<fieldset>
-	  	  <legend>Responsável pela Reserva</legend>
 		  <c:forEach var="quarto" items="${reservasView.quartos}">
-			<div class="form-group">
-				<label class="control-label col-xs-2">Quarto:</label>
-				<div class="col-xs-10">
-					<input type="text" class="col-xs-10" value="${quarto.numero}" readonly="readonly" />
-				</div>
-			</div>
+		  	<p>
+		  		<label>Quarto:</label>
+				<input type="text" value="${quarto.numero}" readonly="readonly" />
+			</p>
 		  </c:forEach>
-		  <div class="form-group">
-				<label class="control-label col-xs-2">Adultos:</label>
-				<div class="col-xs-10">
-					<input type="text" class="col-xs-10" value="${reservasView.numeroAdultos}" readonly="readonly" />
-				</div>
-		  </div>
-		  <div class="form-group">
-				<label class="control-label col-xs-2">0 a 5 anos:</label>
-				<div class="col-xs-10">
-					<input type="text" class="col-xs-10" value="${reservasView.numeroCriancas0a5}" readonly="readonly" />
-				</div>
-		 </div>
-		 <div class="form-group">
-				<label class="control-label col-xs-2">6 a 16 anos:</label>
-				<div class="col-xs-10">
-					<input type="text" class="col-xs-10" value="${reservasView.numeroCriancas6a16}" readonly="readonly" />
-				</div>
-		 </div>
-		  <div class="form-group">
-				<label class="control-label col-xs-2">17 a 18 anos:</label>
-				<div class="col-xs-10">
-					<input type="text" class="col-xs-10" value="${reservasView.numeroCriancas17a18}" readonly="readonly" />
-				</div>
-		 </div>
-		 <div class="form-group">
-				<label class="control-label col-xs-2">Início:</label>
-				<div class="col-xs-10">
-					<input type="text" class="col-xs-10" value="<fmt:formatDate value='${reservasView.chegada}'/>" readonly="readonly" />
-				</div>
-		 </div>
-		 <div class="form-group">
-				<label class="control-label col-xs-2">Fim:</label>
-				<div class="col-xs-10">
-					<input type="text" class="col-xs-10" value="<fmt:formatDate value='${reservasView.saida}'/>" readonly="readonly" />
-				</div>
-		 </div>
-		 <div class="form-group">
-				<label class="control-label col-xs-2">Valor:</label>
-				<div class="col-xs-10">
-					<input type="text" class="col-xs-10" value="${reservasView.valorReserva}" readonly="readonly" />
-				</div>
-		 </div>
+		  <p>
+				<label>Adultos:</label>
+				<input type="text" value="${reservasView.numeroAdultos}" readonly="readonly" />
+		  </p>
+		  <p>
+				<label>0 a 5 anos:</label>
+				<input type="text" value="${reservasView.numeroCriancas0a5}" readonly="readonly" />
+		  </p>
+		  <p>
+				<label>6 a 16 anos:</label>
+				<input type="text" value="${reservasView.numeroCriancas6a16}" readonly="readonly" />
+		  </p>
+		  <p>
+				<label>17 a 18 anos:</label>
+				<input type="text" class="col-xs-10" value="${reservasView.numeroCriancas17a18}" readonly="readonly" />
+		  </p>
+		  <p>
+				<label>Início:</label>
+				<input type="text" value="<fmt:formatDate value='${reservasView.chegada}'/>" readonly="readonly" />
+		  </p>
+		  <p>
+				<label>Fim:</label>
+				<input type="text" value="<fmt:formatDate value='${reservasView.saida}'/>" readonly="readonly" />
+		  </p>
+		  <p>
+				<label>Valor:</label>
+				<input type="text" class="col-xs-10" value="${reservasView.valorReserva}" readonly="readonly" />
+		  </p>
 		  <div class="nav-bar">
 			<div class="header">
 				<ul class="nav nav-pills pull-right">
@@ -77,7 +56,8 @@
 				</ul>
 			</div>
 		  </div>
-	 </fieldset>
+	  </fieldset>
+	  <div class="clear"></div>
 	</div>
 </body>
 </html>

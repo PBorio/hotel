@@ -33,9 +33,6 @@
 				</ul>
 				<div class="nav navbar-nav navbar-right">
 					<div class="panel panel-default">
-						<c:if test="${not empty reservasView}">
-							${reservasView}
-						</c:if>
 					</div>
 				</div>
 			</div>

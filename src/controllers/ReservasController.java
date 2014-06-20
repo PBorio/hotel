@@ -6,7 +6,6 @@ import java.util.List;
 import org.joda.time.DateTime;
 
 import repositorios.CategoriaRepositorio;
-import repositorios.HospedeRepositorio;
 import repositorios.PoliticaPrecoRepositorio;
 import repositorios.QuartoRepositorio;
 import repositorios.ReservaRepositorio;
@@ -30,6 +29,7 @@ import domain.servicos.InformativoService;
 import domain.servicos.ServicoDeReserva;
 import domain.servicos.StatusDeReservasNoDia;
 import domain.servicos.helpers.Periodo;
+import domain.servicos.interfaces.HospedeService;
 
 @Resource
 public class ReservasController {
@@ -37,16 +37,16 @@ public class ReservasController {
 	private CategoriaRepositorio categoriaRepositorio;
 	private Result result;
 	private QuartoRepositorio quartoRepositorio;
-	private HospedeRepositorio hospedeRepositorio;
 	private ReservaRepositorio reservaRepositorio;
 	private PoliticaPrecoRepositorio politicaPrecoRepositorio;
 	private Validator validator;
 	private ReservasView reservasView;
+	private HospedeService hospedeService;
 
 	public ReservasController(Result result, 
 			                  CategoriaRepositorio categoriaRepositorio, 
 			                  QuartoRepositorio quartoRepositorio, 
-			                  HospedeRepositorio hospedeRepositorio,
+			                  HospedeService hospedeService,
 			                  ReservaRepositorio reservaRepositorio,
 			                  PoliticaPrecoRepositorio politicaPrecoRepositorio,
 			                  Validator validator,
@@ -54,7 +54,7 @@ public class ReservasController {
 		this.result = result;
 		this.categoriaRepositorio = categoriaRepositorio;
 		this.quartoRepositorio = quartoRepositorio;
-		this.hospedeRepositorio = hospedeRepositorio;
+		this.hospedeService = hospedeService;
 		this.reservaRepositorio = reservaRepositorio;
 		this.politicaPrecoRepositorio = politicaPrecoRepositorio;
 		this.validator = validator;
@@ -86,28 +86,8 @@ public class ReservasController {
 	public void confirmar(Hospede hospede){
 		
 		try{
-			if (hospede.getEmail() == null)
-				throw new HotelException("Email não informado");
 			
-			Hospede hospedeExistente = hospedeRepositorio.buscaPorEmail(hospede.getEmail());
-			
-			if (hospedeExistente == null){
-				hospedeExistente = new Hospede();
-				hospedeExistente.setNome(hospede.getNome());
-				hospedeExistente.setSobrenome(hospede.getSobrenome());
-				hospedeExistente.setEmail(hospede.getEmail());
-				hospedeExistente.setCidade(hospede.getCidade());
-				hospedeExistente.setTelefone(hospede.getTelefone());
-				hospedeExistente.setCelular(hospede.getCelular());
-				hospedeRepositorio.salva(hospedeExistente);
-			}else{
-				hospedeExistente.setNome(hospede.getNome());
-				hospedeExistente.setSobrenome(hospede.getSobrenome());
-				hospedeExistente.setCidade(hospede.getCidade());
-				hospedeExistente.setTelefone(hospede.getTelefone());
-				hospedeExistente.setCelular(hospede.getCelular());
-				hospedeRepositorio.atualiza(hospedeExistente);
-			}
+			Hospede hospedeExistente = hospedeService.buscarESalvarOuAtualizar(hospede);
 			
 			reservasView.setHospedeResponsavel(hospedeExistente);
 			

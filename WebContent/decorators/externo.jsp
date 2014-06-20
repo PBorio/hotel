@@ -1,12 +1,11 @@
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator"  prefix="decorator" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-  <link rel="stylesheet" href="<c:url value='/resources/css/reservados.css'/>" type="text/css" media="screen" />
-  <link rel="stylesheet" href="<c:url value='/resources/css/style.css'/>" type="text/css" media="screen" />
+  <link rel="stylesheet" href="<c:url value='/resources/css/cssfront/stylefront.css'/>" type="text/css" media="screen" />
+    <link rel="stylesheet" href="<c:url value='/resources/css/cssfront/reset.css'/>" type="text/css" media="screen" />
   <script type="text/javascript" src="<c:url value='/resources/scripts/jquery-1.7.1.min.js'/>"></script>    
  <script type="text/javascript">                                         
    jQuery(document).ready(function() {
@@ -39,22 +38,14 @@
 				<li><a href="<c:url value='/reservas/consulta'/>">Consulta</a></li>
 			</ul>
 		</nav>
-		 <nav>
-	  <ul>
-		<li><a href="<c:url value='/quartos/list'/>" id="menu-quarto">Quartos</a></li>
-		<li><a href="<c:url value='/categorias/list'/>" id="menu-cat">Categorias</a></li>
-		<li><a href="<c:url value='/reservas/reserva'/>" id="menu-reservas">Reservas</a></li>
-		<li><a href="<c:url value='/politicas/list'/>" id="menu-preco">Preços</a></li>
-		<li><a href="<c:url value='/reservas/consulta'/>" id="menu-consulta">Consultas</a></li>
-	</ul>
-	</nav>
 		<div class="clear"></div>
 	</header>
 	<section class="inner">
-		<div class="content-inner content-form">
-		  <decorator:body/>
-		</div>
+		<div class="content-inner content-reservas">
+			<decorator:body/>
+		 </div>
 	</section>
+	 <div class='clear'></div>
 </div>
 <div class="footer-container">
 	<footer>
@@ -77,19 +68,19 @@
 			<dt>Siga, curta e compartilhe:</dt>
 			<dd>
 				<ul class="social-media">
-					<li><a href="http://www.pousadapordosol.com.br/blog"><img src="<c:url value='/resources/imagens/icon-blogger.png'/>" alt="Blog" /></a></li>
+					<li><a href="http://www.pousadapordosol.com.br/blog"><img src="<c:url value='/resources/imagens/imagensfront/icon-blogger.png'/>" alt="Blog" /></a></li>
 
-					<li><a href="http://www.facebook.com/pousadapds"><img src="<c:url value='/resources/imagens/icon-fb.png'/>" alt="Facebook" /></a></li>
+					<li><a href="http://www.facebook.com/pousadapds"><img src="<c:url value='/resources/imagens/imagensfront/icon-fb.png'/>" alt="Facebook" /></a></li>
 					
-					<li><a href="http://www.youtube.com/user/PorDoSolPousada"><img src="<c:url value='/resources/imagens/icon-yt.png'/>" alt="Youtube" /></a></li>
+					<li><a href="http://www.youtube.com/user/PorDoSolPousada"><img src="<c:url value='/resources/imagens/imagensfront/icon-yt.png'/>" alt="Youtube" /></a></li>
 					
-					<li><a href="mailto:ilhapordosol@gmail.com"><img src="<c:url value='/resources/imagens/icon-mail.png'/>" alt="E-mail" /></a></li>
+					<li><a href="mailto:ilhapordosol@gmail.com"><img src="<c:url value='/resources/imagens/imagensfront/icon-mail.png'/>" alt="E-mail" /></a></li>
 				</ul>
 				<div class="clear"></div>
 			</dd>
 			<dt>Formas de pagamento:</dt>
 			<dd>
-				<img src="<c:url value='/resources/imagens/footer-cards.png'/>" alt="Cartões" />
+				<img src="<c:url value='/resources/imagens/imagensfront/footer-cards.png'/>" alt="Cartões" />
 			</dd>
 		</dl>
 		
@@ -103,3 +94,4 @@
 </div>
 </body>
 </html>
+		

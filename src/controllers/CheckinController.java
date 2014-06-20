@@ -6,7 +6,6 @@ import java.util.List;
 import org.joda.time.DateTime;
 
 import repositorios.EstadiaRepositorio;
-import repositorios.HospedeRepositorio;
 import repositorios.QuartoRepositorio;
 import repositorios.ReservaRepositorio;
 import br.com.caelum.vraptor.Get;
@@ -17,26 +16,26 @@ import domain.Estadia;
 import domain.Hospede;
 import domain.Quarto;
 import domain.Reserva;
-import domain.exceptions.HotelException;
 import domain.servicos.Checkin;
+import domain.servicos.interfaces.HospedeService;
 
 @Resource
 public class CheckinController {
 	
 	private ReservaRepositorio reservaRepositorio;
 	private Result result;
-	private HospedeRepositorio hospedeRepositorio;
 	private EstadiaRepositorio estadiaRepositorio;
 	private QuartoRepositorio quartoRepositorio;
+	private HospedeService hospedeService;
 
 	public CheckinController(Result result, 
 							 ReservaRepositorio reservaRepositorio, 
-							 HospedeRepositorio hospedeRepositorio,
+							 HospedeService hospedeService,
 							 EstadiaRepositorio estadiaRepositorio,
 							 QuartoRepositorio quartoRepositorio) {
 		this.result = result;
 		this.reservaRepositorio = reservaRepositorio;
-		this.hospedeRepositorio = hospedeRepositorio;
+		this.hospedeService = hospedeService;
 		this.estadiaRepositorio = estadiaRepositorio;
 		this.quartoRepositorio = quartoRepositorio;
 	}
@@ -84,29 +83,7 @@ public class CheckinController {
 	
 	public void salvaEPreparaMaisHospedes(Estadia estadia, Hospede hospede){
 		
-		if (hospede.getEmail() == null)
-			throw new HotelException("Email não informado");
-		
-		Hospede hospedeExistente = hospedeRepositorio.buscaPorEmail(hospede.getEmail());
-		
-		
-		if (hospedeExistente == null){
-			hospedeExistente = new Hospede();
-			hospedeExistente.setNome(hospede.getNome());
-			hospedeExistente.setSobrenome(hospede.getSobrenome());
-			hospedeExistente.setEmail(hospede.getEmail());
-			hospedeExistente.setCidade(hospede.getCidade());
-			hospedeExistente.setTelefone(hospede.getTelefone());
-			hospedeExistente.setCelular(hospede.getCelular());
-			hospedeRepositorio.salva(hospedeExistente);
-		}else{
-			hospedeExistente.setNome(hospede.getNome());
-			hospedeExistente.setSobrenome(hospede.getSobrenome());
-			hospedeExistente.setCidade(hospede.getCidade());
-			hospedeExistente.setTelefone(hospede.getTelefone());
-			hospedeExistente.setCelular(hospede.getCelular());
-			hospedeRepositorio.atualiza(hospedeExistente);
-		}
+		Hospede hospedeExistente = hospedeService.buscarESalvarOuAtualizar(hospede); 
 		
 		estadia.addHospede(hospedeExistente);
 		if (estadia.getId() == null){
@@ -124,28 +101,7 @@ public class CheckinController {
 	
 	public void salva(Estadia estadia, Hospede hospede){
 		
-		if (hospede.getEmail() == null)
-			throw new HotelException("Email não informado");
-		
-		Hospede hospedeExistente = hospedeRepositorio.buscaPorEmail(hospede.getEmail());
-		
-		if (hospedeExistente == null){
-			hospedeExistente = new Hospede();
-			hospedeExistente.setNome(hospede.getNome());
-			hospedeExistente.setSobrenome(hospede.getSobrenome());
-			hospedeExistente.setEmail(hospede.getEmail());
-			hospedeExistente.setCidade(hospede.getCidade());
-			hospedeExistente.setTelefone(hospede.getTelefone());
-			hospedeExistente.setCelular(hospede.getCelular());
-			hospedeRepositorio.salva(hospedeExistente);
-		}else{
-			hospedeExistente.setNome(hospede.getNome());
-			hospedeExistente.setSobrenome(hospede.getSobrenome());
-			hospedeExistente.setCidade(hospede.getCidade());
-			hospedeExistente.setTelefone(hospede.getTelefone());
-			hospedeExistente.setCelular(hospede.getCelular());
-			hospedeRepositorio.atualiza(hospedeExistente);
-		}
+		Hospede hospedeExistente = hospedeService.buscarESalvarOuAtualizar(hospede); 
 		
 		if (estadia.getId() != null)
 			estadia = estadiaRepositorio.buscaPorId(estadia.getId());

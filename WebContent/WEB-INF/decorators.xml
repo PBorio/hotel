@@ -8,8 +8,10 @@
 	     <pattern>*</pattern>
 	 </decorator>
 	 
-	 <decorator name="bootstrap" page="bootstrap.jsp">
-	     <pattern>**/pedidos333/**</pattern>
+	 <decorator name="externo" page="externo.jsp">
+	     <pattern>/*/reserva.jsp</pattern>
+	     <pattern>/*/showReserva.jsp</pattern>
+	     <pattern>/*/responsavelReserva.jsp</pattern>
 	 </decorator>
 	
 </decorators>
