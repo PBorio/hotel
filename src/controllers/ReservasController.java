@@ -69,7 +69,15 @@ public class ReservasController {
 		try{
 			quarto = quartoRepositorio.buscaPorId(quarto.getId());
 			reservasView.addQuarto(quarto);
-			result.of(this).showReserva();
+			
+			if (reservasView.precisaDeMaisQuartos()){
+				List<InformativoDeQuartos> quartosParaReserva = buscarQuartosDisponiveis();
+				result.include("quartoList", quartosParaReserva);
+				result.of(this).reserva();
+			}
+			else{
+				result.of(this).showReserva();
+			}
 			
 		}catch(HotelException e){
 			result.include("reserva",reservasView);
@@ -86,7 +94,6 @@ public class ReservasController {
 	public void confirmar(Hospede hospede){
 		
 		try{
-			
 			Hospede hospedeExistente = hospedeService.buscarESalvarOuAtualizar(hospede);
 			
 			reservasView.setHospedeResponsavel(hospedeExistente);
@@ -129,8 +136,6 @@ public class ReservasController {
 			validator.add(new ValidationMessage(e.getMessage(),"erro.no.reserva",e.getMessage()));
 			validator.onErrorUsePageOf(this).reserva();
 		}
-		
-		
 	}
 	
 	public void consulta(){
@@ -172,7 +177,15 @@ public class ReservasController {
 		reservasView.setNumeroCriancas0a5(parametrosReserva.getNumeroCriancas0a5());
 		reservasView.setNumeroCriancas6a16(parametrosReserva.getNumeroCriancas6a16());
 		reservasView.setNumeroCriancas17a18(parametrosReserva.getNumeroCriancas17a18());
+		reservasView.setNumeroDeQuartos(parametrosReserva.getNumeroDeQuartos());
 		
+		List<InformativoDeQuartos> quartosParaReserva = buscarQuartosDisponiveis();
+		
+		result.include("quartoList", quartosParaReserva);
+		result.of(this).reserva();
+	}
+
+	private List<InformativoDeQuartos> buscarQuartosDisponiveis() {
 		Reserva reservaComTodosOsQuartos = new Reserva();
 		reservaComTodosOsQuartos.setInicio(new DateTime(reservasView.getChegada().getTime()));
 		reservaComTodosOsQuartos.setFim(new DateTime(reservasView.getSaida().getTime()));
@@ -185,8 +198,11 @@ public class ReservasController {
 		
 		Periodo periodo = new Periodo(reservaComTodosOsQuartos.getInicio(), reservaComTodosOsQuartos.getFim());
 		List<InformativoDeQuartos> quartosParaReserva = new InformativoService(politicas).criarInformativoDeQuartos(periodo,quartosDisponiveis);
-		
-		result.include("quartoList", quartosParaReserva);
+		return quartosParaReserva;
+	}
+	
+	public void limparReserva(){
+		reservasView = new ReservasView();
 		result.of(this).reserva();
 	}
 	

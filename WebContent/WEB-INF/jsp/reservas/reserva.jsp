@@ -41,7 +41,7 @@
 					<option value="2" <c:if test="${2 == reservasView.numeroCriancas0a5}">selected="true"</c:if>>02</option>
 					<option value="3" <c:if test="${3 == reservasView.numeroCriancas0a5}">selected="true"</c:if>>03</option>
 					<option value="4" <c:if test="${4 == reservasView.numeroCriancas0a5}">selected="true"</c:if>>04</option>
-                                <option value="5" <c:if test="${5 == reservasView.numeroCriancas0a5}">selected="true"</c:if>>05</option>
+                    <option value="5" <c:if test="${5 == reservasView.numeroCriancas0a5}">selected="true"</c:if>>05</option>
 					<option value="6" <c:if test="${6 == reservasView.numeroCriancas0a5}">selected="true"</c:if>>06</option>
 					<option value="7" <c:if test="${7 == reservasView.numeroCriancas0a5}">selected="true"</c:if>>07</option>
 					<option value="8" <c:if test="${8 == reservasView.numeroCriancas0a5}">selected="true"</c:if>>08</option>
@@ -57,36 +57,60 @@
 					<option value="2" <c:if test="${2 == reservasView.numeroCriancas6a16}">selected="true"</c:if>>02</option>
 					<option value="3" <c:if test="${3 == reservasView.numeroCriancas6a16}">selected="true"</c:if>>03</option>
 					<option value="4" <c:if test="${4 == reservasView.numeroCriancas6a16}">selected="true"</c:if>>04</option>
-                                <option value="5" <c:if test="${5 == reservasView.numeroCriancas6a16}">selected="true"</c:if>>05</option>
+                    <option value="5" <c:if test="${5 == reservasView.numeroCriancas6a16}">selected="true"</c:if>>05</option>
 					<option value="6" <c:if test="${6 == reservasView.numeroCriancas6a16}">selected="true"</c:if>>06</option>
 					<option value="7" <c:if test="${7 == reservasView.numeroCriancas6a16}">selected="true"</c:if>>07</option>
 					<option value="8" <c:if test="${8 == reservasView.numeroCriancas6a16}">selected="true"</c:if>>08</option>
 					<option value="9" <c:if test="${9 == reservasView.numeroCriancas6a16}">selected="true"</c:if>>09</option>
 					<option value="10" <c:if test="${10 == reservasView.numeroCriancas6a16}">selected="true"</c:if>>10</option>
 				</select>
-            			</p>
-            			<p class="half">
-            				<select name="parametrosReserva.numeroCriancas17a18">
+            	</p>
+            	<p class="half">
+            	 <select name="parametrosReserva.numeroCriancas17a18">
 					<option value="">Nº de crianças (16-18)</option>
 					<option value="0" <c:if test="${0 == reservasView.numeroCriancas17a18}">selected="true"</c:if>>0</option>
 					<option value="1" <c:if test="${1 == reservasView.numeroCriancas17a18}">selected="true"</c:if>>01</option>
 					<option value="2" <c:if test="${2 == reservasView.numeroCriancas17a18}">selected="true"</c:if>>02</option>
 					<option value="3" <c:if test="${3 == reservasView.numeroCriancas17a18}">selected="true"</c:if>>03</option>
 					<option value="4" <c:if test="${4 == reservasView.numeroCriancas17a18}">selected="true"</c:if>>04</option>
-                                <option value="5" <c:if test="${5 == reservasView.numeroCriancas17a18}">selected="true"</c:if>>05</option>
+                    <option value="5" <c:if test="${5 == reservasView.numeroCriancas17a18}">selected="true"</c:if>>05</option>
 					<option value="6" <c:if test="${6 == reservasView.numeroCriancas17a18}">selected="true"</c:if>>06</option>
 					<option value="7" <c:if test="${7 == reservasView.numeroCriancas17a18}">selected="true"</c:if>>07</option>
 					<option value="8" <c:if test="${8 == reservasView.numeroCriancas17a18}">selected="true"</c:if>>08</option>
 					<option value="9" <c:if test="${9 == reservasView.numeroCriancas17a18}">selected="true"</c:if>>09</option>
 					<option value="10" <c:if test="${10 == reservasView.numeroCriancas17a18}">selected="true"</c:if>>10</option>
-				</select>
-            			</p>
-            			<p>
-            			  <input type="submit" value="Enviar" name="Enviar"/>
-            			</p>
-            			<div class="clear"></div>
-            		</fieldset>
-            		<div class="clear"></div>
+				 </select>
+            	</p>
+            	<p class="half">
+            	 <select name="parametrosReserva.numeroDeQuartos">
+					<option value="1">Selecione mais de um quarto</option>
+					<option value="2" <c:if test="${2 == reservasView.numeroDeQuartos}">selected="true"</c:if>>02</option>
+					<option value="3" <c:if test="${3 == reservasView.numeroDeQuartos}">selected="true"</c:if>>03</option>
+					<option value="4" <c:if test="${4 == reservasView.numeroDeQuartos}">selected="true"</c:if>>04</option>
+                    <option value="5" <c:if test="${5 == reservasView.numeroDeQuartos}">selected="true"</c:if>>05</option>
+					<option value="6" <c:if test="${6 == reservasView.numeroDeQuartos}">selected="true"</c:if>>06</option>
+					<option value="7" <c:if test="${7 == reservasView.numeroDeQuartos}">selected="true"</c:if>>07</option>
+					<option value="8" <c:if test="${8 == reservasView.numeroDeQuartos}">selected="true"</c:if>>08</option>
+					<option value="9" <c:if test="${9 == reservasView.numeroDeQuartos}">selected="true"</c:if>>09</option>
+					<option value="10" <c:if test="${10 == reservasView.numeroDeQuartos}">selected="true"</c:if>>10</option>
+				 </select>
+            	</p>
+            	<p>
+            	   <input type="submit" value="Enviar" name="Enviar"/>
+            	</p>
+            	<c:if test="${not empty reservasView.quartos}">
+            	<fieldset>
+				  	  <legend>Quartos Selecionados</legend>
+					  <c:forEach var="quarto" items="${reservasView.quartos}">
+					  	<p>
+							<input type="text" value="${quarto.numero}" readonly="readonly" />
+						</p>
+					  </c:forEach>
+				  </fieldset>
+				</c:if>
+            	<div class="clear"></div>
+            	</fieldset>
+            	<div class="clear"></div>
 	</div>	
           </form>
        <div class="reservas-box02">

@@ -157,7 +157,7 @@ section.inner{ background:url(../../imagens/imagensfront/section-inner-bg.png) 0
 .content-inner h3 {color:#0f4e8c; display:block; font-family:'FelipeRegular'; font-size:24px; line-height:28px; margin:0 0 18px; text-shadow:1px 1px 2px #305f8d;}
 .content-inner h3 span { display:block; font-size:20px;}
 
-.content-inner p{ color:#0f4e8c; font-size:12px; line-height:16px; margin:0 0 15px; }
+.content-inner p{ color:#0f4e8c; font-size:12px; line-height:14px; margin:0 0 15px; }
 .content-inner ul li{color:#0f4e8c; font-size:12px; line-height:16px;}
 
 /* POUSADA */
@@ -286,7 +286,7 @@ ul#acomodacoes ul.icons li{ background:none; display:inline; float:left; height:
 .content-reservas fieldset select{ background:url(../../imagens/imagensfront/reservas-input.png) 0 0 no-repeat; border:none; color:#0f4e8c; display:block; font-size:12px; padding:4px 0 5px 5px; width:410px;}
 .content-reservas fieldset input[type="text"]{ background:url(../../imagens/imagensfront/reservas-input.png) 0 0 no-repeat; border:none; color:#0f4e8c; display:block; font-size:12px; padding:5px 5px 6px; width:400px;}
 
-.content-reservas fieldset p.half { display:inline-block; float:left; margin:0 10px 10px 0; position:relative; width:200px;}
+.content-reservas fieldset p.half { display:inline-block; float:left; margin:0 10px 0px 0; position:relative; width:200px;}
 .content-reservas fieldset p.half select{ background:url(../../imagens/imagensfront/reservas-input-half.png) 0 0 no-repeat; width:200px;}
 .content-reservas fieldset p.half input[type="text"]{ background:url(../../imagens/imagensfront/reservas-input-half.png) 0 0 no-repeat; width:190px;}
 
@@ -306,9 +306,11 @@ ul#acomodacoes ul.icons li{ background:none; display:inline; float:left; height:
 
 .reservas-box01{ background:url(../../imagens/imagensfront/reservas-bg.jpg) 0 0 no-repeat #c8e3fe; margin:-21px 0 0 -20px; padding:25px 0 20px 30px; position:relative; width:880px;}
 .reservas-box01 h3{background:url(../../imagens/imagensfront/reservas-01.png) 0 0 no-repeat;}
+.reservas-box01 legend{font-family:'FelipeRegular'; font-size:14px; color:#0f4e8c}
 
 .reservas-box02{ margin:0 0 0 -20px; padding:25px 0 20px 30px; position:relative; width:880px;}
 .reservas-box02 h3{background:url(../../imagens/imagensfront/reservas-02.png) 0 0 no-repeat;}
+.reservas-box02 legend{font-family:'FelipeRegular'; font-size:14px; color:#0f4e8c}
 
 .reservas-box03{ background:#c8e3fe; margin:0 0 0 -20px; padding:25px 0 20px 30px; position:relative; width:880px;}
 .reservas-box03 h3{background:url(../../imagens/imagensfront/reservas-03.png) 0 0 no-repeat;}

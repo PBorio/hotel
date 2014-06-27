@@ -27,6 +27,8 @@ public class ReservasView {
 	
 	private Integer numeroAdultos;
 	
+	private Integer numeroDeQuartos;
+	
 	private List<Quarto> quartos = new ArrayList<Quarto>();
 
 	private Hospede hospedeResponsavel;
@@ -120,6 +122,21 @@ public class ReservasView {
 			return null;
 		
 		return this.hospedeResponsavel.getTelefone();
+	}
+
+	public Integer getNumeroDeQuartos() {
+		return numeroDeQuartos;
+	}
+
+	public void setNumeroDeQuartos(Integer numeroDeQuartos) {
+		this.numeroDeQuartos = numeroDeQuartos;
+	}
+
+	public boolean precisaDeMaisQuartos() {
+		int numeroQuarto = 0;
+		if (this.numeroDeQuartos != null)
+			numeroQuarto = this.numeroDeQuartos;
+		return (numeroQuarto > quartos.size());
 	}
 
 }

@@ -15,6 +15,8 @@ public class ParametrosReserva {
 	private Date chegada;
 	
 	private Date saida;
+	
+	private Integer numeroDeQuartos;
 
 	public Integer getNumeroCriancas0a5() {
 		return numeroCriancas0a5;
@@ -62,6 +64,14 @@ public class ParametrosReserva {
 
 	public void setNumeroCriancas17a18(Integer numeroCriancas17a18) {
 		this.numeroCriancas17a18 = numeroCriancas17a18;
+	}
+
+	public Integer getNumeroDeQuartos() {
+		return numeroDeQuartos;
+	}
+
+	public void setNumeroDeQuartos(Integer numeroDeQuartos) {
+		this.numeroDeQuartos = numeroDeQuartos;
 	}
 
 }
