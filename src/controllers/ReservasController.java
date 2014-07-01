@@ -87,9 +87,7 @@ public class ReservasController {
 		}
 	}
 	
-	public void showReserva() {
-		
-	}
+	public void showReserva() {}
 
 	public void confirmar(Hospede hospede){
 		

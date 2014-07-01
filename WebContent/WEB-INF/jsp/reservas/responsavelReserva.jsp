@@ -22,16 +22,16 @@
 	        <p>
 	        	<input id="nome" type="text" placeholder="Sobrenome" name="hospede.sobrenome" value="${hospede.sobrenome}" />
 	        </p>
-	         <p>
+	         <p class="half">
 	        	<input id="email" type="text" placeholder="Email" name="hospede.email" value="${hospede.email}" />
 	        </p>
-	        <p>
+	        <p class="half">
 	        	<input id="cidade" type="text" placeholder="Cidade" name="hospede.cidade" value="${hospede.cidade}" />
 	        </p>
-	        <p>
+	        <p class="half">
 	        	<input id="telefone" type="text" placeholder="Telefone" name="hospede.telefone" value="${hospede.telefone}" />
 	        </p>
-	        <p>
+	        <p class="half">
 	        	<input id="celular" type="text" placeholder="Celular" name="hospede.celular" value="${hospede.celular}" />
 	        </p>
 	        <p>
