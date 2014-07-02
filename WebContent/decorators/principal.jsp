@@ -20,7 +20,7 @@
 				<button type="button" class="navbar-toggle"
 						data-toggle="collapse" data-target=".navbar-collapse">
 				</button>
-				<a class="navbar-brand" href="<c:url value='/painel/painel'/>">Hotel</a>
+				<a class="navbar-brand" href="<c:url value='/'/>">Hotel</a>
 			</div>
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">

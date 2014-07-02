@@ -11,9 +11,15 @@ public class FakeReserva {
 	
 	private Reserva reserva = new Reserva();
 	
+	
 	public FakeReserva iniciandoEm(String data){
 		DateTime inicio = parseData(data);
 		this.reserva.setInicio(inicio);
+		return this;
+	}
+	
+	public FakeReserva comNumeroDeAdultos(Integer adultos){
+		this.reserva.setNumeroAdultos(adultos);
 		return this;
 	}
 

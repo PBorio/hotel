@@ -32,14 +32,4 @@ public class ServicoDeReserva {
 		}
 		return disponiveis;
 	}
-
-//	public boolean qua(DateTime carnaval) {
-//		
-//		
-//		if (reservas == null || reservas.size() == 0)
-//			return true;
-//		
-//		return false;
-//	}
-
 }

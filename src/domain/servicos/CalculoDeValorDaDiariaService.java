@@ -33,7 +33,7 @@ public class CalculoDeValorDaDiariaService {
 				periodoDaPoliticaDePrecos.setFim(new DateTime(politica.getFim()));
 				
 				if (reserva.coincideCom(periodoDaPoliticaDePrecos))
-					valorDaDiaria = politica.getValorDiaria();
+					valorDaDiaria += politica.getValorDiaria();
 				
 			}
 			
@@ -43,7 +43,7 @@ public class CalculoDeValorDaDiariaService {
 				if (politicaPadrao == null)
 					throw new HotelException("Não há política de preços para a categoria: "+quarto.getCategoria().getDescricao());
 				
-				valorDaDiaria = politicaPadrao.getValorDiaria();
+				valorDaDiaria += politicaPadrao.getValorDiaria();
 			}
 			
 			if (naoEncontrouPoliticaParaAReserva(valorDaDiaria))

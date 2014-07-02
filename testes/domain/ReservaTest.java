@@ -160,19 +160,18 @@ public class ReservaTest {
 	
 	@Test
 	public void oValorDaReservaEhValorDaDiariaVezesONumeroDeDiasDaReserva(){
-		Reserva r = new FakeReserva().iniciandoEm("01/03/2014").terminandoEm("04/03/2014").build();
+		Reserva r = new FakeReserva().iniciandoEm("01/03/2014").terminandoEm("04/03/2014").comNumeroDeAdultos(2).build();
 		r.setValorDiaria(10.2);
 		
 		Assert.assertEquals((Double)30.6, r.getValorReserva());
 	}
-
+	
 	@Test
-	public void umaReservaPodeTerMaisDeUmQuarto(){
-		Reserva reserva = new FakeReserva().iniciandoEm("01/03/2014").terminandoEm("04/03/2014").build();
-		Quarto q1 = new Quarto();
-		Quarto q2 = new Quarto();
-		reserva.addQuarto(q1);
-		reserva.addQuarto(q2);
+	public void seUmaReservaForDeApenasUmAdultoOValorDaReservaSera60PorCentoDoValorCalculado(){
+		Reserva r = new FakeReserva().iniciandoEm("01/03/2014").terminandoEm("04/03/2014").build();
+		r.setNumeroAdultos(1);
+		r.setValorDiaria(100.0);
+		Assert.assertEquals((Double)180.0, r.getValorReserva());
 	}
 }
 

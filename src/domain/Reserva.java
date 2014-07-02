@@ -1,5 +1,7 @@
 package domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -187,7 +189,12 @@ public class Reserva implements CalculavelPorPeriodo {
 	}
 
 	public Double getValorReserva() {
-		return new CalculoDeValorPorPeriodoService().calcularValor(this);
+		Double valor = new CalculoDeValorPorPeriodoService().calcularValor(this);
+		if (this.numeroAdultos.intValue() == 1)
+			valor = valor * 0.6;
+		
+		BigDecimal bd = new BigDecimal(valor.toString());
+	  	return bd.setScale(2, RoundingMode.HALF_EVEN).doubleValue();
 	}
 
 	public void addQuarto(Quarto quarto) {

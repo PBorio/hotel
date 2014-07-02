@@ -117,6 +117,15 @@
             <h3>Escolha um quarto para sua Reserva</h3>
             <fieldset>
             	<div class="places">
+          	    		
+          	    	<c:forEach var="error" items="${errors}">
+          	    		<article>
+						<div class="alert">
+							${error.message}
+						</div>
+						</article>
+					</c:forEach>
+												
             		<c:forEach var="quarto" items="${quartoList}">
 	           		<article>
 						<h2>${quarto.numero}</h2>

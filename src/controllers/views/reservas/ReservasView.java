@@ -32,6 +32,8 @@ public class ReservasView {
 	private List<Quarto> quartos = new ArrayList<Quarto>();
 
 	private Hospede hospedeResponsavel;
+	
+	private Double valorReserva = 0.0;
 
 	public Long getIdCategoria() {
 		return idCategoria;
@@ -99,7 +101,11 @@ public class ReservasView {
 	}
 	
 	public Double getValorReserva(){
-		return 0.0;
+		return this.valorReserva;
+	}
+	
+	public void setValorReserva(Double valorReserva){
+		this.valorReserva = valorReserva;
 	}
 
 	public void setHospedeResponsavel(Hospede hospede) {

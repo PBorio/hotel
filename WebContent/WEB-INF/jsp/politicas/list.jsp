@@ -12,9 +12,9 @@
 				${mensagem}
 			</div>
 		</c:if>
-		<c:if test="${not empty erro}">
+		<c:if test="${not empty erros}">
 			<div class="alert alert-danger">
-				${erro}
+				${erros}
 			</div>
 		</c:if>
 		

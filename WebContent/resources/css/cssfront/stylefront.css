@@ -286,7 +286,7 @@ ul#acomodacoes ul.icons li{ background:none; display:inline; float:left; height:
 .content-reservas fieldset select{ background:url(../../imagens/imagensfront/reservas-input.png) 0 0 no-repeat; border:none; color:#0f4e8c; display:block; font-size:12px; padding:4px 0 5px 5px; width:410px;}
 .content-reservas fieldset input[type="text"]{ background:url(../../imagens/imagensfront/reservas-input.png) 0 0 no-repeat; border:none; color:#0f4e8c; display:block; font-size:12px; padding:5px 5px 6px; width:400px;}
 
-.content-reservas fieldset p.half { display:inline-block; float:left; margin:0 10px 0px 0; position:relative; width:200px;}
+.content-reservas fieldset p.half { display:inline-block; float:left; margin:0 10px 10px 0; position:relative; width:200px;}
 .content-reservas fieldset p.half select{ background:url(../../imagens/imagensfront/reservas-input-half.png) 0 0 no-repeat; width:200px;}
 .content-reservas fieldset p.half input[type="text"]{ background:url(../../imagens/imagensfront/reservas-input-half.png) 0 0 no-repeat; width:190px;}
 
@@ -320,6 +320,7 @@ ul#acomodacoes ul.icons li{ background:none; display:inline; float:left; height:
 .reservas-box04 h3{background:url(../../imagens/imagensfront/reservas-04.png) 0 0 no-repeat;}
 .reservas-box04 span{color:#0f4e8c; display:inline-block; font-size:11px; }
 
-
 article h2 {border-bottom: 1px dashed #0f4e8c; margin: 0;}
+
+.alert{ background:url(../../imagens/imagensfront/form-error-bg.gif) 0 0 no-repeat; color:#fff; font-size:11px; height:19px; left:300px; line-height:11px; padding:8px 10px 0 20px; white-space:nowrap; width:auto; z-index:999;}
 

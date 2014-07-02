@@ -13,7 +13,7 @@
         <h3>Informações da Reserva</h3>
 		<fieldset>
 		  <fieldset>
-		  	  <legend>Quartos</legend>
+		  	  <legend>Quartos Selecionados</legend>
 			  <c:forEach var="quarto" items="${reservasView.quartos}">
 			  	<p>
 					<input type="text" value="${quarto.numero}" readonly="readonly" />
@@ -58,16 +58,16 @@
 			        <p>
 			        	<input id="nome" type="text" placeholder="Sobrenome" name="hospede.sobrenome" value="${hospede.sobrenome}" />
 			        </p>
-			         <p>
+			          <p class="half">
 			        	<input id="email" type="text" placeholder="Email" name="hospede.email" value="${hospede.email}" />
 			        </p>
-			        <p>
+			        <p class="half">
 			        	<input id="cidade" type="text" placeholder="Cidade" name="hospede.cidade" value="${hospede.cidade}" />
 			        </p>
-			        <p>
+			        <p class="half">
 			        	<input id="telefone" type="text" placeholder="Telefone" name="hospede.telefone" value="${hospede.telefone}" />
 			        </p>
-			        <p>
+			        <p class="half">
 			        	<input id="celular" type="text" placeholder="Celular" name="hospede.celular" value="${hospede.celular}" />
 			        </p>
 			        <p>
@@ -79,13 +79,13 @@
 	 </fieldset>
 	  <div class="clear"></div>
 	</div>
-			  <div class="nav-bar">
-			<div class="header">
-				<ul class="nav nav-pills pull-right">
-					<li class="active"><a href="<c:url value='/reservas/reserva'/>">Procurar Mais Quartos</a></li>
-				</ul>
-			</div>
-		  </div>
+	<div class="nav-bar">
+		<c:forEach var="error" items="${errors}">
+		<div class="alert">
+			${error.message}
+		</div>
+	</c:forEach>
+    </div>
 	
 </body>
 </html>
