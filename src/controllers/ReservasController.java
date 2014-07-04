@@ -131,10 +131,12 @@ public class ReservasController {
 		Reserva reserva = new Reserva();
 		reserva.setInicio(new DateTime(reservasView.getChegada().getTime()));
 		reserva.setFim(new DateTime(reservasView.getSaida().getTime()));
-		reserva.setNumeroAdultos(reservasView.getNumeroAdultos());
-		reserva.setNumeroCriancas0a5(reservasView.getNumeroCriancas0a5());
-		reserva.setNumeroCriancas6a16(reservasView.getNumeroCriancas6a16());
-		reserva.setNumeroCriancas17a18(reservasView.getNumeroCriancas17a18());
+		
+		//TODO Ajustar para mais de uma reserva
+//		reserva.setNumeroAdultos(reservasView.getNumeroAdultos());
+//		reserva.setNumeroCriancas0a5(reservasView.getNumeroCriancas0a5());
+//		reserva.setNumeroCriancas6a16(reservasView.getNumeroCriancas6a16());
+//		reserva.setNumeroCriancas17a18(reservasView.getNumeroCriancas17a18());
 		
 		reserva.setHospede(hospedeExistente);
 		
@@ -184,10 +186,12 @@ public class ReservasController {
 		
 		reservasView.setChegada(parametrosReserva.getChegada());
 		reservasView.setSaida(parametrosReserva.getSaida());
-		reservasView.setNumeroAdultos(parametrosReserva.getNumeroAdultos());
-		reservasView.setNumeroCriancas0a5(parametrosReserva.getNumeroCriancas0a5());
-		reservasView.setNumeroCriancas6a16(parametrosReserva.getNumeroCriancas6a16());
-		reservasView.setNumeroCriancas17a18(parametrosReserva.getNumeroCriancas17a18());
+		
+		//TODO Ajustar para mais de uma reserva
+//		reservasView.setNumeroAdultos(parametrosReserva.getNumeroAdultos());
+//		reservasView.setNumeroCriancas0a5(parametrosReserva.getNumeroCriancas0a5());
+//		reservasView.setNumeroCriancas6a16(parametrosReserva.getNumeroCriancas6a16());
+//		reservasView.setNumeroCriancas17a18(parametrosReserva.getNumeroCriancas17a18());
 		reservasView.setNumeroDeQuartos(parametrosReserva.getNumeroDeQuartos());
 		
 		ReservaValidation validation = new ReservaValidation(validator, reservasView);

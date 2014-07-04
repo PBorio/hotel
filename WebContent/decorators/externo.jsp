@@ -5,23 +5,9 @@
 <html>
 <head>
   <link rel="stylesheet" href="<c:url value='/resources/css/cssfront/stylefront.css'/>" type="text/css" media="screen" />
-    <link rel="stylesheet" href="<c:url value='/resources/css/cssfront/reset.css'/>" type="text/css" media="screen" />
+  <link rel="stylesheet" href="<c:url value='/resources/css/cssfront/reset.css'/>" type="text/css" media="screen" />
   <script type="text/javascript" src="<c:url value='/resources/scripts/jquery-1.7.1.min.js'/>"></script>    
- <script type="text/javascript">                                         
-   jQuery(document).ready(function() {
-		jQuery('.livre').hover(mouseOver, mouseOut);
-   });                   
-
-   function mouseOver(){
-     //alert('mouseOver');
-	 jQuery(this).addClass('over');
-   }   
-   
-   function mouseOut(){
-     jQuery(this).removeClass('over');
-   }
- </script>     
-  
+  <decorator:head />
 </head>
 <body>
 <div class="container">

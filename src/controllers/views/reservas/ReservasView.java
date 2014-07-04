@@ -13,19 +13,11 @@ import br.com.caelum.vraptor.ioc.SessionScoped;
 @SessionScoped
 public class ReservasView {
 	
-	private Long idCategoria;
-	
 	private Date chegada;
 	
 	private Date saida;
 	
-	private Integer numeroCriancas0a5;
-	
-	private Integer numeroCriancas6a16;
-	
-	private Integer numeroCriacas17a18;
-	
-	private Integer numeroAdultos;
+	private List<ParametrosReserva> parametrosReserva = new ArrayList<ParametrosReserva>();
 	
 	private Integer numeroDeQuartos;
 	
@@ -34,14 +26,6 @@ public class ReservasView {
 	private Hospede hospedeResponsavel;
 	
 	private Double valorReserva = 0.0;
-
-	public Long getIdCategoria() {
-		return idCategoria;
-	}
-
-	public void setIdCategoria(Long idCategoria) {
-		this.idCategoria = idCategoria;
-	}
 
 	public Date getChegada() {
 		return chegada;
@@ -57,38 +41,6 @@ public class ReservasView {
 
 	public void setSaida(Date saida) {
 		this.saida = saida;
-	}
-
-	public Integer getNumeroCriancas0a5() {
-		return numeroCriancas0a5;
-	}
-
-	public void setNumeroCriancas0a5(Integer numeroCriancas0a5) {
-		this.numeroCriancas0a5 = numeroCriancas0a5;
-	}
-
-	public Integer getNumeroCriancas6a16() {
-		return numeroCriancas6a16;
-	}
-
-	public void setNumeroCriancas6a16(Integer numeroCriancas6a16) {
-		this.numeroCriancas6a16 = numeroCriancas6a16;
-	}
-
-	public Integer getNumeroCriancas17a18() {
-		return numeroCriacas17a18;
-	}
-
-	public void setNumeroCriancas17a18(Integer numeroCriacas17a18) {
-		this.numeroCriacas17a18 = numeroCriacas17a18;
-	}
-
-	public Integer getNumeroAdultos() {
-		return numeroAdultos;
-	}
-
-	public void setNumeroAdultos(Integer numeroAdultos) {
-		this.numeroAdultos = numeroAdultos;
 	}
 
 	public List<Quarto> getQuartos() {
@@ -143,6 +95,10 @@ public class ReservasView {
 		if (this.numeroDeQuartos != null)
 			numeroQuarto = this.numeroDeQuartos;
 		return (numeroQuarto > quartos.size());
+	}
+
+	public List<ParametrosReserva> getParametrosReserva() {
+		return parametrosReserva;
 	}
 
 }
