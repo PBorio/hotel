@@ -2,7 +2,7 @@ package controllers.validators;
 
 import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.validator.ValidationMessage;
-import controllers.views.reservas.ParametrosReserva;
+import controllers.views.reservas.DetalhesDosParametros;
 import controllers.views.reservas.ReservasView;
 import domain.Hospede;
 
@@ -30,8 +30,8 @@ public class ReservaValidation {
 		if (reservaView.getSaida() == null)
 			validator.add(new ValidationMessage("Data de Saída é obrigatória", "fim"));
 		
-		for (ParametrosReserva params : reservaView.getParametrosReserva()){
-			if (params.getNumeroAdultos() == null)
+		for (DetalhesDosParametros detalhe : reservaView.getParametrosReserva().getDetalhes()){
+			if (detalhe.getNumeroAdultos() == null)
 				validator.add(new ValidationMessage("Numero de Adultos é obrigatório", "numeroAdultos"));
 		}
 		
@@ -56,8 +56,8 @@ public class ReservaValidation {
 		if (reservaView.getSaida() == null)
 			validator.add(new ValidationMessage("Data de Saída é obrigatória", "fim"));
 		
-		for (ParametrosReserva params : reservaView.getParametrosReserva()){
-			if (params.getNumeroAdultos() == null)
+		for (DetalhesDosParametros detalhe : reservaView.getParametrosReserva().getDetalhes()){
+			if (detalhe.getNumeroAdultos() == null)
 				validator.add(new ValidationMessage("Numero de Adultos é obrigatório", "numeroAdultos"));
 		}
 		

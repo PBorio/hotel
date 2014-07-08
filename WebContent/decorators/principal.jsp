@@ -25,7 +25,7 @@
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="<c:url value='/checkin/list'/>">Checkin</a></li>
-					<li><a href="<c:url value='/reservas/reserva'/>">Reservas</a></li> 
+					<li><a href="<c:url value='/reservas/parametrosIniciais'/>">Reservas</a></li> 
 					<li><a href="<c:url value='/reservas/consulta'/>">Consulta</a></li>
 					<li><a href="<c:url value='/quartos/list'/>">Quartos</a></li>
 					<li><a href="<c:url value='/categorias/list'/>">Categorias</a></li>

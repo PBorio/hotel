@@ -9,7 +9,8 @@
 	 </decorator>
 	 
 	 <decorator name="externo" page="externo.jsp">
-	     <pattern>/*/reserva.jsp</pattern>
+	     <pattern>/*/parametrosIniciais.jsp</pattern>
+	     <pattern>/*/parametrosDetalhes.jsp</pattern>
 	     <pattern>/*/showReserva.jsp</pattern>
 	     <pattern>/*/responsavelReserva.jsp</pattern>
 	 </decorator>

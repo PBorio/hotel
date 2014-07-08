@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://www.joda.org/joda/time/tags" prefix="joda"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,41 +14,43 @@
         <h3>Informações da Reserva</h3>
 		<fieldset>
 		  <fieldset>
-		  	  <legend>Quartos Selecionados</legend>
-			  <c:forEach var="quarto" items="${reservasView.quartos}">
+		  	  <legend>Reservas Criadas</legend>
+			  <c:forEach var="reserva" items="${reservasView.reservas}">
 			  	<p>
-					<input type="text" value="${quarto.numero}" readonly="readonly" />
+					<input type="text" value="${reserva.quarto.numero}" readonly="readonly" />
 				</p>
+				 <p class="half">
+						<label>Início:</label>
+						<input type="text" class="col-xs-10" value="<joda:format pattern='dd/MM/yyyy' value='${reserva.inicio}'/>" readonly="readonly" />
+				  </p>
+				  <p class="half">
+						<label>Fim:</label>
+						<input type="text" class="col-xs-10" value="<joda:format pattern='dd/MM/yyyy' value='${reserva.fim}'/>" readonly="readonly" />
+				  </p>
+				  <p class="half">
+						<label>Adultos:</label>
+						<input type="text" value="${reserva.numeroAdultos}" readonly="readonly" />
+				  </p>
+				  <p class="half">
+						<label>0 a 5 anos:</label>
+						<input type="text" value="${reserva.numeroCriancas0a5}" readonly="readonly" />
+				  </p>
+				  <p class="half">
+						<label>6 a 16 anos:</label>
+						<input type="text" value="${reserva.numeroCriancas6a16}" readonly="readonly" />
+				  </p>
+				  <p class="half">
+						<label>17 a 18 anos:</label>
+						<input type="text" class="col-xs-10" value="${reserva.numeroCriancas17a18}" readonly="readonly" />
+				  </p>
+				  <p>
+						<label>Valor:</label>
+						<input type="text" class="col-xs-10" value="${reserva.valorReserva}" readonly="readonly" />
+				  </p>
 			  </c:forEach>
 		  </fieldset>
-		   <p class="half">
-				<label>Início:</label>
-				<input type="text" value="<fmt:formatDate value='${reservasView.chegada}'/>" readonly="readonly" />
-		  </p>
-		  <p class="half">
-				<label>Fim:</label>
-				<input type="text" value="<fmt:formatDate value='${reservasView.saida}'/>" readonly="readonly" />
-		  </p>
-		  <p class="half">
-				<label>Adultos:</label>
-				<input type="text" value="${reservasView.numeroAdultos}" readonly="readonly" />
-		  </p>
-		  <p class="half">
-				<label>0 a 5 anos:</label>
-				<input type="text" value="${reservasView.numeroCriancas0a5}" readonly="readonly" />
-		  </p>
-		  <p class="half">
-				<label>6 a 16 anos:</label>
-				<input type="text" value="${reservasView.numeroCriancas6a16}" readonly="readonly" />
-		  </p>
-		  <p class="half">
-				<label>17 a 18 anos:</label>
-				<input type="text" class="col-xs-10" value="${reservasView.numeroCriancas17a18}" readonly="readonly" />
-		  </p>
-		  <p>
-				<label>Valor:</label>
-				<input type="text" class="col-xs-10" value="${reservasView.valorReserva}" readonly="readonly" />
-		  </p>
+		  
+		  
 		  <fieldset>
 		  <legend>Informações do Responsável</legend>
 			  <form class="form-horizontal" action='<c:url value="/reservas/confirmar"/>' method="post">

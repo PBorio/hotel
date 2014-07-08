@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import domain.Hospede;
-import domain.Quarto;
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.SessionScoped;
+import domain.Hospede;
+import domain.Quarto;
+import domain.Reserva;
 
 @Component
 @SessionScoped
@@ -17,15 +18,15 @@ public class ReservasView {
 	
 	private Date saida;
 	
-	private List<ParametrosReserva> parametrosReserva = new ArrayList<ParametrosReserva>();
+	private ParametrosReserva parametrosReserva;
 	
 	private Integer numeroDeQuartos;
 	
-	private List<Quarto> quartos = new ArrayList<Quarto>();
-
 	private Hospede hospedeResponsavel;
 	
 	private Double valorReserva = 0.0;
+
+	private List<Reserva> reservas = new ArrayList<Reserva>();
 
 	public Date getChegada() {
 		return chegada;
@@ -44,12 +45,14 @@ public class ReservasView {
 	}
 
 	public List<Quarto> getQuartos() {
-		return quartos;
+		if (this.parametrosReserva == null)
+			return null;
+		
+		return this.parametrosReserva.getQuartos();
 	}
 
 	public void addQuarto(Quarto quarto) {
-		if (!quartos.contains(quarto))
-			quartos.add(quarto);
+		parametrosReserva.primeiroDetalheSemQuarto().setQuarto(quarto);
 	}
 	
 	public Double getValorReserva(){
@@ -94,11 +97,41 @@ public class ReservasView {
 		int numeroQuarto = 0;
 		if (this.numeroDeQuartos != null)
 			numeroQuarto = this.numeroDeQuartos;
-		return (numeroQuarto > quartos.size());
+		return (numeroQuarto > getQuartos().size());
 	}
 
-	public List<ParametrosReserva> getParametrosReserva() {
+	public ParametrosReserva getParametrosReserva() {
 		return parametrosReserva;
+	}
+
+	public void setParametrosReserva(ParametrosReserva parametrosReserva) {
+		this.parametrosReserva = parametrosReserva;
+	}
+
+	public void addReserva(Reserva reserva) {
+		this.reservas .add(reserva);
+	}
+
+	public List<Reserva> getReservas() {
+		return reservas;
+	}
+	
+	public Integer getNumeroDeQuartosJaSelecionados(){
+		Integer numeroDeQuartoSelecionados = 0;
+		
+		if (parametrosReserva == null)
+			return 0;
+		
+		return parametrosReserva.getNumeroDeQuartosJaSelecionados();
+		
+	}
+
+	public boolean jaTemOQuarto(Quarto quarto) {
+
+		if (parametrosReserva == null || parametrosReserva.getDetalhes() == null)
+			return false;
+
+		return parametrosReserva.jaTemOQuarto(quarto);
 	}
 
 }

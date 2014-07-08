@@ -141,14 +141,6 @@ public class Reserva implements CalculavelPorPeriodo {
 		this.numeroCriancas17a18 = numeroCriacas17a18;
 	}
 
-	public Integer getNumeroCriacas17a18() {
-		return numeroCriancas17a18;
-	}
-
-	public void setNumeroCriacas17a18(Integer numeroCriacas17a18) {
-		this.numeroCriancas17a18 = numeroCriacas17a18;
-	}
-
 	public void setHospede(Hospede hospede) {
 		this.hospede = hospede;
 	}
@@ -199,7 +191,6 @@ public class Reserva implements CalculavelPorPeriodo {
 
 	public void addQuarto(Quarto quarto) {
 		QuartoDaReserva quartoDaReserva = new QuartoDaReserva(this, quarto);
-		quarto.addReserva(quartoDaReserva);
 		this.quartosDaReserva.add(quartoDaReserva);
 	}
 
@@ -209,6 +200,14 @@ public class Reserva implements CalculavelPorPeriodo {
 			result.add(quartoReserva.getQuarto());
 		}
 		return result;
+	}
+	
+	public Quarto getQuarto(){
+		return new ArrayList<QuartoDaReserva>(this.quartosDaReserva).get(0).getQuarto();
+	}
+
+	public Integer getNumeroCriancas17a18() {
+		return numeroCriancas17a18;
 	}
 
 }

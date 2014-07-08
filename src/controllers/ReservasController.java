@@ -16,6 +16,7 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.validator.ValidationMessage;
 import controllers.validators.ReservaValidation;
+import controllers.views.reservas.DetalhesDosParametros;
 import controllers.views.reservas.InformativoDeQuartos;
 import controllers.views.reservas.ParametrosReserva;
 import controllers.views.reservas.ReservasView;
@@ -61,23 +62,41 @@ public class ReservasController {
 		this.reservasView = reservasView;
 	}
 	
-	public void reserva(){
+	public void parametrosIniciais(){
+		reservasView.setParametrosReserva(null);
+		reservasView.setHospedeResponsavel(null);
+		reservasView.getReservas().clear();
+		reservasView.setChegada(null);
+		reservasView.setSaida(null);
+		reservasView.setValorReserva(0.0);
 	}
 	
 	public void reservar(Quarto quarto){
 		
 		try{
 			quarto = quartoRepositorio.buscaPorId(quarto.getId());
-			reservasView.addQuarto(quarto);
+			DetalhesDosParametros detalhe = reservasView.getParametrosReserva().primeiroDetalheSemQuarto();
+			detalhe.setQuarto(quarto);
+			Reserva reserva = new Reserva();
+			reserva.addQuarto(quarto);
+			reserva.setNumeroAdultos(detalhe.getNumeroAdultos());
+			reserva.setNumeroCriancas0a5(detalhe.getNumeroCriancas0a5());
+			reserva.setNumeroCriancas6a16(detalhe.getNumeroCriancas6a16());
+			reserva.setNumeroCriancas17a18(detalhe.getNumeroCriancas17a18());
+			reserva.setInicio(new DateTime(reservasView.getChegada().getTime()));
+			reserva.setFim(new DateTime(reservasView.getSaida().getTime()));
+			
+			CalculoDeValorDaDiariaService servicoPrecos = new CalculoDeValorDaDiariaService(politicaPrecoRepositorio.buscaTodos());
+			servicoPrecos.calcularEInformarValorNaReserva(reserva);
+			
+			reservasView.addReserva(reserva);
 			
 			if (reservasView.precisaDeMaisQuartos()){
 				List<InformativoDeQuartos> quartosParaReserva = buscarQuartosDisponiveis();
 				result.include("quartoList", quartosParaReserva);
-				result.of(this).reserva();
+				result.redirectTo(this).parametrosDetalhes(reservasView.getParametrosReserva());
 			}
 			else{
-				Reserva reserva = criarReserva(null);
-				reservasView.setValorReserva(reserva.getValorReserva());
 				result.of(this).showReserva();
 			}
 			
@@ -85,7 +104,7 @@ public class ReservasController {
 			result.include("reserva",reservasView);
 			result.include("categoriaList",this.categoriaRepositorio.buscaTodos());
 			validator.add(new ValidationMessage(e.getMessage(),"erro.no.reserva",e.getMessage()));
-			validator.onErrorUsePageOf(this).reserva();
+			validator.onErrorUsePageOf(this).parametrosIniciais();
 		}
 	}
 	
@@ -106,18 +125,30 @@ public class ReservasController {
 			Hospede hospedeExistente = hospedeService.buscarESalvarOuAtualizar(hospede);
 			reservasView.setHospedeResponsavel(hospedeExistente);
 			
-			Reserva reserva = criarReserva(hospedeExistente);
-			
-			for (Quarto q : reservasView.getQuartos()){
-				if (q.possuiReservasNoMesmoPeriodo(reserva))
-					throw new HotelException("Já existe reserva para o quarto "+q.getNumero()+" para este período.");
+			for (DetalhesDosParametros detalhe : reservasView.getParametrosReserva().getDetalhes()){
+				
+				Reserva reserva = new Reserva();
+				reserva.addQuarto(detalhe.getQuarto());
+				reserva.setNumeroAdultos(detalhe.getNumeroAdultos());
+				reserva.setNumeroCriancas0a5(detalhe.getNumeroCriancas0a5());
+				reserva.setNumeroCriancas6a16(detalhe.getNumeroCriancas6a16());
+				reserva.setNumeroCriancas17a18(detalhe.getNumeroCriancas17a18());
+				reserva.setInicio(new DateTime(reservasView.getChegada().getTime()));
+				reserva.setFim(new DateTime(reservasView.getSaida().getTime()));
+				
+				Quarto quarto = detalhe.getQuarto();
+//				if (quarto.possuiReservasNoMesmoPeriodo(reserva))
+//					throw new HotelException("Já existe reserva para o quarto "+quarto.getNumero()+" para este período.");
+				
+				CalculoDeValorDaDiariaService servicoPrecos = new CalculoDeValorDaDiariaService(politicaPrecoRepositorio.buscaTodos());
+				servicoPrecos.calcularEInformarValorNaReserva(reserva);
+				reserva.setHospede(hospedeExistente);
+				
+				reservasView.setValorReserva(reserva.getValorReserva());
+//				reservaRepositorio.salva(reserva);
+				reservasView.addReserva(reserva);
 			}
-			
-			reservasView.setValorReserva(reserva.getValorReserva());
-			
-			reservaRepositorio.salva(reserva);
-			result.include("reserva", reserva);
-			result.of(this).show(reserva.getId());
+			result.of(this).showReserva();
 			
 		}catch(HotelException e){
 			result.include("reserva",reservasView);
@@ -127,29 +158,6 @@ public class ReservasController {
 		}
 	}
 
-	private Reserva criarReserva(Hospede hospedeExistente) {
-		Reserva reserva = new Reserva();
-		reserva.setInicio(new DateTime(reservasView.getChegada().getTime()));
-		reserva.setFim(new DateTime(reservasView.getSaida().getTime()));
-		
-		//TODO Ajustar para mais de uma reserva
-//		reserva.setNumeroAdultos(reservasView.getNumeroAdultos());
-//		reserva.setNumeroCriancas0a5(reservasView.getNumeroCriancas0a5());
-//		reserva.setNumeroCriancas6a16(reservasView.getNumeroCriancas6a16());
-//		reserva.setNumeroCriancas17a18(reservasView.getNumeroCriancas17a18());
-		
-		reserva.setHospede(hospedeExistente);
-		
-		for (Quarto quarto : reservasView.getQuartos()){
-			quarto = quartoRepositorio.buscaPorId(quarto.getId());
-			reserva.addQuarto(quarto);
-		}
-		
-		CalculoDeValorDaDiariaService servicoPrecos = new CalculoDeValorDaDiariaService(politicaPrecoRepositorio.buscaTodos());
-		servicoPrecos.calcularEInformarValorNaReserva(reserva);
-		
-		return reserva;
-	}
 	
 	public void consulta(){
 		
@@ -182,29 +190,25 @@ public class ReservasController {
 		result.include("reserva", reserva);
 	}
 
-	public void quartosDisponiveis(ParametrosReserva parametrosReserva){
+	public void parametrosDetalhes(ParametrosReserva parametrosReserva){
 		
 		reservasView.setChegada(parametrosReserva.getChegada());
 		reservasView.setSaida(parametrosReserva.getSaida());
-		
-		//TODO Ajustar para mais de uma reserva
-//		reservasView.setNumeroAdultos(parametrosReserva.getNumeroAdultos());
-//		reservasView.setNumeroCriancas0a5(parametrosReserva.getNumeroCriancas0a5());
-//		reservasView.setNumeroCriancas6a16(parametrosReserva.getNumeroCriancas6a16());
-//		reservasView.setNumeroCriancas17a18(parametrosReserva.getNumeroCriancas17a18());
 		reservasView.setNumeroDeQuartos(parametrosReserva.getNumeroDeQuartos());
+		reservasView.setParametrosReserva(parametrosReserva);
 		
 		ReservaValidation validation = new ReservaValidation(validator, reservasView);
 		validator = validation.validarBusca();
 		
 		if (validator.hasErrors()){
-		    validator.onErrorUsePageOf(this).reserva();
+		    validator.onErrorUsePageOf(this).parametrosIniciais();
 		}
 		
 		List<InformativoDeQuartos> quartosParaReserva = buscarQuartosDisponiveis();
+		DetalhesDosParametros detalhesDosParametros = reservasView.getParametrosReserva().primeiroDetalheSemQuarto();
 		
+		result.include("detalhesDosParametros", detalhesDosParametros);
 		result.include("quartoList", quartosParaReserva);
-		result.of(this).reserva();
 	}
 
 	private List<InformativoDeQuartos> buscarQuartosDisponiveis() {
@@ -221,12 +225,27 @@ public class ReservasController {
 		
 		Periodo periodo = new Periodo(reservaComTodosOsQuartos.getInicio(), reservaComTodosOsQuartos.getFim());
 		List<InformativoDeQuartos> quartosParaReserva = new InformativoService(politicas).criarInformativoDeQuartos(periodo,quartosDisponiveis);
-		return quartosParaReserva;
+		List<InformativoDeQuartos> result = new ArrayList<InformativoDeQuartos>();
+
+		for (InformativoDeQuartos infoq : quartosParaReserva){
+			Quarto quartoDisponivel = new Quarto();
+			quartoDisponivel.setId(infoq.getId());
+			if (!reservasView.jaTemOQuarto(quartoDisponivel))
+				result.add(infoq);
+		}
+		
+		return result;
 	}
 	
 	public void limparReserva(){
-		reservasView = new ReservasView();
-		result.of(this).reserva();
+		reservasView.setNumeroDeQuartos(1);
+		reservasView.setParametrosReserva(null);
+		reservasView.setHospedeResponsavel(null);
+		reservasView.getReservas().clear();
+		reservasView.setChegada(null);
+		reservasView.setSaida(null);
+		reservasView.setValorReserva(0.0);
+		result.of(this).parametrosIniciais();
 	}
 	
 	public void responsavelReserva(){}
