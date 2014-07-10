@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Query;
 
 import org.joda.time.DateTime;
+import org.springframework.transaction.annotation.Transactional;
 
 import repositorios.ReservaRepositorio;
 import br.com.caelum.vraptor.ioc.Component;
@@ -47,5 +48,12 @@ public class ReservaDAO extends DAO<Reserva> implements ReservaRepositorio {
 		Query query = entityManager.createQuery(sql.toString());
 		query.setParameter(1, tresDiasAtras);
 		return query.getResultList();
+	}
+
+	@Transactional
+	public void salvarVariasReservas(List<Reserva> reservas) {
+		for (Reserva reserva : reservas){
+			super.salva(reserva);
+		}
 	}
 }

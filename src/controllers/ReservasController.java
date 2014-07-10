@@ -78,13 +78,16 @@ public class ReservasController {
 			DetalhesDosParametros detalhe = reservasView.getParametrosReserva().primeiroDetalheSemQuarto();
 			detalhe.setQuarto(quarto);
 			Reserva reserva = new Reserva();
-			reserva.addQuarto(quarto);
+			reserva.setQuarto(quarto);
 			reserva.setNumeroAdultos(detalhe.getNumeroAdultos());
 			reserva.setNumeroCriancas0a5(detalhe.getNumeroCriancas0a5());
 			reserva.setNumeroCriancas6a16(detalhe.getNumeroCriancas6a16());
 			reserva.setNumeroCriancas17a18(detalhe.getNumeroCriancas17a18());
 			reserva.setInicio(new DateTime(reservasView.getChegada().getTime()));
 			reserva.setFim(new DateTime(reservasView.getSaida().getTime()));
+			
+			if (quarto.possuiReservasNoMesmoPeriodo(reserva))
+				throw new HotelException("Já existe reserva para o quarto "+quarto.getNumero()+" para este período.");
 			
 			CalculoDeValorDaDiariaService servicoPrecos = new CalculoDeValorDaDiariaService(politicaPrecoRepositorio.buscaTodos());
 			servicoPrecos.calcularEInformarValorNaReserva(reserva);
@@ -123,31 +126,15 @@ public class ReservasController {
 			}
 
 			Hospede hospedeExistente = hospedeService.buscarESalvarOuAtualizar(hospede);
-			reservasView.setHospedeResponsavel(hospedeExistente);
 			
-			for (DetalhesDosParametros detalhe : reservasView.getParametrosReserva().getDetalhes()){
-				
-				Reserva reserva = new Reserva();
-				reserva.addQuarto(detalhe.getQuarto());
-				reserva.setNumeroAdultos(detalhe.getNumeroAdultos());
-				reserva.setNumeroCriancas0a5(detalhe.getNumeroCriancas0a5());
-				reserva.setNumeroCriancas6a16(detalhe.getNumeroCriancas6a16());
-				reserva.setNumeroCriancas17a18(detalhe.getNumeroCriancas17a18());
-				reserva.setInicio(new DateTime(reservasView.getChegada().getTime()));
-				reserva.setFim(new DateTime(reservasView.getSaida().getTime()));
-				
-				Quarto quarto = detalhe.getQuarto();
-//				if (quarto.possuiReservasNoMesmoPeriodo(reserva))
-//					throw new HotelException("Já existe reserva para o quarto "+quarto.getNumero()+" para este período.");
-				
-				CalculoDeValorDaDiariaService servicoPrecos = new CalculoDeValorDaDiariaService(politicaPrecoRepositorio.buscaTodos());
-				servicoPrecos.calcularEInformarValorNaReserva(reserva);
+			for (Reserva reserva : reservasView.getReservas()){
+				Quarto quarto = reserva.getQuarto();
+				if (quarto.possuiReservasNoMesmoPeriodo(reserva))
+					throw new HotelException("Já existe reserva para o quarto "+quarto.getNumero()+" para este período.");
 				reserva.setHospede(hospedeExistente);
-				
-				reservasView.setValorReserva(reserva.getValorReserva());
-//				reservaRepositorio.salva(reserva);
-				reservasView.addReserva(reserva);
 			}
+			
+			reservaRepositorio.salvarVariasReservas(reservasView.getReservas());
 			result.of(this).showReserva();
 			
 		}catch(HotelException e){

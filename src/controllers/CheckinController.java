@@ -42,11 +42,6 @@ public class CheckinController {
 	
 	public List<Reserva> list(){
 		List<Reserva> list =  reservaRepositorio.buscaReservasEmAberto();
-		for (Reserva r : list){
-			for (Quarto q : r.getQuartos()){
-				System.out.println(q.getNumero());
-			}
-		}
 		return list;
 	}
 	

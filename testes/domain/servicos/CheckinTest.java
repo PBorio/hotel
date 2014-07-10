@@ -17,7 +17,7 @@ public class CheckinTest {
 	public void oCheckinVaiCriarUmaEstadiaParaUmaReservaEUmQuarto(){
 		Reserva reserva = new FakeReserva().iniciandoEm("10/03/2014").terminandoEm("15/03/2014").noQuarto("1").build();
 		
-		Quarto quarto = reserva.getQuartos().get(0);
+		Quarto quarto = reserva.getQuarto();
 		
 		reserva.setHospede(new Hospede());
 		
@@ -34,7 +34,7 @@ public class CheckinTest {
 		Reserva reserva = new FakeReserva().iniciandoEm("10/03/2014").terminandoEm("15/03/2014").noQuarto("1").build();
 		reserva.setHospede(joao);
 		
-		Quarto quarto = reserva.getQuartos().get(0);
+		Quarto quarto = reserva.getQuarto();
 		
 		Checkin checkin = Checkin.checkinAPartirDeUmaReserva(reserva, quarto);
 		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();
@@ -65,7 +65,7 @@ public class CheckinTest {
 		reserva.setHospede(new Hospede());
 		reserva.setValorDiaria(10.0);
 		
-		Quarto quarto = reserva.getQuartos().get(0);
+		Quarto quarto = reserva.getQuarto();
 		
 		Checkin checkin = Checkin.checkinAPartirDeUmaReserva(reserva, quarto);
 		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();

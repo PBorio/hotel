@@ -2,12 +2,7 @@ package domain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
@@ -58,8 +52,9 @@ public class Reserva implements CalculavelPorPeriodo {
 	@JoinColumn(name="hospede_id")
 	private Hospede hospede;
 
-	@OneToMany(mappedBy="reserva", cascade=CascadeType.ALL)
-	private Set<QuartoDaReserva> quartosDaReserva = new HashSet<QuartoDaReserva>();
+	@ManyToOne
+	@JoinColumn(name="quarto_id")
+	private Quarto quarto;
 	
 	@Column(name="checkin")
 	@Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
@@ -80,14 +75,6 @@ public class Reserva implements CalculavelPorPeriodo {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-//	public Quarto getQuarto() {
-//		return quarto;
-//	}
-//
-//	public void setQuarto(Quarto quarto) {
-//		this.quarto = quarto;
-//	}
 
 	public Double getValorDiaria() {
 		return this.valorDiaria;
@@ -188,26 +175,18 @@ public class Reserva implements CalculavelPorPeriodo {
 		BigDecimal bd = new BigDecimal(valor.toString());
 	  	return bd.setScale(2, RoundingMode.HALF_EVEN).doubleValue();
 	}
-
-	public void addQuarto(Quarto quarto) {
-		QuartoDaReserva quartoDaReserva = new QuartoDaReserva(this, quarto);
-		this.quartosDaReserva.add(quartoDaReserva);
-	}
-
-	public List<Quarto> getQuartos() {
-		List<Quarto> result = new ArrayList<Quarto>();
-		for (QuartoDaReserva quartoReserva : this.quartosDaReserva){
-			result.add(quartoReserva.getQuarto());
-		}
-		return result;
-	}
 	
-	public Quarto getQuarto(){
-		return new ArrayList<QuartoDaReserva>(this.quartosDaReserva).get(0).getQuarto();
-	}
-
 	public Integer getNumeroCriancas17a18() {
 		return numeroCriancas17a18;
+	}
+
+	public Quarto getQuarto(){
+		return this.quarto;
+	}
+
+	public void setQuarto(Quarto quarto) {
+		quarto.addReserva(this);
+		this.quarto = quarto;
 	}
 
 }

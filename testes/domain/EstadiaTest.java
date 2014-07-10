@@ -50,7 +50,7 @@ public class EstadiaTest {
 	public void oValorDeUmaEstadiaEmAbertoComReservaEhOValorDaDiariaDaReservaAteADataInformada(){
 		Reserva reserva = new FakeReserva().iniciandoEm("09/03/2014").terminandoEm("11/03/2014").paraOHospede("Joao").noQuarto("19").build();
 		reserva.setValorDiaria(10.0);
-		Quarto quarto = reserva.getQuartos().get(0);
+		Quarto quarto = reserva.getQuarto();
 		
 		Checkin checkin = Checkin.checkinAPartirDeUmaReserva(reserva, quarto);
 		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();
@@ -84,7 +84,7 @@ public class EstadiaTest {
 	public void oValorDosServicosDaEstadiaEhASomaDosValoresDosServicosPrestados(){
 		Reserva reserva = 
 				new FakeReserva().iniciandoEm("12/03/2014").terminandoEm("19/03/2014").paraOHospede("Joao").noQuarto("1").comValorDaDiariaDe(10.0).build();
-		Quarto quarto = reserva.getQuartos().get(0);
+		Quarto quarto = reserva.getQuarto();
 		
 		Estadia estadia = Checkin.checkinAPartirDeUmaReserva(reserva, quarto).iniciarEstadiaAPartirDeUmaReserva();
 		
@@ -100,7 +100,7 @@ public class EstadiaTest {
 	public void tendoUmServicoDe10EUmDe5OTotalDosServicosSera15(){
 		Reserva reserva = 
 				new FakeReserva().iniciandoEm("12/03/2014").terminandoEm("19/03/2014").paraOHospede("Joao").noQuarto("1").comValorDaDiariaDe(10.0).build();
-		Quarto quarto = reserva.getQuartos().get(0);
+		Quarto quarto = reserva.getQuarto();
 		
     	Estadia estadia= Checkin.checkinAPartirDeUmaReserva(reserva,quarto).iniciarEstadiaAPartirDeUmaReserva();
 		 
@@ -120,7 +120,7 @@ public class EstadiaTest {
 	public void seAEstadiaNaoUtilizouServicosOValorDosServicosEhZero(){
 		Reserva reserva = 
 				new FakeReserva().iniciandoEm("12/03/2014").terminandoEm("19/03/2014").paraOHospede("Joao").noQuarto("1").comValorDaDiariaDe(10.0).build();
-		Quarto quarto = reserva.getQuartos().get(0);
+		Quarto quarto = reserva.getQuarto();
 		
 		Estadia estadia = Checkin.checkinAPartirDeUmaReserva(reserva, quarto).iniciarEstadiaAPartirDeUmaReserva();
 		
@@ -131,7 +131,7 @@ public class EstadiaTest {
 	public void oValorDoConsumoEhASomaDosProdutosConsumidosDuranteAEstadia(){
 		Reserva reserva = 
 				new FakeReserva().iniciandoEm("12/03/2014").terminandoEm("19/03/2014").paraOHospede("Joao").noQuarto("1").comValorDaDiariaDe(10.0).build();
-		Quarto quarto = reserva.getQuartos().get(0);
+		Quarto quarto = reserva.getQuarto();
 		
 		Estadia estadia = Checkin.checkinAPartirDeUmaReserva(reserva, quarto).iniciarEstadiaAPartirDeUmaReserva();
 		
@@ -146,7 +146,7 @@ public class EstadiaTest {
 	public void oValorConsumidoParaUmProdutoDe30EOutroDe10Eh40(){
 		Reserva reserva = 
 				new FakeReserva().iniciandoEm("12/03/2014").terminandoEm("19/03/2014").paraOHospede("Joao").noQuarto("1").comValorDaDiariaDe(10.0).build();
-		Quarto quarto = reserva.getQuartos().get(0);
+		Quarto quarto = reserva.getQuarto();
 		
 		Estadia estadia = Checkin.checkinAPartirDeUmaReserva(reserva, quarto).iniciarEstadiaAPartirDeUmaReserva();
 		
@@ -164,7 +164,7 @@ public class EstadiaTest {
 		
 		Reserva reserva = 
 				new FakeReserva().iniciandoEm("12/03/2014").terminandoEm("14/03/2014").paraOHospede("Joao").noQuarto("1").comValorDaDiariaDe(10.0).build();
-		Quarto quarto = reserva.getQuartos().get(0);
+		Quarto quarto = reserva.getQuarto();
 		
 		Estadia estadia = Checkin.checkinAPartirDeUmaReserva(reserva, quarto).iniciarEstadiaAPartirDeUmaReserva();
 		
@@ -193,7 +193,7 @@ public class EstadiaTest {
 		
 		Reserva reserva = 
 				new FakeReserva().iniciandoEm("12/03/2014").terminandoEm("14/03/2014").paraOHospede("Joao").noQuarto("1").comValorDaDiariaDe(10.0).build();
-		Quarto quarto = reserva.getQuartos().get(0);
+		Quarto quarto = reserva.getQuarto();
 		
 		Estadia estadia = Checkin.checkinAPartirDeUmaReserva(reserva, quarto).iniciarEstadiaAPartirDeUmaReserva();
 		
@@ -206,7 +206,7 @@ public class EstadiaTest {
 		
 		Reserva reserva = 
 				new FakeReserva().iniciandoEm("12/03/2014").terminandoEm("14/03/2014").paraOHospede("Joao").noQuarto("1").comValorDaDiariaDe(10.0).build();
-		Quarto quarto = reserva.getQuartos().get(0);
+		Quarto quarto = reserva.getQuarto();
 		
 		Estadia estadia = Checkin.checkinAPartirDeUmaReserva(reserva, quarto).iniciarEstadiaAPartirDeUmaReserva();
 		

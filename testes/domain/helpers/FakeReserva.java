@@ -39,7 +39,7 @@ public class FakeReserva {
 	public FakeReserva noQuarto(String numero) {
 		Quarto quarto = new Quarto();
 		quarto.setNumero(numero);
-		reserva.addQuarto(quarto);
+		reserva.setQuarto(quarto);
 		return this;
 	}
 
@@ -58,7 +58,7 @@ public class FakeReserva {
 	}
 
 	public FakeReserva paraOQuarto(Quarto quarto) {
-		reserva.addQuarto(quarto);
+		reserva.setQuarto(quarto);
 		return this;
 	}
 

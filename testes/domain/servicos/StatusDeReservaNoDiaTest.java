@@ -43,7 +43,7 @@ public class StatusDeReservaNoDiaTest {
 		
 		Quarto _002 = new Quarto();
 		_002.setId(2l);
-		reserva.addQuarto(_002);
+		reserva.setQuarto(_002);
 		
 		quartos.add(_001);
 		quartos.add(_002);

@@ -9,42 +9,64 @@
 <body>
             <div class="reservas-box02">
             		<h3>Escolha os quartos de sua Reserva</h3>
-            		<fieldset>
-            		<legend>Reserva N. ${reservasView.numeroDeQuartosJaSelecionados + 1}</legend>
-           			<p class="half">
-           			  <input type="text" value="<fmt:formatDate value='${reservasView.chegada}' pattern='dd/MM/yyyy'/>" readonly="readonly"/>
-           			</p>
-           			<p class="half">
-           			  <input type="text" value="<fmt:formatDate value='${reservasView.saida}' pattern='dd/MM/yyyy'/>" readonly="readonly"/>
-           			</p>
-           			<p class="half">
-           			  <input type="text" value="${detalhesDosParametros.numeroAdultos}" readonly="readonly"/>
-           			</p>
-           			<p class="half">
-           			  <input type="text" value="${detalhesDosParametros.numeroCriancas0a5}" readonly="readonly"/>
-           			</p>
-           			<p class="half">
-           			  <input type="text" value="${detalhesDosParametros.numeroCriancas6a16}" readonly="readonly"/>
-           			</p>
-			        <p class="half">
-           			  <input type="text" value="${detalhesDosParametros.numeroCriancas17a18}" readonly="readonly"/>
-           			</p>
-			            		
-				            	
+            <fieldset>
+            	<fieldset class="molduraLegenda">
+	          		<legend>Reserva N. ${reservasView.numeroDeQuartosJaSelecionados + 1}</legend>
+	           			<p class="half">
+	           			  <input type="text" value="<fmt:formatDate value='${reservasView.chegada}' pattern='dd/MM/yyyy'/>" readonly="readonly"/>
+	           			</p>
+	           			<p class="half">
+	           			  <input type="text" value="<fmt:formatDate value='${reservasView.saida}' pattern='dd/MM/yyyy'/>" readonly="readonly"/>
+	           			</p>
+	           			<p class="half">
+	           			  <label>Adultos:</label>
+	           			  <input type="text" value="${detalhesDosParametros.numeroAdultos}" readonly="readonly"/>
+	           			</p>
+	           			<p class="half">
+	           			  <label>0 a 5 anos:</label>
+	           			  <input type="text" value="${detalhesDosParametros.numeroCriancas0a5}" readonly="readonly"/>
+	           			</p>
+	           			<p class="half">
+	           			  <label>6 a 16 anos:</label>
+	           			  <input type="text" value="${detalhesDosParametros.numeroCriancas6a16}" readonly="readonly"/>
+	           			</p>
+				        <p class="half">
+				          <label>17 a 18 anos:</label>
+	           			  <input type="text" value="${detalhesDosParametros.numeroCriancas17a18}" readonly="readonly"/>
+	           			</p>
+				            		
+					<div class="clear"></div>
+            	</fieldset>            	
 			              
-            	<c:if test="${not empty reservasView.quartos}">
-            	<fieldset>
-				  	  <legend>Quartos Selecionados</legend>
-					  <c:forEach var="quarto" items="${reservasView.quartos}">
-					  	<p>
-							<input type="text" value="${quarto.numero}" readonly="readonly" />
-						</p>
-					  </c:forEach>
-				  </fieldset>
-				</c:if>
-            	<div class="clear"></div>
-            	</fieldset>
-            	<div class="clear"></div>
+			  <c:forEach var="detalhe" items="${reservasView.parametrosReserva.detalhes}">
+			    <c:if test="${not empty detalhe.quarto}">
+				    <fieldset class="molduraLegenda">
+			  	  	  <legend>Quarto já reservado: ${detalhe.quarto.numero}</legend>
+					  <p class="half">
+							<label>Adultos:</label>
+							<input type="text" value="${detalhe.numeroAdultos}" readonly="readonly" />
+					  </p>
+					  <p class="half">
+							<label>0 a 5 anos:</label>
+							<input type="text" value="${detalhe.numeroCriancas0a5}" readonly="readonly" />
+					  </p>
+					  <p class="half">
+							<label>6 a 16 anos:</label>
+							<input type="text" value="${detalhe.numeroCriancas6a16}" readonly="readonly" />
+					  </p>
+					  <p class="half">
+							<label>17 a 18 anos:</label>
+							<input type="text" class="col-xs-10" value="${detalhe.numeroCriancas17a18}" readonly="readonly" />
+					  </p>
+					  <p>
+							<label>Valor:</label>
+							<input type="text" class="col-xs-10" value="${reserva.valorReserva}" readonly="readonly" />
+					  </p>
+					  </fieldset>
+					</c:if>
+			  </c:forEach>
+              <div class="clear"></div>
+              </fieldset>
 		</div>	
        <div class="reservas-box02">
             <h3>Escolha um quarto para sua Reserva</h3>

@@ -324,3 +324,5 @@ article h2 {border-bottom: 1px dashed #0f4e8c; margin: 0;}
 
 .alert{ background:url(../../imagens/imagensfront/form-error-bg.gif) 0 0 no-repeat; color:#fff; font-size:11px; height:19px; left:300px; line-height:11px; padding:8px 10px 0 20px; white-space:nowrap; width:auto; z-index:999;}
 
+.molduraLegenda{border:solid 1px #0f4ea8; padding-left: 10px;}
+

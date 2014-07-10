@@ -20,7 +20,7 @@ public class ServicoDeReservaTest {
 		Reserva outraReserva = criarReserva("01/02/2014", "15/03/2014");
 		
 		Quarto quarto = new Quarto();
-		outraReserva.addQuarto(quarto);
+		outraReserva.setQuarto(quarto);
 		
 		List<Quarto> quartos = new ArrayList<Quarto>();
 		quartos.add(quarto);
@@ -36,7 +36,7 @@ public class ServicoDeReservaTest {
 		Reserva outra = criarReserva("15/03/2014", "31/03/2014");
 		
 		Quarto quarto = new Quarto();
-		outra.addQuarto(quarto);
+		outra.setQuarto(quarto);
 		
 		List<Quarto> quartos = new ArrayList<Quarto>();
 		quartos.add(quarto);
@@ -54,11 +54,11 @@ public class ServicoDeReservaTest {
 		
 		Quarto quarto = new Quarto();
 		quarto.setId(1l);
-		deUmAQuinzeDeMarco.addQuarto(quarto);
+		deUmAQuinzeDeMarco.setQuarto(quarto);
 		
 		Quarto outroQuarto = new Quarto();
 		outroQuarto.setId(2l);
-		deDezesseisATreintaEUm.addQuarto(outroQuarto);
+		deDezesseisATreintaEUm.setQuarto(outroQuarto);
 		
 		List<Quarto> quartos = new ArrayList<Quarto>();
 		quartos.add(quarto);

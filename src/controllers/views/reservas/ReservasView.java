@@ -109,7 +109,7 @@ public class ReservasView {
 	}
 
 	public void addReserva(Reserva reserva) {
-		this.reservas .add(reserva);
+		this.reservas.add(reserva);
 	}
 
 	public List<Reserva> getReservas() {
@@ -117,13 +117,10 @@ public class ReservasView {
 	}
 	
 	public Integer getNumeroDeQuartosJaSelecionados(){
-		Integer numeroDeQuartoSelecionados = 0;
-		
 		if (parametrosReserva == null)
 			return 0;
 		
 		return parametrosReserva.getNumeroDeQuartosJaSelecionados();
-		
 	}
 
 	public boolean jaTemOQuarto(Quarto quarto) {

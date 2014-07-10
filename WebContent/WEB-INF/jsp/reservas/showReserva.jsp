@@ -13,12 +13,9 @@
   <div class="reservas-box03">
         <h3>Informações da Reserva</h3>
 		<fieldset>
-		  <fieldset>
-		  	  <legend>Reservas Criadas</legend>
 			  <c:forEach var="reserva" items="${reservasView.reservas}">
-			  	<p>
-					<input type="text" value="${reserva.quarto.numero}" readonly="readonly" />
-				</p>
+			   <fieldset class="molduraLegenda">
+		  	   <legend>${reserva.quarto.numero}</legend>
 				 <p class="half">
 						<label>Início:</label>
 						<input type="text" class="col-xs-10" value="<joda:format pattern='dd/MM/yyyy' value='${reserva.inicio}'/>" readonly="readonly" />
@@ -47,11 +44,9 @@
 						<label>Valor:</label>
 						<input type="text" class="col-xs-10" value="${reserva.valorReserva}" readonly="readonly" />
 				  </p>
+				 </fieldset>
 			  </c:forEach>
-		  </fieldset>
-		  
-		  
-		  <fieldset>
+		  <fieldset class="molduraLegenda">
 		  <legend>Informações do Responsável</legend>
 			  <form class="form-horizontal" action='<c:url value="/reservas/confirmar"/>' method="post">
 		  	   <input type="hidden" name="hospede.id" value="${hospede.id}" />

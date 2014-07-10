@@ -27,7 +27,7 @@ function maisParametrosDeSelecao() {
 function addParametrosDeReservas(indiceDosParametros){
 	
 	var num = indiceDosParametros + 1;
-	cHtml = "<fieldset>"+
+	cHtml = "<fieldset class='molduraLegenda'>"+
 			"<legend>Reserva N. "+num+"</legend>"+
 		    "<p class='half'>"+
 			"	<select name='parametrosReserva.detalhes["+indiceDosParametros+"].numeroAdultos'>"+
@@ -129,7 +129,7 @@ function addParametrosDeReservas(indiceDosParametros){
            			<div id="reservas">
            			  <c:choose>
            			  		<c:when test="${empty reservasView.parametrosReserva || empty reservasView.parametrosReserva.detalhes }">
-		           			  <fieldset>
+		           			 <fieldset class="molduraLegenda">
 		           			    <legend>Reserva n. 1</legend>
 		  	           			<p class="half">
 			            				<select name="parametrosReserva.detalhes[0].numeroAdultos">
@@ -199,7 +199,7 @@ function addParametrosDeReservas(indiceDosParametros){
 			              </c:when>
 			              <c:otherwise>
 			                    <c:forEach var="detalhe" items="${ reservasView.parametrosReserva.detalhes }" varStatus="idx" >
-				              		<fieldset>
+				              		<fieldset class="molduraLegenda">
 			           			    <legend>Reserva n. ${idx.index+1}</legend>
 			  	           			<p class="half">
 				            				<select name="parametrosReserva.detalhes[${idx.index}].numeroAdultos">

@@ -17,4 +17,6 @@ public interface ReservaRepositorio {
 
 	List<Reserva> buscaReservasEmAberto();
 
+	void salvarVariasReservas(List<Reserva> reservas);
+
 }
