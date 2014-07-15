@@ -8,6 +8,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Reserva</title>
+<script type="text/javascript" src="<c:url value='/resources/scripts/jquery.maskedinput-1.3.min.js'/>"></script>
+  <script type="text/javascript">
+
+$(function() {
+	$("#cpf").mask("999.999.999-99");
+});
+
+	
+</script>
 </head>
 <body>
   <div class="reservas-box03">
@@ -56,12 +65,28 @@
 			        <p>
 			        	<input id="nome" type="text" placeholder="Sobrenome" name="hospede.sobrenome" value="${hospede.sobrenome}" />
 			        </p>
+			        <p>
+			        	<input id="cpf" type="text" placeholder="CPF" name="hospede.cpf" value="${hospede.cpf}" />
+			        </p>
+			        <p>
+			        	<input id="passaporte" type="text" placeholder="Passaporte" name="hospede.passaporte" value="${hospede.passaporte}" />
+			        </p>
+			        <p>
+			        	<input id="rne" type="text" placeholder="RNE" name="hospede.rne" value="${hospede.rne}" />
+			        </p>
 			          <p class="half">
 			        	<input id="email" type="text" placeholder="Email" name="hospede.email" value="${hospede.email}" />
 			        </p>
 			        <p class="half">
 			        	<input id="cidade" type="text" placeholder="Cidade" name="hospede.cidade" value="${hospede.cidade}" />
 			        </p>
+			         <p class="half">
+			        	<input id="estado" type="text" placeholder="Estado/Província/Departamento" name="hospede.estado" value="${hospede.estado}" />
+			        </p>
+			         <p class="half">
+			        	<input id="pais" type="text" placeholder="País" name="hospede.pais" value="${hospede.pais}" />
+			        </p>
+			        
 			        <p class="half">
 			        	<input id="telefone" type="text" placeholder="Telefone" name="hospede.telefone" value="${hospede.telefone}" />
 			        </p>

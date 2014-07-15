@@ -220,7 +220,7 @@ ul#acomodacoes ul.icons li{ background:none; display:inline; float:left; height:
 .contact-inner .contact-column { background:_#f00; display:inline; float:left; margin:0 15px 0 0;}
 .contact-inner .contact-column p { display:block; margin:0 0 10px; position:relative;}
 .contact-inner .contact-column p input[type="text"]{ background:url(../../imagens/imagensfront/contact-input.png) 0 0 no-repeat; color:#0f4e8c; display:block; font-size:12px; padding:5px 5px 6px; width:368px;}
-.contact-inner .contact-column p input[type="submit"]{ background:url(../../imagens/imagensfront/contact-enviar.png) no-repeat; background-position: 0 0; cursor:pointer; display:inline-block; float:right; font-size:1px; height:36px; margin:0 -5px 0 0; overflow:hidden; text-indent:-9999em; width:86px;}
+.contact-inner .contact-column p input[type="submit"]{ background-color: #d1a211; background-position: 0 0; cursor:pointer; display:inline-block; float:right; font-size:1px; height:36px; margin:0 -5px 0 0; overflow:hidden; text-indent:-9999em; width:86px;}
 .contact-inner .contact-column p input[type="submit"]:hover{ background-position:0 -36px;}
 .contact-inner .contact-column p textarea{ background:url(../../imagens/imagensfront/contact-textarea.png) 0 0 no-repeat; color:#0f4e8c; display:block; font-family: Tahoma; height:128px; font-size:12px; padding:5px 5px 6px; width:382px;}
 .contact-inner .contact-column p span{color:#0f4e8c; display:inline-block; font-size:11px;}

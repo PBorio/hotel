@@ -16,16 +16,20 @@ public class Hospede {
 	private Integer id;
 	
 	private String nome;
-	private String cidade;
 	private String email;
 	private String telefone;
 	private String celular;
 	
+	private Long cpf;
+	private String passaporte;
+	private String rne;
+	
 	@Transient
 	private String endereco;
 	
-	@Transient
-	private Long cpf;
+	private String cidade;
+	private String estado;
+	private String pais;
 	
 	@Transient
 	private Long rg;
@@ -143,6 +147,38 @@ public class Hospede {
 
 	public void setSobrenome(String sobrenome) {
 		this.sobrenome = sobrenome;
+	}
+
+	public String getPassaporte() {
+		return passaporte;
+	}
+
+	public void setPassaporte(String passaporte) {
+		this.passaporte = passaporte;
+	}
+
+	public String getRne() {
+		return rne;
+	}
+
+	public void setRne(String rne) {
+		this.rne = rne;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getPais() {
+		return pais;
+	}
+
+	public void setPais(String pais) {
+		this.pais = pais;
 	}
 
 }

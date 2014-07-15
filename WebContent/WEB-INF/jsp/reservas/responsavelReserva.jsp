@@ -20,7 +20,16 @@
 	        	<input id="nome" placeholder="Nome" type="text" name="hospede.nome" value="${hospede.nome}" />
 	        </p>
 	        <p>
-	        	<input id="nome" type="text" placeholder="Sobrenome" name="hospede.sobrenome" value="${hospede.sobrenome}" />
+	        	<input id="sobrenome" type="text" placeholder="Sobrenome" name="hospede.sobrenome" value="${hospede.sobrenome}" />
+	        </p>
+	        <p>
+	        	<input id="cpf" type="text" placeholder="CPF" name="hospede.cpf" value="${hospede.cpf}" />
+	        </p>
+	        <p>
+	        	<input id="passaporte" type="text" placeholder="Passaporte" name="hospede.passaporte" value="${hospede.passaporte}" />
+	        </p>
+	        <p>
+	        	<input id="rne" type="text" placeholder="RNE" name="hospede.rne" value="${hospede.rne}" />
 	        </p>
 	         <p class="half">
 	        	<input id="email" type="text" placeholder="Email" name="hospede.email" value="${hospede.email}" />

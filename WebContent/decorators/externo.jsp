@@ -6,7 +6,9 @@
 <head>
   <link rel="stylesheet" href="<c:url value='/resources/css/cssfront/stylefront.css'/>" type="text/css" media="screen" />
   <link rel="stylesheet" href="<c:url value='/resources/css/cssfront/reset.css'/>" type="text/css" media="screen" />
+  <link rel="stylesheet" href="<c:url value='/resources/css/datepicker.css'/>" type="text/css" media="screen" />
   <script type="text/javascript" src="<c:url value='/resources/scripts/jquery-1.7.1.min.js'/>"></script>    
+  <script src="<c:url value='/resources/scripts/jquery-ui.min.js'/>"></script>
   <decorator:head />
 </head>
 <body>

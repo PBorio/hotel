@@ -1,0 +1,5 @@
+ALTER TABLE `hotel`.`hospedes` 
+CHANGE COLUMN `sobrenome` `sobrenome` VARCHAR(255) NULL DEFAULT NULL AFTER `nome`,
+CHANGE COLUMN `endereco` `endereco` VARCHAR(255) NULL DEFAULT NULL AFTER `sobrenome`,
+CHANGE COLUMN `estado` `estado` VARCHAR(255) NULL DEFAULT NULL ,
+ADD COLUMN `pais` VARCHAR(255) NULL DEFAULT NULL AFTER `estado`;
