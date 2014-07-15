@@ -41,7 +41,7 @@
 			  <c:forEach var="detalhe" items="${reservasView.parametrosReserva.detalhes}">
 			    <c:if test="${not empty detalhe.quarto}">
 				    <fieldset class="molduraLegenda">
-			  	  	  <legend>Quarto já reservado: ${detalhe.quarto.numero}</legend>
+			  	  	  <legend>Quarto já reservado: ${detalhe.quarto.descricao}</legend>
 					  <p class="half">
 							<label>Adultos:</label>
 							<input type="text" value="${detalhe.numeroAdultos}" readonly="readonly" />

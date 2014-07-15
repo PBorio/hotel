@@ -24,7 +24,7 @@ $(function() {
 		<fieldset>
 			  <c:forEach var="reserva" items="${reservasView.reservas}">
 			   <fieldset class="molduraLegenda">
-		  	   <legend>${reserva.quarto.numero}</legend>
+		  	   <legend>${reserva.quarto.descricao}</legend>
 				 <p class="half">
 						<label>Início:</label>
 						<input type="text" class="col-xs-10" value="<joda:format pattern='dd/MM/yyyy' value='${reserva.inicio}'/>" readonly="readonly" />
