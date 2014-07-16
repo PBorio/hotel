@@ -20,7 +20,7 @@ public class Hospede {
 	private String telefone;
 	private String celular;
 	
-	private Long cpf;
+	private String cpf;
 	private String passaporte;
 	private String rne;
 	
@@ -31,8 +31,7 @@ public class Hospede {
 	private String estado;
 	private String pais;
 	
-	@Transient
-	private Long rg;
+	private String rg;
 
 	private String sobrenome;
 	
@@ -113,11 +112,11 @@ public class Hospede {
 		return String.valueOf(cpf);
 	}
 
-	public void setCpf(Long cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 	
-	public Long getCpf(){
+	public String getCpf(){
 		return this.cpf;
 	}
 
@@ -125,11 +124,11 @@ public class Hospede {
 		return String.valueOf(rg);
 	}
 
-	public void setRg(Long rg) {
+	public void setRg(String rg) {
 		this.rg = rg;
 	}
 	
-	public Long getRg(){
+	public String getRg(){
 		return this.rg;
 	}
 

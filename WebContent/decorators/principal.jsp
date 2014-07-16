@@ -26,7 +26,7 @@
 				<ul class="nav navbar-nav">
 					<li><a href="<c:url value='/checkin/list'/>">Checkin</a></li>
 					<li><a href="<c:url value='/reservas/parametrosIniciais'/>">Reservas</a></li> 
-					<li><a href="<c:url value='/reservas/consulta'/>">Consulta</a></li>
+					<li><a href="<c:url value='/consultas/consulta'/>">Consulta</a></li>
 					<li><a href="<c:url value='/quartos/list'/>">Quartos</a></li>
 					<li><a href="<c:url value='/categorias/list'/>">Categorias</a></li>
 					<li><a href="<c:url value='/politicas/list'/>">Preços</a></li>

@@ -29,14 +29,12 @@
 					<input type="text" class="col-xs-10" value="${reserva.hospede.email}" readonly="readonly" />
 				</div>
 		  </div>
-		   <c:forEach var="quarto" items="${reserva.quartos}">
 			<div class="form-group">
 				<label class="control-label col-xs-2">Quarto:</label>
 				<div class="col-xs-10">
-					<input type="text" class="col-xs-10" value="${quarto.numero}" readonly="readonly" />
+					<input type="text" class="col-xs-10" value="${reserva.quarto.numero}" readonly="readonly" />
 				</div>
 			</div>
-		</c:forEach>
 		<div class="form-group">
 			<label class="control-label col-xs-2">Início:</label>
 			<div class="col-xs-10">

@@ -28,7 +28,6 @@ import domain.exceptions.HotelException;
 import domain.servicos.CalculoDeValorDaDiariaService;
 import domain.servicos.InformativoService;
 import domain.servicos.ServicoDeReserva;
-import domain.servicos.StatusDeReservasNoDia;
 import domain.servicos.helpers.Periodo;
 import domain.servicos.interfaces.HospedeService;
 
@@ -146,37 +145,6 @@ public class ReservasController {
 	}
 
 	
-	public void consulta(){
-		
-		DateTime inicioPeriodo = new DateTime();
-		DateTime fimPeriodo = inicioPeriodo.plusDays(30);
-		
-		List<Quarto> quartos = quartoRepositorio.buscaTodos();
-		List<StatusDeReservasNoDia> statuses = new ArrayList<StatusDeReservasNoDia>();
-		
-		StatusDeReservasNoDia statusDoPrimeiroDia = new StatusDeReservasNoDia(inicioPeriodo, quartos);
-		statuses.add(statusDoPrimeiroDia);
-		
-		DateTime proximoDia = inicioPeriodo.plusDays(1);
-		while (proximoDia.isBefore(fimPeriodo)){
-			StatusDeReservasNoDia status = new StatusDeReservasNoDia(proximoDia, quartos);
-			statuses.add(status);
-			proximoDia = proximoDia.plusDays(1);
-		}
-		
-		StatusDeReservasNoDia statusDoUltimoDia = new StatusDeReservasNoDia(fimPeriodo, quartos);
-		statuses.add(statusDoUltimoDia);
-		
-		result.include("statusDeReservaNoDiaList", statuses);
-	}
-	
-	@Get
-	@Path("/reservas/{id}")
-	public void show(Long id) {
-		Reserva reserva = reservaRepositorio.buscaPorId(id);
-		result.include("reserva", reserva);
-	}
-
 	public void parametrosDetalhes(ParametrosReserva parametrosReserva){
 		
 		reservasView.setChegada(parametrosReserva.getChegada());

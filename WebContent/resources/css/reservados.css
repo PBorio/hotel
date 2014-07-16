@@ -1,3 +1,20 @@
+table{
+	width: 100%;	
+	font-size: 14px;
+}
+
+th{
+	text-align: center;
+}
+
+td{
+	border: 1px solid black;
+	text-align: center;
+}
+
+a{
+	color: black;
+}
 
 #container1 {
     float:left;
@@ -12,9 +29,6 @@
 
 .registroData{
   background-color: pink;
-  #margin:2px;
-  #margin-left:4px;
-  #margin-right:4px;
   cursor: default;
   border: 1px solid black;
 }
@@ -22,7 +36,6 @@
 .colunaQuarto{
     text-align: center;
     float:left;
-    width:8%;
 }
 
 .colunaChale {
@@ -87,12 +100,17 @@
 
 
 
-.livre{
+.L{
   background-color: #008000;
   border: 1px solid black;
   cursor: default;
 }
 
+.R{
+  background-color: #FF0000;
+  border: 1px solid black;
+  cursor: default;
+}
 
 .over{
   border: 1px solid black;
