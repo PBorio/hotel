@@ -1,22 +1,18 @@
 package controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.joda.time.DateTime;
 
-
 import repositorios.QuartoRepositorio;
 import repositorios.ReservaRepositorio;
-
-import domain.Quarto;
-import domain.Reserva;
-import domain.servicos.HotelCalendario;
-import domain.servicos.StatusDeReservasNoDia;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
+import domain.Quarto;
+import domain.Reserva;
+import domain.servicos.HotelCalendario;
 
 @Resource
 public class ConsultasController {
@@ -32,29 +28,9 @@ public class ConsultasController {
 	}
 	
 	public void consulta(){
-		
 		DateTime inicioPeriodo = new DateTime();
-		DateTime fimPeriodo = inicioPeriodo.plusDays(30);
-		List<Quarto> quartos = quartoRepositorio.buscaTodos();
-		HotelCalendario hotelCalendario = new HotelCalendario(quartos, inicioPeriodo);
+		HotelCalendario hotelCalendario = criarCalendario(inicioPeriodo);
 		result.include("hotelCalendario", hotelCalendario);
-
-		List<StatusDeReservasNoDia> statuses = new ArrayList<StatusDeReservasNoDia>();
-		
-		StatusDeReservasNoDia statusDoPrimeiroDia = new StatusDeReservasNoDia(inicioPeriodo, quartos);
-		statuses.add(statusDoPrimeiroDia);
-		
-		DateTime proximoDia = inicioPeriodo.plusDays(1);
-		while (proximoDia.isBefore(fimPeriodo)){
-			StatusDeReservasNoDia status = new StatusDeReservasNoDia(proximoDia, quartos);
-			statuses.add(status);
-			proximoDia = proximoDia.plusDays(1);
-		}
-		
-		StatusDeReservasNoDia statusDoUltimoDia = new StatusDeReservasNoDia(fimPeriodo, quartos);
-		statuses.add(statusDoUltimoDia);
-		
-		result.include("statusDeReservaNoDiaList", statuses);
 	}
 	
 	@Get
@@ -62,6 +38,32 @@ public class ConsultasController {
 	public void show(Long id) {
 		Reserva reserva = reservaRepositorio.buscaPorId(id);
 		result.include("reserva", reserva);
+	}
+	
+	@Get
+	@Path("/consultas/proximo/{mes}/{ano}")
+	public void proxima(Integer mes, Integer ano){
+		DateTime inicioPeriodo = new DateTime(ano, mes, 1, 0, 0);
+		inicioPeriodo = inicioPeriodo.plusMonths(1);
+		HotelCalendario hotelCalendario = criarCalendario(inicioPeriodo);
+		result.include("hotelCalendario", hotelCalendario);
+		result.of(this).consulta();
+	}
+	
+	@Get
+	@Path("/consultas/anterior/{mes}/{ano}")
+	public void anterior(Integer mes, Integer ano){
+		DateTime inicioPeriodo = new DateTime(ano, mes, 1, 0, 0);
+		inicioPeriodo = inicioPeriodo.minusMonths(1);
+		HotelCalendario hotelCalendario = criarCalendario(inicioPeriodo);
+		result.include("hotelCalendario", hotelCalendario);
+		result.of(this).consulta();
+	}
+
+	private HotelCalendario criarCalendario(DateTime inicioPeriodo) {
+		List<Quarto> quartos = quartoRepositorio.buscaTodos();
+		HotelCalendario hotelCalendario = new HotelCalendario(quartos, inicioPeriodo);
+		return hotelCalendario;
 	}
 
 }

@@ -13,7 +13,9 @@
 	<table>
 	 <thead>
    	 <tr>
-   	    <th colspan="32"<h1>${hotelCalendario.mes}</h1></th>
+   	    <th><a href="<c:url value='/consultas/anterior/${hotelCalendario.mes}/${hotelCalendario.ano}'/>"><img src="<c:url value='/resources/imagens/arrow_left.png'/>"></a></th>
+   	    <th colspan="30"><h2>${hotelCalendario.nomeDoMes}/${hotelCalendario.ano}</h2></th>
+   	    <th><a href="<c:url value='/consultas/proximo/${hotelCalendario.mes}/${hotelCalendario.ano}'/>"><img src="<c:url value='/resources/imagens/arrow_right.png'/>"></a></th>
    	 </tr>
    	 <tr>
    	 	<th class="registroData"></th>	

@@ -154,8 +154,8 @@ public class Reserva implements CalculavelPorPeriodo {
 	
 	public boolean contemAData(DateTime dia) {
 		
-		dia = dia.withTime(0, 0, 0, 0);
-		if (dia.equals(inicio.withTime(0, 0, 0, 0)) || dia.equals(fim.withTime(0, 0, 0, 0)))
+		dia = dia.withTimeAtStartOfDay();
+		if (dia.equals(inicio.withTimeAtStartOfDay()) || dia.equals(fim.withTimeAtStartOfDay()))
 			return true;
 		
 		return new Interval(inicio, fim).contains(dia);

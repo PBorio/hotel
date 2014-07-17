@@ -13,7 +13,7 @@ public class DiaCabecalho implements DiaDoCalendario {
 	}
 
 	public String getTexto() {
-		return dia.dayOfWeek().getAsShortText()+", "+dia.dayOfMonth().getAsString();
+		return dia.dayOfWeek().getAsShortText()+"  "+dia.dayOfMonth().getAsString();
 	}
 
 

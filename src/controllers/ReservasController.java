@@ -9,8 +9,6 @@ import repositorios.CategoriaRepositorio;
 import repositorios.PoliticaPrecoRepositorio;
 import repositorios.QuartoRepositorio;
 import repositorios.ReservaRepositorio;
-import br.com.caelum.vraptor.Get;
-import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
