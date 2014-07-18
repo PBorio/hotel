@@ -17,6 +17,7 @@ import domain.servicos.helpers.Periodo;
 public class CalculoDeValorDaDiariaServiceTest {
 	
 	private ParserDeStringParaData parser = new ParserDeStringParaData();
+	List<PoliticaDePrecos> politicas = new ArrayList<PoliticaDePrecos>();
 	
 	@Test
 	public void oValorDaReservaEhDeAcordoComAPoliticaDePrecosDaCategoriaDosQuartos(){
@@ -35,7 +36,6 @@ public class CalculoDeValorDaDiariaServiceTest {
 		politica.setFim(parser.parseData("30/04/2014").toDate());
 		politica.setValorDiaria(50.0);
 		
-		List<PoliticaDePrecos> politicas = new ArrayList<PoliticaDePrecos>();
 		politicas.add(politica);
 		
 		CalculoDeValorDaDiariaService servico = new CalculoDeValorDaDiariaService(politicas);
@@ -68,7 +68,6 @@ public class CalculoDeValorDaDiariaServiceTest {
 		padrao.setValorDiaria(40.0);
 		padrao.setPadrao(true);
 		
-		List<PoliticaDePrecos> politicas = new ArrayList<PoliticaDePrecos>();
 		politicas.add(politica);
 		politicas.add(padrao);
 		
@@ -102,7 +101,6 @@ public class CalculoDeValorDaDiariaServiceTest {
 		padrao.setValorDiaria(40.0);
 		padrao.setPadrao(false);
 		
-		List<PoliticaDePrecos> politicas = new ArrayList<PoliticaDePrecos>();
 		politicas.add(politica);
 		politicas.add(padrao);
 		
@@ -136,7 +134,6 @@ public class CalculoDeValorDaDiariaServiceTest {
 		padrao.setValorDiaria(40.0);
 		padrao.setPadrao(true);
 		
-		List<PoliticaDePrecos> politicas = new ArrayList<PoliticaDePrecos>();
 		politicas.add(politica);
 		politicas.add(padrao);
 		
@@ -170,7 +167,6 @@ public class CalculoDeValorDaDiariaServiceTest {
 		padrao.setValorDiaria(40.0);
 		padrao.setPadrao(true);
 		
-		List<PoliticaDePrecos> politicas = new ArrayList<PoliticaDePrecos>();
 		politicas.add(politica);
 		politicas.add(padrao);
 		
@@ -180,4 +176,89 @@ public class CalculoDeValorDaDiariaServiceTest {
 		Assert.assertEquals((Double)50.0, valorDiaria);
 	}
 	
+	@Test
+	public void seUmaReservaForDeApenasUmAdultoOValorDaReservaSera60PorCentoDoValorCalculado(){
+
+		Categoria categoria = new Categoria();
+		categoria.setId(1l);
+		
+		Quarto quarto = new Quarto();
+		quarto.setId(1l);
+		quarto.setCategoria(categoria);
+		
+		PoliticaDePrecos politica = new PoliticaDePrecos();
+		politica.setCategoria(categoria);
+		politica.setInicio(parser.parseData("01/01/2014").toDate());
+		politica.setFim(parser.parseData("30/12/2014").toDate());
+		politica.setValorDiaria(100.0);
+		
+		politicas.add(politica);
+		
+		Reserva reserva = new FakeReserva().iniciandoEm("01/03/2014").terminandoEm("02/03/2014").build();
+		reserva.setNumeroAdultos(1);
+		reserva.setQuarto(quarto);
+		
+		CalculoDeValorDaDiariaService servico = new CalculoDeValorDaDiariaService(politicas);
+		servico.calcularEInformarValorNaReserva(reserva);
+		
+		Assert.assertEquals((Double)60.0, reserva.getValorDiaria());
+	}
+	
+	@Test
+	public void paraCadaParDeCriancasDe0a5DeveAcrescentar40ReaisNoValorDaDiaria(){
+
+		Categoria categoria = new Categoria();
+		categoria.setId(1l);
+		
+		Quarto quarto = new Quarto();
+		quarto.setId(1l);
+		quarto.setCategoria(categoria);
+		
+		PoliticaDePrecos politica = new PoliticaDePrecos();
+		politica.setCategoria(categoria);
+		politica.setInicio(parser.parseData("01/01/2014").toDate());
+		politica.setFim(parser.parseData("30/12/2014").toDate());
+		politica.setValorDiaria(100.0);
+		
+		politicas.add(politica);
+		
+		Reserva reserva = new FakeReserva().iniciandoEm("01/03/2014").terminandoEm("02/03/2014").build();
+		reserva.setNumeroAdultos(1);
+		reserva.setNumeroCriancas0a5(4);
+		reserva.setQuarto(quarto);
+		
+		CalculoDeValorDaDiariaService servico = new CalculoDeValorDaDiariaService(politicas);
+		servico.calcularEInformarValorNaReserva(reserva);
+		
+		Assert.assertEquals((Double)180.0, reserva.getValorDiaria());
+	}
+
+	@Test
+	public void paraCadaParDeCriancasDe6a16DeveAcrescentar70ReaisNoValorDaDiaria(){
+
+		Categoria categoria = new Categoria();
+		categoria.setId(1l);
+		
+		Quarto quarto = new Quarto();
+		quarto.setId(1l);
+		quarto.setCategoria(categoria);
+		
+		PoliticaDePrecos politica = new PoliticaDePrecos();
+		politica.setCategoria(categoria);
+		politica.setInicio(parser.parseData("01/01/2014").toDate());
+		politica.setFim(parser.parseData("30/12/2014").toDate());
+		politica.setValorDiaria(100.0);
+		
+		politicas.add(politica);
+		
+		Reserva reserva = new FakeReserva().iniciandoEm("01/03/2014").terminandoEm("02/03/2014").build();
+		reserva.setNumeroAdultos(2);
+		reserva.setNumeroCriancas6a16(1);
+		reserva.setQuarto(quarto);
+		
+		CalculoDeValorDaDiariaService servico = new CalculoDeValorDaDiariaService(politicas);
+		servico.calcularEInformarValorNaReserva(reserva);
+		
+		Assert.assertEquals((Double)170.0, reserva.getValorDiaria());
+	}
 }

@@ -24,7 +24,7 @@ public class Periodo {
 	public boolean coincideCom(Periodo outroPeriodo) {
 		Interval destaReserva = new Interval(inicio, fim);
 		Interval daOutraReserva = new Interval(outroPeriodo.getInicio(), outroPeriodo.getFim());
-		return destaReserva.overlaps(daOutraReserva);
+		return destaReserva.overlaps(daOutraReserva) || destaReserva.abuts(daOutraReserva);
 	}
 
 }

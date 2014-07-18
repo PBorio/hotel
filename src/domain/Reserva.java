@@ -164,14 +164,11 @@ public class Reserva implements CalculavelPorPeriodo {
 	public boolean coincideCom(Reserva outraReserva) {
 		Periodo periodoDestaReserva = new Periodo(inicio, fim);
 		Periodo periodoDaOutraReserva = new Periodo(outraReserva.getInicio(), outraReserva.getFim());
-		return periodoDestaReserva.coincideCom(periodoDaOutraReserva);
+ 		return periodoDestaReserva.coincideCom(periodoDaOutraReserva);
 	}
 
 	public Double getValorReserva() {
 		Double valor = new CalculoDeValorPorPeriodoService().calcularValor(this);
-		if (this.numeroAdultos.intValue() == 1)
-			valor = valor * 0.6;
-		
 		BigDecimal bd = new BigDecimal(valor.toString());
 	  	return bd.setScale(2, RoundingMode.HALF_EVEN).doubleValue();
 	}
@@ -187,6 +184,28 @@ public class Reserva implements CalculavelPorPeriodo {
 	public void setQuarto(Quarto quarto) {
 		quarto.addReserva(this);
 		this.quarto = quarto;
+	}
+
+	public boolean isSoParaUmAdulto() {
+		if (this.numeroAdultos == null)
+			return false;
+		
+		if (this.numeroCriancas0a5 != null && this.numeroCriancas0a5.intValue()  > 0)
+			return false;
+		
+		if (this.numeroCriancas6a16 != null && this.numeroCriancas6a16.intValue() > 0)
+			return false;
+		
+		if (this.numeroCriancas17a18 != null && this.numeroCriancas17a18.intValue() > 0)
+			return false;
+		
+		return (numeroAdultos.intValue() == 1);
+	}
+
+	public int getParDeCriancasDe0a5() {
+		if (numeroCriancas0a5 == null)
+			return 0;
+		return (this.numeroCriancas0a5 / 2);
 	}
 
 }
