@@ -50,17 +50,22 @@ public class ReservaValidation {
 
 	public Validator validarBusca() {
 		
-		if (reservaView.getChegada() == null)
-			validator.add(new ValidationMessage("Data de Chegada é obrigatória", "inicio"));
-		
-		if (reservaView.getSaida() == null)
-			validator.add(new ValidationMessage("Data de Saída é obrigatória", "fim"));
-		
+		if (reservaView.getChegada() == null || reservaView.getSaida() == null){
+			if (reservaView.getChegada() == null)
+				validator.add(new ValidationMessage("Data de Chegada é obrigatória", "inicio"));
+			
+			if (reservaView.getSaida() == null)
+				validator.add(new ValidationMessage("Data de Saída é obrigatória", "fim"));
+		}
+		else{
+			if (reservaView.getSaida().before(reservaView.getChegada()))
+				validator.add(new ValidationMessage("Data de saída anterior a data de chegada", "datas"));
+		}
+
 		for (DetalhesDosParametros detalhe : reservaView.getParametrosReserva().getDetalhes()){
 			if (detalhe.getNumeroAdultos() == null)
 				validator.add(new ValidationMessage("Numero de Adultos é obrigatório", "numeroAdultos"));
 		}
-		
 		return this.validator;
 	}
 

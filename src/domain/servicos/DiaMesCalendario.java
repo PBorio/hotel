@@ -24,6 +24,12 @@ public class DiaMesCalendario implements DiaDoCalendario {
 		if (reserva instanceof ReservaNulo) 
 			return TipoStatusQuarto.LIVRE.getDescription();
 		
+		if (!reserva.isPossuiPagamento())
+			return TipoStatusQuarto.RESERVA_NAO_CONFIRMADA.getDescription();
+		
+		if (dia.withTimeAtStartOfDay().equals(reserva.getInicio().withTimeAtStartOfDay()))
+			return TipoStatusQuarto.RESERVADO_PRIMEIRODIA.getDescription();
+		
 		return TipoStatusQuarto.RESERVADO.getDescription();
 	}
 	

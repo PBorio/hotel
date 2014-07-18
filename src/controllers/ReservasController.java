@@ -132,7 +132,7 @@ public class ReservasController {
 			}
 			
 			reservaRepositorio.salvarVariasReservas(reservasView.getReservas());
-			result.of(this).showReserva();
+			result.redirectTo(ConsultasController.class).consulta();
 			
 		}catch(HotelException e){
 			result.include("reserva",reservasView);
@@ -191,13 +191,7 @@ public class ReservasController {
 	}
 	
 	public void limparReserva(){
-		reservasView.setNumeroDeQuartos(1);
-		reservasView.setParametrosReserva(null);
-		reservasView.setHospedeResponsavel(null);
-		reservasView.getReservas().clear();
-		reservasView.setChegada(null);
-		reservasView.setSaida(null);
-		reservasView.setValorReserva(0.0);
+		reservasView.clear();
 		result.of(this).parametrosIniciais();
 	}
 	

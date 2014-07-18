@@ -112,6 +112,18 @@ a{
   cursor: default;
 }
 
+.X{
+  background-color: #993300;
+  border: 1px solid black;
+  cursor: default;
+}
+
+.Lb{
+  background-color: #45818E;
+  border: 1px solid black;
+  cursor: default;
+}
+
 .over{
   border: 1px solid black;
   box-shadow:5px 4px 10px #ccc;

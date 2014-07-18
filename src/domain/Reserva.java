@@ -2,6 +2,8 @@ package domain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
@@ -67,7 +70,9 @@ public class Reserva implements CalculavelPorPeriodo {
 	@Column(name="valor_diaria")
 	private Double valorDiaria;
 
-	
+	@OneToMany(mappedBy="reserva")
+	private List<PagamentoReserva> pagamentos = new ArrayList<PagamentoReserva>();
+
 	public Long getId() {
 		return id;
 	}
@@ -173,6 +178,15 @@ public class Reserva implements CalculavelPorPeriodo {
 	  	return bd.setScale(2, RoundingMode.HALF_EVEN).doubleValue();
 	}
 	
+	public Double getValorPago() {
+		Double result = 0.0;
+		for (PagamentoReserva pg : this.pagamentos){
+			result += pg.getValorPagamento();
+		}
+		BigDecimal bd = new BigDecimal(result.toString());
+	  	return bd.setScale(2, RoundingMode.HALF_EVEN).doubleValue();
+	}
+	
 	public Integer getNumeroCriancas17a18() {
 		return numeroCriancas17a18;
 	}
@@ -206,6 +220,27 @@ public class Reserva implements CalculavelPorPeriodo {
 		if (numeroCriancas0a5 == null)
 			return 0;
 		return (this.numeroCriancas0a5 / 2);
+	}
+
+	public void addPagamento(PagamentoReserva pagamento) {
+		this.pagamentos.add(pagamento);
+	}
+
+	public boolean isPossuiPagamento() {
+		return (this.pagamentos.size() > 0);
+	}
+
+	public Double getSaldoAPagar() {
+		Double valorReserva = this.getValorReserva();
+		Double valorPago = this.getValorPago();
+		
+		Double result = valorReserva - valorPago;
+		BigDecimal bd = new BigDecimal(result.toString());
+	  	return bd.setScale(2, RoundingMode.HALF_EVEN).doubleValue();
+	}
+
+	public List<PagamentoReserva> getPagamentos() {
+		return pagamentos;
 	}
 
 }

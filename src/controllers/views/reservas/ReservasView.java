@@ -131,4 +131,14 @@ public class ReservasView {
 		return parametrosReserva.jaTemOQuarto(quarto);
 	}
 
+	public void clear() {
+		this.setNumeroDeQuartos(1);
+		this.setParametrosReserva(null);
+		this.setHospedeResponsavel(null);
+		this.getReservas().clear();
+		this.setChegada(null);
+		this.setSaida(null);
+		this.setValorReserva(0.0);
+	}
+
 }
