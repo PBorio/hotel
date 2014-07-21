@@ -52,20 +52,20 @@ public class ConsultasController {
 	}
 	
 	@Get
-	@Path("/consultas/proximo/{mes}/{ano}")
-	public void proxima(Integer mes, Integer ano){
-		DateTime inicioPeriodo = new DateTime(ano, mes, 1, 0, 0);
-		inicioPeriodo = inicioPeriodo.plusMonths(1);
+	@Path("/consultas/proximo/{primeiraSegundaFeira}/{mes}/{ano}")
+	public void proxima(Integer primeiraSegundaFeira, Integer mes, Integer ano){
+		DateTime inicioPeriodo = new DateTime(ano, mes, primeiraSegundaFeira, 0, 0);
+		inicioPeriodo = inicioPeriodo.plusWeeks(1);
 		HotelCalendario hotelCalendario = criarCalendario(inicioPeriodo);
 		result.include("hotelCalendario", hotelCalendario);
 		result.of(this).consulta();
 	}
 	
 	@Get
-	@Path("/consultas/anterior/{mes}/{ano}")
-	public void anterior(Integer mes, Integer ano){
-		DateTime inicioPeriodo = new DateTime(ano, mes, 1, 0, 0);
-		inicioPeriodo = inicioPeriodo.minusMonths(1);
+	@Path("/consultas/anterior/{primeiraSegundaFeira}/{mes}/{ano}")
+	public void anterior(Integer primeiraSegundaFeira, Integer mes, Integer ano){
+		DateTime inicioPeriodo = new DateTime(ano, mes, primeiraSegundaFeira, 0, 0);
+		inicioPeriodo = inicioPeriodo.minusWeeks(1);
 		HotelCalendario hotelCalendario = criarCalendario(inicioPeriodo);
 		result.include("hotelCalendario", hotelCalendario);
 		result.of(this).consulta();

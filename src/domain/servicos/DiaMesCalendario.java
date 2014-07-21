@@ -37,5 +37,9 @@ public class DiaMesCalendario implements DiaDoCalendario {
 		return reserva.getId();
 	}
 	
+	public boolean isFimDeSemana(){
+		return (this.dia.getDayOfWeek() == 6 || this.dia.getDayOfWeek() == 7);
+	}
+	
 
 }

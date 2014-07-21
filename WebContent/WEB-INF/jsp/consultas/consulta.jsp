@@ -13,14 +13,19 @@
 	<table>
 	 <thead>
    	 <tr>
-   	    <th><a href="<c:url value='/consultas/anterior/${hotelCalendario.mes}/${hotelCalendario.ano}'/>"><img src="<c:url value='/resources/imagens/arrow_left.png'/>"></a></th>
-   	    <th colspan="30"><h2>${hotelCalendario.nomeDoMes}/${hotelCalendario.ano}</h2></th>
-   	    <th><a href="<c:url value='/consultas/proximo/${hotelCalendario.mes}/${hotelCalendario.ano}'/>"><img src="<c:url value='/resources/imagens/arrow_right.png'/>"></a></th>
+   	    <th><a href="<c:url value='/consultas/anterior/${hotelCalendario.primeiraSegundaFeira}/${hotelCalendario.mesAtual}/${hotelCalendario.anoAtual}'/>"><img src="<c:url value='/resources/imagens/arrow_left.png'/>"></a></th>
+   	    <th class="nomeMes" colspan="${hotelCalendario.diasRestantesMesAtual}"><h3>${hotelCalendario.nomeDoMesAtual}/${hotelCalendario.anoAtual}</h3></th>
+   	    <c:if test="${hotelCalendario.diasRestantesProximoMes > 0}">
+   	    	<th class="nomeMes" colspan="${hotelCalendario.diasRestantesProximoMes}"><h3>${hotelCalendario.nomeDoProximoMes}/${hotelCalendario.proximoAno}</h3></th>
+   	    </c:if>
+   	    <th><a href="<c:url value='/consultas/proximo/${hotelCalendario.primeiraSegundaFeira}/${hotelCalendario.mesAtual}/${hotelCalendario.anoAtual}'/>"><img src="<c:url value='/resources/imagens/arrow_right.png'/>"></a></th>
    	 </tr>
    	 <tr>
    	 	<th class="registroData"></th>	
    	    <c:forEach var="dia" items="${hotelCalendario.cabecalho.dias}">
-   	         <th class="registroData">${dia.texto}</th>
+   	         <th <c:if test="${dia.fimDeSemana}">class="fimDeSemana"</c:if>
+   	             <c:if test="${ not dia.fimDeSemana}">class="registroData"</c:if>>
+   	             ${dia.texto}</th>
    	    </c:forEach>
      </tr>
      </thead>

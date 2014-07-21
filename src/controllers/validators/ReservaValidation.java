@@ -1,5 +1,7 @@
 package controllers.validators;
 
+import org.joda.time.DateTime;
+
 import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.validator.ValidationMessage;
 import controllers.views.reservas.DetalhesDosParametros;
@@ -58,6 +60,12 @@ public class ReservaValidation {
 				validator.add(new ValidationMessage("Data de Saída é obrigatória", "fim"));
 		}
 		else{
+			
+			DateTime chegada = new DateTime(reservaView.getChegada().getTime()).withTimeAtStartOfDay();
+			DateTime hoje = new DateTime().withTimeAtStartOfDay();
+			if (chegada.isBefore(hoje))
+				validator.add(new ValidationMessage("Data de chegada anterior a data de hoje", "datas"));
+			
 			if (reservaView.getSaida().before(reservaView.getChegada()))
 				validator.add(new ValidationMessage("Data de saída anterior a data de chegada", "datas"));
 		}

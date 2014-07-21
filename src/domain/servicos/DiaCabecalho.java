@@ -16,5 +16,9 @@ public class DiaCabecalho implements DiaDoCalendario {
 		return dia.dayOfWeek().getAsShortText()+"  "+dia.dayOfMonth().getAsString();
 	}
 
+	public boolean isFimDeSemana() {
+		return (this.dia.getDayOfWeek() == 6 || this.dia.getDayOfWeek() == 7);
+	}
+
 
 }
