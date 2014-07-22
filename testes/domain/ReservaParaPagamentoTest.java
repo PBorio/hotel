@@ -45,4 +45,5 @@ public class ReservaParaPagamentoTest {
 		
 		Assert.assertEquals((Double)20.0, reserva.getSaldoAPagar());
 	}
+	
 }

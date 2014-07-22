@@ -8,13 +8,12 @@
 		<meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.css'/>" />
-		<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap-theme.css'/>" />
 		<script src=" <c:url value='/resources/scripts/jquery-1.7.1.min.js'/>"></script>
 		<decorator:head />
 		
 	</head>
 	<body>
-	<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle"
@@ -39,9 +38,8 @@
 		</div>
 	</div>
 	<div class="container">
-		<div class="starter-template">
-			<h1>Hotel</h1>
-			<p class="lead">Os melhores preços</p>
+		<div class="page-header">
+			
 		</div>
 	</div>
 		<div class="jumbotron">

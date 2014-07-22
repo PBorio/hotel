@@ -18,6 +18,13 @@ public class PagamentoReserva {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	private Integer tipoPagamento;
+	
+	@Column(name="data_previsao")
+	private Date dataPrevisao;
+	
+	private String banco;
 
 	@Column(name="data_pagamento")
 	private Date dataPagamento;
@@ -62,6 +69,30 @@ public class PagamentoReserva {
 
 	public void setReserva(Reserva reserva) {
 		this.reserva = reserva;
+	}
+
+	public Integer getTipoPagamento() {
+		return tipoPagamento;
+	}
+
+	public void setTipoPagamento(Integer tipoPagamento) {
+		this.tipoPagamento = tipoPagamento;
+	}
+
+	public Date getDataPrevisao() {
+		return dataPrevisao;
+	}
+
+	public void setDataPrevisao(Date dataPrevisao) {
+		this.dataPrevisao = dataPrevisao;
+	}
+
+	public String getBanco() {
+		return banco;
+	}
+
+	public void setBanco(String banco) {
+		this.banco = banco;
 	}
 
 }

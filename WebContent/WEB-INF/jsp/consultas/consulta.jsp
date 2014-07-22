@@ -24,21 +24,23 @@
    	 	<th class="registroData"></th>	
    	    <c:forEach var="dia" items="${hotelCalendario.cabecalho.dias}">
    	         <th <c:choose>
-   	               <c:when test="${dia.hoje}">class="hoje"</c:when>
+   	               <c:when test="${dia.hoje}">class="destaque"</c:when>
    	               <c:when test="${dia.fimDeSemana}">class="fimDeSemana"</c:when>
    	               <c:otherwise>class="registroData"</c:otherwise>
    	             </c:choose> > 
    	             ${dia.texto}</th>
    	    </c:forEach>
+   	    <th class="registroData"></th>
      </tr>
      </thead>
     <tbody>
           <c:forEach var="linha" items="${hotelCalendario.linhas}" >
           	<tr>
-	            <td>${linha.numeroQuarto}</td>
+	            <td class="destaque">${linha.numeroQuarto}</td>
 	            <c:forEach var="dia" items="${linha.dias}">
 	              <td class="${dia.marcacao}"><a href="<c:url value='/consultas/${dia.idReserva}'/>">${dia.texto}</a></td>
 	            </c:forEach>
+	            <td class="destaque">${linha.numeroQuarto}</td>
              </tr>
           </c:forEach>
     </tbody>

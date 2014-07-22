@@ -179,5 +179,9 @@ public class Hospede {
 	public void setPais(String pais) {
 		this.pais = pais;
 	}
+	
+	public String getNomeCompleto(){
+		return this.nome+" "+this.sobrenome;
+	}
 
 }
