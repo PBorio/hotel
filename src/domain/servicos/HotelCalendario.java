@@ -10,9 +10,9 @@ import domain.Quarto;
 
 public class HotelCalendario {
 
-	LinhasDoCalendario cabecalho;
+	private LinhaCabecalhoCalendario cabecalho;
 	
-	public List<LinhasDoCalendario> linhas = new ArrayList<LinhasDoCalendario>();
+	private List<LinhasDoCalendario> linhas = new ArrayList<LinhasDoCalendario>();
 
 	private final List<Quarto> quartos;
 
@@ -77,7 +77,7 @@ public class HotelCalendario {
 		return linhas;
 	}
 	
-	public LinhasDoCalendario getCabecalho(){
+	public LinhaCabecalhoCalendario getCabecalho(){
 		return this.cabecalho;
 	}
 	
@@ -85,7 +85,7 @@ public class HotelCalendario {
 
 		DateTime ultimoDiaDoMes = primeiraSegundaFeira.plusDays(28).withTimeAtStartOfDay();
 		DateTime dia = primeiraSegundaFeira;
-		cabecalho = new LinhasDoCalendario();
+		cabecalho = new LinhaCabecalhoCalendario();
 		while (dia.isBefore(ultimoDiaDoMes)||dia.equals(ultimoDiaDoMes)){
 			DiaCabecalho diaCabecalho = new DiaCabecalho(dia);
 			cabecalho.addDia(diaCabecalho);

@@ -3,18 +3,21 @@ package domain.servicos.tipos;
 
 public enum TipoStatusQuarto implements Tipo
 {
-  LIVRE(0, "L"),
-  RESERVADO(1, "X"),
-  RESERVADO_PRIMEIRODIA(2,"R"), 
-  RESERVA_NAO_CONFIRMADA(3, "P");   
+  LIVRE(0, "L", "Livre"),
+  RESERVADO(1, "X", "ReservadoOutro"),
+  RESERVADO_PRIMEIRODIA(2, "R", "Reservado"), 
+  RESERVA_NAO_CONFIRMADA_PRIMEIRODIA(3, "P", "Pre"),
+  RESERVA_NAO_CONFIRMADA(4, "X", "PreOutro");
   
   private final Integer value;   
   private final String description;
+  private String marcacao;
   
-  TipoStatusQuarto(Integer value, String description)
+  TipoStatusQuarto(Integer value, String description, String marcacao)
   {   
      this.value = value;
      this.description = description;
+	this.marcacao = marcacao;
   }   
   
   public Integer getValue()
@@ -25,6 +28,11 @@ public enum TipoStatusQuarto implements Tipo
   public String getDescription()
   {
     return description;
+  }
+  
+  public String getMarcacao()
+  {
+    return marcacao;
   }
   
   public static TipoStatusQuarto getType(Integer value)

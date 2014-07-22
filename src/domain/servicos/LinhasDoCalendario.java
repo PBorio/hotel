@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import domain.Quarto;
-import domain.servicos.interfaces.DiaDoCalendario;
 
 
 public class LinhasDoCalendario  {
-	private List<DiaDoCalendario> dias = new ArrayList<DiaDoCalendario>();
+	private List<DiaMesCalendario> dias = new ArrayList<DiaMesCalendario>();
 	private Quarto quarto;
 	
 	public LinhasDoCalendario(){}
@@ -17,11 +16,11 @@ public class LinhasDoCalendario  {
 		this.quarto = quarto;
 	}
 
-	public void addDia(DiaDoCalendario dia){
+	public void addDia(DiaMesCalendario dia){
 		this.dias.add(dia);
 	}
 
-	public List<DiaDoCalendario> getDias() {
+	public List<DiaMesCalendario> getDias() {
 		return dias;
 	}
 	

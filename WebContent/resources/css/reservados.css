@@ -29,30 +29,43 @@ a{
 .fimDeSemana{
   background-color: black;
   cursor: default;
-  border: 1px solid black;
+  border: 1px solid white;
   color: white;
 }
 
-.L{
+.hoje{
+  background-color: white;
+  cursor: default;
+  border: 2px solid black;
+  color: black;
+}
+
+.Livre{
   background-color: #008000;
   border: 1px solid black;
   cursor: default;
 }
 
-.R{
+.Reservado{
   background-color: #FF0000;
   border: 1px solid black;
   cursor: default;
 }
 
-.X{
+.ReservadoOutro{
   background-color: #993300;
   border: 1px solid black;
   cursor: default;
 }
 
-.P{
-  background-color: #45818E;
+.Pre{
+  background-color: #CA610E;
+  border: 1px solid black;
+  cursor: default;
+}
+
+.PreOutro{
+  background-color: #FFB430;
   border: 1px solid black;
   cursor: default;
 }

@@ -2,9 +2,7 @@ package domain.servicos;
 
 import org.joda.time.DateTime;
 
-import domain.servicos.interfaces.DiaDoCalendario;
-
-public class DiaCabecalho implements DiaDoCalendario {
+public class DiaCabecalho {
 
 	private DateTime dia;
 
@@ -18,6 +16,12 @@ public class DiaCabecalho implements DiaDoCalendario {
 
 	public boolean isFimDeSemana() {
 		return (this.dia.getDayOfWeek() == 6 || this.dia.getDayOfWeek() == 7);
+	}
+	
+	public boolean isHoje() {
+		DateTime hoje = new DateTime().withTimeAtStartOfDay();
+		DateTime dia = this.dia.withTimeAtStartOfDay();
+		return (hoje.equals(dia));
 	}
 
 
