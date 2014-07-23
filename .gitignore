@@ -15,4 +15,4 @@
 /log/*.log
 /tmp
 
-/WebContent/WEB-INF/classes/*.*
+/WebContent/WEB-INF/classes/*
