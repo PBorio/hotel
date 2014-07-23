@@ -33,19 +33,14 @@ public class PagamentoReserva {
 	@Transient
 	private Date dataDeposito;
 	
-	private double valor;
+	private Double valor;
+	
+	@Transient
+	private Double valorDeposito;
 	
 	@ManyToOne
 	@JoinColumn(name="reserva_id")
 	private Reserva reserva;
-
-	public void setValor(double valor) {
-		this.valor = valor;
-	}
-
-	public Double getValorPagamento() {
-		return this.valor;
-	}
 
 	public Long getId() {
 		return id;
@@ -61,10 +56,6 @@ public class PagamentoReserva {
 
 	public void setDataPagamento(Date dataPagamento) {
 		this.dataPagamento = dataPagamento;
-	}
-
-	public double getValor() {
-		return valor;
 	}
 
 	public Reserva getReserva() {
@@ -106,5 +97,42 @@ public class PagamentoReserva {
 	public void setDataDeposito(Date dataDeposito) {
 		this.dataDeposito = dataDeposito;
 	}
+	
+	public Double getValorDeposito() {
+		return valorDeposito;
+	}
 
+	public void setValorDeposito(Double valorDeposito) {
+		this.valorDeposito = valorDeposito;
+	}
+
+	public void setValor(Double valor) {
+		this.valor = valor;
+	}
+
+	public Double getValor() {
+		return valor;
+	}
+
+	public Double getValorPagamento() {
+		return this.valor;
+	}
+
+	public void arrumaValores() {
+		if (this.valor == null) this.valor = valorDeposito;
+		if (this.dataPagamento == null) this.dataPagamento = dataDeposito;
+	}
+	
+	public String getDescricaoDoTipo(){
+		if (tipoPagamento == null)
+			return "";
+		
+		if (tipoPagamento.equals(1))
+			return "Cartão";
+		
+		if (tipoPagamento.equals(2))
+			return "Depósito";
+		
+		return "";
+	}
 }

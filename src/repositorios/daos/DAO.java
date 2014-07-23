@@ -37,7 +37,7 @@ public class DAO<T> {
 	public void atualiza(T t) {
 		entityManager.merge(t);		
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	public List<T> buscaTodos(int pagina) {
 		Query query = entityManager.createQuery(" From " + classe.getName() + " c order by c.id desc");

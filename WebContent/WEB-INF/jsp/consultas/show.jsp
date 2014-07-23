@@ -78,108 +78,12 @@ function mudarTipoPagamento(){
 				<input type="text" class="col-xs-10" value="${reserva.saldoAPagar}" readonly="readonly" />
 			</div>
 	   </div>
-	 <c:choose>
-	   <c:when test="${reserva.possuiPagamento}">
-	   		<legend>Pagamentos</legend>
-		  	 <c:forEach var="pg" items="${reserva.pagamentos}">
-			  	 <div class="form-group">
-			  	  	<label class="control-label col-xs-2">Data:</label>
-				    <div class="col-xs-10">
-				 	  <input type="text" class="col-xs-10" value="<fmt:formatDate value='${pg.dataPagamento}' pattern='dd/MM/yyyy'/>" readonly="readonly" />
-					</div>
-				</div>
-				<div class="form-group">
-			  	  	<label class="control-label col-xs-2">Valor:</label>
-				    <div class="col-xs-10">
-				 	  <input type="text" class="col-xs-10" value="${pg.valor}" readonly="readonly" />
-					</div>
-				</div>
-			</c:forEach>
-	   </c:when>
-	   <c:otherwise> 
-	   <form class="form-horizontal" action='<c:url value="/pagamentos/registrar"/>' method="post">
-		<legend>Informar Pagamento</legend>
-		  	 <div class="form-group">
-				<label class="control-label col-xs-2">Tipos de Pagamento:</label>
-				<div class="col-xs-10">
-					<select id="tipo" class="col-xs-10" >   
-		                <option> Tipos...</option>
-		                <option value="1"> Cartão </option>
-		                <option value="2"> Depósito </option>  
-		            </select>
-				</div>
-			 </div>
-		  	 <div id="cartao">
-		  	 	<input type="hidden" value="${reserva.id}" name="pagamentoReserva.reserva.id"/>
-		  	 	<input type="hidden" value="1" name="pagamentoReserva.tipoPagamento"/>
-			  	 <div class="form-group">
-			  	  	<label class="control-label col-xs-2">Data Pagamento:</label>
-				    <div class="col-xs-10">
-				 	  <input type="text" class="col-xs-10" value="<fmt:formatDate value='${pagamentoReserva.dataPagamento}' pattern='dd/MM/yyyy'/>" name="pagamentoReserva.dataPagamento" />
-					</div>
-				 </div>
-			  	 
-			  	 <div class="form-group">
-			  	  	<label class="control-label col-xs-2">Valor:</label>
-				    <div class="col-xs-10">
-				 	  <input type="text" class="col-xs-10" value="${pagamentoReserva.valor}" name="pagamentoReserva.valor" />
-					</div>
-				 </div>
-				 <div class="form-group">
-					  <label class="control-label col-xs-2" for="singlebutton"></label>
-					  <div class="col-xs-10">
-					    <button id="singlebutton" name="singlebutton" class="btn btn-primary btn-lg">
-						 Salvar
-					    </button>
-					  </div>
-				    </div>
-			</div>
-			<div id="deposito">
-			     <input type="hidden" value="${reserva.id}" name="pagamentoReserva.reserva.id"/>
-			      <input type="hidden" value="2" name="pagamentoReserva.tipoPagamento"/>
-				 <div class="form-group">
-				   <label class="control-label col-xs-2">Banco:</label>
-				   <div class="col-xs-10">
-					 <select id="banco" name="pagamentoReserva.banco" class="col-xs-10" >   
-		                <option> Tipos...</option>
-		                <option value="Itau"> Itau </option>
-		                <option value="Banco do Brasil"> Banco do Brasil </option>  
-		             </select>
-				   </div>
-			 	</div>
-				
-				<div class="form-group">
-			  	  	<label class="control-label col-xs-2">Data Previsão:</label>
-				    <div class="col-xs-10">
-				 	  <input type="text" class="col-xs-10" value="<fmt:formatDate value='${pagamentoReserva.dataPrevisao}' pattern='dd/MM/yyyy'/>" name="pagamentoReserva.dataPrevisao" />
-					</div>
-				 </div>
-				<div class="form-group">
-			  	  	<label class="control-label col-xs-2">Data Pagamento:</label>
-				    <div class="col-xs-10">
-				 	  <input type="text" class="col-xs-10" value="<fmt:formatDate value='${pagamentoReserva.dataDeposito}' pattern='dd/MM/yyyy'/>" name="pagamentoReserva.dataDeposito" />
-					</div>
-				 </div>
-				 <div class="form-group">
-			  	  	<label class="control-label col-xs-2">Valor:</label>
-				    <div class="col-xs-10">
-				 	  <input type="text" class="col-xs-10" value="${pagamentoReserva.valor}" name="pagamentoReserva.valor" />
-					</div>
-				 </div>
-				 <div class="form-group">
-					  <label class="control-label col-xs-2" for="singlebutton"></label>
-					  <div class="col-xs-10">
-					    <button id="singlebutton" name="singlebutton" class="btn btn-primary btn-lg">
-						 Salvar
-					    </button>
-					  </div>
-				  </div>
-				
-			</div> 
-		</form>
-	   </c:otherwise>
-	 </c:choose>
 	 </fieldset>
+	   <c:if test="${reserva.possuiPagamento}">
+	     <%@include file="fragmentos/pagamentosrealizados.jspf" %>
+	   </c:if>
+	    <%@include file="fragmentos/pagamentosarealizar.jspf" %>
+	 
 </div>
 </body>
 </html>
