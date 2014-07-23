@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="pagamentos_reservas")
@@ -28,6 +29,9 @@ public class PagamentoReserva {
 
 	@Column(name="data_pagamento")
 	private Date dataPagamento;
+	
+	@Transient
+	private Date dataDeposito;
 	
 	private double valor;
 	
@@ -93,6 +97,14 @@ public class PagamentoReserva {
 
 	public void setBanco(String banco) {
 		this.banco = banco;
+	}
+
+	public Date getDataDeposito() {
+		return dataDeposito;
+	}
+
+	public void setDataDeposito(Date dataDeposito) {
+		this.dataDeposito = dataDeposito;
 	}
 
 }

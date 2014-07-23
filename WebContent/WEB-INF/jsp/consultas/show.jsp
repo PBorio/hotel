@@ -97,6 +97,7 @@ function mudarTipoPagamento(){
 			</c:forEach>
 	   </c:when>
 	   <c:otherwise> 
+	   <form class="form-horizontal" action='<c:url value="/pagamentos/registrar"/>' method="post">
 		<legend>Informar Pagamento</legend>
 		  	 <div class="form-group">
 				<label class="control-label col-xs-2">Tipos de Pagamento:</label>
@@ -109,9 +110,8 @@ function mudarTipoPagamento(){
 				</div>
 			 </div>
 		  	 <div id="cartao">
-		  	 	<form class="form-horizontal" action='<c:url value="/pagamentos/registrar"/>' method="post">
 		  	 	<input type="hidden" value="${reserva.id}" name="pagamentoReserva.reserva.id"/>
-		  	 	<input type="hidden" value="1" name="pagamentoReserva.tipoPagamento'	"/>
+		  	 	<input type="hidden" value="1" name="pagamentoReserva.tipoPagamento"/>
 			  	 <div class="form-group">
 			  	  	<label class="control-label col-xs-2">Data Pagamento:</label>
 				    <div class="col-xs-10">
@@ -133,12 +133,10 @@ function mudarTipoPagamento(){
 					    </button>
 					  </div>
 				    </div>
-				</form>
 			</div>
 			<div id="deposito">
-			   <form class="form-horizontal" action='<c:url value="/pagamentos/registrar"/>' method="post">
 			     <input type="hidden" value="${reserva.id}" name="pagamentoReserva.reserva.id"/>
-			     <input type="hidden" value="2" name="pagamentoReserva.tipoPagamento'	"/>
+			      <input type="hidden" value="2" name="pagamentoReserva.tipoPagamento"/>
 				 <div class="form-group">
 				   <label class="control-label col-xs-2">Banco:</label>
 				   <div class="col-xs-10">
@@ -159,10 +157,10 @@ function mudarTipoPagamento(){
 				<div class="form-group">
 			  	  	<label class="control-label col-xs-2">Data Pagamento:</label>
 				    <div class="col-xs-10">
-				 	  <input type="text" class="col-xs-10" value="<fmt:formatDate value='${pagamentoReserva.dataPagamento}' pattern='dd/MM/yyyy'/>" name="pagamentoReserva.dataPagamento" />
+				 	  <input type="text" class="col-xs-10" value="<fmt:formatDate value='${pagamentoReserva.dataDeposito}' pattern='dd/MM/yyyy'/>" name="pagamentoReserva.dataDeposito" />
 					</div>
 				 </div>
-			  	 <div class="form-group">
+				 <div class="form-group">
 			  	  	<label class="control-label col-xs-2">Valor:</label>
 				    <div class="col-xs-10">
 				 	  <input type="text" class="col-xs-10" value="${pagamentoReserva.valor}" name="pagamentoReserva.valor" />
@@ -176,9 +174,9 @@ function mudarTipoPagamento(){
 					    </button>
 					  </div>
 				  </div>
-				</form>
+				
 			</div> 
-			
+		</form>
 	   </c:otherwise>
 	 </c:choose>
 	 </fieldset>
