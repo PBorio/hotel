@@ -54,6 +54,20 @@
 					</tfoot>
 				</table>
 			</c:if>
+			
+			<table class="table table-striped table-bordered" id="example"
+						cellpadding="0" cellspacing="0" border="0" width="100%">
+					<thead> 
+						<tr>
+							<th class="ui-state-default" width="100%">Quarto</th>
+						</tr>
+					</thead>
+					<tfoot>
+						<tr>
+						   	<th>${checkin.quarto.numero}</th>
+						</tr>
+					</tfoot>
+			</table>
 			<c:if test="${ not empty checkin.hospedes}">
 				<table class="table table-striped table-bordered" id="example"
 						cellpadding="0" cellspacing="0" border="0" width="100%">
@@ -95,7 +109,7 @@
 					<div class="form-group">
 						<label class="control-label col-xs-2">Quarto:</label>
 						<div class="col-xs-10">
-							<input id="estadia.quarto.numero" type="text" class="col-xs-10" name="estadia.quarto.numero" value="${checkin.quarto.numero}" readonly="readonly" />
+							<input type="text" class="col-xs-10" value="${checkin.quarto.numero}" readonly="readonly" />
 						</div>
 					</div>
 					<div class="form-group">

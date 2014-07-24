@@ -107,10 +107,12 @@ public class CheckinController {
 		
 		Hospede hospedeExistente = hospedeService.buscarESalvarOuAtualizar(hospede); 
 		checkin.addHospede(hospedeExistente);
+		
 		result.of(this).checkin();
 	}
 
 	public void salva(){
+		
 		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();
 		estadiaRepositorio.salva(estadia);
 		
