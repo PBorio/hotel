@@ -107,12 +107,6 @@
 			  	<fieldset>
 					<legend>Checkin</legend>
 					<div class="form-group">
-						<label class="control-label col-xs-2">Quarto:</label>
-						<div class="col-xs-10">
-							<input type="text" class="col-xs-10" value="${checkin.quarto.numero}" readonly="readonly" />
-						</div>
-					</div>
-					<div class="form-group">
 						<label class="control-label col-xs-2">Valor Diária:</label>
 						<div class="col-xs-10">
 							<input id="estadia.valorDiaria" type="text" class="col-xs-10" name="estadia.valorDiaria" value="${checkin.valorDiaria}" />
