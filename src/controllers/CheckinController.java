@@ -7,6 +7,7 @@ import repositorios.EstadiaRepositorio;
 import repositorios.ReservaRepositorio;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
+import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
@@ -94,13 +95,13 @@ public class CheckinController {
 		result.of(this).checkin();
 	}
 	
-	public void salvaEPreparaMaisHospedes(Estadia estadia, Hospede hospede){
+	@Post("/checkin/novo/hospede")
+	public void salvaHospede(Hospede hospede){
 
 		HospedeValidation validation = new HospedeValidation(validator);
 		validation.validarHospede(hospede);
 		
 		if (validator.hasErrors()){
-			result.include("estadia",estadia);
 		    validator.onErrorUsePageOf(this).checkin();
 		}
 		
@@ -109,15 +110,7 @@ public class CheckinController {
 		result.of(this).checkin();
 	}
 
-	public void salva(Hospede hospede){
-		HospedeValidation validation = new HospedeValidation(validator);
-		validation.validarHospede(hospede);
-		if (validator.hasErrors()){
-		    validator.onErrorUsePageOf(this).checkin();
-		}
-		Hospede hospedeExistente = hospedeService.buscarESalvarOuAtualizar(hospede); 
-		checkin.addHospede(hospedeExistente);
-		
+	public void salva(){
 		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();
 		estadiaRepositorio.salva(estadia);
 		

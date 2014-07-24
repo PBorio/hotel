@@ -6,6 +6,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Checkin</title>
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		  
+		$("#divHospede").hide();
+	    mudarTipoPagamento();	
+	});
+	
+	function mostrarHospede(){
+		$("#divHospede").show();
+	}
+</script>
 </head>
 <body>
 	 
@@ -20,12 +31,6 @@
 			</div>
 		</c:if>
 
-		<div class="widget-title">
-			<span class="icon">
-				<i class="icon-align-justify"></i>									
-			</span>
-			<h5>Checkin</h5>
-		</div>
 		<div class="container">
 			<div class="header">
 				<ul class="nav nav-pills pull-right">
@@ -70,7 +75,21 @@
 					</tfoot>
 				</table>
 			</c:if>
-			  <form class="form-horizontal" action='<c:url value="/categorias/salva"/>' method="post">
+			 <form class="form-horizontal" method="post">
+			<div class="form-group">
+				<label class="control-label col-xs-2" for="singlebutton"></label>
+				<div class="col-xs-10">
+					<button type="button" id="outroHospede" name="outroHospede" class="btn btn-primary" onClick="mostrarHospede();">
+						Cadastrar Outro Hóspede
+					</button>
+					<button type="button" id="concluir" name="concluir" class="btn btn-primary" onClick="this.form.action='<c:url value="/checkin/salva"/>';this.form.submit()">
+						Concluir
+					</button>
+				</div>
+			</div>
+			</form>
+			<div id="divHospede">
+			  <form class="form-horizontal" action='<c:url value="/checkin/novo/hospede"/>' method="post">
 			  	<fieldset>
 					<legend>Checkin</legend>
 					<div class="form-group">
@@ -136,16 +155,14 @@
 					 <div class="form-group">
 						<label class="control-label col-xs-2" for="singlebutton"></label>
 						<div class="col-xs-10">
-							<button type="button" id="outroHospede" name="outroHospede" class="btn btn-primary" onClick="this.form.action='<c:url value="/checkin/salvaEPreparaMaisHospedes"/>';this.form.submit()">
-								Cadastrar Outro Hóspede
-							</button>
-							<button type="button" id="concluir" name="concluir" class="btn btn-primary" onClick="this.form.action='<c:url value="/checkin/salva"/>';this.form.submit()">
-								Concluir
+							<button type="submit" id="concluir" name="concluir" class="btn btn-primary">
+								Salvar
 							</button>
 						</div>
 					 </div>
 				</fieldset>
 			  </form>
 			</div>
+		</div>
 </body>
 </html>
