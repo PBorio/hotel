@@ -6,7 +6,6 @@ import java.util.List;
 import org.joda.time.DateTime;
 
 import repositorios.EstadiaRepositorio;
-import repositorios.QuartoRepositorio;
 import repositorios.ReservaRepositorio;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
@@ -14,7 +13,6 @@ import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import domain.Estadia;
 import domain.Hospede;
-import domain.Quarto;
 import domain.Reserva;
 import domain.servicos.Checkin;
 import domain.servicos.interfaces.HospedeService;
@@ -25,19 +23,16 @@ public class CheckinController {
 	private ReservaRepositorio reservaRepositorio;
 	private Result result;
 	private EstadiaRepositorio estadiaRepositorio;
-	private QuartoRepositorio quartoRepositorio;
 	private HospedeService hospedeService;
 
 	public CheckinController(Result result, 
 							 ReservaRepositorio reservaRepositorio, 
 							 HospedeService hospedeService,
-							 EstadiaRepositorio estadiaRepositorio,
-							 QuartoRepositorio quartoRepositorio) {
+							 EstadiaRepositorio estadiaRepositorio) {
 		this.result = result;
 		this.reservaRepositorio = reservaRepositorio;
 		this.hospedeService = hospedeService;
 		this.estadiaRepositorio = estadiaRepositorio;
-		this.quartoRepositorio = quartoRepositorio;
 	}
 	
 	public List<Reserva> list(){
@@ -62,15 +57,13 @@ public class CheckinController {
 	}
 	
 	@Get
-	@Path("/checkin/{idReserva}/{idQuarto}")
+	@Path("/checkin/{idReserva}")
 	public void edit(Long idReserva, Long idQuarto) {
 		
 		Reserva reserva = reservaRepositorio.buscaPorId(idReserva);
-		Quarto quarto = quartoRepositorio.buscaPorId(idQuarto);
-		Estadia estadia = Checkin.checkinAPartirDeUmaReserva(reserva, quarto).iniciarEstadiaAPartirDeUmaReserva();
+		Estadia estadia = Checkin.checkinAPartirDeUmaReserva(reserva).iniciarEstadiaAPartirDeUmaReserva();
 		
 		result.include("reserva", reserva);
-		result.include("quarto", quarto);
 		result.include("estadia", estadia);
 		result.include("hospede", reserva.getHospede());
 		result.of(this).checkin();

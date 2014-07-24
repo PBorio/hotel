@@ -10,7 +10,6 @@
 		<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.css'/>" />
 		<script src=" <c:url value='/resources/scripts/jquery-1.7.1.min.js'/>"></script>
 		<decorator:head />
-		
 	</head>
 	<body>
 	<div class="navbar navbar-default navbar-fixed-top">

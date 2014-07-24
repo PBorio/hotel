@@ -15,9 +15,9 @@ public class Checkin {
 	private DateTime dataCheckin;
 	private Double valorDiaria;
 
-	private Checkin(Reserva reserva, Quarto quarto) {
+	private Checkin(Reserva reserva) {
 		this.reserva = reserva;
-		this.quarto = quarto;
+		this.quarto = reserva.getQuarto();
 	}
 
 	private Checkin(Quarto quarto, Hospede hospede, DateTime dataCheckin, Double valorDiaria) {
@@ -27,8 +27,8 @@ public class Checkin {
 		this.valorDiaria = valorDiaria;
 	}
 
-	public static Checkin checkinAPartirDeUmaReserva(Reserva reserva, Quarto quarto) {
-		return new Checkin(reserva, quarto);
+	public static Checkin checkinAPartirDeUmaReserva(Reserva reserva) {
+		return new Checkin(reserva);
 	}
 
 	public Estadia iniciarEstadiaAPartirDeUmaReserva() {

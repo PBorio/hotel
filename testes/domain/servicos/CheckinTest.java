@@ -17,11 +17,9 @@ public class CheckinTest {
 	public void oCheckinVaiCriarUmaEstadiaParaUmaReservaEUmQuarto(){
 		Reserva reserva = new FakeReserva().iniciandoEm("10/03/2014").terminandoEm("15/03/2014").noQuarto("1").build();
 		
-		Quarto quarto = reserva.getQuarto();
-		
 		reserva.setHospede(new Hospede());
 		
-		Checkin checkin = Checkin.checkinAPartirDeUmaReserva(reserva, quarto);
+		Checkin checkin = Checkin.checkinAPartirDeUmaReserva(reserva);
 		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();
 		Assert.assertNotNull(estadia);
 	}
@@ -34,9 +32,7 @@ public class CheckinTest {
 		Reserva reserva = new FakeReserva().iniciandoEm("10/03/2014").terminandoEm("15/03/2014").noQuarto("1").build();
 		reserva.setHospede(joao);
 		
-		Quarto quarto = reserva.getQuarto();
-		
-		Checkin checkin = Checkin.checkinAPartirDeUmaReserva(reserva, quarto);
+		Checkin checkin = Checkin.checkinAPartirDeUmaReserva(reserva);
 		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();
 		Assert.assertEquals("Joao", estadia.getHospedes().get(0).getNome());
 	}
@@ -50,7 +46,7 @@ public class CheckinTest {
 		Reserva reserva = new FakeReserva().iniciandoEm("10/03/2014").terminandoEm("15/03/2014").paraOQuarto(_101).build();
 		reserva.setHospede(new Hospede());
 		
-		Checkin checkin = Checkin.checkinAPartirDeUmaReserva(reserva, _101);
+		Checkin checkin = Checkin.checkinAPartirDeUmaReserva(reserva);
 		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();
 		Assert.assertEquals("101", estadia.getQuarto().getNumero());
 		
@@ -65,9 +61,7 @@ public class CheckinTest {
 		reserva.setHospede(new Hospede());
 		reserva.setValorDiaria(10.0);
 		
-		Quarto quarto = reserva.getQuarto();
-		
-		Checkin checkin = Checkin.checkinAPartirDeUmaReserva(reserva, quarto);
+		Checkin checkin = Checkin.checkinAPartirDeUmaReserva(reserva);
 		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();
 		Assert.assertEquals((Double)10.0, estadia.getValorDiaria());
 		

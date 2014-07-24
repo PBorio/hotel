@@ -36,12 +36,11 @@ public class ReservaDAO extends DAO<Reserva> implements ReservaRepositorio {
 	public List<Reserva> buscaReservasEmAberto() {
 		
 		DateTime tresDiasAtras = new DateTime().minusDays(3);
-		
+				
 		StringBuilder sql = new StringBuilder();
 		sql.append(" Select r From Reserva r ");
-		sql.append(" join r.quartosDaReserva quartosDaReserva ");
-		sql.append(" join quartosDaReserva.quarto quarto ");
-		sql.append(" where not exists (select 1 from Estadia e where e.reserva = r and e.quarto = quarto ) ");
+		sql.append(" join r.hospede hospede ");
+		sql.append(" where not exists (select 1 from Estadia e where e.reserva = r) ");
 		sql.append(" and r.inicio > ? ");
 		sql.append(" order by r.id ");
 		
