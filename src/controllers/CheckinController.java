@@ -3,14 +3,14 @@ package controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.joda.time.DateTime;
-
 import repositorios.EstadiaRepositorio;
 import repositorios.ReservaRepositorio;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.Validator;
+import controllers.validators.HospedeValidation;
 import domain.Estadia;
 import domain.Hospede;
 import domain.Reserva;
@@ -24,15 +24,21 @@ public class CheckinController {
 	private Result result;
 	private EstadiaRepositorio estadiaRepositorio;
 	private HospedeService hospedeService;
+	private Validator validator;
+	private Checkin checkin;
 
-	public CheckinController(Result result, 
+	public CheckinController(Result result,
+						     Validator validator,
 							 ReservaRepositorio reservaRepositorio, 
 							 HospedeService hospedeService,
-							 EstadiaRepositorio estadiaRepositorio) {
+							 EstadiaRepositorio estadiaRepositorio, 
+							 Checkin checkin) {
 		this.result = result;
+		this.validator = validator;
 		this.reservaRepositorio = reservaRepositorio;
 		this.hospedeService = hospedeService;
 		this.estadiaRepositorio = estadiaRepositorio;
+		this.checkin = checkin;
 	}
 	
 	public List<Reserva> list(){
@@ -58,52 +64,65 @@ public class CheckinController {
 	
 	@Get
 	@Path("/checkin/{idReserva}")
-	public void edit(Long idReserva, Long idQuarto) {
+	public void edit(Long idReserva) {
 		
 		Reserva reserva = reservaRepositorio.buscaPorId(idReserva);
-		Estadia estadia = Checkin.checkinAPartirDeUmaReserva(reserva).iniciarEstadiaAPartirDeUmaReserva();
+		
+		checkin.clear();
+		checkin.aPartirDaReserva(reserva);
 		
 		result.include("reserva", reserva);
-		result.include("estadia", estadia);
-		result.include("hospede", reserva.getHospede());
+		result.include("hospedeReserva", reserva.getHospede());
+		result.of(this).checkin();
+	}
+	
+	@Get
+	@Path("/checkin/remover/{id}")
+	public void removerHospede(Long id) {
+		
+		Hospede hospede = new Hospede();
+		hospede.setId(id);
+		checkin.removeHospede(hospede);
+		
+		result.of(this).checkin();
+	}
+	
+	@Get
+	@Path("/checkin/responsavel/estadia/")
+	public void hospedeResponsavelNaEstadia(){
+		checkin.addHospede(checkin.getReserva().getHospede());
 		result.of(this).checkin();
 	}
 	
 	public void salvaEPreparaMaisHospedes(Estadia estadia, Hospede hospede){
+
+		HospedeValidation validation = new HospedeValidation(validator);
+		validation.validarHospede(hospede);
 		
-		Hospede hospedeExistente = hospedeService.buscarESalvarOuAtualizar(hospede); 
-		
-		estadia.addHospede(hospedeExistente);
-		if (estadia.getId() == null){
-			estadia.setDataCheckin(new DateTime());
-			estadiaRepositorio.salva(estadia);
-		}else{
-			estadiaRepositorio.atualiza(estadia);
+		if (validator.hasErrors()){
+			result.include("estadia",estadia);
+		    validator.onErrorUsePageOf(this).checkin();
 		}
 		
-		result.include("estadia", estadia);
-		result.include("hospede", new Hospede());
-		result.include("mensagem", "Estadia criada com sucesso!");
+		Hospede hospedeExistente = hospedeService.buscarESalvarOuAtualizar(hospede); 
+		checkin.addHospede(hospedeExistente);
 		result.of(this).checkin();
 	}
-	
-	public void salva(Estadia estadia, Hospede hospede){
-		
-		Hospede hospedeExistente = hospedeService.buscarESalvarOuAtualizar(hospede); 
-		
-		if (estadia.getId() != null)
-			estadia = estadiaRepositorio.buscaPorId(estadia.getId());
-		
-		estadia.addHospede(hospedeExistente);
-		if (estadia.getId() == null){
-			estadia.setDataCheckin(new DateTime());
-			estadiaRepositorio.salva(estadia);
-		}else{
-			estadiaRepositorio.atualiza(estadia);
+
+	public void salva(Hospede hospede){
+		HospedeValidation validation = new HospedeValidation(validator);
+		validation.validarHospede(hospede);
+		if (validator.hasErrors()){
+		    validator.onErrorUsePageOf(this).checkin();
 		}
+		Hospede hospedeExistente = hospedeService.buscarESalvarOuAtualizar(hospede); 
+		checkin.addHospede(hospedeExistente);
 		
+		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();
+		estadiaRepositorio.salva(estadia);
+		
+		checkin.clear();
 		result.include("mensagem", "Estadia criada com sucesso!");
 		result.redirectTo(PainelController.class).painel();
 	}
-
 }

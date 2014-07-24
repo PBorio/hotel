@@ -3,6 +3,7 @@ package repositorios;
 import java.util.List;
 
 import domain.Estadia;
+import domain.HospedeDaEstadia;
 
 public interface EstadiaRepositorio {
 	
@@ -15,5 +16,9 @@ public interface EstadiaRepositorio {
 	void atualiza(Estadia hospede);
 
 	List<Estadia> estadiasAbertas();
+
+	HospedeDaEstadia buscaHospedeDaEstadiaPorId(Long id);
+
+	void excluirHospede(HospedeDaEstadia hospedeDaEstadia);
 
 }

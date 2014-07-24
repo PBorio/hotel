@@ -6,7 +6,6 @@ import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.validator.ValidationMessage;
 import controllers.views.reservas.DetalhesDosParametros;
 import controllers.views.reservas.ReservasView;
-import domain.Hospede;
 
 public class ReservaValidation {
 	
@@ -76,23 +75,4 @@ public class ReservaValidation {
 		}
 		return this.validator;
 	}
-
-	public Validator validarHospede(Hospede hospede) {
-		
-		if (hospede.getNome() == null || hospede.getNome().trim().equals(""))
-			validator.add(new ValidationMessage("Nome é obrigatorio", "hospede"));
-		
-		if (hospede.getEmail() == null || hospede.getEmail().trim().equals("")){
-			validator.add(new ValidationMessage("Email do Hospede é obrigatorio", "email"));
-		}else{
-			if (!hospede.getEmail().contains("@"))
-				validator.add(new ValidationMessage("Email inválido", "email"));
-		}
-		
-		if (hospede.getTelefone() == null || hospede.getTelefone().trim().equals(""))
-			validator.add(new ValidationMessage("Telefone do Hospede é obrigatorio", "email"));
-		
-		return this.validator;
-	}
-
 }

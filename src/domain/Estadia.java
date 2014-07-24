@@ -36,7 +36,7 @@ public class Estadia implements CalculavelPorPeriodo {
 	private Long id;
 	
 	@OneToMany(mappedBy="estadia", cascade=CascadeType.ALL)
-	private Set<HospedeDaEstadia> hospedes = new HashSet<HospedeDaEstadia>();
+	private Set<HospedeDaEstadia> hospedesDaEstadia = new HashSet<HospedeDaEstadia>();
 	
 	@Transient
 	private Set<ServicoPrestado> servicosPrestados = new HashSet<ServicoPrestado>();
@@ -73,10 +73,9 @@ public class Estadia implements CalculavelPorPeriodo {
 	
 	
 
-	public void aPartirDaReservaEQuarto(Reserva reserva, Quarto quarto) {
+	public void aPartirDaReserva(Reserva reserva) {
 		this.reserva = reserva;
-		this.addHospede(reserva.getHospede());
-		this.quarto = quarto;
+		this.quarto = reserva.getQuarto();
 		this.dataCheckin = reserva.getInicio();
 		this.previsaoCheckout = reserva.getFim();
 		this.valorDiaria = reserva.getValorDiaria();
@@ -106,23 +105,13 @@ public class Estadia implements CalculavelPorPeriodo {
 		return dataCheckout;
 	}
 
-	public List<Hospede> getHospedes() {
-		
-		List<Hospede> result = new ArrayList<Hospede>();
-		
-		for (HospedeDaEstadia h : hospedes){
-			result.add(h.getHospede());
-		}
-		return result;
-	}
-
 	public void setDataCheckin(DateTime dataCheckin) {
 		this.dataCheckin = dataCheckin;
 	}
 
 	public void addHospede(Hospede hospede) {
 		HospedeDaEstadia hospedeEstadia = new HospedeDaEstadia(this,hospede);
-		this.hospedes.add(hospedeEstadia);
+		this.hospedesDaEstadia.add(hospedeEstadia);
 	}
 
 	public void setQuarto(Quarto quarto) {
@@ -233,6 +222,55 @@ public class Estadia implements CalculavelPorPeriodo {
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+	public List<Hospede> getHospedes() {
+		
+		List<Hospede> result = new ArrayList<Hospede>();
+		
+		for (HospedeDaEstadia h : hospedesDaEstadia){
+			result.add(h.getHospede());
+		}
+		return result;
+	}
+
+	public Set<HospedeDaEstadia> getHospedesDaEstadia() {
+		return hospedesDaEstadia;
+	}
+
+	public boolean contemOHospedeDaReserva() {
+		for (HospedeDaEstadia he : this.hospedesDaEstadia){
+			if (he.getHospede().equals(reserva.getHospede()))
+				return true;
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		if (id == null) return super.hashCode();
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Estadia other = (Estadia) obj;
+		if (id == null) 
+				return false;
+		if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+	
+	
 
 	
 

@@ -28,27 +28,61 @@
 		</div>
 		<div class="container">
 			<div class="header">
-			<ul class="nav nav-pills pull-right">
-				<li class="active"><a href="/">Home</a></li>
-			</ul>
+				<ul class="nav nav-pills pull-right">
+					<li class="active"><a href="<c:url value='/'/>">Home</a></li>
+				</ul>
 			</div>
+			<c:if test="${checkin.mostraResponsavel}">
+				<table class="table table-striped table-bordered" id="example"
+						cellpadding="0" cellspacing="0" border="0" width="100%">
+					<thead> 
+						<tr>
+							<th class="ui-state-default" width="70%">Informações de Contato do Responsável Pela Reserva</th>
+							<th class="ui-state-default" width="30%"></th>
+						</tr>
+					</thead>
+					<tfoot>
+						<tr>
+							<th>${checkin.reserva.hospede.nomeCompleto} - ${checkin.reserva.hospede.email} - ${checkin.reserva.hospede.telefone}</th>
+						   	<th><a href="<c:url value='/checkin/responsavel/estadia/'/>" title="title">Marcar como Hóspede</a></th>
+						</tr>
+					</tfoot>
+				</table>
+			</c:if>
+			<c:if test="${ not empty checkin.hospedes}">
+				<table class="table table-striped table-bordered" id="example"
+						cellpadding="0" cellspacing="0" border="0" width="100%">
+					<thead> 
+						<tr>
+							<th class="ui-state-default" width="90%">Hospede</th>
+							<th class="ui-state-default" width="10%"></th>
+						</tr>
+					</thead>
+					
+					<tfoot>
+						<c:forEach var="hospede" items="${checkin.hospedes}">
+							<tr id="hospede-${hospede.id}">
+								<th>${hospede.nomeCompleto}</th>
+								<th><a href="<c:url value='/checkin/remover/${hospede.id}'/>" title="title">Remover</a> 
+								</th>
+							</tr>
+						</c:forEach>
+					</tfoot>
+				</table>
+			</c:if>
 			  <form class="form-horizontal" action='<c:url value="/categorias/salva"/>' method="post">
 			  	<fieldset>
 					<legend>Checkin</legend>
-		    		<input type="hidden" name="estadia.id" value="${estadia.id}" />
-		    		<input type="hidden" name="hospede.id" value="${hospede.id}" />
-		    		<input type="hidden" name="estadia.quarto.id" value="${estadia.quarto.id}" />
-		    		<input type="hidden" name="estadia.reserva.id" value="${estadia.reserva.id}" />
 					<div class="form-group">
 						<label class="control-label col-xs-2">Quarto:</label>
 						<div class="col-xs-10">
-							<input id="estadia.quarto.numero" type="text" class="col-xs-10" name="estadia.quarto.numero" value="${estadia.quarto.numero}" readonly="readonly" />
+							<input id="estadia.quarto.numero" type="text" class="col-xs-10" name="estadia.quarto.numero" value="${checkin.quarto.numero}" readonly="readonly" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-xs-2">Valor Diária:</label>
 						<div class="col-xs-10">
-							<input id="estadia.valorDiaria" type="text" class="col-xs-10" name="estadia.valorDiaria" value="${estadia.valorDiaria}" />
+							<input id="estadia.valorDiaria" type="text" class="col-xs-10" name="estadia.valorDiaria" value="${checkin.valorDiaria}" />
 						</div>
 					</div>
 					<div class="form-group">

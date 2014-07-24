@@ -4,9 +4,12 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import repositorios.EstadiaRepositorio;
 import br.com.caelum.vraptor.ioc.Component;
 import domain.Estadia;
+import domain.HospedeDaEstadia;
 
 
 @Component
@@ -28,5 +31,15 @@ public class EstadiaDAO extends DAO<Estadia> implements EstadiaRepositorio {
 		
 		Query query = entityManager.createQuery(sql.toString());
 		return query.getResultList();
+	}
+
+	public HospedeDaEstadia buscaHospedeDaEstadiaPorId(Long id) {
+		return getEntityManager().find(HospedeDaEstadia.class, id);
+	}
+
+
+	@Transactional
+	public void excluirHospede(HospedeDaEstadia hospedeDaEstadia) {
+		super.entityManager.remove(hospedeDaEstadia);
 	}
 }

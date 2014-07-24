@@ -44,4 +44,8 @@ public class HospedeServiceImpl implements HospedeService {
 		return hospedeExistente;
 	}
 
+	public HospedeRepositorio getHospedeRepositorio() {
+		return this.hospedeRepositorio;
+	}
+
 }

@@ -13,6 +13,7 @@ import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.validator.ValidationMessage;
+import controllers.validators.HospedeValidation;
 import controllers.validators.ReservaValidation;
 import controllers.views.reservas.DetalhesDosParametros;
 import controllers.views.reservas.InformativoDeQuartos;
@@ -113,7 +114,7 @@ public class ReservasController {
 	public void confirmar(Hospede hospede){
 		
 		try{
-			ReservaValidation validation = new ReservaValidation(validator, reservasView);
+			HospedeValidation validation = new HospedeValidation(validator);
 			validator = validation.validarHospede(hospede);
 			
 			if (validator.hasErrors()){
