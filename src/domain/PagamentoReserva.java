@@ -128,7 +128,7 @@ public class PagamentoReserva {
 	}
 
 	public void arrumaValores() {
-		if (this.tipoPagamento.equals(TipoPagamento.DEPOSITO)){
+		if (this.tipoPagamento.equals(TipoPagamento.DEPOSITO.getValue())){
 			this.valor = valorDeposito;
 			this.dataPagamento = dataDeposito;
 		}
