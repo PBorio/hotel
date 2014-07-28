@@ -18,10 +18,8 @@ public class CheckinTest {
 	
 	@Test
 	public void oCheckinVaiCriarUmaEstadiaParaUmaReservaEUmQuarto(){
-		Reserva reserva = new FakeReserva().iniciandoEm("10/03/2014").terminandoEm("15/03/2014").noQuarto("1").build();
-		
+		Reserva reserva = new FakeReserva().iniciandoEm("10/03/2014").terminandoEm("15/03/2014").noQuarto("1").comValorDaDiariaDe(10.0).build();
 		reserva.setHospede(new Hospede());
-		
 		Checkin checkin = new Checkin();
 		checkin.aPartirDaReserva(reserva);
 		checkin.addHospede(reserva.getHospede());
@@ -34,7 +32,7 @@ public class CheckinTest {
 		Hospede joao = new Hospede();
 		joao.setNome("Joao");
 		
-		Reserva reserva = new FakeReserva().iniciandoEm("10/03/2014").terminandoEm("15/03/2014").noQuarto("1").build();
+		Reserva reserva = new FakeReserva().iniciandoEm("10/03/2014").terminandoEm("15/03/2014").noQuarto("1").comValorDaDiariaDe(10.0).build();
 		reserva.setHospede(joao);
 		
 		Checkin checkin = new Checkin();
@@ -94,7 +92,7 @@ public class CheckinTest {
 		Quarto _101 = new Quarto();
 		_101.setNumero("101");
 		
-		Reserva reserva = new FakeReserva().iniciandoEm("10/03/2014").terminandoEm("15/03/2014").paraOQuarto(_101).build();
+		Reserva reserva = new FakeReserva().iniciandoEm("10/03/2014").terminandoEm("15/03/2014").paraOQuarto(_101).comValorDaDiariaDe(10.0).build();
 		reserva.setHospede(new Hospede());
 		
 		Checkin checkin = new Checkin();
@@ -107,7 +105,7 @@ public class CheckinTest {
 	}
 	
 	@Test
-	public void oValorDaDiariaDaEstadiaSeraODaReserva(){
+	public void seNaoHouverDiferencaNasDatasNoCheckinoValorDaDiariaDaEstadiaSeraODaReserva(){
 		
 		
 		Reserva reserva = new FakeReserva().iniciandoEm("10/03/2014").terminandoEm("15/03/2014").paraOQuarto(new Quarto()).build();
@@ -119,6 +117,39 @@ public class CheckinTest {
 		checkin.addHospede(reserva.getHospede());
 		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();
 		Assert.assertEquals((Double)10.0, estadia.getValorDiaria());
+		
+	}
+	
+	@Test
+	public void seOValorDaDiariaNoCheckinForAlteradaDeveSerFeitoORecalculoDosValores(){
+		
+		Reserva reserva = new FakeReserva().iniciandoEm("10/03/2014").terminandoEm("15/03/2014").paraOQuarto(new Quarto()).build();
+		reserva.setHospede(new Hospede());
+		reserva.setValorDiaria(10.0);
+		
+		Checkin checkin = new Checkin();
+		checkin.aPartirDaReserva(reserva);
+		checkin.setValorDiaria(15.0);
+		checkin.addHospede(reserva.getHospede());
+		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();
+		Assert.assertEquals((Double)15.0, estadia.getValorDiaria());
+		
+	}
+	
+	@Test
+	public void oCheckinPodeTerUmValorDeDescontoNaDiaria(){
+		
+		Reserva reserva = new FakeReserva().iniciandoEm("10/03/2014").terminandoEm("15/03/2014").paraOQuarto(new Quarto()).build();
+		reserva.setHospede(new Hospede());
+		reserva.setValorDiaria(10.0);
+		
+		Checkin checkin = new Checkin();
+		checkin.aPartirDaReserva(reserva);
+		checkin.setValorDiaria(15.0);
+		checkin.setDesconto(10.0);
+		checkin.addHospede(reserva.getHospede());
+		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();
+		Assert.assertEquals((Double)13.5, estadia.getValorDiaria());
 		
 	}
 	
@@ -137,7 +168,7 @@ public class CheckinTest {
 		checkin.setQuarto(_101);
 		checkin.addHospede(joao);
 		checkin.setValorDiaria(10.0);
-		checkin.setDataCheckin(dataCheckin);
+		checkin.setDataCheckin(dataCheckin.toDate());
 		Estadia estadia = checkin.iniciarEstadiaSemReserva();
 		Assert.assertEquals("Joao", estadia.getHospedes().get(0).getNome());
 		Assert.assertEquals("101", estadia.getQuarto().getNumero());

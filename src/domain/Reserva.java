@@ -181,7 +181,8 @@ public class Reserva implements CalculavelPorPeriodo {
 	public Double getValorPago() {
 		Double result = 0.0;
 		for (PagamentoReserva pg : this.pagamentos){
-			result += pg.getValorPagamento();
+			if (pg.getDataPagamento() != null)
+				result += pg.getValorPagamento();
 		}
 		BigDecimal bd = new BigDecimal(result.toString());
 	  	return bd.setScale(2, RoundingMode.HALF_EVEN).doubleValue();
@@ -227,7 +228,15 @@ public class Reserva implements CalculavelPorPeriodo {
 	}
 
 	public boolean isPossuiPagamento() {
-		return (this.pagamentos.size() > 0);
+		for (PagamentoReserva pagamento : this.pagamentos){
+			if (pagamento.getDataPagamento() != null)
+				return true;
+		}
+		return false;
+	}
+	
+	public boolean isPossuiPagamentoOuPrevisao() {
+		return this.pagamentos.size() > 0;
 	}
 
 	public Double getSaldoAPagar() {

@@ -38,14 +38,14 @@ public class ConsultasController {
 	}
 	
 	@Get
-	@Path("/consultas/{id}")
-	public void show(Long id) {
+	@Path("/pagamento/{id}")
+	public void pagamento(Long id) {
 		Reserva reserva = reservaRepositorio.buscaPorId(id);
 		result.include("reserva", reserva);
 	}
 	
 	@Get
-	@Path("/consultas/")
+	@Path("/nova/reserva")
 	public void novaReserva() {
 		reservasView.clear();
 		result.of(ReservasController.class).parametrosIniciais();

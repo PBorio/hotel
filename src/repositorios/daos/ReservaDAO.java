@@ -55,4 +55,16 @@ public class ReservaDAO extends DAO<Reserva> implements ReservaRepositorio {
 			super.salva(reserva);
 		}
 	}
+
+	public Reserva buscaReservaPorIdComPagamentos(Long idReserva) {
+		StringBuilder sql = new StringBuilder();
+		sql.append(" Select r From Reserva r ");
+		sql.append(" join fetch r.hospede hospede ");
+		sql.append(" join fetch r.pagamentos pagamentos ");
+		sql.append(" where r.id = ? ");
+		
+		Query query = entityManager.createQuery(sql.toString());
+		query.setParameter(1, idReserva);
+		return (Reserva) query.getSingleResult();
+	}
 }

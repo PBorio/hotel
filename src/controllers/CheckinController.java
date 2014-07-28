@@ -3,7 +3,10 @@ package controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.joda.time.DateTime;
+
 import repositorios.EstadiaRepositorio;
+import repositorios.PoliticaPrecoRepositorio;
 import repositorios.ReservaRepositorio;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
@@ -15,7 +18,10 @@ import controllers.validators.HospedeValidation;
 import domain.Estadia;
 import domain.Hospede;
 import domain.Reserva;
+import domain.servicos.CalculoDeValorDaDiariaService;
 import domain.servicos.Checkin;
+import domain.servicos.ModificadorDeValoresDaDiariaService;
+import domain.servicos.helpers.Periodo;
 import domain.servicos.interfaces.HospedeService;
 
 @Resource
@@ -27,18 +33,21 @@ public class CheckinController {
 	private HospedeService hospedeService;
 	private Validator validator;
 	private Checkin checkin;
+	private PoliticaPrecoRepositorio politicaRepositorio;
 
 	public CheckinController(Result result,
 						     Validator validator,
 							 ReservaRepositorio reservaRepositorio, 
 							 HospedeService hospedeService,
 							 EstadiaRepositorio estadiaRepositorio, 
+							 PoliticaPrecoRepositorio politicaRepositorio,
 							 Checkin checkin) {
 		this.result = result;
 		this.validator = validator;
 		this.reservaRepositorio = reservaRepositorio;
 		this.hospedeService = hospedeService;
 		this.estadiaRepositorio = estadiaRepositorio;
+		this.politicaRepositorio = politicaRepositorio;
 		this.checkin = checkin;
 	}
 	
@@ -67,7 +76,7 @@ public class CheckinController {
 	@Path("/checkin/{idReserva}")
 	public void edit(Long idReserva) {
 		
-		Reserva reserva = reservaRepositorio.buscaPorId(idReserva);
+		Reserva reserva = reservaRepositorio.buscaReservaPorIdComPagamentos(idReserva);
 		
 		checkin.clear();
 		checkin.aPartirDaReserva(reserva);
@@ -111,13 +120,40 @@ public class CheckinController {
 		result.of(this).checkin();
 	}
 
-	public void salva(){
+	@Post("/checkin/continua/para/valores")
+	public void checkinValores(){
+
+	}
+	
+	@Post("/checkin/recalcula/valores/")
+	public void recalculaValores(Checkin checkinLocal){
+		recalcular(checkinLocal);
+		result.of(this).checkinValores();
+	}
+	
+	@Post("/checkin/confirma/")
+	public void confirmar(Checkin checkinLocal){
 		
-		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();
+		Estadia estadia = recalcular(checkinLocal);
 		estadiaRepositorio.salva(estadia);
 		
-		checkin.clear();
+		this.checkin.clear();
 		result.include("mensagem", "Estadia criada com sucesso!");
 		result.redirectTo(PainelController.class).painel();
+	}
+
+	private Estadia recalcular(Checkin checkinLocal) {
+		this.checkin.setDataCheckin(checkinLocal.getDataCheckin());
+		this.checkin.setDataCheckout(checkinLocal.getDataCheckout());
+		this.checkin.setDesconto(checkinLocal.getDesconto());
+		
+		CalculoDeValorDaDiariaService calculoDiaria = new CalculoDeValorDaDiariaService(politicaRepositorio.buscaTodos());
+		Periodo periodo = new Periodo(new DateTime(this.checkin.getDataCheckin()), new DateTime(this.checkin.getDataCheckout()));
+		Double valorDiaria = calculoDiaria.calcularValorDaDiaria(periodo, checkin.getQuarto());
+		valorDiaria = new ModificadorDeValoresDaDiariaService().aplicarModificadores(this.checkin.getReserva(), valorDiaria);
+		this.checkin.setValorDiaria(valorDiaria);
+		
+		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();
+		return estadia;
 	}
 }

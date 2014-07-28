@@ -71,15 +71,13 @@ public class Estadia implements CalculavelPorPeriodo {
 	@Column(name="valor_diaria")
 	private Double valorDiaria;
 	
-	
-
-	public void aPartirDaReserva(Reserva reserva) {
-		this.reserva = reserva;
-		this.quarto = reserva.getQuarto();
-		this.dataCheckin = reserva.getInicio();
-		this.previsaoCheckout = reserva.getFim();
-		this.valorDiaria = reserva.getValorDiaria();
-	}
+//	public void aPartirDaReserva(Reserva reserva) {
+//		this.reserva = reserva;
+//		this.quarto = reserva.getQuarto();
+//		this.dataCheckin = reserva.getInicio();
+//		this.previsaoCheckout = reserva.getFim();
+//		this.valorDiaria = reserva.getValorDiaria();
+//	}
 
 	public Reserva getReserva() {
 		return reserva;
@@ -99,6 +97,10 @@ public class Estadia implements CalculavelPorPeriodo {
 
 	public DateTime getPrevisaoCheckout() {
 		return previsaoCheckout;
+	}
+	
+	public void setPrevisaoCheckout(DateTime previsaoCheckout) {
+		this.previsaoCheckout = previsaoCheckout;
 	}
 
 	public DateTime getDataCheckout() {
@@ -237,14 +239,6 @@ public class Estadia implements CalculavelPorPeriodo {
 		return hospedesDaEstadia;
 	}
 
-	public boolean contemOHospedeDaReserva() {
-		for (HospedeDaEstadia he : this.hospedesDaEstadia){
-			if (he.getHospede().equals(reserva.getHospede()))
-				return true;
-		}
-		return false;
-	}
-
 	@Override
 	public int hashCode() {
 		if (id == null) return super.hashCode();
@@ -269,9 +263,5 @@ public class Estadia implements CalculavelPorPeriodo {
 			return false;
 		return true;
 	}
-	
-	
-
-	
 
 }

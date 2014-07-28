@@ -34,6 +34,11 @@ function mudarTipoPagamento(){
  </script>
 </head>
 <body>
+	<c:forEach var="error" items="${errors}">
+		<div class="alert alert-danger">
+			${error.message}
+		</div>
+	</c:forEach>
   <div class="container">
 			<div class="header">
 				<ul class="nav nav-pills pull-right">
@@ -79,7 +84,7 @@ function mudarTipoPagamento(){
 			</div>
 	   </div>
 	 </fieldset>
-	   <c:if test="${reserva.possuiPagamento}">
+	   <c:if test="${reserva.possuiPagamentoOuPrevisao}">
 	     <%@include file="fragmentos/pagamentosrealizados.jspf" %>
 	   </c:if>
 	    <%@include file="fragmentos/pagamentosarealizar.jspf" %>

@@ -38,7 +38,10 @@
           	<tr>
 	            <td class="destaque">${linha.numeroQuarto}</td>
 	            <c:forEach var="dia" items="${linha.dias}">
-	              <td class="${dia.marcacao}"><a href="<c:url value='/consultas/${dia.idReserva}'/>">${dia.texto}</a></td>
+	              <c:choose>
+	              	<c:when test="${empty dia.idReserva}"><td class="${dia.marcacao}"><a href="<c:url value='/nova/reserva'/>">${dia.texto}</a></td></c:when>
+	              	<c:otherwise><td class="${dia.marcacao}"><a href="<c:url value='/pagamento/${dia.idReserva}'/>">${dia.texto}</a></td></c:otherwise>
+	              </c:choose>
 	            </c:forEach>
 	            <td class="destaque">${linha.numeroQuarto}</td>
              </tr>

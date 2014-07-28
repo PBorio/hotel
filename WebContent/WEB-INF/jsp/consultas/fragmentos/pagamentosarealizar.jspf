@@ -6,13 +6,14 @@
 		<legend>Informar Pagamento</legend>
 		 <form class="form-horizontal" action='<c:url value="/pagamentos/registrar"/>' method="post">
 		 	 <input type="hidden" value="${reserva.id}" name="pagamentoReserva.reserva.id"/>
+		 	 <input type="hidden" value="${pagamentoReserva.id}" name="pagamentoReserva.id"/>
 		  	 <div class="form-group">
 				<label class="control-label col-xs-2">Tipos de Pagamento:</label>
 				<div class="col-xs-10">
 					<select id="tipo" class="col-xs-10" name="pagamentoReserva.tipoPagamento">   
 		                <option> Tipos...</option>
-		                <option value="1"> Cartão </option>
-		                <option value="2"> Depósito </option>  
+		                <option value="1" <c:if test="${1 == pagamentoReserva.tipoPagamento}">selected="true"</c:if>> Cartão </option>
+		                <option value="2" <c:if test="${2 == pagamentoReserva.tipoPagamento}">selected="true"</c:if>> Depósito </option>  
 		            </select>
 				</div>
 			 </div>
@@ -24,7 +25,12 @@
 				 	  <input type="text" class="col-xs-10" value="<fmt:formatDate value='${pagamentoReserva.dataPagamento}' pattern='dd/MM/yyyy'/>" name="pagamentoReserva.dataPagamento" />
 					</div>
 				 </div>
-			  	 
+			  	  <div class="form-group">
+			  	  	<label class="control-label col-xs-2">Número:</label>
+				    <div class="col-xs-10">
+				 	  <input type="text" class="col-xs-10" value="${pagamentoReserva.numeroCartao}" name="pagamentoReserva.numeroCartao" maxlength="8" />
+					</div>
+				 </div>
 			  	 <div class="form-group">
 			  	  	<label class="control-label col-xs-2">Valor:</label>
 				    <div class="col-xs-10">
@@ -47,8 +53,8 @@
 				   <div class="col-xs-10">
 					 <select id="banco" name="pagamentoReserva.banco" class="col-xs-10" >   
 		                <option> Tipos...</option>
-		                <option value="Itau"> Itau </option>
-		                <option value="Banco do Brasil"> Banco do Brasil </option>  
+		                <option value="Itau" <c:if test="${'Itau' == pagamentoReserva.banco}">selected="true"</c:if>> Itau </option>
+		                <option value="Banco do Brasil" <c:if test="${'Banco do Brasil' == pagamentoReserva.banco}">selected="true"</c:if>> Banco do Brasil </option>  
 		             </select>
 				   </div>
 			 	</div>

@@ -8,9 +8,11 @@
 					cellpadding="0" cellspacing="0" border="0" width="100%">
 				<thead> 
 					<tr>
-						<th class="ui-state-default" width="40%">Tipo</th>
-						<th class="ui-state-default" width="30%">Data</th>
+						<th class="ui-state-default" width="20%">Tipo</th>
+						<th class="ui-state-default" width="20%">Data Previsão</th>
+						<th class="ui-state-default" width="20%">Data Pagamento</th>
 						<th class="ui-state-default" width="20%">Valor</th>
+						<th class="ui-state-default" width="20%"></th>
 						<th class="ui-state-default" width="10%"></th>
 					</tr>
 				</thead>
@@ -19,8 +21,11 @@
 					<c:forEach var="pg" items="${reserva.pagamentos}">
 						<tr id="pg-${pg.id}">
 							<th>${pg.descricaoDoTipo}</th>
+							<th>${pg.dataPrevisao}</th>
 							<th>${pg.dataPagamento}</th>
-							<th>${pg.valor}
+							<th>${pg.valor}</th>
+							<th><a href="<c:url value='/pagamentos/editar/${pg.id}'/>" title="title">Editar</a> 
+							</th>
 							<th><a href="<c:url value='/pagamentos/excluir/${pg.id}'/>" title="title">Remover</a> 
 							</th>
 						</tr>

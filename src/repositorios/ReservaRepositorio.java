@@ -19,4 +19,6 @@ public interface ReservaRepositorio {
 
 	void salvarVariasReservas(List<Reserva> reservas);
 
+	Reserva buscaReservaPorIdComPagamentos(Long idReserva);
+
 }

@@ -10,4 +10,6 @@ public interface PagamentoRepositorio {
 
 	public void excluir(PagamentoReserva pagamentoReserva);
 
+	void atualiza(PagamentoReserva pagamentoReserva);
+
 }

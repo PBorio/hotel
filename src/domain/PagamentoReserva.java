@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import domain.servicos.tipos.TipoPagamento;
+
 @Entity
 @Table(name="pagamentos_reservas")
 public class PagamentoReserva {
@@ -29,6 +31,9 @@ public class PagamentoReserva {
 
 	@Column(name="data_pagamento")
 	private Date dataPagamento;
+	
+	@Column(name="numero_cartao")
+	private String numeroCartao;
 	
 	@Transient
 	private Date dataDeposito;
@@ -91,6 +96,8 @@ public class PagamentoReserva {
 	}
 
 	public Date getDataDeposito() {
+		if (dataDeposito == null)
+			return dataDeposito;
 		return dataDeposito;
 	}
 
@@ -99,6 +106,8 @@ public class PagamentoReserva {
 	}
 	
 	public Double getValorDeposito() {
+		if (valorDeposito == null)
+			return valor;
 		return valorDeposito;
 	}
 
@@ -119,8 +128,10 @@ public class PagamentoReserva {
 	}
 
 	public void arrumaValores() {
-		if (this.valor == null) this.valor = valorDeposito;
-		if (this.dataPagamento == null) this.dataPagamento = dataDeposito;
+		if (this.tipoPagamento.equals(TipoPagamento.DEPOSITO)){
+			this.valor = valorDeposito;
+			this.dataPagamento = dataDeposito;
+		}
 	}
 	
 	public String getDescricaoDoTipo(){
@@ -134,5 +145,13 @@ public class PagamentoReserva {
 			return "Depósito";
 		
 		return "";
+	}
+
+	public String getNumeroCartao() {
+		return numeroCartao;
+	}
+
+	public void setNumeroCartao(String numeroCartao) {
+		this.numeroCartao = numeroCartao;
 	}
 }

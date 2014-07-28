@@ -1,6 +1,7 @@
 package domain.servicos;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -14,14 +15,17 @@ import domain.Reserva;
 import domain.exceptions.HospedeInvalidoException;
 import domain.exceptions.QuartoInvalidoException;
 import domain.exceptions.ReservaInvalidaException;
+import domain.interfaces.CalculavelPorPeriodo;
 
 @Component
 @SessionScoped
-public class Checkin {
+public class Checkin implements CalculavelPorPeriodo {
 
 	private Reserva reserva;
 	private Quarto quarto;
-	private DateTime dataCheckin;
+	private Date dataCheckin;
+	private Date dataCheckout;
+	private Double desconto;
 	private Double valorDiaria;
 	private List<Hospede> hospedes = new ArrayList<Hospede>();
 	
@@ -32,7 +36,11 @@ public class Checkin {
 		validarReserva(this.reserva);
 		validarHospedes();
 		Estadia estadia = new Estadia();
-		estadia.aPartirDaReserva(this.reserva);
+		estadia.setReserva(this.reserva);
+		estadia.setQuarto(this.reserva.getQuarto());
+		estadia.setDataCheckin(new DateTime(this.getDataCheckin()));
+		estadia.setPrevisaoCheckout(new DateTime(this.getDataCheckout()));
+		estadia.setValorDiaria(this.getValorDiaria());
 		for (Hospede hospede : this.hospedes){
 			estadia.addHospede(hospede);
 		}
@@ -42,7 +50,7 @@ public class Checkin {
 	public Estadia iniciarEstadiaSemReserva() {
 		validarHospedes();
 		Estadia estadia = new Estadia();
-		estadia.setDataCheckin(dataCheckin);
+		estadia.setDataCheckin(new DateTime(dataCheckin));
 		for (Hospede hospede : this.hospedes){
 			estadia.addHospede(hospede);
 		}
@@ -62,29 +70,14 @@ public class Checkin {
 		this.hospedes.add(hospede);
 	}
 
-	private void validarReserva(Reserva reserva) {
-		if (reserva == null)
-			throw new ReservaInvalidaException("Nenhuma reserva selecionada para o checkin.");
-		
-		validarQuarto(reserva.getQuarto());
-	}
-
-	private void validarQuarto(Quarto quarto) {
-		if (quarto == null)
-			throw new QuartoInvalidoException("Nenhuma reserva selecionada para o checkin.");
-	}
-	
-	private void validarHospedes() {
-		if (this.hospedes.isEmpty())
-			throw new HospedeInvalidoException("Nenhum hóspede selecionado para o checkin.");
-	}
-
 	public void clear() {
 		this.hospedes = new ArrayList<Hospede>();
 		this.reserva = null;
 		this.quarto = null;
 		this.valorDiaria = null;
 		this.dataCheckin = null;
+		this.dataCheckout = null;
+		this.desconto = null;
 	}
 
 	public void setQuarto(Quarto quarto) {
@@ -95,7 +88,7 @@ public class Checkin {
 		this.valorDiaria = valorDiaria;
 	}
 
-	public void setDataCheckin(DateTime dataCheckin) {
+	public void setDataCheckin(Date dataCheckin) {
 		this.dataCheckin = dataCheckin;
 	}
 
@@ -123,10 +116,74 @@ public class Checkin {
 		this.hospedes.remove(hospede);
 	}
 	
-	public Double getValorDiaria(){
-		if (this.reserva == null)
-			return this.valorDiaria;
-		return this.reserva.getValorDiaria();
+	public Date getDataCheckout() {
+		if (this.dataCheckout == null)
+			return this.reserva.getFim().toDate();
+		return dataCheckout;
 	}
 
+	public void setDataCheckout(Date dataCheckout) {
+		this.dataCheckout = dataCheckout;
+	}
+
+	public Date getDataCheckin() {
+		if (this.dataCheckin == null)
+			return this.reserva.getInicio().toDate();
+		return dataCheckin;
+	}
+
+	public Double getDesconto() {
+		return desconto;
+	}
+
+	public void setDesconto(Double desconto) {
+		this.desconto = desconto;
+	}
+	
+	public Double getValorFinal(){
+		return new CalculoDeValorPorPeriodoService().calcularValorAteAData(this, new DateTime(this.getDataCheckout()));
+	}
+	
+	public Double getSaldoAPagar(){
+		return (this.getValorFinal() - valorPago());
+	}
+	
+	private Double valorPago() {
+		if (reserva == null)
+			return 0.0;
+		return reserva.getValorPago();
+	}
+
+	private void validarReserva(Reserva reserva) {
+		if (reserva == null)
+			throw new ReservaInvalidaException("Nenhuma reserva selecionada para o checkin.");
+		
+		validarQuarto(reserva.getQuarto());
+	}
+
+	private void validarQuarto(Quarto quarto) {
+		if (quarto == null)
+			throw new QuartoInvalidoException("Nenhuma reserva selecionada para o checkin.");
+	}
+	
+	private void validarHospedes() {
+		if (this.hospedes.isEmpty())
+			throw new HospedeInvalidoException("Nenhum hóspede selecionado para o checkin.");
+	}
+
+	public DateTime getInicio() {
+		return new DateTime(this.getDataCheckin());
+	}
+
+	public DateTime getFim() {
+		return new DateTime(this.getDataCheckout());
+	}
+	
+	public Double getValorDiaria(){
+		if (this.valorDiaria == null)
+			return this.reserva.getValorDiaria();
+		
+		if (this.desconto == null) this.desconto = 0.0;
+		return this.valorDiaria * (1 - (desconto/100)) ;
+	}
 }

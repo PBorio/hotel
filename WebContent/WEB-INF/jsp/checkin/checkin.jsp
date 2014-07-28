@@ -37,15 +37,27 @@
 					<li class="active"><a href="<c:url value='/'/>">Home</a></li>
 				</ul>
 			</div>
+			<fieldset>
+				<legend>Quarto</legend>
+				<table class="table table-striped table-bordered" id="example"
+							cellpadding="0" cellspacing="0" border="0" width="100%">
+						<thead> 
+							<tr>
+								<th class="ui-state-default" width="100%">Quarto</th>
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+							   	<th>${checkin.quarto.numero}</th>
+							</tr>
+						</tfoot>
+				</table>
+			</fieldset>
 			<c:if test="${checkin.mostraResponsavel}">
+			<fieldset>
+				<legend>Informações de Contato do Responsável</legend>
 				<table class="table table-striped table-bordered" id="example"
 						cellpadding="0" cellspacing="0" border="0" width="100%">
-					<thead> 
-						<tr>
-							<th class="ui-state-default" width="70%">Informações de Contato do Responsável Pela Reserva</th>
-							<th class="ui-state-default" width="30%"></th>
-						</tr>
-					</thead>
 					<tfoot>
 						<tr>
 							<th>${checkin.reserva.hospede.nomeCompleto} - ${checkin.reserva.hospede.email} - ${checkin.reserva.hospede.telefone}</th>
@@ -53,22 +65,11 @@
 						</tr>
 					</tfoot>
 				</table>
+				</fieldset>
 			</c:if>
-			
-			<table class="table table-striped table-bordered" id="example"
-						cellpadding="0" cellspacing="0" border="0" width="100%">
-					<thead> 
-						<tr>
-							<th class="ui-state-default" width="100%">Quarto</th>
-						</tr>
-					</thead>
-					<tfoot>
-						<tr>
-						   	<th>${checkin.quarto.numero}</th>
-						</tr>
-					</tfoot>
-			</table>
 			<c:if test="${ not empty checkin.hospedes}">
+			<fieldset>
+				<legend>Hospedes Já Registrados</legend>
 				<table class="table table-striped table-bordered" id="example"
 						cellpadding="0" cellspacing="0" border="0" width="100%">
 					<thead> 
@@ -88,6 +89,7 @@
 						</c:forEach>
 					</tfoot>
 				</table>
+				</fieldset>
 			</c:if>
 			 <form class="form-horizontal" method="post">
 			<div class="form-group">
@@ -96,8 +98,8 @@
 					<button type="button" id="outroHospede" name="outroHospede" class="btn btn-primary" onClick="mostrarHospede();">
 						Cadastrar Outro Hóspede
 					</button>
-					<button type="button" id="concluir" name="concluir" class="btn btn-primary" onClick="this.form.action='<c:url value="/checkin/salva"/>';this.form.submit()">
-						Concluir
+					<button type="button" id="concluir" name="concluir" class="btn btn-primary" onClick="this.form.action='<c:url value="/checkin/continua/para/valores"/>';this.form.submit()">
+						Ir Para Datas e Valores
 					</button>
 				</div>
 			</div>
@@ -106,12 +108,6 @@
 			  <form class="form-horizontal" action='<c:url value="/checkin/novo/hospede"/>' method="post">
 			  	<fieldset>
 					<legend>Checkin</legend>
-					<div class="form-group">
-						<label class="control-label col-xs-2">Valor Diária:</label>
-						<div class="col-xs-10">
-							<input id="estadia.valorDiaria" type="text" class="col-xs-10" name="estadia.valorDiaria" value="${checkin.valorDiaria}" />
-						</div>
-					</div>
 					<div class="form-group">
 						<label class="control-label col-xs-2" >Nome:</label>
 						<div class="col-xs-10">

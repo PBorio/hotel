@@ -49,49 +49,24 @@ public class CalculoDeValorDaDiariaService {
 
 
 	public void calcularEInformarValorNaReserva(Reserva reserva) {
-		
-		Double valorDaDiaria = 0.0;
-		
-		Quarto quarto = reserva.getQuarto();
-		for (PoliticaDePrecos politica : this.politicas){
-			if (!politica.getCategoria().equals(quarto.getCategoria()))
-				continue;
-			
-			Reserva periodoDaPoliticaDePrecos = new Reserva();
-			periodoDaPoliticaDePrecos.setInicio(new DateTime(politica.getInicio().getTime()));
-			periodoDaPoliticaDePrecos.setFim(new DateTime(politica.getFim()));
-			
-			if (reserva.coincideCom(periodoDaPoliticaDePrecos))
-				valorDaDiaria += politica.getValorDiaria();
-			
-		}
-		
-		if (naoEncontrouPoliticaParaAReserva(valorDaDiaria)){
-			PoliticaDePrecos politicaPadrao = getPoliticaPadraoParaACategoria(quarto.getCategoria());
-			
-			if (politicaPadrao == null)
-				throw new HotelException("Não há política de preços para a categoria: "+quarto.getCategoria().getDescricao());
-			
-			valorDaDiaria += politicaPadrao.getValorDiaria();
-		}
-		
-		if (naoEncontrouPoliticaParaAReserva(valorDaDiaria))
-			throw new HotelException("Não há política de preços para a categoria: "+quarto.getCategoria().getDescricao());
-		
+		Periodo periodo = new Periodo(reserva.getInicio(), reserva.getFim());
+		Double valorDaDiaria = this.calcularValorDaDiaria(periodo, reserva.getQuarto());
+		reserva.setValorDiaria(valorDaDiaria);
 		valorDaDiaria = aplicarModificadoresDeValor(reserva, valorDaDiaria);
 		reserva.setValorDiaria(valorDaDiaria);
 	}
 
 	private Double aplicarModificadoresDeValor(Reserva reserva, Double valorDaDiaria) {
-		if (reserva.isSoParaUmAdulto())
-			return (valorDaDiaria * 0.6);
-		
-		valorDaDiaria += (40.0 * reserva.getParDeCriancasDe0a5());
-		
-		if (reserva.getNumeroCriancas6a16() != null && reserva.getNumeroCriancas6a16().intValue() > 0)
-			valorDaDiaria += (70.0 * reserva.getNumeroCriancas6a16().intValue());
-		
-		return valorDaDiaria;
+		return new ModificadorDeValoresDaDiariaService().aplicarModificadores(reserva, valorDaDiaria);
+//		if (reserva.isSoParaUmAdulto())
+//			return (valorDaDiaria * 0.6);
+//		
+//		valorDaDiaria += (40.0 * reserva.getParDeCriancasDe0a5());
+//		
+//		if (reserva.getNumeroCriancas6a16() != null && reserva.getNumeroCriancas6a16().intValue() > 0)
+//			valorDaDiaria += (70.0 * reserva.getNumeroCriancas6a16().intValue());
+//		
+//		return valorDaDiaria;
 	}
 
 	private PoliticaDePrecos getPoliticaPadraoParaACategoria(Categoria categoria) {

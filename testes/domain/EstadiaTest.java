@@ -66,7 +66,7 @@ public class EstadiaTest {
 		Checkin checkin = new Checkin();
 		checkin.setQuarto(new Quarto());
 		checkin.addHospede(new Hospede());
-		checkin.setDataCheckin(new ParserDeStringParaData().parseData("09/03/2014"));
+		checkin.setDataCheckin(new ParserDeStringParaData().parseData("09/03/2014").toDate());
 		checkin.setValorDiaria(10.0);
 		Estadia estadia = checkin.iniciarEstadiaSemReserva();
 		
@@ -80,7 +80,7 @@ public class EstadiaTest {
 		Checkin checkin = new Checkin();
 		checkin.setQuarto(new Quarto());
 		checkin.addHospede(new Hospede());
-		checkin.setDataCheckin(new ParserDeStringParaData().parseData("09/03/2014"));
+		checkin.setDataCheckin(new ParserDeStringParaData().parseData("09/03/2014").toDate());
 		checkin.setValorDiaria(10.0);
 
 		Estadia estadia = checkin.iniciarEstadiaSemReserva();
@@ -254,22 +254,6 @@ public class EstadiaTest {
 		
 		Assert.assertEquals((Double)90.0, estadia.getValorDaEstadiaNaData(hoje));
 		
-	}
-	
-	@Test
-	public void aEstadiaDeveSaberSeJaContemOHospedeDaReserva(){
-		
-		Reserva reserva = 
-				new FakeReserva().iniciandoEm("12/03/2014").terminandoEm("14/03/2014").paraOHospede("Joao").noQuarto("1").comValorDaDiariaDe(10.0).build();
-		
-		Checkin checkin = new Checkin();
-		checkin.aPartirDaReserva(reserva);
-		checkin.addHospede(reserva.getHospede());
-		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();
-		
-		Assert.assertFalse(estadia.contemOHospedeDaReserva());
-		estadia.addHospede(reserva.getHospede());
-		Assert.assertTrue(estadia.contemOHospedeDaReserva());
 	}
 	
 }
