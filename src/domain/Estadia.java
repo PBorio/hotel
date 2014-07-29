@@ -70,15 +70,10 @@ public class Estadia implements CalculavelPorPeriodo {
 	
 	@Column(name="valor_diaria")
 	private Double valorDiaria;
-	
-//	public void aPartirDaReserva(Reserva reserva) {
-//		this.reserva = reserva;
-//		this.quarto = reserva.getQuarto();
-//		this.dataCheckin = reserva.getInicio();
-//		this.previsaoCheckout = reserva.getFim();
-//		this.valorDiaria = reserva.getValorDiaria();
-//	}
 
+	@OneToMany(mappedBy="estadia")
+	private List<PagamentoEstadia> pagamentosEstadias = new ArrayList<PagamentoEstadia>();
+	
 	public Reserva getReserva() {
 		return reserva;
 	}
@@ -262,6 +257,15 @@ public class Estadia implements CalculavelPorPeriodo {
 		if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public void addPagamento(Pagamento pagamento) {
+		PagamentoEstadia pagamentoEstadia = new PagamentoEstadia(this, pagamento);
+		this.pagamentosEstadias  .add(pagamentoEstadia);
+	}
+
+	public List<PagamentoEstadia> getPagamentosEstadias() {
+		return pagamentosEstadias;
 	}
 
 }

@@ -1,14 +1,14 @@
 package domain.helpers;
 
-import domain.PagamentoReserva;
+import domain.Pagamento;
 import domain.exceptions.PagamentoInvalidoException;
 import domain.servicos.tipos.TipoPagamento;
 
 public class ValidadorPagamentoReserva {
 
-	private PagamentoReserva pagamento;
+	private Pagamento pagamento;
 
-	public ValidadorPagamentoReserva(PagamentoReserva pagamento) {
+	public ValidadorPagamentoReserva(Pagamento pagamento) {
 		this.pagamento = pagamento;
 	}
 

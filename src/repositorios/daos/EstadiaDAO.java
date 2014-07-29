@@ -10,6 +10,7 @@ import repositorios.EstadiaRepositorio;
 import br.com.caelum.vraptor.ioc.Component;
 import domain.Estadia;
 import domain.HospedeDaEstadia;
+import domain.PagamentoEstadia;
 
 
 @Component
@@ -41,5 +42,17 @@ public class EstadiaDAO extends DAO<Estadia> implements EstadiaRepositorio {
 	@Transactional
 	public void excluirHospede(HospedeDaEstadia hospedeDaEstadia) {
 		super.entityManager.remove(hospedeDaEstadia);
+	}
+	
+	@Transactional
+	@Override
+	public void salva(Estadia estadia) {
+		getEntityManager().persist(estadia);
+		getEntityManager().flush();
+		for (PagamentoEstadia pe : estadia.getPagamentosEstadias()){
+			getEntityManager().persist(pe.getPagamento());
+			getEntityManager().flush();
+			getEntityManager().persist(pe);
+		}
 	}
 }

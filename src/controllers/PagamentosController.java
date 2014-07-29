@@ -8,7 +8,7 @@ import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.validator.ValidationMessage;
-import domain.PagamentoReserva;
+import domain.Pagamento;
 import domain.Reserva;
 import domain.exceptions.HotelException;
 import domain.helpers.ValidadorPagamentoReserva;
@@ -28,29 +28,29 @@ public class PagamentosController {
 		this.validator = validator;
 	}
 	
-	public void registrar(PagamentoReserva pagamentoReserva){
+	public void registrar(Pagamento pagamento){
 		try{
-			pagamentoReserva.arrumaValores();
-			ValidadorPagamentoReserva validador = new ValidadorPagamentoReserva(pagamentoReserva);
+			pagamento.arrumaValores();
+			ValidadorPagamentoReserva validador = new ValidadorPagamentoReserva(pagamento);
 			validador.validar();
 			
-			if (pagamentoReserva.getId() == null)
-				pagamentoRepositorio.salva(pagamentoReserva);
+			if (pagamento.getId() == null)
+				pagamentoRepositorio.salva(pagamento);
 			else
-				pagamentoRepositorio.atualiza(pagamentoReserva);
+				pagamentoRepositorio.atualiza(pagamento);
 			
 			result.redirectTo(ConsultasController.class).consulta();
 		}catch(HotelException e){
 			e.printStackTrace();
 			validator. add(new ValidationMessage(e.getMessage(),"erro.no.reserva",e.getMessage()));
-			validator.onErrorRedirectTo(ConsultasController.class).pagamento(pagamentoReserva.getReserva().getId());
+			validator.onErrorRedirectTo(ConsultasController.class).pagamento(pagamento.getReserva().getId());
 		}
 	}
 	
 	@Get
 	@Path("/pagamentos/excluir/{id}")
 	public void excluir(Long id){
-		PagamentoReserva pagamento = pagamentoRepositorio.buscaPorId(id);
+		Pagamento pagamento = pagamentoRepositorio.buscaPorId(id);
 		Reserva reserva = reservaRepositorio.buscaPorId(pagamento.getReserva().getId());
 		pagamentoRepositorio.excluir(pagamento);
 		result.redirectTo(ConsultasController.class).pagamento(reserva.getId());
@@ -59,10 +59,10 @@ public class PagamentosController {
 	@Get
 	@Path("/pagamentos/editar/{id}")
 	public void editar(Long id){
-		PagamentoReserva pagamento = pagamentoRepositorio.buscaPorId(id);
+		Pagamento pagamento = pagamentoRepositorio.buscaPorId(id);
 		Reserva reserva = reservaRepositorio.buscaPorId(pagamento.getReserva().getId());
 		result.include("reserva", reserva);
-		result.include("pagamentoReserva", pagamento);
+		result.include("pagamento", pagamento);
 		result.of(ConsultasController.class).pagamento(pagamento.getReserva().getId());
 	}
 }

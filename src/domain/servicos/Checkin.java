@@ -145,10 +145,10 @@ public class Checkin implements CalculavelPorPeriodo {
 	}
 	
 	public Double getSaldoAPagar(){
-		return (this.getValorFinal() - valorPago());
+		return (this.getValorFinal() - getValorPago());
 	}
 	
-	private Double valorPago() {
+	public Double getValorPago() {
 		if (reserva == null)
 			return 0.0;
 		return reserva.getValorPago();

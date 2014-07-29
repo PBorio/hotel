@@ -8,30 +8,31 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
 @Entity
-@Table(name="pagamentos_reservas")
-public class PagamentoReserva {
+@Table(name="pagamentos_estadias")
+public class PagamentoEstadia {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name="reserva_id")
-	private Reserva reserva;
+	@JoinColumn(name="estadia_id")
+	private Estadia estadia;
 	
 	@ManyToOne
 	@JoinColumn(name="pagamento_id")
 	private Pagamento pagamento;
-
-	public PagamentoReserva() {	}
 	
-	public PagamentoReserva(Reserva reserva, Pagamento pagamento){
-		this.reserva = reserva;
+	public PagamentoEstadia(){}
+	
+
+	public PagamentoEstadia(Estadia estadia, Pagamento pagamento) {
+		this.estadia = estadia;
 		this.pagamento = pagamento;
 	}
-	
+
+
 	public Long getId() {
 		return id;
 	}
@@ -40,12 +41,12 @@ public class PagamentoReserva {
 		this.id = id;
 	}
 
-	public Reserva getReserva() {
-		return reserva;
+	public Estadia getEstadia() {
+		return estadia;
 	}
 
-	public void setReserva(Reserva reserva) {
-		this.reserva = reserva;
+	public void setEstadia(Estadia estadia) {
+		this.estadia = estadia;
 	}
 
 	public Pagamento getPagamento() {

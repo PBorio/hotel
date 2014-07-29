@@ -1,0 +1,81 @@
+<input type="hidden" value="${pagamento.id}" name="pagamento.id"/>
+		  	 <div class="form-group">
+				<label class="control-label col-xs-2">Tipos de Pagamento:</label>
+				<div class="col-xs-10">
+					<select id="tipo" class="col-xs-10" name="pagamento.tipoPagamento">   
+		                <option> Tipos...</option>
+		                <option value="1" <c:if test="${1 == pagamento.tipoPagamento}">selected="true"</c:if>> Cartão </option>
+		                <option value="2" <c:if test="${2 == pagamento.tipoPagamento}">selected="true"</c:if>> Depósito </option>  
+		            </select>
+				</div>
+			 </div>
+		  	 <div id="cartao">
+		  	 	<input type="hidden" value="${reserva.id}" name="pagamento.reserva.id"/>
+			  	 <div class="form-group">
+			  	  	<label class="control-label col-xs-2">Data Pagamento:</label>
+				    <div class="col-xs-10">
+				 	  <input type="text" class="col-xs-10" value="<fmt:formatDate value='${pagamento.dataPagamento}' pattern='dd/MM/yyyy'/>" name="pagamento.dataPagamento" />
+					</div>
+				 </div>
+			  	  <div class="form-group">
+			  	  	<label class="control-label col-xs-2">Número:</label>
+				    <div class="col-xs-10">
+				 	  <input type="text" class="col-xs-10" value="${pagamento.numeroCartao}" name="pagamento.numeroCartao" maxlength="8" />
+					</div>
+				 </div>
+			  	 <div class="form-group">
+			  	  	<label class="control-label col-xs-2">Valor:</label>
+				    <div class="col-xs-10">
+				 	  <input type="text" class="col-xs-10" value="${pagamento.valor}" name="pagamento.valor" />
+					</div>
+				 </div>
+				 <div class="form-group">
+					  <label class="control-label col-xs-2" for="singlebutton"></label>
+					  <div class="col-xs-10">
+					    <button id="singlebutton" name="singlebutton" class="btn btn-primary btn-lg">
+						 Salvar
+					    </button>
+					  </div>
+				    </div>
+			</div>
+			<div id="deposito">
+
+				 <div class="form-group">
+				   <label class="control-label col-xs-2">Banco:</label>
+				   <div class="col-xs-10">
+					 <select id="banco" name="pagamento.banco" class="col-xs-10" >   
+		                <option> Tipos...</option>
+		                <option value="Itau" <c:if test="${'Itau' == pagamento.banco}">selected="true"</c:if>> Itau </option>
+		                <option value="Banco do Brasil" <c:if test="${'Banco do Brasil' == pagamento.banco}">selected="true"</c:if>> Banco do Brasil </option>  
+		             </select>
+				   </div>
+			 	</div>
+				
+				<div class="form-group">
+			  	  	<label class="control-label col-xs-2">Data Previsão:</label>
+				    <div class="col-xs-10">
+				 	  <input type="text" class="col-xs-10" value="<fmt:formatDate value='${pagamento.dataPrevisao}' pattern='dd/MM/yyyy'/>" name="pagamento.dataPrevisao" />
+					</div>
+				 </div>
+				<div class="form-group">
+			  	  	<label class="control-label col-xs-2">Data Deposito:</label>
+				    <div class="col-xs-10">
+				 	  <input type="text" class="col-xs-10" value="<fmt:formatDate value='${pagamento.dataDeposito}' pattern='dd/MM/yyyy'/>" name="pagamento.dataDeposito" />
+					</div>
+				 </div>
+				 <div class="form-group">
+			  	  	<label class="control-label col-xs-2">Valor:</label>
+				    <div class="col-xs-10">
+				 	  <input type="text" class="col-xs-10" value="${pagamento.valorDeposito}" name="pagamento.valorDeposito" />
+					</div>
+				 </div>
+				 <div class="form-group">
+					  <label class="control-label col-xs-2" for="singlebutton"></label>
+					  <div class="col-xs-10">
+					    <button id="singlebutton" name="singlebutton" class="btn btn-primary btn-lg">
+						 Salvar
+					    </button>
+					  </div>
+				  </div>
+				
+			</div> 

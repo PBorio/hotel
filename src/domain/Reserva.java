@@ -71,7 +71,7 @@ public class Reserva implements CalculavelPorPeriodo {
 	private Double valorDiaria;
 
 	@OneToMany(mappedBy="reserva")
-	private List<PagamentoReserva> pagamentos = new ArrayList<PagamentoReserva>();
+	private List<PagamentoReserva> pagamentosReservas = new ArrayList<PagamentoReserva>();
 
 	public Long getId() {
 		return id;
@@ -180,7 +180,8 @@ public class Reserva implements CalculavelPorPeriodo {
 	
 	public Double getValorPago() {
 		Double result = 0.0;
-		for (PagamentoReserva pg : this.pagamentos){
+		for (PagamentoReserva pr : this.pagamentosReservas){
+			Pagamento pg = pr.getPagamento();
 			if (pg.getDataPagamento() != null)
 				result += pg.getValorPagamento();
 		}
@@ -223,12 +224,13 @@ public class Reserva implements CalculavelPorPeriodo {
 		return (this.numeroCriancas0a5 / 2);
 	}
 
-	public void addPagamento(PagamentoReserva pagamento) {
-		this.pagamentos.add(pagamento);
+	public void addPagamento(Pagamento pagamento) {
+		this.pagamentosReservas.add(new PagamentoReserva(this, pagamento));
 	}
 
 	public boolean isPossuiPagamento() {
-		for (PagamentoReserva pagamento : this.pagamentos){
+		for (PagamentoReserva pr : this.pagamentosReservas){
+			Pagamento pagamento = pr.getPagamento(); 
 			if (pagamento.getDataPagamento() != null)
 				return true;
 		}
@@ -236,7 +238,7 @@ public class Reserva implements CalculavelPorPeriodo {
 	}
 	
 	public boolean isPossuiPagamentoOuPrevisao() {
-		return this.pagamentos.size() > 0;
+		return this.pagamentosReservas.size() > 0;
 	}
 
 	public Double getSaldoAPagar() {
@@ -248,8 +250,16 @@ public class Reserva implements CalculavelPorPeriodo {
 	  	return bd.setScale(2, RoundingMode.HALF_EVEN).doubleValue();
 	}
 
-	public List<PagamentoReserva> getPagamentos() {
+	public List<Pagamento> getPagamentos() {
+		List<Pagamento> pagamentos = new ArrayList<Pagamento>();
+		for (PagamentoReserva pr : this.pagamentosReservas){
+			pagamentos.add(pr.getPagamento());
+		}
 		return pagamentos;
+	}
+	
+	public List<PagamentoReserva> getPagamentosReservas(){
+		return this.pagamentosReservas;
 	}
 
 	@Override

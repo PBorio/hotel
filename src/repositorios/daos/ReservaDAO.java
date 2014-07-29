@@ -24,7 +24,8 @@ public class ReservaDAO extends DAO<Reserva> implements ReservaRepositorio {
 		StringBuilder sql = new StringBuilder();
 		sql.append(" Select r From Reserva r ");
 		sql.append(" join fetch r.hospede hospede ");
-		sql.append(" join fetch r.pagamentos pagamentos ");
+		sql.append(" join fetch r.pagamentosReservas pagamentoReserva ");
+		sql.append(" join fetch pagamentoReserva.pagamento pagamento ");
 		sql.append(" where hospede.nome like ? ");
 		sql.append(" order by r.id ");
 		
@@ -41,7 +42,8 @@ public class ReservaDAO extends DAO<Reserva> implements ReservaRepositorio {
 		StringBuilder sql = new StringBuilder();
 		sql.append(" Select r From Reserva r ");
 		sql.append(" join fetch r.hospede hospede ");
-		sql.append(" join fetch r.pagamentos pagamentos ");
+		sql.append(" join fetch r.pagamentosReservas pagamentoReserva ");
+		sql.append(" join fetch pagamentoReserva.pagamento pagamento ");
 		sql.append(" where not exists (select 1 from Estadia e where e.reserva = r) ");
 		sql.append(" and r.inicio > ? ");
 		sql.append(" order by r.id ");
@@ -62,7 +64,8 @@ public class ReservaDAO extends DAO<Reserva> implements ReservaRepositorio {
 		StringBuilder sql = new StringBuilder();
 		sql.append(" Select r From Reserva r ");
 		sql.append(" join fetch r.hospede hospede ");
-		sql.append(" join fetch r.pagamentos pagamentos ");
+		sql.append(" join fetch r.pagamentosReservas pagamentoReserva ");
+		sql.append(" join fetch pagamentoReserva.pagamento pagamento ");
 		sql.append(" where r.id = ? ");
 		
 		Query query = entityManager.createQuery(sql.toString());

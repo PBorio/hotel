@@ -14,10 +14,14 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
+import br.com.caelum.vraptor.validator.ValidationMessage;
 import controllers.validators.HospedeValidation;
 import domain.Estadia;
 import domain.Hospede;
+import domain.Pagamento;
 import domain.Reserva;
+import domain.exceptions.HotelException;
+import domain.helpers.ValidadorPagamentoReserva;
 import domain.servicos.CalculoDeValorDaDiariaService;
 import domain.servicos.Checkin;
 import domain.servicos.ModificadorDeValoresDaDiariaService;
@@ -122,7 +126,10 @@ public class CheckinController {
 
 	@Post("/checkin/continua/para/valores")
 	public void checkinValores(){
-
+		if (checkin.getHospedes().isEmpty()){
+			validator.add(new ValidationMessage("Nenhum hóspede informado", "checkin"));
+			validator.onErrorUsePageOf(this).checkin();
+		}
 	}
 	
 	@Post("/checkin/recalcula/valores/")
@@ -131,15 +138,34 @@ public class CheckinController {
 		result.of(this).checkinValores();
 	}
 	
-	@Post("/checkin/confirma/")
-	public void confirmar(Checkin checkinLocal){
+	@Post("/checkin/ir/para/pagamento/")
+	public void checkinPagamento(Checkin checkinLocal){
+		recalcular(checkinLocal);
+	}
+	
+	@Post("/checkin/registrar/pagamento")
+	public void registrarPagamento(Pagamento pagamento){
 		
-		Estadia estadia = recalcular(checkinLocal);
-		estadiaRepositorio.salva(estadia);
-		
-		this.checkin.clear();
-		result.include("mensagem", "Estadia criada com sucesso!");
-		result.redirectTo(PainelController.class).painel();
+		try{
+			Estadia estadia = recalcular(checkin);
+			
+			if (pagamento.foiMarcado()){
+				pagamento.arrumaValores();
+				ValidadorPagamentoReserva validador = new ValidadorPagamentoReserva(pagamento);
+				validador.validar();
+				estadia.addPagamento(pagamento);
+			}
+			estadiaRepositorio.salva(estadia);
+			
+			this.checkin.clear();
+			result.include("mensagem", "Estadia criada com sucesso!");
+			result.redirectTo(PainelController.class).painel();
+		}catch(HotelException e){
+			e.printStackTrace();
+			result.include("pagamento", pagamento);
+			validator. add(new ValidationMessage(e.getMessage(),"erro.no.reserva",e.getMessage()));
+			validator.onErrorUsePageOf(this).checkinPagamento(checkin); 
+		}
 	}
 
 	private Estadia recalcular(Checkin checkinLocal) {

@@ -12,7 +12,7 @@ public class ValidadorPagamentoReservaTest {
 	
 	@Test(expected=PagamentoInvalidoException.class)
 	public void umPagamentoNaoEhValidoSeOTipoDePagamentoNaoFoiInformado(){
-		PagamentoReserva pagamento = criarPagamento();
+		Pagamento pagamento = criarPagamento();
 		pagamento.setTipoPagamento(null);
 		ValidadorPagamentoReserva validadorPagamentoReserva = new ValidadorPagamentoReserva(pagamento);
 		validadorPagamentoReserva.validar();
@@ -20,7 +20,7 @@ public class ValidadorPagamentoReservaTest {
 	
 	@Test(expected=PagamentoInvalidoException.class)
 	public void paraPagamentoComCartaoOValorNaoPodeSerMenorOuIgualAZero(){
-		PagamentoReserva pagamento = criarPagamento();
+		Pagamento pagamento = criarPagamento();
 		pagamento.setValor(0.0);
 		ValidadorPagamentoReserva validadorPagamentoReserva = new ValidadorPagamentoReserva(pagamento);
 		validadorPagamentoReserva.validar();
@@ -28,7 +28,7 @@ public class ValidadorPagamentoReservaTest {
 	
 	@Test(expected=PagamentoInvalidoException.class)
 	public void paraPagamentoComCartaoOValorNaoPodeSerNula(){
-		PagamentoReserva pagamento = criarPagamento();
+		Pagamento pagamento = criarPagamento();
 		pagamento.setValor(null);
 		ValidadorPagamentoReserva validadorPagamentoReserva = new ValidadorPagamentoReserva(pagamento);
 		validadorPagamentoReserva.validar();
@@ -36,7 +36,7 @@ public class ValidadorPagamentoReservaTest {
 	
 	@Test(expected=PagamentoInvalidoException.class)
 	public void paraPagamentoComCartaoONumeroDoCartaoTemQuerSerInformado(){
-		PagamentoReserva pagamento = criarPagamento();
+		Pagamento pagamento = criarPagamento();
 		pagamento.setNumeroCartao("");
 		ValidadorPagamentoReserva validadorPagamentoReserva = new ValidadorPagamentoReserva(pagamento);
 		validadorPagamentoReserva.validar();
@@ -44,7 +44,7 @@ public class ValidadorPagamentoReservaTest {
 	
 	@Test(expected=PagamentoInvalidoException.class)
 	public void paraPagamentoComCartaoADataDePagamentoTemQuerSerInformado(){
-		PagamentoReserva pagamento = criarPagamento();
+		Pagamento pagamento = criarPagamento();
 		pagamento.setDataPagamento(null);
 		ValidadorPagamentoReserva validadorPagamentoReserva = new ValidadorPagamentoReserva(pagamento);
 		validadorPagamentoReserva.validar();
@@ -52,7 +52,7 @@ public class ValidadorPagamentoReservaTest {
 	
 	@Test(expected=PagamentoInvalidoException.class)
 	public void paraPagamentoViaDepositoOBancoTemQueSerInformado(){
-		PagamentoReserva pagamento = criarPagamento();
+		Pagamento pagamento = criarPagamento();
 		pagamento.setTipoPagamento(TipoPagamento.DEPOSITO.getValue());
 		pagamento.setBanco(null);
 		ValidadorPagamentoReserva validadorPagamentoReserva = new ValidadorPagamentoReserva(pagamento);
@@ -61,7 +61,7 @@ public class ValidadorPagamentoReservaTest {
 	
 	@Test(expected=PagamentoInvalidoException.class)
 	public void paraPagamentoViaDepositoPrecisaTerADataDeDepositoOuDePagamentoInformada(){
-		PagamentoReserva pagamento = criarPagamento();
+		Pagamento pagamento = criarPagamento();
 		pagamento.setTipoPagamento(TipoPagamento.DEPOSITO.getValue());
 		pagamento.setDataPrevisao(null);
 		pagamento.setDataPagamento(null);
@@ -71,7 +71,7 @@ public class ValidadorPagamentoReservaTest {
 	
 	@Test(expected=PagamentoInvalidoException.class)
 	public void casoADataDePagamentoTenhaSidoInformadaOValorEhObrigatorio(){
-		PagamentoReserva pagamento = criarPagamento();
+		Pagamento pagamento = criarPagamento();
 		pagamento.setTipoPagamento(TipoPagamento.DEPOSITO.getValue());
 		pagamento.setDataPagamento(new Date());
 		pagamento.setValor(null);
@@ -81,7 +81,7 @@ public class ValidadorPagamentoReservaTest {
 	
 	@Test
 	public void umPagamentoDeCartaoEhValidoSeTiverDataDePagamentoNumeroDoCartaoEValor(){
-		PagamentoReserva pagamento = new PagamentoReserva();
+		Pagamento pagamento = new Pagamento();
 		pagamento.setTipoPagamento(TipoPagamento.CARTAO.getValue());
 		pagamento.setDataPagamento(new Date());
 		pagamento.setValor(10.0);
@@ -92,7 +92,7 @@ public class ValidadorPagamentoReservaTest {
 	
 	@Test
 	public void umPagamentoPorDepositoPodeTerSomenteADataDePrevisaoEOBanco(){
-		PagamentoReserva pagamento = new PagamentoReserva();
+		Pagamento pagamento = new Pagamento();
 		pagamento.setTipoPagamento(TipoPagamento.DEPOSITO.getValue());
 		pagamento.setBanco("Itau");
 		pagamento.setDataPrevisao(new Date());
@@ -102,7 +102,7 @@ public class ValidadorPagamentoReservaTest {
 	
 	@Test
 	public void umPagamentoPorDepositoQueTenhaDataDePagamentoDeveTerTambemBancoEValor(){
-		PagamentoReserva pagamento = new PagamentoReserva();
+		Pagamento pagamento = new Pagamento();
 		pagamento.setTipoPagamento(TipoPagamento.DEPOSITO.getValue());
 		pagamento.setBanco("Itau");
 		pagamento.setDataPagamento(new Date());
@@ -111,8 +111,8 @@ public class ValidadorPagamentoReservaTest {
 		validadorPagamentoReserva.validar();
 	}
 
-	private PagamentoReserva criarPagamento() {
-		PagamentoReserva pagamento = new PagamentoReserva();
+	private Pagamento criarPagamento() {
+		Pagamento pagamento = new Pagamento();
 		pagamento.setTipoPagamento(TipoPagamento.CARTAO.getValue());
 		pagamento.setValor(50.0);
 		pagamento.setNumeroCartao("1234 5678 XXXX XXXX");

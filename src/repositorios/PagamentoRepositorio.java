@@ -1,15 +1,15 @@
 package repositorios;
 
-import domain.PagamentoReserva;
+import domain.Pagamento;
 
 public interface PagamentoRepositorio {
 	
-	void salva(PagamentoReserva pagamento);
+	void salva(Pagamento pagamento);
 	
-	public PagamentoReserva buscaPorId(Long id);
+	public Pagamento buscaPorId(Long id);
 
-	public void excluir(PagamentoReserva pagamentoReserva);
+	public void excluir(Pagamento pagamentoReserva);
 
-	void atualiza(PagamentoReserva pagamentoReserva);
+	void atualiza(Pagamento pagamentoReserva);
 
 }
