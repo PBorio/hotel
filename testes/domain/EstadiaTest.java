@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Date;
+
 import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Test;
@@ -9,6 +11,7 @@ import domain.helpers.FakeConsumo;
 import domain.helpers.FakeReserva;
 import domain.servicos.Checkin;
 import domain.servicos.helpers.ParserDeStringParaData;
+import domain.servicos.tipos.TipoPagamento;
 
 public class EstadiaTest {
 	
@@ -253,7 +256,133 @@ public class EstadiaTest {
 		DateTime hoje = new ParserDeStringParaData().parseData("15/03/2014");
 		
 		Assert.assertEquals((Double)90.0, estadia.getValorDaEstadiaNaData(hoje));
+	}
+	
+	@Test
+	public void oValorPagoEhOValorPagoDaReservaMaisOValorPagoDaEstadia(){
+		Reserva reserva = 
+				new FakeReserva().iniciandoEm("12/03/2014").terminandoEm("14/03/2014").paraOHospede("Joao").noQuarto("1").comValorDaDiariaDe(10.0).build();
 		
+		Pagamento pagamento = new Pagamento();
+		pagamento.setTipoPagamento(TipoPagamento.CARTAO.getValue());
+		pagamento.setDataPagamento(new Date());
+		pagamento.setValor(5.0);
+		reserva.addPagamento(pagamento);
+		
+		Checkin checkin = new Checkin();
+		checkin.aPartirDaReserva(reserva);
+		checkin.addHospede(reserva.getHospede());
+		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();
+		
+		Pagamento pagamentoNaEstadia = new Pagamento();
+		pagamentoNaEstadia.setTipoPagamento(TipoPagamento.CARTAO.getValue());
+		pagamento.setDataPagamento(new Date());
+		pagamentoNaEstadia.setValor(5.0);
+		estadia.addPagamento(pagamento);
+		
+		Assert.assertEquals((Double)10.0, estadia.getValorPago());
+	}
+	
+	@Test
+	public void oValorFinalDeUmaEstadiaEhOValorDaEstadiaMenosOValorPago(){
+		Reserva reserva = 
+				new FakeReserva().iniciandoEm("12/03/2014").terminandoEm("14/03/2014").paraOHospede("Joao").noQuarto("1").comValorDaDiariaDe(10.0).build();
+		
+		Checkin checkin = new Checkin();
+		checkin.aPartirDaReserva(reserva);
+		checkin.addHospede(reserva.getHospede());
+		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();
+		
+		Consumo consumo = new FakeConsumo("Bebida").comValorDe(30.0).build();
+		estadia.addConsumo(consumo);
+		
+		Assert.assertEquals((Double)50.0, estadia.getPrevisaoDoValorFinal());
+	}
+	
+	@Test
+	public void oPagamentoSoEhConsideradoSeTiver(){
+		Reserva reserva = 
+				new FakeReserva().iniciandoEm("12/03/2014").terminandoEm("14/03/2014").paraOHospede("Joao").noQuarto("1").comValorDaDiariaDe(10.0).build();
+		
+		Pagamento pagamento = new Pagamento();
+		pagamento.setTipoPagamento(TipoPagamento.CARTAO.getValue());
+		pagamento.setDataPagamento(new Date());
+		pagamento.setValor(5.0);
+		reserva.addPagamento(pagamento);
+		
+		Checkin checkin = new Checkin();
+		checkin.aPartirDaReserva(reserva);
+		checkin.addHospede(reserva.getHospede());
+		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();
+		
+		Pagamento pagamentoNaEstadia = new Pagamento();
+		pagamentoNaEstadia.setTipoPagamento(TipoPagamento.CARTAO.getValue());
+		pagamento.setDataPagamento(new Date());
+		pagamentoNaEstadia.setValor(5.0);
+		estadia.addPagamento(pagamento);
+		
+		Consumo consumo = new FakeConsumo("Bebida").comValorDe(30.0).build();
+		estadia.addConsumo(consumo);
+		
+		Assert.assertEquals((Double)40.0, estadia.getSaldoAPagar());
+	}
+	
+	@Test
+	public void oSaldoAPagarEhOValorDaEstadiaNoCheckoutMaisConsumoEServicoMenosOValorJaPago(){
+		Reserva reserva = 
+				new FakeReserva().iniciandoEm("12/03/2014").terminandoEm("14/03/2014").paraOHospede("Joao").noQuarto("1").comValorDaDiariaDe(10.0).build();
+		
+		Pagamento pagamento = new Pagamento();
+		pagamento.setTipoPagamento(TipoPagamento.CARTAO.getValue());
+		pagamento.setDataPagamento(new Date());
+		pagamento.setValor(5.0);
+		reserva.addPagamento(pagamento);
+		
+		Checkin checkin = new Checkin();
+		checkin.aPartirDaReserva(reserva);
+		checkin.addHospede(reserva.getHospede());
+		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();
+		
+		Pagamento pagamentoNaEstadia = new Pagamento();
+		pagamentoNaEstadia.setTipoPagamento(TipoPagamento.CARTAO.getValue());
+		pagamento.setDataPagamento(new Date());
+		pagamentoNaEstadia.setValor(5.0);
+		estadia.addPagamento(pagamento);
+		
+		Consumo consumo = new FakeConsumo("Bebida").comValorDe(30.0).build();
+		estadia.addConsumo(consumo);
+		
+		estadia.fechar(new ParserDeStringParaData().parseData("15/03/2014"));
+		
+		Assert.assertEquals((Double)50.0, estadia.getSaldoAPagar());
+	}
+	
+	@Test
+	public void seAindaNaoFoiFeitoOCheckoutOSaldoAPagarDeveConsiderarAPrevisaoDeCheckout(){
+		Reserva reserva = 
+				new FakeReserva().iniciandoEm("12/03/2014").terminandoEm("14/03/2014").paraOHospede("Joao").noQuarto("1").comValorDaDiariaDe(10.0).build();
+		
+		Pagamento pagamento = new Pagamento();
+		pagamento.setTipoPagamento(TipoPagamento.CARTAO.getValue());
+		pagamento.setDataPagamento(new Date());
+		pagamento.setValor(5.0);
+		reserva.addPagamento(pagamento);
+		
+		Checkin checkin = new Checkin();
+		checkin.aPartirDaReserva(reserva);
+		checkin.addHospede(reserva.getHospede());
+		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();
+		
+		Pagamento pagamentoNaEstadia = new Pagamento();
+		pagamentoNaEstadia.setTipoPagamento(TipoPagamento.CARTAO.getValue());
+		pagamento.setDataPagamento(new Date());
+		pagamentoNaEstadia.setValor(5.0);
+		estadia.addPagamento(pagamento);
+		
+		Consumo consumo = new FakeConsumo("Bebida").comValorDe(30.0).build();
+		estadia.addConsumo(consumo);
+		
+		Assert.assertEquals((Double)40.0, estadia.getSaldoAPagar());
 	}
 	
 }

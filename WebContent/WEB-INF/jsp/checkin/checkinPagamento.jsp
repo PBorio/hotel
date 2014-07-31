@@ -61,9 +61,7 @@ function mudarTipoPagamento(){
 							</tr>
 						</tfoot>
 				</table>
-			</fieldset>
 			
-			<fieldset>
 				<legend>Hospedes Já Registrados</legend>
 				<table class="table table-striped table-bordered" id="example"
 						cellpadding="0" cellspacing="0" border="0" width="100%">
@@ -75,9 +73,7 @@ function mudarTipoPagamento(){
 						</c:forEach>
 					</tfoot>
 				</table>
-			</fieldset>
-			<fieldset>
-				<legend>Hospedes Já Registrados</legend>
+				<legend>Valores</legend>
 				<table class="table table-striped table-bordered" id="example"
 						cellpadding="0" cellspacing="0" border="0" width="100%">
 					<tbody>
@@ -99,15 +95,11 @@ function mudarTipoPagamento(){
 							</tr>
 					</tbody>
 				</table>
-			</fieldset>
-			<div id="divHospede">
-			  <fieldset> 
 		<legend>Informar Pagamento</legend>
 		 <form class="form-horizontal" action='<c:url value="/checkin/registrar/pagamento"/>' method="post">
 		 	   <%@include file="../consultas/fragmentos/formPagamento.jspf" %>
 		</form>
 		</fieldset>
-			</div>
-		</div>
+	</div>
 </body>
 </html>

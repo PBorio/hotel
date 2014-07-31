@@ -192,26 +192,6 @@ public class Estadia implements CalculavelPorPeriodo {
 		return new ArrayList<Consumo>(consumos);
 	}
 
-	public Double getValorDaEstadiaFechada() {
-		
-		if (dataCheckout == null)
-			throw new DataFechamentoNaoInformadoException("Estadia em aberto");
-		
-		Double result = valorAteAData(this.dataCheckout)+getValorDosServicos()+getValorConsumido();
-		BigDecimal bd = new BigDecimal(result.toString());
-	  	return bd.setScale(2, RoundingMode.HALF_EVEN).doubleValue();
-	}
-
-	public Double getValorDaEstadiaNaData(DateTime data) {
-		
-		if (dataCheckout != null)
-			data = dataCheckout;
-		
-		Double result = valorAteAData(data)+getValorDosServicos()+getValorConsumido();
-		BigDecimal bd = new BigDecimal(result.toString());
-	  	return bd.setScale(2, RoundingMode.HALF_EVEN).doubleValue();
-	}
-
 	public Long getId() {
 		return id;
 	}
@@ -266,6 +246,62 @@ public class Estadia implements CalculavelPorPeriodo {
 
 	public List<PagamentoEstadia> getPagamentosEstadias() {
 		return pagamentosEstadias;
+	}
+
+	public Double getValorPago() {
+		Double result = 0.0;
+		if (this.reserva != null)
+			result = reserva.getValorPago();
+		
+		for (PagamentoEstadia pe : this.pagamentosEstadias){
+			if (pe.getPagamento().getDataPagamento() != null)
+				result += pe.getPagamento().getValor();
+		}
+		BigDecimal bd = new BigDecimal(result.toString());
+	  	return bd.setScale(2, RoundingMode.HALF_EVEN).doubleValue();
+	}
+
+public Double getValorDaEstadiaFechada() {
+		
+		if (dataCheckout == null)
+			throw new DataFechamentoNaoInformadoException("Estadia em aberto");
+		
+		Double result = valorAteAData(this.dataCheckout)+getValorDosServicos()+getValorConsumido();
+		BigDecimal bd = new BigDecimal(result.toString());
+	  	return bd.setScale(2, RoundingMode.HALF_EVEN).doubleValue();
+	}
+
+	public Double getValorDaEstadiaNaData(DateTime data) {
+		
+		if (dataCheckout != null)
+			data = dataCheckout;
+		
+		Double result = valorAteAData(data)+getValorDosServicos()+getValorConsumido();
+		BigDecimal bd = new BigDecimal(result.toString());
+	  	return bd.setScale(2, RoundingMode.HALF_EVEN).doubleValue();
+	}
+	
+	public Double getPrevisaoDoValorFinal() {
+		if (previsaoCheckout == null)
+			throw new DataFechamentoNaoInformadoException("Estadia sem Previsão de checkout.");
+		
+		Double result = valorAteAData(this.previsaoCheckout)+getValorDosServicos()+getValorConsumido();
+		BigDecimal bd = new BigDecimal(result.toString());
+	  	return bd.setScale(2, RoundingMode.HALF_EVEN).doubleValue();
+	}
+	
+	public Double getSaldoAPagar() {
+		DateTime data = null;
+		
+		if (previsaoCheckout != null)
+			data = previsaoCheckout;
+			
+		if (dataCheckout != null)
+			data = dataCheckout;
+		
+		Double result = (valorAteAData(data)+getValorDosServicos()+getValorConsumido()) - getValorPago();
+		BigDecimal bd = new BigDecimal(result.toString());
+	  	return bd.setScale(2, RoundingMode.HALF_EVEN).doubleValue();
 	}
 
 }

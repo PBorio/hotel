@@ -5,6 +5,8 @@ public class Consumo {
 	private Long id;
 	
 	private Produto produto;
+	
+	private Estadia estadia;
 
 	public void setProduto(Produto produto) {
 		this.produto = produto;
@@ -48,6 +50,10 @@ public class Consumo {
 		if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public Estadia getEstadia() {
+		return this.estadia;
 	}
 
 }
