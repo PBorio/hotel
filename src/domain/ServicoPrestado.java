@@ -1,11 +1,28 @@
 package domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="servicos_prestados")
 public class ServicoPrestado {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private Double valor;
+	@ManyToOne
+	private Estadia estadia;
+
+	@ManyToOne
 	private Servico servico;
+	
+	private Double valor;
+	
 	private String observacao;
 
 	public void setValor(Double valor) {
@@ -67,6 +84,14 @@ public class ServicoPrestado {
 		if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public Estadia getEstadia() {
+		return estadia;
+	}
+
+	public void setEstadia(Estadia estadia) {
+		this.estadia = estadia;
 	}
 
 }

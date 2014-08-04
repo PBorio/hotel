@@ -1,12 +1,29 @@
 package domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="consumos")
 public class Consumo {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@ManyToOne
 	private Produto produto;
-	
+
+	@ManyToOne
 	private Estadia estadia;
+	
+	private Integer quantidade;
+	
+	private Double preco;
 
 	public void setProduto(Produto produto) {
 		this.produto = produto;
@@ -54,6 +71,26 @@ public class Consumo {
 
 	public Estadia getEstadia() {
 		return this.estadia;
+	}
+
+	public Integer getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(Integer quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	public Double getPreco() {
+		return preco;
+	}
+
+	public void setPreco(Double preco) {
+		this.preco = preco;
+	}
+
+	public void setEstadia(Estadia estadia) {
+		this.estadia = estadia;
 	}
 
 }

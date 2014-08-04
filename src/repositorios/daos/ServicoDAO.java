@@ -4,46 +4,44 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import repositorios.ServicoRepositorio;
 import br.com.caelum.vraptor.ioc.Component;
-import repositorios.ProdutoRepositorio;
-import domain.Produto;
+import domain.Servico;
 
 @Component
-public class ProdutoDAO extends DAO<Produto> implements ProdutoRepositorio {
+public class ServicoDAO extends DAO<Servico> implements ServicoRepositorio {
 
-	public ProdutoDAO() {
-		super(Produto.class);
+	public ServicoDAO() {
+		super(Servico.class);
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Produto> buscaProdutosPorDescricao(String descricao) {
-
+	public List<Servico> buscaServicosPorDescricao(String descricao) {
 		StringBuilder hql = new StringBuilder();
-		hql.append(" From Produto p ");
-		hql.append(" where p.descricao like ? ");
+		hql.append(" From Servico s ");
+		hql.append(" where s.descricao like ? ");
 
 		Query query = entityManager.createQuery(hql.toString());
 		query.setParameter(1, "%" + descricao + "%");
 		
-		List<Produto> result = query.getResultList();
+		List<Servico> result = query.getResultList();
 		return result; 
 	}
 
 	@SuppressWarnings("unchecked")
-	public Produto buscaPorEstaDescricao(String descricao) {
+	public Servico buscaPorEstaDescricao(String descricao) {
 		StringBuilder hql = new StringBuilder();
-		hql.append(" From Produto p ");
-		hql.append(" where p.descricao = ? ");
+		hql.append(" From Servico s ");
+		hql.append(" where s.descricao = ? ");
 
 		Query query = entityManager.createQuery(hql.toString());
 		query.setParameter(1, descricao);
 		
-		List<Produto> result = query.getResultList();
+		List<Servico> result = query.getResultList();
 		
 		if (result.isEmpty())
 			return null;
 		
 		return result.get(0); 
 	}
-
 }
