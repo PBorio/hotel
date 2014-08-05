@@ -17,7 +17,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
@@ -38,10 +37,10 @@ public class Estadia implements CalculavelPorPeriodo {
 	@OneToMany(mappedBy="estadia", cascade=CascadeType.ALL)
 	private Set<HospedeDaEstadia> hospedesDaEstadia = new HashSet<HospedeDaEstadia>();
 	
-	@Transient
+	@OneToMany(mappedBy="estadia")
 	private Set<ServicoPrestado> servicosPrestados = new HashSet<ServicoPrestado>();
 	
-	@Transient
+	@OneToMany(mappedBy="estadia")
 	private Set<Consumo> consumos = new HashSet<Consumo>();
 	
 	@ManyToOne
@@ -182,6 +181,10 @@ public class Estadia implements CalculavelPorPeriodo {
 
 	public void addServicoPrestado(ServicoPrestado servicoPrestado) {
 		this.servicosPrestados.add(servicoPrestado);
+	}
+	
+	public List<ServicoPrestado> getServicosPrestados(){
+		return new ArrayList<ServicoPrestado>(servicosPrestados);
 	}
 
 	public void addConsumo(Consumo consumo) {

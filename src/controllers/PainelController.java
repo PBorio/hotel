@@ -51,12 +51,14 @@ public class PainelController {
 	
 	@Post("/painel/add/consumo/")
 	public void addConsumo(Consumo consumo){
-		System.out.println(consumo);
+		estadiaRepositorio.salvarConsumo(consumo);
+		result.redirectTo(this).estadia(consumo.getEstadia().getId());
 	}
 	
 	@Post("/painel/add/servico/")
 	public void addServico(ServicoPrestado servicoPrestado){
-		System.out.println(servicoPrestado);
+		estadiaRepositorio.salvarServicoPrestado(servicoPrestado);
+		result.redirectTo(this).estadia(servicoPrestado.getEstadia().getId());
 	}
 	
 	@Get
@@ -89,5 +91,21 @@ public class PainelController {
 			result.use(json()).withoutRoot()
 					.from(servicoRepositorio.buscaPorEstaDescricao(descricao))
 					.serialize();
+	}
+	
+	@Get
+	@Path("/painel/deleta/consumo/{id}")
+	public void deletaConsumo(Long id) {
+		Consumo consumo = estadiaRepositorio.buscarConsumoPorId(id);
+		estadiaRepositorio.deletaConsumo(consumo);
+		result.redirectTo(this).estadia(consumo.getEstadia().getId());
+	}
+	
+	@Get
+	@Path("/painel/deleta/servico/{id}")
+	public void deletaServico(Long id) {
+		ServicoPrestado servicoPrestado = estadiaRepositorio.buscarServicoPrestadoPorId(id);
+		estadiaRepositorio.deletaServicoPrestado(servicoPrestado);
+		result.redirectTo(this).estadia(servicoPrestado.getEstadia().getId());
 	}
 }

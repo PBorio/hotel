@@ -183,7 +183,7 @@ function buscarConsumo(nLinhaDeItem) {
 function addServicos(nContItems) {
 	
 	cHtml = '<tr id="row-'+ nContItems + '" class="alt-row-son" >'
-			+ '<input id="estadia-id" type="hidden" name="servicoPrestado.estadia.id"> </input>'
+			+ '<input id="estadia-id" type="hidden" name="servicoPrestado.estadia.id"  value="${estadia.id}"> </input>'
 	        + '<input id="servico-prestado-id-'+ nContItems +'" type="hidden" name="servicoPrestado.id"> </input>'
 			+ '<input id="servico-id-'+ nContItems +'" type="hidden" name="servicoPrestado.servico.id"> </input>'
 			+ '<td> <input id="desc-servico-'+ nContItems +'" type="text" class="col-xs-10" class="text-input s70-input" name="servicoPrestado.servico.descricao"> </input> </td>'
@@ -299,12 +299,6 @@ function buscarServico(nLinhaDeItem) {
 				<legend>Valores</legend>
 				<table class="table table-striped table-bordered" id="example"
 						cellpadding="0" cellspacing="0" border="0" width="100%">
-					<thead> 
-					<tr>
-						<th class="ui-state-default" width="20%"></th>
-						<th class="ui-state-default" width="80%"></th>
-					</tr>
-					</thead>
 					<tbody>
 							<tr>
 							    <td>Checkin</td>
@@ -342,7 +336,8 @@ function buscarServico(nLinhaDeItem) {
 							<i class="icon-align-justify"></i>									
 						</span>
 					</div>
-					<table id="consumos">
+					<table id="consumos"class="table table-striped table-bordered" 
+							cellpadding="0" cellspacing="0" border="0" width="100%">
 						<thead>
 							<tr>
 								<th width="40%">Descrição</th>
@@ -353,6 +348,15 @@ function buscarServico(nLinhaDeItem) {
 							</tr>
 						</thead>
 						<tbody>
+							<c:forEach var="consumo" items="${estadia.consumos}" varStatus="nContItems">
+								<tr id="row-${nContItems.index}" class="alt-row-son" >
+									<td> ${consumo.produto.descricao}</td>
+									<td> ${consumo.quantidade}</td>
+									<td> ${consumo.preco}</td>
+									<td> <label id="total-'+ nContItems +'"> </label> </td>
+									<td> <a href="<c:url value='/painel/deleta/consumo/${consumo.id}'/>" title="Delete" tabindex="-1"> <img src="../resources/imagens/icons/cross.png" alt="Delete" tabindex="-1"/> </a> </td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 					
@@ -373,7 +377,8 @@ function buscarServico(nLinhaDeItem) {
 							<i class="icon-align-justify"></i>									
 						</span>
 					</div>
-					<table id="servicos">
+					<table id="servicos" class="table table-striped table-bordered" 
+						   cellpadding="0" cellspacing="0" border="0" width="100%">
 						<thead>
 							<tr>
 								<th width="35%">Descrição</th>
@@ -383,6 +388,14 @@ function buscarServico(nLinhaDeItem) {
 							</tr>
 						</thead>
 						<tbody>
+						  <c:forEach var="servico" items="${estadia.servicosPrestados}" varStatus="nContItems">
+							<tr id="row-${nContItems.index}" class="alt-row-son" >
+							<td> ${servico.servico.descricao} </td>
+							<td> ${servico.valor} </td>
+							<td> ${servico.observacao}</td>
+							<td> <a href="<c:url value='/painel/deleta/servico/${servico.id}'/>" title="Delete" tabindex="-1"> <img src="../resources/imagens/icons/cross.png" alt="Delete" tabindex="-1"/> </a> </td>
+							</tr>
+						  </c:forEach>
 						</tbody>
 					</table>
 					
