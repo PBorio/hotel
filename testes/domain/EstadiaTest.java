@@ -156,7 +156,7 @@ public class EstadiaTest {
 		checkin.addHospede(reserva.getHospede());
 		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();
 		
-		Consumo consumo = new FakeConsumo("Bebida").comValorDe(25.0).build();
+		Consumo consumo = new FakeConsumo("Bebida").comValorDe(25.0).comQuantidade(1).build();
 		
 		estadia.addConsumo(consumo);
 		
@@ -173,13 +173,30 @@ public class EstadiaTest {
 		checkin.addHospede(reserva.getHospede());
 		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();
 		
-		Consumo consumo = new FakeConsumo("Bebida").comValorDe(30.0).build();
-		Consumo outroConsumo = new FakeConsumo("Lanche").comValorDe(10.0).build();
+		Consumo consumo = new FakeConsumo("Bebida").comValorDe(30.0).comQuantidade(1).build();
+		Consumo outroConsumo = new FakeConsumo("Lanche").comValorDe(10.0).comQuantidade(1).build();
 		
 		estadia.addConsumo(consumo);
 		estadia.addConsumo(outroConsumo);
 		
 		Assert.assertEquals((Double)40.0, estadia.getValorConsumido());
+	}
+	
+	@Test
+	public void oValorConsumidoParaDeveConsiderarAQuantidadeEOPreco(){
+		Reserva reserva = 
+				new FakeReserva().iniciandoEm("12/03/2014").terminandoEm("19/03/2014").paraOHospede("Joao").noQuarto("1").comValorDaDiariaDe(10.0).build();
+		
+		Checkin checkin = new Checkin();
+		checkin.aPartirDaReserva(reserva);
+		checkin.addHospede(reserva.getHospede());
+		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();
+		
+		Consumo consumo = new FakeConsumo("Bebida").comValorDe(30.0).comQuantidade(2).build();
+		
+		estadia.addConsumo(consumo);
+		
+		Assert.assertEquals((Double)60.0, estadia.getValorConsumido());
 	}
 	
 	@Test
@@ -198,8 +215,8 @@ public class EstadiaTest {
 		ServicoPrestado outroServico = new ServicoPrestado();
 		outroServico.setValor(10.0);
 		
-		Consumo consumo = new FakeConsumo("Bebida").comValorDe(30.0).build();
-		Consumo outroConsumo = new FakeConsumo("Lanche").comValorDe(10.0).build();
+		Consumo consumo = new FakeConsumo("Bebida").comValorDe(30.0).comQuantidade(1).build();
+		Consumo outroConsumo = new FakeConsumo("Lanche").comValorDe(10.0).comQuantidade(1).build();
 		
 		estadia.addServicoPrestado(servicoPrestado);
 		estadia.addServicoPrestado(outroServico);
@@ -244,8 +261,8 @@ public class EstadiaTest {
 		ServicoPrestado outroServico = new ServicoPrestado();
 		outroServico.setValor(10.0);
 		
-		Consumo consumo = new FakeConsumo("Bebida").comValorDe(30.0).build();
-		Consumo outroConsumo = new FakeConsumo("Lanche").comValorDe(10.0).build();
+		Consumo consumo = new FakeConsumo("Bebida").comValorDe(30.0).comQuantidade(1).build();
+		Consumo outroConsumo = new FakeConsumo("Lanche").comValorDe(10.0).comQuantidade(1).build();
 		
 		estadia.addServicoPrestado(servicoPrestado);
 		estadia.addServicoPrestado(outroServico);
@@ -293,7 +310,7 @@ public class EstadiaTest {
 		checkin.addHospede(reserva.getHospede());
 		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();
 		
-		Consumo consumo = new FakeConsumo("Bebida").comValorDe(30.0).build();
+		Consumo consumo = new FakeConsumo("Bebida").comValorDe(30.0).comQuantidade(1).build();
 		estadia.addConsumo(consumo);
 		
 		Assert.assertEquals((Double)50.0, estadia.getPrevisaoDoValorFinal());
@@ -321,7 +338,7 @@ public class EstadiaTest {
 		pagamentoNaEstadia.setValor(5.0);
 		estadia.addPagamento(pagamento);
 		
-		Consumo consumo = new FakeConsumo("Bebida").comValorDe(30.0).build();
+		Consumo consumo = new FakeConsumo("Bebida").comValorDe(30.0).comQuantidade(1).build();
 		estadia.addConsumo(consumo);
 		
 		Assert.assertEquals((Double)40.0, estadia.getSaldoAPagar());
@@ -349,7 +366,7 @@ public class EstadiaTest {
 		pagamentoNaEstadia.setValor(5.0);
 		estadia.addPagamento(pagamento);
 		
-		Consumo consumo = new FakeConsumo("Bebida").comValorDe(30.0).build();
+		Consumo consumo = new FakeConsumo("Bebida").comValorDe(30.0).comQuantidade(1).build();
 		estadia.addConsumo(consumo);
 		
 		estadia.fechar(new ParserDeStringParaData().parseData("15/03/2014"));
@@ -379,7 +396,7 @@ public class EstadiaTest {
 		pagamentoNaEstadia.setValor(5.0);
 		estadia.addPagamento(pagamento);
 		
-		Consumo consumo = new FakeConsumo("Bebida").comValorDe(30.0).build();
+		Consumo consumo = new FakeConsumo("Bebida").comValorDe(30.0).comQuantidade(1).build();
 		estadia.addConsumo(consumo);
 		
 		Assert.assertEquals((Double)40.0, estadia.getSaldoAPagar());

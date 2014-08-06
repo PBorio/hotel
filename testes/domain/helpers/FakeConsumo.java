@@ -17,6 +17,10 @@ public class FakeConsumo {
 		produto.setPreco(valor);
 		return this;
 	}
+	public FakeConsumo comQuantidade(Integer quantidade){
+		consumo.setQuantidade(quantidade);
+		return this;
+	}
 	public Consumo build() {
 		return consumo;
 	}

@@ -109,6 +109,7 @@ jQuery(document).ready(function() {
 		$('#btnSalvaServico').hide();
 		$('#btnNovoServico').show();
 	});
+	
 });
 
 function addConsumos(nContItems) {
@@ -122,7 +123,6 @@ function addConsumos(nContItems) {
 			+ '<td> <input id="preco-'+ nContItems +'" type="text" dir="rtl" class="text-input s70-input" name="consumo.preco" readonly="readonly" > </input> </td>'
 			+ '<td> <label id="total-'+ nContItems +'"> </label> </td>'
 			+ '<td> <a id="delete-' + nContItems + '" href="javascript:" title="Delete" tabindex="-1"> <img src="../resources/imagens/icons/cross.png" alt="Delete" tabindex="-1"/> </a> </td>'
-			+ '<td></td>'
 			+ '</tr>';
 			
 	$("#consumos").append(cHtml);
@@ -134,6 +134,11 @@ function addConsumos(nContItems) {
 	$("#descricao-" + nContItems).on("keypress",
 			function(event) {
 				autoCompleteConsumo(nContItems);
+			});
+	
+	$("#quantidade-" + nContItems).on("blur", nContItems,
+			function(event) {
+				calcularTotalDoConsumo(event.data);
 			});
 
 	$('#btnNovoConsumo').hide();
@@ -190,7 +195,6 @@ function addServicos(nContItems) {
 			+ '<td> <input id="valor-servico-'+ nContItems +'" type="text" class="col-xs-10" dir="rtl" class="text-input s70-input" name="servicoPrestado.valor" > </input> </td>'
 			+ '<td> <textarea id="obs-servico-'+ nContItems +'" class="col-xs-10" name="servicoPrestado.observacao" />  </td>'
 			+ '<td> <a id="delete-' + nContItems + '" href="javascript:" title="Delete" tabindex="-1"> <img src="../resources/imagens/icons/cross.png" alt="Delete" tabindex="-1"/> </a> </td>'
-			+ '<td></td>'
 			+ '</tr>';
 
 	$("#servicos").append(cHtml);
@@ -245,6 +249,15 @@ function buscarServico(nLinhaDeItem) {
 				}
 	        );
 		}	
+}
+
+function calcularTotalDoConsumo(nLinhaDeItem) {
+	var quantidade  = $("#quantidade-"+nLinhaDeItem ).val();
+	var preco = parseFloat($("#preco-" + nLinhaDeItem).val());
+	
+	var total = Math.round(preco * quantidade,2);
+	
+	$("#total-" + nLinhaDeItem).html(total);
 }
 
 	
@@ -353,7 +366,7 @@ function buscarServico(nLinhaDeItem) {
 									<td> ${consumo.produto.descricao}</td>
 									<td> ${consumo.quantidade}</td>
 									<td> ${consumo.preco}</td>
-									<td> <label id="total-'+ nContItems +'"> </label> </td>
+									<td> ${consumo.valor} </td>
 									<td> <a href="<c:url value='/painel/deleta/consumo/${consumo.id}'/>" title="Delete" tabindex="-1"> <img src="../resources/imagens/icons/cross.png" alt="Delete" tabindex="-1"/> </a> </td>
 								</tr>
 							</c:forEach>
@@ -382,8 +395,8 @@ function buscarServico(nLinhaDeItem) {
 						<thead>
 							<tr>
 								<th width="35%">Descrição</th>
-								<th width="15%">Valor</th>
 								<th width="55%">Observação</th>
+								<th width="15%">Valor</th>
 								<th width="5%"> Deletar</th>
 							</tr>
 						</thead>
@@ -391,8 +404,8 @@ function buscarServico(nLinhaDeItem) {
 						  <c:forEach var="servico" items="${estadia.servicosPrestados}" varStatus="nContItems">
 							<tr id="row-${nContItems.index}" class="alt-row-son" >
 							<td> ${servico.servico.descricao} </td>
-							<td> ${servico.valor} </td>
 							<td> ${servico.observacao}</td>
+							<td> ${servico.valor} </td>
 							<td> <a href="<c:url value='/painel/deleta/servico/${servico.id}'/>" title="Delete" tabindex="-1"> <img src="../resources/imagens/icons/cross.png" alt="Delete" tabindex="-1"/> </a> </td>
 							</tr>
 						  </c:forEach>

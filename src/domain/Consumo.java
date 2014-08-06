@@ -1,5 +1,8 @@
 package domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -42,7 +45,10 @@ public class Consumo {
 	}
 	
 	public Double getValor() {
-		return produto.getPreco();
+		double quantidade = (double) this.quantidade;
+		Double valor = (quantidade * produto.getPreco()); 
+		BigDecimal bd = new BigDecimal(valor.toString());
+	  	return bd.setScale(2, RoundingMode.HALF_EVEN).doubleValue();
 	}
 
 	@Override
