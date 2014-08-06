@@ -61,6 +61,12 @@ public class PainelController {
 		result.redirectTo(this).estadia(servicoPrestado.getEstadia().getId());
 	}
 	
+	@Post("/painel/ir/para/fechamento/")
+	public void finalizar(Estadia estadia){
+		Estadia e = estadiaRepositorio.buscaPorId(estadia.getId());
+		result.include("estadia", e);
+	}
+	
 	@Get
 	@Path("/painel/buscarProdutosPorDescricao.json")
 	public void buscarProdutosPorDescricao(String descricao) {

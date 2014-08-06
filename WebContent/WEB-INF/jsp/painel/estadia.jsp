@@ -192,8 +192,8 @@ function addServicos(nContItems) {
 	        + '<input id="servico-prestado-id-'+ nContItems +'" type="hidden" name="servicoPrestado.id"> </input>'
 			+ '<input id="servico-id-'+ nContItems +'" type="hidden" name="servicoPrestado.servico.id"> </input>'
 			+ '<td> <input id="desc-servico-'+ nContItems +'" type="text" class="col-xs-10" class="text-input s70-input" name="servicoPrestado.servico.descricao"> </input> </td>'
-			+ '<td> <input id="valor-servico-'+ nContItems +'" type="text" class="col-xs-10" dir="rtl" class="text-input s70-input" name="servicoPrestado.valor" > </input> </td>'
 			+ '<td> <textarea id="obs-servico-'+ nContItems +'" class="col-xs-10" name="servicoPrestado.observacao" />  </td>'
+			+ '<td> <input id="valor-servico-'+ nContItems +'" type="text" class="col-xs-10" dir="rtl" class="text-input s70-input" name="servicoPrestado.valor" > </input> </td>'
 			+ '<td> <a id="delete-' + nContItems + '" href="javascript:" title="Delete" tabindex="-1"> <img src="../resources/imagens/icons/cross.png" alt="Delete" tabindex="-1"/> </a> </td>'
 			+ '</tr>';
 
@@ -245,7 +245,7 @@ function buscarServico(nLinhaDeItem) {
 					$("#servico-id-" + nLinhaDeItem).val(servico.id);
 					$("#desc-servico-" + nLinhaDeItem).val(servico.descricao);
 					$("#valor-servico-" + nLinhaDeItem).val(servico.valorSugerido);
-					$("#valor-servico-" + nLinhaDeItem).focus();
+					$("#obs-servico-" + nLinhaDeItem).focus();
 				}
 	        );
 		}	
@@ -310,6 +310,8 @@ function calcularTotalDoConsumo(nLinhaDeItem) {
 			</fieldset>
 			<fieldset>
 				<legend>Valores</legend>
+				<form class="form-horizontal" method="post" action='<c:url value="/painel/ir/para/fechamento/"/>'>
+					<input type="hidden" name="estadia.id" value="${estadia.id}" />
 				<table class="table table-striped table-bordered" id="example"
 						cellpadding="0" cellspacing="0" border="0" width="100%">
 					<tbody>
@@ -337,8 +339,13 @@ function calcularTotalDoConsumo(nLinhaDeItem) {
 							    <td>Saldo a Pagar</td>
 								<td>${estadia.saldoAPagar}</td>
 							</tr>
+							
 					</tbody>
 				</table>
+					<div class="form-actions" id="btnNovoConsumo">								
+						<button type="submit" id="salva-produto" class="btn btn-primary">Finalizar Estadia</button>
+					</div>
+				</form>
 			</fieldset>
 			<fieldset>
 			  <legend>Consumo</legend>
@@ -373,7 +380,7 @@ function calcularTotalDoConsumo(nLinhaDeItem) {
 						</tbody>
 					</table>
 					
-					<div class="form-actions" id="btnNovoConsumo">
+					<div class="form-actions" id="btnSalvaConsumo">
 						<button type="button" id="adiciona-produto" class="btn btn-primary">Adicionar Consumo</button>
 				    </div>
 				    <div class="form-actions" id="btnSalvaConsumo">
@@ -420,7 +427,5 @@ function calcularTotalDoConsumo(nLinhaDeItem) {
 				    </div>
 			  </form>
 			 </fieldset>
-			</div>
-			
 </body>
 </html>
