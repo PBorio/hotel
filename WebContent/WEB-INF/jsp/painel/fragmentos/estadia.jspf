@@ -1,0 +1,58 @@
+<fieldset>
+				<legend>Quarto</legend>
+				<table class="table table-striped table-bordered" id="example"
+							cellpadding="0" cellspacing="0" border="0" width="100%">
+						<tfoot>
+							<tr>
+							   	<th>${estadia.quarto.numero}</th>
+							</tr>
+						</tfoot>
+				</table>
+			</fieldset>
+			
+			<fieldset>
+				<legend>Hospedes Já Registrados</legend>
+				<table class="table table-striped table-bordered" id="example"
+						cellpadding="0" cellspacing="0" border="0" width="100%">
+					<tfoot>
+						<c:forEach var="hospede" items="${estadia.hospedes}">
+							<tr id="hospede-${hospede.id}">
+								<th>${hospede.nomeCompleto}</th>
+							</tr>
+						</c:forEach>
+					</tfoot>
+				</table>
+			</fieldset>
+			<fieldset>
+				<legend>Valores</legend>
+				<table class="table table-striped table-bordered" id="example"
+						cellpadding="0" cellspacing="0" border="0" width="100%">
+					<tbody>
+							<tr>
+							    <td>Checkin</td>
+								<td><joda:format pattern='dd/MM/yyyy' value='${estadia.dataCheckin}'/></td>
+							</tr>
+							<tr>
+							    <td>Checkout</td>
+								<td><joda:format pattern='dd/MM/yyyy' value='${estadia.previsaoCheckout}'/></td>
+							</tr>
+							<tr>
+							    <td>Valor Diária</td>
+								<td><fmt:formatNumber value="${estadia.valorDiaria}" type="number" pattern="#,##0.00"/> </td>
+							</tr>
+							<tr>
+							    <td>Valor Final</td>
+								<td><fmt:formatNumber value="${estadia.previsaoDoValorFinal}" type="number" pattern="#,##0.00"/> </td>
+							</tr>
+							<tr>
+							    <td>Valor Pago</td>
+								<td><fmt:formatNumber value="${estadia.valorPago}" type="number" pattern="#,##0.00"/> </td>
+							</tr>
+							<tr>
+							    <td>Saldo a Pagar</td>
+								<td><fmt:formatNumber value="${estadia.saldoAPagar}" type="number" pattern="#,##0.00"/> </td>
+							</tr>
+							
+					</tbody>
+				</table>
+				</fieldset>

@@ -52,6 +52,20 @@ public class EstadiaDAO extends DAO<Estadia> implements EstadiaRepositorio {
 		getEntityManager().persist(estadia);
 		getEntityManager().flush();
 		for (PagamentoEstadia pe : estadia.getPagamentosEstadias()){
+			if (pe.getId() != null)
+				continue;
+			getEntityManager().persist(pe.getPagamento());
+			getEntityManager().flush();
+			getEntityManager().persist(pe);
+		}
+	}
+	
+	@Transactional
+	public void atualiza(Estadia estadia) {
+		getEntityManager().merge(estadia);
+		for (PagamentoEstadia pe : estadia.getPagamentosEstadias()){
+			if (pe.getId() != null)
+				continue;
 			getEntityManager().persist(pe.getPagamento());
 			getEntityManager().flush();
 			getEntityManager().persist(pe);

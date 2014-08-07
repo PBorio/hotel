@@ -402,4 +402,48 @@ public class EstadiaTest {
 		Assert.assertEquals((Double)40.0, estadia.getSaldoAPagar());
 	}
 	
+	@Test
+	public void aEstadiaNaoEstaPendenteSeOSaldoAPagarForZero(){
+		Reserva reserva = 
+				new FakeReserva().iniciandoEm("07/08/2014").terminandoEm("08/08/2014").paraOHospede("Joao").noQuarto("1").comValorDaDiariaDe(10.0).build();
+		
+		Pagamento pagamento = new Pagamento();
+		pagamento.setTipoPagamento(TipoPagamento.CARTAO.getValue());
+		pagamento.setDataPagamento(new Date());
+		pagamento.setValor(5.0);
+		reserva.addPagamento(pagamento);
+		
+		Checkin checkin = new Checkin();
+		checkin.aPartirDaReserva(reserva);
+		checkin.addHospede(reserva.getHospede());
+		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();
+		
+		Pagamento pagamentoNaEstadia = new Pagamento();
+		pagamentoNaEstadia.setTipoPagamento(TipoPagamento.CARTAO.getValue());
+		pagamento.setDataPagamento(new Date());
+		pagamentoNaEstadia.setValor(5.0);
+		estadia.addPagamento(pagamento);
+		
+		Assert.assertFalse(estadia.isPendente());
+	}
+	
+	@Test
+	public void aEstadiaEstaPendenteSeOSaldoAPagarForMaiorQueZero(){
+		Reserva reserva = 
+				new FakeReserva().iniciandoEm("07/08/2014").terminandoEm("08/08/2014").paraOHospede("Joao").noQuarto("1").comValorDaDiariaDe(10.0).build();
+		
+		Pagamento pagamento = new Pagamento();
+		pagamento.setTipoPagamento(TipoPagamento.CARTAO.getValue());
+		pagamento.setDataPagamento(new Date());
+		pagamento.setValor(5.0);
+		reserva.addPagamento(pagamento);
+		
+		Checkin checkin = new Checkin();
+		checkin.aPartirDaReserva(reserva);
+		checkin.addHospede(reserva.getHospede());
+		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();
+		
+		Assert.assertTrue(estadia.isPendente());
+	}
+	
 }

@@ -15,7 +15,7 @@ public interface EstadiaRepositorio {
 	
 	void salva(Estadia hospede);
 	
-	void atualiza(Estadia hospede);
+	void atualiza(Estadia estadia);
 
 	List<Estadia> estadiasAbertas();
 

@@ -307,4 +307,8 @@ public Double getValorDaEstadiaFechada() {
 	  	return bd.setScale(2, RoundingMode.HALF_EVEN).doubleValue();
 	}
 
+	public boolean isPendente() {
+		return (this.getSaldoAPagar().doubleValue() > 0.0);
+	}
+
 }

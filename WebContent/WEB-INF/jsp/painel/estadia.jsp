@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
  <%@ taglib uri="http://www.joda.org/joda/time/tags" prefix="joda"%>
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -260,6 +261,11 @@ function calcularTotalDoConsumo(nLinhaDeItem) {
 	$("#total-" + nLinhaDeItem).html(total);
 }
 
+function replaceVirgula(campo)
+{
+	campo.value = campo.value.replace(/,/gi, ".");
+	
+}
 	
 </script>
 </head>
@@ -283,70 +289,13 @@ function calcularTotalDoConsumo(nLinhaDeItem) {
 					<li class="active"><a href="<c:url value='/'/>">Home</a></li>
 				</ul>								
 			</div>
-			<fieldset>
-				<legend>Quarto</legend>
-				<table class="table table-striped table-bordered" id="example"
-							cellpadding="0" cellspacing="0" border="0" width="100%">
-						<tfoot>
-							<tr>
-							   	<th>${estadia.quarto.numero}</th>
-							</tr>
-						</tfoot>
-				</table>
-			</fieldset>
+			<%@include file="fragmentos/estadia.jspf" %>
 			
-			<fieldset>
-				<legend>Hospedes Já Registrados</legend>
-				<table class="table table-striped table-bordered" id="example"
-						cellpadding="0" cellspacing="0" border="0" width="100%">
-					<tfoot>
-						<c:forEach var="hospede" items="${estadia.hospedes}">
-							<tr id="hospede-${hospede.id}">
-								<th>${hospede.nomeCompleto}</th>
-							</tr>
-						</c:forEach>
-					</tfoot>
-				</table>
-			</fieldset>
-			<fieldset>
-				<legend>Valores</legend>
-				<form class="form-horizontal" method="post" action='<c:url value="/painel/ir/para/fechamento/"/>'>
-					<input type="hidden" name="estadia.id" value="${estadia.id}" />
-				<table class="table table-striped table-bordered" id="example"
-						cellpadding="0" cellspacing="0" border="0" width="100%">
-					<tbody>
-							<tr>
-							    <td>Checkin</td>
-								<td><joda:format pattern='dd/MM/yyyy' value='${estadia.dataCheckin}'/></td>
-							</tr>
-							<tr>
-							    <td>Checkout</td>
-								<td><joda:format pattern='dd/MM/yyyy' value='${estadia.previsaoCheckout}'/></td>
-							</tr>
-							<tr>
-							    <td>Valor Diária</td>
-								<td>${estadia.valorDiaria}</td>
-							</tr>
-							<tr>
-							    <td>Valor Final</td>
-								<td>${estadia.previsaoDoValorFinal}</td>
-							</tr>
-							<tr>
-							    <td>Valor Pago</td>
-								<td>${estadia.valorPago}</td>
-							</tr>
-							<tr>
-							    <td>Saldo a Pagar</td>
-								<td>${estadia.saldoAPagar}</td>
-							</tr>
-							
-					</tbody>
-				</table>
-					<div class="form-actions" id="btnNovoConsumo">								
-						<button type="submit" id="salva-produto" class="btn btn-primary">Finalizar Estadia</button>
-					</div>
-				</form>
-			</fieldset>
+			<div class="form-actions">				
+				<ul class="nav nav-pills pull-right">
+					<li class="active"><a href="<c:url value='/checkout/${estadia.id}'/>">Finalizar Estadia</a></li>
+				</ul>					
+			</div>
 			<fieldset>
 			  <legend>Consumo</legend>
 			  <form class="form-horizontal" method="post" action='<c:url value="/painel/add/consumo/"/>'>
@@ -372,15 +321,15 @@ function calcularTotalDoConsumo(nLinhaDeItem) {
 								<tr id="row-${nContItems.index}" class="alt-row-son" >
 									<td> ${consumo.produto.descricao}</td>
 									<td> ${consumo.quantidade}</td>
-									<td> ${consumo.preco}</td>
-									<td> ${consumo.valor} </td>
+									<td><fmt:formatNumber value="${consumo.preco}" type="number" pattern="#,##0.00"/> </td>
+									<td><fmt:formatNumber value="${consumo.valor}" type="number" pattern="#,##0.00"/>  </td>
 									<td> <a href="<c:url value='/painel/deleta/consumo/${consumo.id}'/>" title="Delete" tabindex="-1"> <img src="../resources/imagens/icons/cross.png" alt="Delete" tabindex="-1"/> </a> </td>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
 					
-					<div class="form-actions" id="btnSalvaConsumo">
+					<div class="form-actions" id="btnNovoConsumo">
 						<button type="button" id="adiciona-produto" class="btn btn-primary">Adicionar Consumo</button>
 				    </div>
 				    <div class="form-actions" id="btnSalvaConsumo">
@@ -391,7 +340,6 @@ function calcularTotalDoConsumo(nLinhaDeItem) {
 			 <fieldset>
 			  <legend>Serviços</legend>
 			  <form class="form-horizontal" method="post" action='<c:url value="/painel/add/servico/"/>'> 
-		    		<input type="hidden" name="estadia.id" value="${estadia.id}" />
 					<div class="widget-title">
 						<span class="icon">
 							<i class="icon-align-justify"></i>									
@@ -412,7 +360,7 @@ function calcularTotalDoConsumo(nLinhaDeItem) {
 							<tr id="row-${nContItems.index}" class="alt-row-son" >
 							<td> ${servico.servico.descricao} </td>
 							<td> ${servico.observacao}</td>
-							<td> ${servico.valor} </td>
+							<td><fmt:formatNumber value="${servico.valor}" type="number" pattern="#,##0.00"/></td>
 							<td> <a href="<c:url value='/painel/deleta/servico/${servico.id}'/>" title="Delete" tabindex="-1"> <img src="../resources/imagens/icons/cross.png" alt="Delete" tabindex="-1"/> </a> </td>
 							</tr>
 						  </c:forEach>
@@ -427,5 +375,6 @@ function calcularTotalDoConsumo(nLinhaDeItem) {
 				    </div>
 			  </form>
 			 </fieldset>
+		</div>
 </body>
 </html>
