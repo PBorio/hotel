@@ -1,7 +1,6 @@
 <fieldset>
 				<legend>Quarto</legend>
-				<table class="table table-striped table-bordered" id="example"
-							cellpadding="0" cellspacing="0" border="0" width="100%">
+				<table class="table table-striped table-bordered" id="example">
 						<tfoot>
 							<tr>
 							   	<th>${estadia.quarto.numero}</th>
@@ -12,8 +11,7 @@
 			
 			<fieldset>
 				<legend>Hospedes Já Registrados</legend>
-				<table class="table table-striped table-bordered" id="example"
-						cellpadding="0" cellspacing="0" border="0" width="100%">
+				<table class="table table-striped table-bordered" id="example">
 					<tfoot>
 						<c:forEach var="hospede" items="${estadia.hospedes}">
 							<tr id="hospede-${hospede.id}">
@@ -25,8 +23,7 @@
 			</fieldset>
 			<fieldset>
 				<legend>Valores</legend>
-				<table class="table table-striped table-bordered" id="example"
-						cellpadding="0" cellspacing="0" border="0" width="100%">
+				<table class="table table-striped table-bordered" id="example">
 					<tbody>
 							<tr>
 							    <td>Checkin</td>

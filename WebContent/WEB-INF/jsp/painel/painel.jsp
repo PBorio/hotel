@@ -23,11 +23,11 @@
 
     <div id="painel">
 		<c:forEach var="estadia" items="${estadiaList}">
+			<div class="quarto"> 
 			<a class="shortcut-button" href="<c:url value='/painel/${estadia.id}'/>">
-				<div class="quarto"> 
 					<span class="numeroQuarto">${estadia.quarto.numero}</span>
-				</div>
 			</a>
+			</div>
 		</c:forEach>
 	</div>
 </div>

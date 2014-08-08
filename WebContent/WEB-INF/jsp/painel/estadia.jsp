@@ -93,22 +93,10 @@ jQuery(document).ready(function() {
 	        nContItems++;
 	});
 	
-	//TODO Provisorio, remover
-	$("#salva-produto").bind('click', function() {
-		$('#btnSalvaConsumo').hide();
-		$('#btnNovoConsumo').show();
-	});
-	
 	var nContItems = 0;
 	$("#adiciona-servico").bind('click', function() {
 		addServicos(nContItems);
 	        nContItems++;
-	});
-	
-	//TODO Provisorio, remover
-	$("#salva-servico").bind('click', function() {
-		$('#btnSalvaServico').hide();
-		$('#btnNovoServico').show();
 	});
 	
 });
@@ -290,12 +278,13 @@ function replaceVirgula(campo)
 				</ul>								
 			</div>
 			<%@include file="fragmentos/estadia.jspf" %>
-			
+			<fieldset>
 			<div class="form-actions">				
 				<ul class="nav nav-pills pull-right">
 					<li class="active"><a href="<c:url value='/checkout/${estadia.id}'/>">Finalizar Estadia</a></li>
 				</ul>					
 			</div>
+			</fieldset>
 			<fieldset>
 			  <legend>Consumo</legend>
 			  <form class="form-horizontal" method="post" action='<c:url value="/painel/add/consumo/"/>'>
