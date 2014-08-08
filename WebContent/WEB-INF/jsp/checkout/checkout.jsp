@@ -8,29 +8,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Checkout</title>
-<script type="text/javascript">
-jQuery(document).ready(function() {
-	$("#tipo").bind('change', function(self) {
-		mudarTipoPagamento();
-	});
-    mudarTipoPagamento();	
-});
-function mudarTipoPagamento(){
-	var tipo = $('select#tipo').val();
-	
-	if (tipo === "1"){
-    	$("#cartao").show();
-    	$("#deposito").hide();
-	}else if(tipo === "2"){
-		$("#cartao").hide();
-    	$("#deposito").show();
-	}else{
-		$("#cartao").hide();
-    	$("#deposito").hide();
-	}
-    	
-}
- </script>
 </head>
 <body>
 	 

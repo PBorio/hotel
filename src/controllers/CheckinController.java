@@ -61,7 +61,7 @@ public class CheckinController {
 	}
 	
 	@Get
-	@Path("/checkin/pesquisar")
+	@Path("/checkin/pesquisar/")
 	public void pesquisar(String pesquisa) {
 		
 		List<Reserva> reservaList = new ArrayList<Reserva>();

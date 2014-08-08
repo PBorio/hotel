@@ -13,20 +13,21 @@
 			${mensagem}
 		</div>
 		</c:if>
-		<c:if test="${not empty erro}">
+		<c:forEach var="error" items="${errors}">
 			<div class="alert alert-danger">
-				${erro}
+				${error.message}
 			</div>
-		</c:if>
+		</c:forEach>
 		<div class="container">
 			<div class="header">
 			<ul class="nav nav-pills pull-right">
-				<li class="active"><a href="/">Home</a></li>
+				<li class="active"><a href="<c:url value='/'/>">Home</a></li>
 			</ul>
 			</div>
 	 	
 	 	<form class="form-horizontal" action='<c:url value="/quartos/salva"/>' method="post" enctype="multipart/form-data">
 	 		<input type="hidden" name="quarto.id" value="${quarto.id}" />
+	 		<input type="hidden" name="quarto.foto" value="${quarto.foto}" />
 			<fieldset>
 				<legend>Quarto</legend>
 				<div class="form-group">
@@ -52,7 +53,7 @@
 					<label class="control-label col-xs-2">Categoria:</label>
 					<div class="col-xs-10">
 						<select id="quarto.categoria.id" name="quarto.categoria.id" class="col-xs-10" >   
-		                    <option> Categorias...</option>  
+		                    <option value="-1"> Categorias...</option>  
 		                    <c:forEach var="categoria" items="${categoriaList}">  
 		                        <option value="${categoria.id}" <c:if test="${categoria.id == quarto.categoria.id}">selected="true"</c:if>> 
 		                        	${categoria.descricao} 

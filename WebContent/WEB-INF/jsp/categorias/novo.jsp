@@ -13,15 +13,15 @@
 			${mensagem}
 		</div>
 		</c:if>
-		<c:if test="${not empty erro}">
+		<c:forEach var="error" items="${errors}">
 			<div class="alert alert-danger">
-				${erro}
+				${error.message}
 			</div>
-		</c:if>
+		</c:forEach>
 		<div class="container">
 			<div class="header">
 			<ul class="nav nav-pills pull-right">
-				<li class="active"><a href="/">Home</a></li>
+				<li class="active"><a href="<c:url value='/'/>">Home</a></li>
 			</ul>
 			</div>
 			  <form class="form-horizontal" action='<c:url value="/categorias/salva"/>' method="post">

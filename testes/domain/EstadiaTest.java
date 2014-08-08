@@ -64,6 +64,21 @@ public class EstadiaTest {
 	}
 	
 	@Test
+	public void oValorDeUmaEstadiaEmAbertoComReservaEhOValorDaDiariaDaReservaAteADataInformadaMenosODesconto(){
+		Reserva reserva = new FakeReserva().iniciandoEm("09/03/2014").terminandoEm("11/03/2014").paraOHospede("Joao").noQuarto("19").build();
+		reserva.setValorDiaria(50.0);
+		
+		Checkin checkin = new Checkin();
+		checkin.aPartirDaReserva(reserva);
+		checkin.addHospede(reserva.getHospede());
+		checkin.setDesconto(20.0);
+		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();
+		
+		DateTime hoje = new ParserDeStringParaData().parseData("11/03/2014");
+		Assert.assertEquals((Double)80.0, estadia.valorAteAData(hoje));
+	}
+	
+	@Test
 	public void casoAEstadiaNaoTenhaSidoCriadaAtravesDeUmaReservaElaMesmaTeraQueInformarOValorDaDiaria(){
 		
 		Checkin checkin = new Checkin();

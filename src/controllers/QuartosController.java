@@ -12,15 +12,18 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.interceptor.download.ByteArrayDownload;
 import br.com.caelum.vraptor.interceptor.download.Download;
 import br.com.caelum.vraptor.interceptor.multipart.UploadedFile;
+import br.com.caelum.vraptor.validator.ValidationMessage;
 
 import com.google.common.io.ByteStreams;
 
 import domain.Arquivo;
 import domain.Categoria;
 import domain.Quarto;
+import domain.exceptions.HotelException;
 
 
 @Resource
@@ -30,12 +33,16 @@ public class QuartosController {
 	private QuartoRepositorio quartoRepositorio;
 	private CategoriaRepositorio categoriaRepositorio;
 	private ArquivosRepositorio arquivosRepositorio;
-//	private Validator validator;
+	private Validator validator;
 
-	public QuartosController(Result result, QuartoRepositorio quartoRepositorio, CategoriaRepositorio categoriaRepositorio, ArquivosRepositorio arquivosRepositorio) {
+	public QuartosController(Result result, 
+							 QuartoRepositorio quartoRepositorio,
+							 Validator validator,
+							 CategoriaRepositorio categoriaRepositorio, 
+							 ArquivosRepositorio arquivosRepositorio) {
 		this.result = result;
 		this.quartoRepositorio = quartoRepositorio;
-//		this.validator = validator;
+		this.validator = validator;
 		this.categoriaRepositorio = categoriaRepositorio;
 		this.arquivosRepositorio = arquivosRepositorio;
 	}
@@ -59,19 +66,47 @@ public class QuartosController {
 	
 	public void salva(Quarto quarto, UploadedFile foto) throws IOException{
 		
-		if (foto != null){
-			URI imagem = arquivosRepositorio.grava(new Arquivo(foto.getFileName(), ByteStreams.toByteArray(foto.getFile()), foto.getContentType(), new Date()));
-			quarto.setFoto(imagem);
+		validarQuarto(quarto);
+		if (validator.hasErrors()){
+			result.include("quarto", quarto);
+			result.include("categoriaList",this.categoriaRepositorio.buscaTodos());
+			result.include("foto", foto);
+		    validator.onErrorUsePageOf(this).novo();
 		}
 		
-		if (quarto.getId() == null){
-			quartoRepositorio.salva(quarto);
-		}else{
-			quartoRepositorio.atualiza(quarto);
+		try{
+			if (foto != null){
+				URI imagem = arquivosRepositorio.grava(new Arquivo(foto.getFileName(), ByteStreams.toByteArray(foto.getFile()), foto.getContentType(), new Date()));
+				quarto.setCaminhoFoto(imagem);
+			}
+			if (quarto.getId() == null){
+				quartoRepositorio.salva(quarto);
+			}else{
+				quartoRepositorio.atualiza(quarto);
+			}
+			
+			result.include("mensagem", "Quarto salvo com sucesso!");
+			result.redirectTo(this).list();
+		}catch(HotelException e){
+			e.printStackTrace();
+			result.include(quarto);
+			result.include("categoriaList", categoriaRepositorio.buscaTodos());
+			result.include("foto", foto);
+			validator. add(new ValidationMessage(e.getMessage(),"erro.no.quarto",e.getMessage()));
+			validator.onErrorUsePageOf(this).novo();
 		}
+	}
+
+	private void validarQuarto(Quarto quarto) {
+		if (quarto.getNumero() == null || quarto.getNumero().trim().equals(""))
+			validator.add(new ValidationMessage("Número é obrigatorio", "quarto"));
+
+		if (quarto.getDescricao() == null || quarto.getDescricao().trim().equals(""))
+			validator.add(new ValidationMessage("Descrição do quarto é obrigatória", "quarto"));
 		
-		result.include("mensagem", "Quarto salvo com sucesso!");
-		result.redirectTo(this).list();
+		if (quarto.getCategoria() == null || quarto.getCategoria().getId().longValue() == -1){
+			validator.add(new ValidationMessage("Categoria do quarto é obrigatória", "quarto"));
+		}
 	}
 
 	public void novo() {
@@ -83,7 +118,7 @@ public class QuartosController {
 	@Path("/quartos/{id}/foto")
 	public Download foto(Long id){
 		Quarto quarto = quartoRepositorio.buscaPorId(id);
-		Arquivo foto =  arquivosRepositorio.recupera(quarto.getFoto());
+		Arquivo foto =  arquivosRepositorio.recupera(quarto.getCaminhoFoto());
 		
 		if (foto == null){
 			result.notFound();

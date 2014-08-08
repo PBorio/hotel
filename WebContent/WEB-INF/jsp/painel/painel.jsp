@@ -20,7 +20,16 @@
 </head>
 <body>
 <div id="container1">
-
+	     <c:if test="${not empty mensagem}">
+			<div class="alert alert-success">
+				${mensagem}
+			</div>
+		</c:if>
+		<c:forEach var="error" items="${errors}">
+			<div class="alert alert-danger">
+				${error.message}
+			</div>
+		</c:forEach>
     <div id="painel">
 		<c:forEach var="estadia" items="${estadiaList}">
 			<div class="quarto"> 

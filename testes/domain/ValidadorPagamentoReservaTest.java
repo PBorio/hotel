@@ -110,6 +110,17 @@ public class ValidadorPagamentoReservaTest {
 		ValidadorPagamentoReserva validadorPagamentoReserva = new ValidadorPagamentoReserva(pagamento);
 		validadorPagamentoReserva.validar();
 	}
+	
+	@Test
+	public void umPagamentoEmDinheiroEhValidoSeTiverDataEValor(){
+		Pagamento pagamento = new Pagamento();
+		pagamento.setTipoPagamento(TipoPagamento.DINHEIRO.getValue());
+		pagamento.setBanco(null);
+		pagamento.setDataPagamento(new Date());
+		pagamento.setValor(50.0);
+		ValidadorPagamentoReserva validadorPagamentoReserva = new ValidadorPagamentoReserva(pagamento);
+		validadorPagamentoReserva.validar();
+	}
 
 	private Pagamento criarPagamento() {
 		Pagamento pagamento = new Pagamento();

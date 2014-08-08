@@ -137,12 +137,28 @@ public class Quarto {
 		return true;
 	}
 
-	public void setFoto(URI foto) {
+	public void setCaminhoFoto(URI foto) {
 		this.foto = foto == null ? null : foto.toString();
 	}
 
-	public URI getFoto() {
+	public URI getCaminhoFoto() {
 		if (foto == null) return null;
 		return URI.create(foto);
+	}
+
+	@Deprecated
+	/** 
+	 * Somente para html
+	 */
+	public String getFoto() {
+		return foto;
+	}
+
+	@Deprecated
+	/** 
+	 * Somente para html
+	 */
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
 }

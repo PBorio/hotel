@@ -17,12 +17,23 @@ public class ValidadorPagamentoReserva {
 		if (pagamento.getTipoPagamento() == null)
 			throw new PagamentoInvalidoException("Tipo de Pagamento não foi informado");
 		
-		if (TipoPagamento.CARTAO.getValue().equals(pagamento.getTipoPagamento()))
+		if (TipoPagamento.CARTAO.getValue().equals(pagamento.getTipoPagamento())){
 			validarCartao();
-
-		if (TipoPagamento.DEPOSITO.getValue().equals(pagamento.getTipoPagamento()))
+		}else if (TipoPagamento.DEPOSITO.getValue().equals(pagamento.getTipoPagamento())){
 			validarDeposito();
+		}else if (TipoPagamento.DINHEIRO.getValue().equals(pagamento.getTipoPagamento())){
+			validarPagamentoEmDinheiro();
+		} else{
+			throw new PagamentoInvalidoException("Não foi informado um tipo de pagamento válido");
+		}
+	}
+
+	private void validarPagamentoEmDinheiro() {
+		if (pagamento.getDataPagamento() == null)
+			throw new PagamentoInvalidoException("Data do pagamento não informada.");
 		
+		if (pagamento.getValor() == null || pagamento.getValor().doubleValue() == 0.0)
+			throw new PagamentoInvalidoException("O valor do pagamento não foi inforamdo.");
 	}
 
 	private void validarDeposito() {

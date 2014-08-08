@@ -152,7 +152,8 @@ public class Pagamento {
 	}
 
 	public void arrumaValores() {
-		if (this.tipoPagamento.equals(TipoPagamento.DEPOSITO.getValue())){
+		if (this.tipoPagamento.equals(TipoPagamento.DEPOSITO.getValue())||
+			this.tipoPagamento.equals(TipoPagamento.DINHEIRO.getValue())){
 			this.valor = valorDeposito;
 			this.dataPagamento = dataDeposito;
 		}
@@ -167,6 +168,9 @@ public class Pagamento {
 		
 		if (tipoPagamento.equals(2))
 			return "Depósito";
+		
+		if (tipoPagamento.equals(3))
+			return "Dinheiro";
 		
 		return "";
 	}
@@ -185,6 +189,7 @@ public class Pagamento {
 
 	public boolean foiMarcado() {
 		return (TipoPagamento.DEPOSITO.getValue().equals(this.tipoPagamento) ||
-				TipoPagamento.CARTAO.getValue().equals(this.tipoPagamento) );
+				TipoPagamento.CARTAO.getValue().equals(this.tipoPagamento) ||
+				TipoPagamento.DINHEIRO.getValue().equals(this.tipoPagamento));
 	}
 }

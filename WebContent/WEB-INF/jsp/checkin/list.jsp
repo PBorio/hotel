@@ -30,15 +30,14 @@
 			<!-- End .content-box-header -->
 			<div class="widget-box">
 				<div class="widget-content nopadding">
-					<form action="<c:url value='/checkin/pesquisar'/>" class="form-horizontal">
-				     <div class="control-group">
-						<label class="control-label">Nome do Hóspede:</label>
-						<div class="controls">
-						    <input type="text" name="pesquisa">
-							<input value="Pesquisar" type="submit" class="button" id="btnPesquisa" >
+				 <form class="form-horizontal" action="<c:url value='/checkin/pesquisar/'/>">
+					<div class="form-group">
+						<label class="control-label col-xs-2">Nome do Hóspede:</label>
+						<div class="col-xs-10">
+							<input type="text" class="col-xs-8" name="pesquisa" />
+							<button type="submit" class="btn btn-primary" id="btnPesquisa">Pesquisar</button>
 						</div>
 					</div>
-
 					</form>
 				</div>
 			</div>

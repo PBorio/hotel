@@ -137,23 +137,6 @@ public class CheckinTest {
 	}
 	
 	@Test
-	public void oCheckinPodeTerUmValorDeDescontoNaDiaria(){
-		
-		Reserva reserva = new FakeReserva().iniciandoEm("10/03/2014").terminandoEm("15/03/2014").paraOQuarto(new Quarto()).build();
-		reserva.setHospede(new Hospede());
-		reserva.setValorDiaria(10.0);
-		
-		Checkin checkin = new Checkin();
-		checkin.aPartirDaReserva(reserva);
-		checkin.setValorDiaria(15.0);
-		checkin.setDesconto(10.0);
-		checkin.addHospede(reserva.getHospede());
-		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();
-		Assert.assertEquals((Double)13.5, estadia.getValorDiaria());
-		
-	}
-	
-	@Test
 	public void umaEstadiaTambemPodeSerCriadaSemUmaReservaInformandoHospedeQuartoEDataDeCheckin(){
 		
 		Quarto _101 = new Quarto();

@@ -7,7 +7,10 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.Validator;
+import br.com.caelum.vraptor.validator.ValidationMessage;
 import domain.Categoria;
+import domain.exceptions.HotelException;
 
 @Resource
 public class CategoriasController {
@@ -15,10 +18,12 @@ public class CategoriasController {
 	
 	private CategoriaRepositorio categoriaRepositorio;
 	private Result result;
+	private Validator validator;
 
-	public CategoriasController(CategoriaRepositorio categoriaRepositorio, Result result){
+	public CategoriasController(CategoriaRepositorio categoriaRepositorio, Result result, Validator validator){
 		this.categoriaRepositorio = categoriaRepositorio;
 		this.result = result;
+		this.validator = validator;
 	}
 	
 	@Get
@@ -38,15 +43,32 @@ public class CategoriasController {
 	}
 	
 	public void salva(Categoria categoria){
-		
-		if (categoria.getId() == null){
-			categoriaRepositorio.salva(categoria);
-		}else{
-			categoriaRepositorio.atualiza(categoria);
+		validarCategoria(categoria);
+		if (validator.hasErrors()){
+			result.include("categoria", categoria);
+		    validator.onErrorUsePageOf(this).novo();
 		}
 		
-		result.include("mensagem", "Categoria salva com sucesso!");
-		result.redirectTo(this).list();
+		try{
+			if (categoria.getId() == null){
+				categoriaRepositorio.salva(categoria);
+			}else{
+				categoriaRepositorio.atualiza(categoria);
+			}
+			
+			result.include("mensagem", "Categoria salva com sucesso!");
+			result.redirectTo(this).list();
+		}catch(HotelException e){
+			e.printStackTrace();
+			result.include(categoria);
+			validator.add(new ValidationMessage(e.getMessage(),"erro.no.quarto",e.getMessage()));
+			validator.onErrorUsePageOf(this).novo();
+		}
+	}
+
+	private void validarCategoria(Categoria categoria) {
+		if (categoria.getDescricao() == null || categoria.getDescricao().trim().equals(""))
+			validator.add(new ValidationMessage("Descrição da categoria é obrigatória", "categoria"));
 	}
 
 	public void novo() {

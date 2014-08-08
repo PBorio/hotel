@@ -7,8 +7,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Cadastro de Políticas de Preços</title>
-<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.css'/>" />
-<link rel="stylesheet" href="<c:url value='/resources/css/datepicker.css'/>" />
 </head>
 <body>
 	    <c:if test="${not empty mensagem}">
@@ -16,15 +14,15 @@
 			${mensagem}
 		</div>
 		</c:if>
-		<c:if test="${not empty erro}">
+		<c:forEach var="error" items="${errors}">
 			<div class="alert alert-danger">
-				${erro}
+				${error.message}
 			</div>
-		</c:if>
+		</c:forEach>
 		<div class="container">
 			<div class="header">
 				<ul class="nav nav-pills pull-right">
-					<li class="active"><a href="/">Home</a></li>
+					<li class="active"><a href="<c:url value='/'/>">Home</a></li>
 				</ul>
 			</div>
 		  <form class="form-horizontal" action='<c:url value="/politicas/salva"/>' method="post">
@@ -41,7 +39,7 @@
 						<label class="control-label col-xs-2">Categoria:</label>
 						<div class="col-xs-10">
 							<select id="politicaDePrecos.categoria.id" name="politicaDePrecos.categoria.id" class="col-xs-10">  
-			                    <option> Categorias...</option>  
+			                    <option value="-1"> Categorias...</option>  
 			                    <c:forEach var="categoria" items="${categoriaList}">  
 			                        <option value="${categoria.id}" <c:if test="${categoria.id == politicaDePrecos.categoria.id}">selected="true"</c:if>> 
 			                        	${categoria.descricao} 
@@ -59,13 +57,13 @@
 				<div class="form-group">
 						<label class="control-label col-xs-2">Inicio:</label>
 						<div class="col-xs-10">
-							<input type="text" class="col-xs-10" name="politicaDePrecos.inicio" id="politicaDePrecos.inicio" value="<fmt:formatDate value='${politicaDePrecos.inicio}'/>" />
+							<input type="text" class="col-xs-10" name="politicaDePrecos.inicio" id="inicio" value="<fmt:formatDate value='${politicaDePrecos.inicio}'/>" />
 						</div>
 				  </div> 
 				  <div class="form-group">
 						<label class="control-label col-xs-2">Fim:</label>
 						<div class="col-xs-10">
-							<input type="text" class="col-xs-10" name="politicaDePrecos.fim" id="politicaDePrecos.fim" value="<fmt:formatDate value='${politicaDePrecos.fim}'/>"/>
+							<input type="text" class="col-xs-10" name="politicaDePrecos.fim" id="fim" value="<fmt:formatDate value='${politicaDePrecos.fim}'/>"/>
 						</div>
 				  </div> 
 				  <div class="form-group">
@@ -80,7 +78,8 @@
 						    <div class="checker">
 							<label>
 							    <span>
-							  		<input type="checkbox" name="politicaDePrecos.padrao" id="politicaDePrecos.padrao" value="${politicaDePrecos.padrao}" checked="${politicaDePrecos.padrao}"/>
+							  		<input type="checkbox" name="politicaDePrecos.padrao" id="politicaDePrecos.padrao" 
+							  		<c:if test="${politicaDePrecos.padrao}">checked="checked"</c:if> />
 							  	</span>
 							</label>
 							</div>
@@ -97,17 +96,31 @@
 			</fieldset>
 		  </form>
 	</div>
-<script src="<c:url value='/resources/scripts/bootstrap.min.js'/>"></script>
-<script src="<c:url value='/resources/scripts/bootstrap-datepicker.js'/>"></script>
+<script src="<c:url value='/resources/scripts/jquery-ui.min.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/resources/scripts/jquery.maskedinput-1.3.min.js'/>"></script>
 <script type="text/javascript">
-$(function(){
-	$('#politicaDePrecos\\.inicio').datepicker({
-		format: 'dd/mm/yyyy'
-	});
-	$('#politicaDePrecos\\.fim').datepicker({
-		format: 'dd/mm/yyyy'
-	});
+
+$(function() {
+	$('#inicio').datepicker({  
+         inline: true,  
+         showOtherMonths: true,  
+         dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],  
+         dateFormat: 'dd/mm/yy',
+         dayNames: [ "Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado" ],
+         dayNamesMin: [ "Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab" ],
+     });
+	$("#inicio").mask("99/99/9999");
+	$('#fim').datepicker({  
+        inline: true,  
+        showOtherMonths: true,  
+        dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        dateFormat: 'dd/mm/yy',
+        dayNames: [ "Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado" ],
+        dayNamesMin: [ "Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab" ],
+    });
+	$("#fim").mask("99/99/9999");
 });
+
 </script>
 </body>
 </html>

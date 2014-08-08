@@ -89,7 +89,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-xs-2">Desconto em %:</label>
+						<label class="control-label col-xs-2">Valor de Desconto:</label>
 						<div class="col-xs-10">
 							<input type="text" class="col-xs-10" name="checkinLocal.desconto" value="${checkin.desconto}" />
 						</div>

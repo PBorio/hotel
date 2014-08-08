@@ -93,5 +93,37 @@ public class PoliticaDePrecos {
 		this.id = id;
 	}
 
+	public boolean possuiAMesmaCategoria(PoliticaDePrecos outraPolitica) {
+		if (this.categoria == null || outraPolitica.categoria == null)
+			return false;
+		
+		return (this.categoria.equals(outraPolitica.categoria));
+	}
+
+	@Override
+	public int hashCode() {
+		if (id == null) return super.hashCode();
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PoliticaDePrecos other = (PoliticaDePrecos) obj;
+		if (id == null) 
+			return false;
+		if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
 
 }

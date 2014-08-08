@@ -1,5 +1,7 @@
 package domain.servicos;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -41,6 +43,7 @@ public class Checkin implements CalculavelPorPeriodo {
 		estadia.setDataCheckin(new DateTime(this.getDataCheckin()));
 		estadia.setPrevisaoCheckout(new DateTime(this.getDataCheckout()));
 		estadia.setValorDiaria(this.getValorDiaria());
+		estadia.setDesconto(desconto);
 		for (Hospede hospede : this.hospedes){
 			estadia.addHospede(hospede);
 		}
@@ -56,6 +59,7 @@ public class Checkin implements CalculavelPorPeriodo {
 		}
 		estadia.setQuarto(quarto);
 		estadia.setValorDiaria(valorDiaria);
+		estadia.setDesconto(this.desconto);
 		return estadia;
 	}
 
@@ -141,7 +145,11 @@ public class Checkin implements CalculavelPorPeriodo {
 	}
 	
 	public Double getValorFinal(){
-		return new CalculoDeValorPorPeriodoService().calcularValorAteAData(this, new DateTime(this.getDataCheckout()));
+		Double valor = new CalculoDeValorPorPeriodoService().calcularValorAteAData(this, new DateTime(this.getDataCheckout()));
+		if (desconto == null) desconto = 0.0;
+		valor -= desconto;
+		BigDecimal bd = new BigDecimal(valor.toString());
+	  	return bd.setScale(2, RoundingMode.HALF_EVEN).doubleValue();
 	}
 	
 	public Double getSaldoAPagar(){
@@ -182,8 +190,6 @@ public class Checkin implements CalculavelPorPeriodo {
 	public Double getValorDiaria(){
 		if (this.valorDiaria == null)
 			return this.reserva.getValorDiaria();
-		
-		if (this.desconto == null) this.desconto = 0.0;
-		return this.valorDiaria * (1 - (desconto/100)) ;
+		return this.valorDiaria;
 	}
 }

@@ -5,7 +5,8 @@
 					<select id="tipo" class="col-xs-10" name="pagamento.tipoPagamento">   
 		                <option> Tipos...</option>
 		                <option value="1" <c:if test="${1 == pagamento.tipoPagamento}">selected="true"</c:if>> Cartão </option>
-		                <option value="2" <c:if test="${2 == pagamento.tipoPagamento}">selected="true"</c:if>> Depósito </option>  
+		                <option value="2" <c:if test="${2 == pagamento.tipoPagamento}">selected="true"</c:if>> Depósito </option>
+		                <option value="3" <c:if test="${2 == pagamento.tipoPagamento}">selected="true"</c:if>> Dinheiro </option>  
 		            </select>
 				</div>
 			 </div>
@@ -14,13 +15,13 @@
 			  	 <div class="form-group">
 			  	  	<label class="control-label col-xs-2">Data Pagamento:</label>
 				    <div class="col-xs-10">
-				 	  <input type="text" class="col-xs-10" value="<fmt:formatDate value='${pagamento.dataPagamento}' pattern='dd/MM/yyyy'/>" name="pagamento.dataPagamento" />
+				 	  <input type="text" class="col-xs-10" id="dataPagamento" value="<fmt:formatDate value='${pagamento.dataPagamento}' pattern='dd/MM/yyyy'/>" name="pagamento.dataPagamento" />
 					</div>
 				 </div>
 			  	  <div class="form-group">
 			  	  	<label class="control-label col-xs-2">Número:</label>
 				    <div class="col-xs-10">
-				 	  <input type="text" class="col-xs-10" value="${pagamento.numeroCartao}" name="pagamento.numeroCartao" maxlength="8" />
+				 	  <input type="text" class="col-xs-10" id="numeroCartao" value="${pagamento.numeroCartao}" name="pagamento.numeroCartao" maxlength="8" />
 					</div>
 				 </div>
 			  	 <div class="form-group">
@@ -40,7 +41,7 @@
 			</div>
 			<div id="deposito">
 
-				 <div class="form-group">
+				 <div class="form-group" id="divBanco">
 				   <label class="control-label col-xs-2">Banco:</label>
 				   <div class="col-xs-10">
 					 <select id="banco" name="pagamento.banco" class="col-xs-10" >   
@@ -51,16 +52,16 @@
 				   </div>
 			 	</div>
 				
-				<div class="form-group">
+				<div class="form-group" id="divPrevisao">
 			  	  	<label class="control-label col-xs-2">Data Previsão:</label>
 				    <div class="col-xs-10">
-				 	  <input type="text" class="col-xs-10" value="<fmt:formatDate value='${pagamento.dataPrevisao}' pattern='dd/MM/yyyy'/>" name="pagamento.dataPrevisao" />
+				 	  <input type="text" class="col-xs-10" id="previsao" value="<fmt:formatDate value='${pagamento.dataPrevisao}' pattern='dd/MM/yyyy'/>" name="pagamento.dataPrevisao" />
 					</div>
 				 </div>
 				<div class="form-group">
 			  	  	<label class="control-label col-xs-2">Data Deposito:</label>
 				    <div class="col-xs-10">
-				 	  <input type="text" class="col-xs-10" value="<fmt:formatDate value='${pagamento.dataDeposito}' pattern='dd/MM/yyyy'/>" name="pagamento.dataDeposito" />
+				 	  <input type="text" class="col-xs-10" id="dataDeposito" value="<fmt:formatDate value='${pagamento.dataDeposito}' pattern='dd/MM/yyyy'/>" name="pagamento.dataDeposito" />
 					</div>
 				 </div>
 				 <div class="form-group">
@@ -79,3 +80,66 @@
 				  </div>
 				
 			</div> 
+
+<script src="<c:url value='/resources/scripts/jquery-ui.min.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/resources/scripts/jquery.maskedinput-1.3.min.js'/>"></script>
+<script type="text/javascript">
+jQuery(document).ready(function() {
+	  
+	$("#tipo").bind('change', function(self) {
+		mudarTipoPagamento();
+	});
+    mudarTipoPagamento();	
+});
+function mudarTipoPagamento(){
+	var tipo = $('select#tipo').val();
+	
+	if (tipo === "1"){
+    	$("#cartao").show();
+    	$("#deposito").hide();
+	}else if(tipo === "2"){
+		$("#cartao").hide();
+    	$("#deposito").show();
+	}else if(tipo === "3"){
+		$("#cartao").hide();
+    	$("#deposito").show();
+    	$("#divBanco").hide();
+    	$("#divPrevisao").hide();
+	}else{
+		$("#cartao").hide();
+    	$("#deposito").hide();
+	}
+    	
+}
+
+$(function() {
+	$('#previsao').datepicker({  
+         inline: true,  
+         showOtherMonths: true,  
+         dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],  
+         dateFormat: 'dd/mm/yy',
+         dayNames: [ "Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado" ],
+         dayNamesMin: [ "Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab" ],
+     });
+	$("#previsao").mask("99/99/9999");
+	$('#dataDeposito').datepicker({  
+        inline: true,  
+        showOtherMonths: true,  
+        dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        dateFormat: 'dd/mm/yy',
+        dayNames: [ "Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado" ],
+        dayNamesMin: [ "Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab" ],
+    });
+	$("#dataDeposito").mask("99/99/9999");
+	$('#dataPagamento').datepicker({  
+        inline: true,  
+        showOtherMonths: true,  
+        dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        dateFormat: 'dd/mm/yy',
+        dayNames: [ "Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado" ],
+        dayNamesMin: [ "Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab" ],
+    });
+	$("#dataPagamento").mask("99/99/9999");
+	$("#numeroCartao").mask("9999.9999");
+});
+ </script>

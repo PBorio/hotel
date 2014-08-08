@@ -72,6 +72,8 @@ public class Estadia implements CalculavelPorPeriodo {
 
 	@OneToMany(mappedBy="estadia")
 	private List<PagamentoEstadia> pagamentosEstadias = new ArrayList<PagamentoEstadia>();
+
+	private Double desconto;
 	
 	public Reserva getReserva() {
 		return reserva;
@@ -158,7 +160,11 @@ public class Estadia implements CalculavelPorPeriodo {
 		if (isFechada())
 			data = dataCheckout;
 			
-		return new CalculoDeValorPorPeriodoService().calcularValorAteAData(this, data);
+		Double valor = new CalculoDeValorPorPeriodoService().calcularValorAteAData(this, data);
+		if (desconto == null) desconto = 0.0;
+		valor -= desconto;
+		BigDecimal bd = new BigDecimal(valor.toString());
+	  	return bd.setScale(2, RoundingMode.HALF_EVEN).doubleValue();
 	}
 
 	public Double getValorDosServicos() {
@@ -309,6 +315,14 @@ public Double getValorDaEstadiaFechada() {
 
 	public boolean isPendente() {
 		return (this.getSaldoAPagar().doubleValue() > 0.0);
+	}
+
+	public Double getDesconto() {
+		return desconto;
+	}
+
+	public void setDesconto(Double desconto) {
+		this.desconto = desconto;
 	}
 
 }

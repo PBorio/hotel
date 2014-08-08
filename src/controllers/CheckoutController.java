@@ -60,8 +60,8 @@ public class CheckoutController {
 		}catch(HotelException e){
 			e.printStackTrace();
 			result.include("pagamento", pagamento);
-			validator. add(new ValidationMessage(e.getMessage(),"erro.no.reserva",e.getMessage()));
-			validator.onErrorUsePageOf(this).checkout(estadia.getId()); 
+			validator.add(new ValidationMessage(e.getMessage(),"erro.no.reserva",e.getMessage()));
+			validator.onErrorForwardTo(this).checkout(estadia.getId()); 
 		}
 	}
 }

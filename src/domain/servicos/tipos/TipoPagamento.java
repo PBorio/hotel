@@ -2,7 +2,8 @@ package domain.servicos.tipos;
 
 public enum TipoPagamento implements Tipo {
 	  CARTAO(1, "Cartão"),
-	  DEPOSITO(2, "Depósito"); 
+	  DEPOSITO(2, "Depósito"),
+	  DINHEIRO(3, "Dinheiro"); 
 	  
 	  private final Integer value;   
 	  private final String description;
