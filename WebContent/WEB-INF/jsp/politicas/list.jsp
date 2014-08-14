@@ -2,57 +2,88 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Categorias</title>
+<title>Quartos</title>
 
 </head>
 
 <body>
-		<c:if test="${not empty mensagem}">
-			<div class="alert alert-success">
-				${mensagem}
-			</div>
-		</c:if>
-		<c:if test="${not empty erros}">
-			<div class="alert alert-danger">
-				${erros}
-			</div>
-		</c:if>
+	
 		
-		<div class="container">
-			<div class="header">
-				<ul class="nav nav-pills pull-right">
-					<li class="active"><a href="<c:url value='/politicas/novo'/>">Nova Política</a></li>
-					<li class="active"><a href="<c:url value='/'/>">Home</a></li>
-				</ul>
-				<h3 class="text-muted">Políticas de Preço</h3>
-			</div>
 		
-			<table class="table table-striped table-bordered" id="example"
-					cellpadding="0" cellspacing="0" border="0" width="100%">
-				<thead> 
-					<tr>
-						<th class="ui-state-default" width="40%">Descrição</th>
-						<th class="ui-state-default" width="40%">Categoria</th>
-						<th class="ui-state-default" width="20%">Valor</th>
-						<th class="ui-state-default" width="20%"></th>
-					</tr>
-				</thead>
-				
-				<tfoot>
-					<c:forEach var="politicaDePrecos" items="${politicaDePrecosList}">
-						<tr id="categoria-${categoria.id}">
-							<td><a href="<c:url value='/politicas/${politicaDePrecos.id}'/>" title="title">${politicaDePrecos.descricao}</a></td>
-							<td><a href="<c:url value='/politicas/${politicaDePrecos.id}'/>" title="title">${politicaDePrecos.categoria.descricao}</a></td>
-							<td>${politicaDePrecos.valorDiaria}</td>
-							<td>
-								<a href="" title="Delete"
-								onclick="remove(${politicaDePrecos.id}); return false;"><img width="16px" height="16px"
-									src="<c:url value="/resources/imagens/icons/cross.png"/>" alt="Delete"/></a> 
-							</td>
-						</tr>
-					</c:forEach>
-				</tfoot>
-			</table>
+<div class="fluid-container">
+	  <c:if test="${not empty mensagem}">
+	<div class="alert alert-success">
+		${mensagem}
 	</div>
+</c:if>
+<c:if test="${not empty erro}">
+	<div class="alert alert-danger">
+		${erro}
+	</div>
+</c:if>
+
+<h1 id="page-header">Políticas de Preço</h1>	
+<div class="header">
+	<ul class="nav nav-pills pull-right">
+		<li class="active"><a href="<c:url value='/politicas/novo'/>">Nova Política</a></li>
+	</ul>
+</div>
+			
+			<!-- widget grid -->
+			<section id="widget-grid" class="">
+				
+				<!-- row-fluid -->
+				
+				<div class="fluid-container">
+			
+			<!-- widget grid -->
+			<section id="widget-grid" class="">
+				
+				<!-- row-fluid -->
+				
+				<div class="row-fluid">
+					<article class="span12">
+						<!-- new widget -->
+						<div class="jarviswidget" id="widget-id-0">
+						    <!-- wrap div -->
+						    <div>
+						    
+						        <div class="inner-spacer"> 
+						        <!-- content goes here -->
+									<table class="table table-striped table-bordered responsive" id="dtable">
+										<thead>
+											<tr>
+												<th>Descrição</th>
+												<th>Categoria</th>
+												<th></th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach var="politicaDePrecos" items="${politicaDePrecosList}">
+										    <tr class="gradeA">
+												<td class="center"><a href="<c:url value='/politicas/${politicaDePrecos.id}'/>" title="title">${politicaDePrecos.descricao}</a></td>
+												<td class="center"><a href="<c:url value='/politicas/${politicaDePrecos.id}'/>" title="title">${politicaDePrecos.categoria.descricao}</a></td>
+												<td><a href="" title="Delete"
+														onclick="remove(${politicaDePrecos.id}); return false;"><img width="16px" height="16px"
+															src="<c:url value="/resources/imagens/icons/cross.png"/>" alt="Delete"/></a> </td>
+											</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+							        	
+							    </div>
+							    <!-- end content-->
+						    </div>
+						    <!-- end wrap div -->
+						</div>
+						<!-- end widget -->
+					</article>
+				</div>
+				
+				<!-- end row-fluid -->
+			</article>
+		</div>
+	</section>
+</div>			
 </body>
 </html>
