@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     
-    <title>{JARVIS}Admin</title>
+    <title>Hotel Admin</title>
     <meta name="description" content="">
     <meta name="author" content="">
     
@@ -68,6 +68,7 @@
 	<link rel="apple-touch-startup-image" href="<c:url value='/jarvis/img/splash/ipad-portrait.png'/>" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
 	<link rel="apple-touch-startup-image" href="<c:url value='/jarvis/img/splash/iphone.png'/>" media="screen and (max-device-width: 320px)">
 	
+	<decorator:head />
   </head>
 
   <body>
@@ -82,7 +83,7 @@
 				<div class="contained">
 					
 					<!-- theme name -->
-					<h1> {JARVIS} <span class="hidden-phone">- Smart Admin Template (v 1.9.4)</span> </h1>
+					<h1> Hotel <span class="hidden-phone">- ${userSession.hotel.nome}</span> </h1>
 					<!-- end theme name -->
 																		
 					<!-- span4 -->
@@ -256,7 +257,7 @@
 						<a href="javascript:void(0)" class="my-profile-pic">
 							<img src="<c:url value='/jarvis/img/avatar/avatar_0.jpg'/>" alt="" />
 						</a>
-						<span class="first-child">Welcome <strong>Victoria!</strong></span>
+						<span class="first-child">Bem-vindo <strong>${userSession.usuario.nome}</strong></span>
 						<span><a href="javascript:void(0);">Edit Profile </a></span>
 					</div>
 					<div class="divider"></div>
@@ -267,80 +268,29 @@
 						
 						<ul class="menu" id="accordion-menu-js">
 							<li class="current">
-								<a href="javascript:void(0)"><i class="icon-off"></i>Dashboard <span class="badge">2</span></a>
+								<a href="javascript:void(0)"><i class="icon-off"></i>Estadias</a>
 								<ul>
 									<li>
-										<a href="index.html" class="expanded">Dashboard</a>
+										<a href="<c:url value='/checkin/list'/>" class="expanded">Checkin</a>
 									</li>
 									<li>
-										<a href="javascript:void(0);" class="logout-js" data-rel="login.html">Logout</a>
+										<a href="<c:url value='/'/>" class="expanded">Painel</a>
 									</li>
 								</ul>
 							</li>
 							<li class="">
-								<a href="inbox.html"><i class="icon-envelope"></i>Inbox</a>
+								<a href="<c:url value='/consultas/consulta'/>"><i class="icon-calendar"></i>Calendário</a>
 							</li>
 							<li class="">
-								<a href="javascript:void(0)"><i class="icon-check"></i>Forms<span class="badge">3</span></a>
+								<a href="javascript:void(0)"><i class="icon-check"></i>Cadastros</a>
 								<ul>
-									<li>
-										<a href="forms.html">Form Elements</a>
-									</li>
-									<li>
-										<a href="validation.html">Validation</a>
-									</li>
-									<li>
-										<a href="wizard.html">Wizards</a>
-									</li>
+								  <li><a href="<c:url value='/quartos/list'/>">Quartos</a></li>
+								  <li><a href="<c:url value='/categorias/list'/>">Categorias</a></li>
+								  <li><a href="<c:url value='/politicas/list'/>">Preços</a></li>
 								</ul>
 							</li>
 							<li class="">
-								<a href="javascript:void(0)"><i class="icon-user"></i>Interface<span class="badge">3</span></a>
-								<ul>
-									<li>
-										<a href="interface.html">Interface Elements</a>
-									</li>
-									<li>
-										<a href="buttons.html">Buttons &amp; Icons</a>
-									</li>
-									<li>
-										<a href="tables.html">Tables</a>
-									</li>
-								</ul>
-							</li>
-							<li class="">
-								<a href="javascript:void(0)"><i class="icon-signal"></i>Charts &amp; Graphs<span class="badge">3</span></a>
-								<ul>
-									<li>
-										<a href="basic_charts.html">Basic Charts</a>
-									</li>
-									<li>
-										<a href="adv_charts.html">Advanced Charts</a>
-									</li>
-									<li>
-										<a href="raphael.html">Raphael Engine</a>
-									</li>
-								</ul>
-							</li>
-							<li class="">
-								<a href="widgets.html"><i class="icon-refresh"></i>Smart Widgets</a>
-							</li>
-							<li class="">
-								<a href="javascript:void(0)"><i class="icon-plus"></i>Bonus<span class="badge">4</span></a>
-								<ul>
-									<li>
-										<a href="invoice.html">Invoice</a>
-									</li>
-									<li>
-										<a href="typography.html">Typography</a>
-									</li>
-									<li>
-										<a href="chat.html">Chat</a>
-									</li>
-									<li>
-										<a href="error-page.html">Error Page</a>
-									</li>
-								</ul>
+								<a href="<c:url value='/reservas/parametrosIniciais'/>"><i class="icon-time"></i>Reservas</a>
 							</li>
 						</ul>
 						
@@ -603,7 +553,7 @@
     
     <!-- REQUIRED: Flot Chart Engine -->
     <script src="<c:url value='/jarvis/js/include/jquery.flot.cust.min.js'/>" ></script>			
-    <script src="<c:url value='/jarvis/js/include/js/include/jquery.flot.resize.min.js'/>"></script>		
+    <script src="<c:url value='/jarvis/js/include/jquery.flot.resize.min.js'/>"></script>		
     <script src="<c:url value='/jarvis/js/include/jquery.flot.tooltip.min.js'/>" ></script>		
     <script src="<c:url value='/jarvis/js/include/jquery.flot.orderBar.min.js'/>" ></script> 	
     <script src="<c:url value='/jarvis/js/include/jquery.flot.fillbetween.min.js'/>" ></script>	
