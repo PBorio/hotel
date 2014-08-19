@@ -85,18 +85,3 @@
 </div>			
 </body>
 </html>
-
-					<c:forEach var="categoria" items="${categoriaList}">
-						<tr id="categoria-${categoria.id}">
-							<th><a href="<c:url value='/categorias/${categoria.id}'/>" title="title">${categoria.descricao}</a></th>
-							<th><a href="" title="Delete" onclick="remove(${categoria.id}); return false;"><img width="16px" height="16px"
-									src="<c:url value="/resources/imagens/icons/cross.png"/>"
-									alt="Delete"/></a> 
-							</th>
-						</tr>
-					</c:forEach>
-				</tfoot>
-			</table>
-	</div>
-</body>
-</html>
