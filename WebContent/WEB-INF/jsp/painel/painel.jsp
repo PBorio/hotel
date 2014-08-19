@@ -19,7 +19,7 @@
  	</script> 
 </head>
 <body>
-<div id="container1">
+<div class="container">
 	     <c:if test="${not empty mensagem}">
 			<div class="alert alert-success">
 				${mensagem}

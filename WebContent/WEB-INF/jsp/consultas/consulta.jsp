@@ -6,10 +6,11 @@
 <html>
 <head>
 <link rel="stylesheet" href="<c:url value='/resources/css/reservados.css'/>" />
+<link rel="stylesheet" href="<c:url value='/resources/css/fullcalendar.css'/>" />
 <title>Consulta Reservas</title>
 </head>
 <body>
-  <div id="containerConsulta">
+  <div class="container" id="containerConsulta">
 	<table>
 	 <thead>
    	 <tr>
@@ -21,29 +22,29 @@
    	    <th><a href="<c:url value='/consultas/proximo/${hotelCalendario.primeiraSegundaFeira}/${hotelCalendario.mesAtual}/${hotelCalendario.anoAtual}'/>"><img src="<c:url value='/resources/imagens/arrow_right.png'/>"></a></th>
    	 </tr>
    	 <tr>
-   	 	<th class="registroData"></th>	
+   	 	<th class="registroData fc-widget-header"></th>	
    	    <c:forEach var="dia" items="${hotelCalendario.cabecalho.dias}">
    	         <th <c:choose>
-   	               <c:when test="${dia.hoje}">class="destaque"</c:when>
-   	               <c:when test="${dia.fimDeSemana}">class="fimDeSemana"</c:when>
-   	               <c:otherwise>class="registroData"</c:otherwise>
+   	               <c:when test="${dia.hoje}">class="destaque fc-widget-header"</c:when>
+   	               <c:when test="${dia.fimDeSemana}">class="fimDeSemana fc-widget-header"</c:when>
+   	               <c:otherwise>class="registroData fc-widget-header"</c:otherwise>
    	             </c:choose> > 
    	             ${dia.texto}</th>
    	    </c:forEach>
-   	    <th class="registroData"></th>
+   	    <th class="registroData fc-widget-header"></th>
      </tr>
      </thead>
     <tbody>
           <c:forEach var="linha" items="${hotelCalendario.linhas}" >
           	<tr>
-	            <td class="destaque">${linha.numeroQuarto}</td>
+	            <td class="fc-widget-header">${linha.numeroQuarto}</td>
 	            <c:forEach var="dia" items="${linha.dias}">
 	              <c:choose>
-	              	<c:when test="${empty dia.idReserva}"><td class="${dia.marcacao}"><a href="<c:url value='/nova/reserva'/>">${dia.texto}</a></td></c:when>
+	              	<c:when test="${empty dia.idReserva}"><td class="fc-widget-content"><a href="<c:url value='/nova/reserva'/>">${dia.texto}</a></td></c:when>
 	              	<c:otherwise><td class="${dia.marcacao}"><a href="<c:url value='/pagamento/${dia.idReserva}'/>">${dia.texto}</a></td></c:otherwise>
 	              </c:choose>
 	            </c:forEach>
-	            <td class="destaque">${linha.numeroQuarto}</td>
+	            <td class="fc-widget-header">${linha.numeroQuarto}</td>
              </tr>
           </c:forEach>
     </tbody>

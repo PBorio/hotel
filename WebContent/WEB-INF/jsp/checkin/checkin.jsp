@@ -36,7 +36,9 @@
 				<ul class="nav nav-pills pull-right">
 					<li class="active"><a href="<c:url value='/'/>">Home</a></li>
 				</ul>
+				<h3 class="text-muted">Checkin</h3>
 			</div>
+		
 			<fieldset>
 				<legend>Quarto</legend>
 				<table class="table table-striped table-bordered" id="example"
