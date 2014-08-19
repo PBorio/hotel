@@ -34,9 +34,6 @@ public class PoliticaDePrecos {
 	@Column(name="valor_diaria")
 	private Double valorDiaria;
 	
-	@Column(name="padrao")
-	private boolean padrao = false;
-
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
@@ -67,14 +64,6 @@ public class PoliticaDePrecos {
 
 	public Double getValorDiaria() {
 		return valorDiaria;
-	}
-
-	public void setPadrao(boolean padrao) {
-		this.padrao  = padrao;
-	}
-
-	public boolean isPadrao() {
-		return padrao;
 	}
 
 	public Long getId() {

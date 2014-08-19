@@ -41,6 +41,12 @@
 							</div>
 					  </div> 
 					  <div class="form-group">
+							<label class="control-label col-xs-2">Valor:</label>
+							<div class="col-xs-10">
+								<input type="text" class="col-xs-10" name="categoria.valor" id="categoria.valor" value="${categoria.valor}" />
+							</div>
+					  </div> 
+					  <div class="form-group">
 						<label class="control-label col-xs-2" for="singlebutton"></label>
 						<div class="col-xs-10">
 							<button id="singlebutton" name="singlebutton" class="btn btn-primary btn-lg">

@@ -10,6 +10,7 @@ import domain.Categoria;
 import domain.PoliticaDePrecos;
 import domain.Quarto;
 import domain.Reserva;
+import domain.exceptions.HotelException;
 import domain.helpers.FakeReserva;
 import domain.servicos.helpers.ParserDeStringParaData;
 import domain.servicos.helpers.Periodo;
@@ -45,9 +46,10 @@ public class CalculoDeValorDaDiariaServiceTest {
 	}
 	
 	@Test
-	public void seNenhumaPoliticaForEncontradaParaOPeriodoValorDaReservaEhAPoliticaPadraoIndependenteDePeriodo(){
+	public void seNenhumaPoliticaForEncontradaParaOPeriodoValorDaReservaEhOValorDaCategoria(){
 		Categoria categoria = new Categoria();
 		categoria.setId(1l);
+		categoria.setValor(40.0);
 		
 		Quarto quarto = new Quarto();
 		quarto.setId(1l);
@@ -61,15 +63,7 @@ public class CalculoDeValorDaDiariaServiceTest {
 		politica.setFim(parser.parseData("30/04/2014").toDate());
 		politica.setValorDiaria(50.0);
 		
-		PoliticaDePrecos padrao = new PoliticaDePrecos();
-		padrao.setCategoria(categoria);
-		padrao.setInicio(parser.parseData("01/04/2013").toDate());
-		padrao.setFim(parser.parseData("31/12/2013").toDate());
-		padrao.setValorDiaria(40.0);
-		padrao.setPadrao(true);
-		
 		politicas.add(politica);
-		politicas.add(padrao);
 		
 		CalculoDeValorDaDiariaService servico = new CalculoDeValorDaDiariaService(politicas);
 		servico.calcularEInformarValorNaReserva(reserva);
@@ -77,8 +71,8 @@ public class CalculoDeValorDaDiariaServiceTest {
 		Assert.assertEquals((Double)40.0, reserva.getValorDiaria());
 	}
 	
-	@Test(expected=RuntimeException.class)
-	public void seNenhumaPoliticaForEncontradaParaOPeriodoValorENaoHouverUmaPadraoDeveLancarExcecao(){
+	@Test(expected=HotelException.class)
+	public void seNenhumaPoliticaForEncontradaParaOPeriodoValorENaoHouverValorNaCategoria(){
 		Categoria categoria = new Categoria();
 		categoria.setId(1l);
 		
@@ -94,15 +88,7 @@ public class CalculoDeValorDaDiariaServiceTest {
 		politica.setFim(parser.parseData("30/04/2014").toDate());
 		politica.setValorDiaria(50.0);
 		
-		PoliticaDePrecos padrao = new PoliticaDePrecos();
-		padrao.setCategoria(categoria);
-		padrao.setInicio(parser.parseData("01/04/2013").toDate());
-		padrao.setFim(parser.parseData("31/12/2013").toDate());
-		padrao.setValorDiaria(40.0);
-		padrao.setPadrao(false);
-		
 		politicas.add(politica);
-		politicas.add(padrao);
 		
 		CalculoDeValorDaDiariaService servico = new CalculoDeValorDaDiariaService(politicas);
 		servico.calcularEInformarValorNaReserva(reserva);
@@ -132,7 +118,6 @@ public class CalculoDeValorDaDiariaServiceTest {
 		padrao.setInicio(parser.parseData("01/04/2013").toDate());
 		padrao.setFim(parser.parseData("31/12/2013").toDate());
 		padrao.setValorDiaria(40.0);
-		padrao.setPadrao(true);
 		
 		politicas.add(politica);
 		politicas.add(padrao);
@@ -165,7 +150,6 @@ public class CalculoDeValorDaDiariaServiceTest {
 		padrao.setInicio(parser.parseData("01/04/2013").toDate());
 		padrao.setFim(parser.parseData("31/12/2013").toDate());
 		padrao.setValorDiaria(40.0);
-		padrao.setPadrao(true);
 		
 		politicas.add(politica);
 		politicas.add(padrao);

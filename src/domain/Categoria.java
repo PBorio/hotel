@@ -17,6 +17,8 @@ public class Categoria {
 	private String descricao;
 	
 	private String observacao;
+	
+	private Double valor;
 
 	public Long getId() {
 		return id;
@@ -64,6 +66,14 @@ public class Categoria {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public Double getValor() {
+		return valor;
+	}
+
+	public void setValor(Double valor) {
+		this.valor = valor;
 	}
 
 }

@@ -6,7 +6,6 @@ import org.joda.time.DateTime;
 
 import domain.PoliticaDePrecos;
 import domain.exceptions.PoliticaComDataCoincidenteException;
-import domain.exceptions.PoliticaPadraoJaExistenteException;
 import domain.servicos.helpers.Periodo;
 
 public class PoliticaDePrecoService {
@@ -22,19 +21,11 @@ public class PoliticaDePrecoService {
 			if (!p.getCategoria().equals(politica.getCategoria()))
 				continue;
 			
-			if (politica.isPadrao()){
-				if (p.isPadrao())
-					throw new PoliticaPadraoJaExistenteException("Já existe política padrão para esta categoria.");
-			}else{
-				if (p.isPadrao())
-					continue;
-				
-				Periodo periodoPoliticaExsistente = new Periodo(new DateTime(p.getInicio()), new DateTime(p.getFim()));
-				Periodo periodoNovaPolitica = new Periodo(new DateTime(p.getInicio()), new DateTime(p.getFim()));
-				
-				if (periodoPoliticaExsistente.coincideCom(periodoNovaPolitica))
-					throw new PoliticaComDataCoincidenteException("Já existe uma política para esta categoria nesta data.");
-			}
+			Periodo periodoPoliticaExsistente = new Periodo(new DateTime(p.getInicio()), new DateTime(p.getFim()));
+			Periodo periodoNovaPolitica = new Periodo(new DateTime(p.getInicio()), new DateTime(p.getFim()));
+			
+			if (periodoPoliticaExsistente.coincideCom(periodoNovaPolitica))
+				throw new PoliticaComDataCoincidenteException("Já existe uma política para esta categoria nesta data.");
 		}
 		return true;
 	}

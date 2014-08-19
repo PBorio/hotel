@@ -72,19 +72,7 @@
 							<input type="text" class="col-xs-10" name="politicaDePrecos.valorDiaria" id="politicaDePrecos.valorDiaria" value="${politicaDePrecos.valorDiaria}" />
 						</div>
 				  </div> 
-				  <div class="form-group">
-						<label class="control-label col-xs-2">Padrão:</label>
-						<div class="col-xs-10">
-						    <div class="checker">
-							<label>
-							    <span>
-							  		<input type="checkbox" name="politicaDePrecos.padrao" id="politicaDePrecos.padrao" 
-							  		<c:if test="${politicaDePrecos.padrao}">checked="checked"</c:if> />
-							  	</span>
-							</label>
-							</div>
-						</div>
-				  </div> 
+				 
 				 	<div class="control-group col-xs-2">
 						<label class="control-label" for="singlebutton"></label>
 						<div class="col-xs-10">

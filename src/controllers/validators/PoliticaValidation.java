@@ -27,7 +27,7 @@ public class PoliticaValidation {
 			validator.add(new ValidationMessage("Categoria da política é obrigatória", "política"));
 		}
 		
-		if ((politicaDePrecos.getInicio() == null || politicaDePrecos.getFim() == null) && !politicaDePrecos.isPadrao()){
+		if ((politicaDePrecos.getInicio() == null || politicaDePrecos.getFim() == null)){
 			if (politicaDePrecos.getInicio() == null)
 				validator.add(new ValidationMessage("Data de início é obrigatória", "inicio"));
 			

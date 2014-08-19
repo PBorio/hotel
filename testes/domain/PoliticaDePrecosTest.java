@@ -12,7 +12,6 @@ public class PoliticaDePrecosTest {
 		
 		PoliticaDePrecos politicaPadrao = new PoliticaDePrecos();
 		politicaPadrao.setCategoria(umaCategoria);
-		politicaPadrao.setPadrao(true);
 		
 		PoliticaDePrecos outraPolitica = new PoliticaDePrecos();
 		outraPolitica.setCategoria(umaCategoria);
@@ -28,7 +27,6 @@ public class PoliticaDePrecosTest {
 		
 		PoliticaDePrecos politicaPadrao = new PoliticaDePrecos();
 		politicaPadrao.setCategoria(umaCategoria);
-		politicaPadrao.setPadrao(true);
 		
 		PoliticaDePrecos outraPolitica = new PoliticaDePrecos();
 		outraPolitica.setCategoria(new Categoria());

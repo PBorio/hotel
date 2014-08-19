@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.joda.time.DateTime;
 
-import domain.Categoria;
 import domain.PoliticaDePrecos;
 import domain.Quarto;
 import domain.Reserva;
@@ -33,12 +32,10 @@ public class CalculoDeValorDaDiariaService {
 			}
 			
 			if (naoEncontrouPoliticaParaAReserva(valorDaDiaria)){
-				PoliticaDePrecos politicaPadrao = getPoliticaPadraoParaACategoria(quarto.getCategoria());
+				if (quarto.getCategoria() == null || quarto.getCategoria().getValor() == null)
+					throw new HotelException("Valor para a categoria do quarto: "+quarto.getCategoria().getDescricao());
 				
-				if (politicaPadrao == null)
-					throw new HotelException("Não há política de preços para a categoria: "+quarto.getCategoria().getDescricao());
-				
-				valorDaDiaria = politicaPadrao.getValorDiaria();
+				valorDaDiaria = quarto.getCategoria().getValor();
 			}
 			
 			if (naoEncontrouPoliticaParaAReserva(valorDaDiaria))
@@ -58,26 +55,6 @@ public class CalculoDeValorDaDiariaService {
 
 	private Double aplicarModificadoresDeValor(Reserva reserva, Double valorDaDiaria) {
 		return new ModificadorDeValoresDaDiariaService().aplicarModificadores(reserva, valorDaDiaria);
-//		if (reserva.isSoParaUmAdulto())
-//			return (valorDaDiaria * 0.6);
-//		
-//		valorDaDiaria += (40.0 * reserva.getParDeCriancasDe0a5());
-//		
-//		if (reserva.getNumeroCriancas6a16() != null && reserva.getNumeroCriancas6a16().intValue() > 0)
-//			valorDaDiaria += (70.0 * reserva.getNumeroCriancas6a16().intValue());
-//		
-//		return valorDaDiaria;
-	}
-
-	private PoliticaDePrecos getPoliticaPadraoParaACategoria(Categoria categoria) {
-		for (PoliticaDePrecos politica : this.politicas){
-			if (!politica.isPadrao())
-				continue;
-			
-			if (politica.getCategoria().equals(categoria))
-				return politica;
-		}
-		return null;
 	}
 
 	private boolean naoEncontrouPoliticaParaAReserva(Double valorDaReserva) {
