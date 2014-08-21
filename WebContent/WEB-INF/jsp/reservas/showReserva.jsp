@@ -18,96 +18,149 @@ $(function() {
 </script>
 </head>
 <body>
-  <div class="reservas-box03">
-        <h3>Informações da Reserva</h3>
-		<fieldset>
-			  <c:forEach var="reserva" items="${reservasView.reservas}">
-			   <fieldset class="molduraLegenda">
-		  	   <legend>${reserva.quarto.descricao}</legend>
-				 <p class="half">
-						<label>Início:</label>
-						<input type="text" class="col-xs-10" value="<joda:format pattern='dd/MM/yyyy' value='${reserva.inicio}'/>" readonly="readonly" />
-				  </p>
-				  <p class="half">
-						<label>Fim:</label>
-						<input type="text" class="col-xs-10" value="<joda:format pattern='dd/MM/yyyy' value='${reserva.fim}'/>" readonly="readonly" />
-				  </p>
-				  <p class="half">
-						<label>Adultos:</label>
-						<input type="text" value="${reserva.numeroAdultos}" readonly="readonly" />
-				  </p>
-				  <p class="half">
-						<label>0 a 5 anos:</label>
-						<input type="text" value="${reserva.numeroCriancas0a5}" readonly="readonly" />
-				  </p>
-				  <p class="half">
-						<label>6 a 16 anos:</label>
-						<input type="text" value="${reserva.numeroCriancas6a16}" readonly="readonly" />
-				  </p>
-				  <p class="half">
-						<label>17 a 18 anos:</label>
-						<input type="text" class="col-xs-10" value="${reserva.numeroCriancas17a18}" readonly="readonly" />
-				  </p>
-				  <p>
-						<label>Valor:</label>
-						<input type="text" class="col-xs-10" value="${reserva.valorReserva}" readonly="readonly" />
-				  </p>
-				 </fieldset>
-			  </c:forEach>
-		  <fieldset class="molduraLegenda">
-		  <legend>Informações do Responsável</legend>
-			  <form class="form-horizontal" action='<c:url value="/reservas/confirmar"/>' method="post">
-		  	   <input type="hidden" name="hospede.id" value="${hospede.id}" />
-			        <p>
-			        	<input id="nome" placeholder="Nome" type="text" name="hospede.nome" value="${hospede.nome}" />
-			        </p>
-			        <p>
-			        	<input id="nome" type="text" placeholder="Sobrenome" name="hospede.sobrenome" value="${hospede.sobrenome}" />
-			        </p>
-			        <p>
-			        	<input id="cpf" type="text" placeholder="CPF" name="hospede.cpf" value="${hospede.cpf}" />
-			        </p>
-			        <p>
-			        	<input id="passaporte" type="text" placeholder="Passaporte" name="hospede.passaporte" value="${hospede.passaporte}" />
-			        </p>
-			        <p>
-			        	<input id="rne" type="text" placeholder="RNE" name="hospede.rne" value="${hospede.rne}" />
-			        </p>
-			          <p class="half">
-			        	<input id="email" type="text" placeholder="Email" name="hospede.email" value="${hospede.email}" />
-			        </p>
-			        <p class="half">
-			        	<input id="cidade" type="text" placeholder="Cidade" name="hospede.cidade" value="${hospede.cidade}" />
-			        </p>
-			         <p class="half">
-			        	<input id="estado" type="text" placeholder="Estado/Província/Departamento" name="hospede.estado" value="${hospede.estado}" />
-			        </p>
-			         <p class="half">
-			        	<input id="pais" type="text" placeholder="País" name="hospede.pais" value="${hospede.pais}" />
-			        </p>
-			        
-			        <p class="half">
-			        	<input id="telefone" type="text" placeholder="Telefone" name="hospede.telefone" value="${hospede.telefone}" />
-			        </p>
-			        <p class="half">
-			        	<input id="celular" type="text" placeholder="Celular" name="hospede.celular" value="${hospede.celular}" />
-			        </p>
-			        <p>
-			        	<input type="submit" name="Salvar" value="Salvar"/>
-			        </p>
-		        <div class="clear"></div>
-			 </form>
-		 </fieldset>
-	 </fieldset>
-	  <div class="clear"></div>
+<section id="reservation-form" class="mt100">
+    <div class="container">
+    
+	    <div class="row">
+	        <div class="col-md-12">
+	          <div class="form-inline reservation-horizontal clearfix">
+	            <fieldset>
+		        	<h2 class="lined-heading"><span>Informações da Reserva</span></h2>
+		        	<c:forEach var="reserva" items="${reservasView.reservas}">
+		        	  <fieldset class="molduraLegenda">
+		  	   			<legend>${reserva.quarto.descricao}</legend>
+		        		<div class="row">
+			                <div class="col-sm-3">
+				              <div class="form-group">
+				                <label for="checkin">Check-in</label>
+				                <input type="text" value="<joda:format pattern='dd/MM/yyyy' value='${reserva.inicio}'/>" class="form-control" readonly="readonly"/>
+				              </div>
+				            </div>
+				            <div class="col-sm-3">
+				              <div class="form-group">
+				                <label for="checkin">Check-out</label>
+				                 <input type="text" class="form-control" value="<joda:format pattern='dd/MM/yyyy' value='${reserva.fim}'/>" readonly="readonly"/>
+				              </div>
+				            </div>
+			              <div class="col-sm-3">
+				              <div class="form-group">
+				                <label>Adultos:</label>
+			           			<input type="text" value="${reserva.numeroAdultos}" class="form-control" readonly="readonly"/>		      
+				              </div>
+			              </div>
+			              <div class="col-sm-3">
+				              <div class="form-group">
+				                <label>Crianças:</label>
+			           			<input type="text" value="${reserva.numeroCriancas0a5}" class="form-control" readonly="readonly"/>		      
+				              </div>
+			              </div>
+			            </div>
+			           </fieldset>
+		        	</c:forEach>
+		        </fieldset>
+	          </div>
+	        </div>
+	    </div>
 	</div>
-	<div class="nav-bar">
-		<c:forEach var="error" items="${errors}">
-		<div class="alert">
-			${error.message}
-		</div>
-	</c:forEach>
-    </div>
-	
+</section>
+
+<section class="mt100">
+    <div class="container">
+    
+	    <div class="row">
+	        <div class="col-md-12">
+	          <fieldset>
+		         <h2 class="lined-heading"><span>Informações do Responsável</span></h2>
+	          	 <form class="reservation-horizontal clearfix" id="form-reservas" action='<c:url value="/reservas/confirmar"/>' method="post">
+	          	   <input type="hidden" name="hospede.id" value="${hospede.id}" />
+	          	   <div id="message">
+		            	<c:forEach var="error" items="${errors}">
+							<div class="alert alert-danger">
+								${error.message}
+							</div>
+						</c:forEach>
+		            </div><!-- Error message display -->
+		            <div class="row">
+		                <div class="col-sm-12">
+			              <div class="form-group">
+			                <label>Nome</label>
+			                <input id="nome" type="text" name="hospede.nome" value="${hospede.nome}" class="form-control" />
+			              </div>
+			            </div>
+			        </div>
+			        <div class="row">
+		                <div class="col-sm-12">
+			              <div class="form-group">
+			                <label>Sobrenome</label>
+			                <input id="nome" type="text" name="hospede.sobrenome" value="${hospede.sobrenome}" class="form-control" />
+			              </div>
+			            </div>
+			        </div>
+			        <div class="row">
+		                <div class="col-sm-12">
+			              <div class="form-group">
+			                <label>CPF</label>
+			                <input id="cpf" type="text" name="hospede.cpf" value="${hospede.cpf}" class="form-control" />
+			              </div>
+			            </div>
+			        </div>
+			        <div class="row">
+		                <div class="col-sm-12">
+			              <div class="form-group">
+			                <label>Email</label>
+			                <input id="email" type="text" name="hospede.email" value="${hospede.email}" class="form-control" />
+			              </div>
+			            </div>
+			        </div>
+			        <div class="row">
+		                <div class="col-sm-6">
+			              <div class="form-group">
+			                <label>Cidade</label>
+			                <input id="cidade" type="text" name="hospede.cidade" value="${hospede.cidade}" class="form-control" />
+			              </div>
+			            </div>
+			            <div class="col-sm-6">
+			              <div class="form-group">
+			                <label>Estado/Província/Departamento</label>
+			                <input id="estado" type="text" name="hospede.estado" value="${hospede.estado}" class="form-control" />
+			              </div>
+			            </div>
+			        </div>
+			        <div class="row">
+		                <div class="col-sm-12">
+			              <div class="form-group">
+			                <label>País</label>
+			                <input id="pais" type="text" name="hospede.pais" value="${hospede.pais}" class="form-control"/>
+			              </div>
+			            </div>
+			        </div>
+			        <div class="row">
+		                <div class="col-sm-6">
+			              <div class="form-group">
+			                <label>Fone</label>
+			                <input id="telefone" type="text" placeholder="Telefone" name="hospede.telefone" value="${hospede.telefone}" class="form-control" />
+			              </div>
+			            </div>
+			            <div class="col-sm-6">
+			              <div class="form-group">
+			                <label>Celular</label>
+			                <input id="celular" type="text" placeholder="Celular" name="hospede.celular" value="${hospede.celular}" class="form-control" />
+			              </div>
+			            </div>
+			        </div>
+			        <div class="row">
+			         <div class="col-sm-2">
+	              		<button type="submit" class="btn btn-primary btn-block">Confirmar Reserva</button>
+	            	</div>
+	            	</div>
+	          	 </form>
+	          </fieldset>
+	        </div>
+	    </div>
+	 </div>
+</section>
+	            
+		        	
+
 </body>
 </html>

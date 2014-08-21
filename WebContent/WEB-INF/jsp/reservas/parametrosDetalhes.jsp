@@ -7,97 +7,121 @@
 	<title>Detalhes da Reserva</title>
 </head>
 <body>
-            <div class="reservas-box02">
-            		<h3>Escolha os quartos de sua Reserva</h3>
-            <fieldset>
-            	<fieldset class="molduraLegenda">
-	          		<legend>Reserva N. ${reservasView.numeroDeQuartosJaSelecionados + 1}</legend>
-	           			<p class="half">
-	           			  <input type="text" value="<fmt:formatDate value='${reservasView.chegada}' pattern='dd/MM/yyyy'/>" readonly="readonly"/>
-	           			</p>
-	           			<p class="half">
-	           			  <input type="text" value="<fmt:formatDate value='${reservasView.saida}' pattern='dd/MM/yyyy'/>" readonly="readonly"/>
-	           			</p>
-	           			<p class="half">
-	           			  <label>Adultos:</label>
-	           			  <input type="text" value="${detalhesDosParametros.numeroAdultos}" readonly="readonly"/>
-	           			</p>
-	           			<p class="half">
-	           			  <label>0 a 5 anos:</label>
-	           			  <input type="text" value="${detalhesDosParametros.numeroCriancas0a5}" readonly="readonly"/>
-	           			</p>
-	           			<p class="half">
-	           			  <label>6 a 16 anos:</label>
-	           			  <input type="text" value="${detalhesDosParametros.numeroCriancas6a16}" readonly="readonly"/>
-	           			</p>
-				        <p class="half">
-				          <label>17 a 18 anos:</label>
-	           			  <input type="text" value="${detalhesDosParametros.numeroCriancas17a18}" readonly="readonly"/>
-	           			</p>
-				            		
-					<div class="clear"></div>
-            	</fieldset>            	
-			              
-			  <c:forEach var="detalhe" items="${reservasView.parametrosReserva.detalhes}">
-			    <c:if test="${not empty detalhe.quarto}">
-				    <fieldset class="molduraLegenda">
-			  	  	  <legend>Quarto já reservado: ${detalhe.quarto.descricao}</legend>
-					  <p class="half">
-							<label>Adultos:</label>
-							<input type="text" value="${detalhe.numeroAdultos}" readonly="readonly" />
-					  </p>
-					  <p class="half">
-							<label>0 a 5 anos:</label>
-							<input type="text" value="${detalhe.numeroCriancas0a5}" readonly="readonly" />
-					  </p>
-					  <p class="half">
-							<label>6 a 16 anos:</label>
-							<input type="text" value="${detalhe.numeroCriancas6a16}" readonly="readonly" />
-					  </p>
-					  <p class="half">
-							<label>17 a 18 anos:</label>
-							<input type="text" class="col-xs-10" value="${detalhe.numeroCriancas17a18}" readonly="readonly" />
-					  </p>
-					  <p>
-							<label>Valor:</label>
-							<input type="text" class="col-xs-10" value="${reserva.valorReserva}" readonly="readonly" />
-					  </p>
-					  </fieldset>
-					</c:if>
-			  </c:forEach>
-              <div class="clear"></div>
-              </fieldset>
-		</div>	
-       <div class="reservas-box02">
-            <h3>Escolha um quarto para sua Reserva</h3>
-            <fieldset>
-            	<div class="places">
-          	    		
-            		<c:forEach var="quarto" items="${quartoList}">
-	           		<article>
-						<h2>${quarto.numero}</h2>
-						<img alt="${quarto.numero}" src="${linkTo[QuartosController].foto[quarto.id] }">
-						<div class='clear'></div>
-						<p>
-							${quarto.descricao}
-						</p>
-						<p>
-						  Valor:${quarto.valorDaDiaria}
-						</p>
-               	      <form class="form-horizontal" action='<c:url value="/reservas/reservar"/>' method="post">
+
+<section id="reservation-form">
+    <div class="container">
+    
+	    <div class="row">
+	        <div class="col-md-12">
+	          <div class="form-inline reservation-horizontal clearfix">
+		        <fieldset>
+		        <legend>Reserva N. ${reservasView.numeroDeQuartosJaSelecionados + 1}</legend>
+	            <div class="row">
+	                <div class="col-sm-3">
+		              <div class="form-group">
+		                <label for="checkin">Check-in</label>
+		                <input type="text" value="<fmt:formatDate value='${reservasView.chegada}' pattern='dd/MM/yyyy'/>" class="form-control" readonly="readonly"/>
+		              </div>
+		            </div>
+		            <div class="col-sm-3">
+		              <div class="form-group">
+		                <label for="checkin">Check-out</label>
+		                 <input type="text" class="form-control" value="<fmt:formatDate value='${reservasView.saida}' pattern='dd/MM/yyyy'/>" readonly="readonly"/>
+		              </div>
+		            </div>
+	              <div class="col-sm-3">
+		              <div class="form-group">
+		                <label>Adultos:</label>
+	           			<input type="text" value="${detalhesDosParametros.numeroAdultos}" class="form-control" readonly="readonly"/>		      
+		              </div>
+	              </div>
+	              <div class="col-sm-3">
+		              <div class="form-group">
+		                <label>Crianças:</label>
+	           			<input type="text" value="${detalhesDosParametros.numeroCriancas0a5}" class="form-control" readonly="readonly"/>		      
+		              </div>
+	              </div>
+	            </div>
+	            </fieldset>
+	          </div>
+	        </div>
+	     </div>
+    	  <div class="row">
+    	     <c:forEach var="detalhe" items="${reservasView.parametrosReserva.detalhes}">
+    	       <c:if test="${not empty detalhe.quarto}">
+			        <div class="col-md-12">
+			          <div class="form-inline reservation-horizontal clearfix">
+			           <fieldset class="molduraLegenda">
+		          		 <legend>Quarto já reservado: ${detalhe.quarto.descricao}</legend>
+		          		 <div class="row">
+			                <div class="col-sm-3">
+				              <div class="form-group">
+				              	<label>Adultos:</label>
+	           					<input type="text" value="${detalhe.numeroAdultos}" class="form-control" readonly="readonly"/>	
+				              </div>
+				             </div>
+				             <div class="col-sm-3">
+					              <div class="form-group">
+					                <label>Crianças:</label>
+				           			<input type="text" value="${detalhe.numeroCriancas0a5}" class="form-control" readonly="readonly"/>		      
+					              </div>
+				              </div>
+				         </div>
+		          	   </fieldset>
+			          </div>
+			        </div>
+			    </c:if>  
+		     </c:forEach>
+	      </div>
+    </div>
+</section>
+
+
+<section class="rooms mt100">
+  <div class="container">
+    <div class="row room-list fadeIn appear"> 
+      <c:forEach var="quarto" items="${quartoList}">
+      		 <!-- Room -->
+		      <div class="col-sm-4 single">
+		        <div class="room-thumb"> <img alt="${quarto.numero}" src="${linkTo[QuartosController].foto[quarto.id]}" class="img-responsive" />
+		          <div class="mask">
+		            <div class="main">
+		              <h5>${quarto.categoria}</h5>
+		              <div class="price">&real;$ ${quarto.valorDaDiaria}<span>a diária</span></div>
+		            </div>
+		            <div class="content">
+		              <p><span>${quarto.descricao}</span> ${quarto.observacao}</p>
+		              <div class="row">
+		                <div class="col-xs-6">
+		                  <ul class="list-unstyled">
+		                    <li><i class="fa fa-check-circle"></i> Café da Manhã</li>
+		                    <li><i class="fa fa-check-circle"></i> Sacada Privativa</li>
+		                    <li><i class="fa fa-check-circle"></i> Vista Para o Mar</li>
+		                  </ul>
+		                </div>
+		                <div class="col-xs-6">
+		                  <ul class="list-unstyled">
+		                    <li><i class="fa fa-check-circle"></i> Wi-Fi Grátis</li>
+		                    <li><i class="fa fa-check-circle"></i> Banheiro Privativo</li>
+		                    <li><i class="fa fa-check-circle"></i> 80m2</li>
+		                  </ul>
+		                </div>
+		              </div>
+		              <form class="form-horizontal" action='<c:url value="/reservas/reservar"/>' method="post">
                	        <input type="hidden" name="reservasView.chegada" value="<fmt:formatDate value='${quarto.inicio}'/>" />
                	        <input type="hidden" name="reservasView.saida" value="<fmt:formatDate value='${quarto.fim}'/>" />
                	        <input type="hidden" name="quarto.id" value="${quarto.id}" />
                	        <p>
-							<input type="submit" name="Reservar" value="Enviar"/>
+							<button type="submit" class="btn btn-primary btn-block">Reservar</button>
 						</p>
 					  </form>
-						<div class='clear'></div>
-					</article>
-            	</c:forEach>
-			</div>
-            </fieldset>
-            <div class='clear'></div>
-       </div>
+		          </div>
+		        </div>
+		      </div>
+		     </div>
+      </c:forEach>
+    </div>
+  </div>
+</section>
 </body>
 </html>

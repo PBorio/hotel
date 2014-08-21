@@ -9,6 +9,8 @@ import repositorios.CategoriaRepositorio;
 import repositorios.PoliticaPrecoRepositorio;
 import repositorios.QuartoRepositorio;
 import repositorios.ReservaRepositorio;
+import br.com.caelum.vraptor.Get;
+import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
@@ -60,13 +62,10 @@ public class ReservasController {
 		this.reservasView = reservasView;
 	}
 	
+	@Get
+	@Path("/reservas/")
 	public void parametrosIniciais(){
-		reservasView.setParametrosReserva(null);
-		reservasView.setHospedeResponsavel(null);
-		reservasView.getReservas().clear();
-		reservasView.setChegada(null);
-		reservasView.setSaida(null);
-		reservasView.setValorReserva(0.0);
+		reservasView.clear();
 	}
 	
 	public void reservar(Quarto quarto){
