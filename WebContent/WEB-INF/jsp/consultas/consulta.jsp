@@ -41,7 +41,11 @@
 	            <c:forEach var="dia" items="${linha.dias}">
 	              <c:choose>
 	              	<c:when test="${empty dia.idReserva}"><td class="fc-widget-content"><a href="<c:url value='/nova/reserva'/>">${dia.texto}</a></td></c:when>
-	              	<c:otherwise><td class="${dia.marcacao}"><a href="<c:url value='/pagamento/${dia.idReserva}'/>">${dia.texto}</a></td></c:otherwise>
+	              	<c:otherwise>
+	              	    <td class="${dia.marcacao}">
+	              	        <a href="<c:url value='/pagamento/${dia.idReserva}'/>">${dia.texto}</a>
+	              	    </td>
+	              	</c:otherwise>
 	              </c:choose>
 	            </c:forEach>
 	            <td class="fc-widget-header">${linha.numeroQuarto}</td>

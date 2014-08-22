@@ -3,6 +3,8 @@
     <excludes>
    		<pattern>/*/rel565.jsp</pattern>
         <pattern>/*/login.jsp</pattern>
+        <pattern>/*/index.jsp</pattern>
+        <pattern>/*/acesso.jsp</pattern>
     </excludes>
 	 <decorator name="principal" page="principal.jsp">
 	     <pattern>*</pattern>

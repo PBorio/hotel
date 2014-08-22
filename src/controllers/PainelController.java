@@ -36,7 +36,7 @@ public class PainelController {
 	}
 	
 	@Get
-	@Path("/")
+	@Path("/painel/")
 	public List<Estadia> painel(){
 		List<Estadia> estadias = estadiaRepositorio.estadiasAbertas();
 		return estadias;

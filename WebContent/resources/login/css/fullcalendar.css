@@ -1,11 +1,11 @@
 /*
- * FullCalendar v1.5.4 Stylesheet
+ * FullCalendar v1.5.3 Stylesheet
  *
  * Copyright (c) 2011 Adam Shaw
  * Dual licensed under the MIT and GPL licenses, located in
  * MIT-LICENSE.txt and GPL-LICENSE.txt respectively.
  *
- * Date: Tue Sep 4 23:38:33 2012 -0700
+ * Date: Mon Feb 6 22:40:40 2012 -0800
  *
  */
 
@@ -156,7 +156,7 @@ html .fc,
 	position: relative;
 	display: inline-block;
 	cursor: pointer;
-	margin-top: -47px;
+	margin-top: -51px;
 	}
 	
 .fc-state-default { /* non-theme */
@@ -180,8 +180,8 @@ html .fc,
 .fc-button-content {
 	position: relative;
 	float: left;
-	height: 1.6em;
-	line-height: 1.6em;
+	height: 1.9em;
+	line-height: 1.9em;
 	padding: 0 .6em;
 	white-space: nowrap;
 	}
@@ -242,9 +242,9 @@ html .fc,
 .fc-state-active,
 .fc-state-active .fc-button-inner {
 	border-color: #ddd;
-	background: #fff;
+	background: #fcfcfc;
 	color: #646464;
-	border-bottom: 1px solid #fff;
+	border-bottom: 1px solid #fcfcfc;
 	}
 	
 .fc-state-disabled,
@@ -291,30 +291,6 @@ a.fc-event {
 	background-color: #67C2EF; /* default BACKGROUND color */
 	color: #fff;            /* default TEXT color */
 	}
-	
-.ReservadoOutro {
-	border-color: #4eaa5f;     /* default BORDER color */
-	background-color: #88c287; /* default BACKGROUND color */
-	color: #fff;            /* default TEXT color */
-	}	
-
-.Reservado {
-	border-color: #087a56;     /* default BORDER color */
-	background-color: #087a56; /* default BACKGROUND color */
-	color: #fff;            /* default TEXT color */
-	}	
-	
-.Pre {
-	border-color: #ec7813;     /* default BORDER color */
-	background-color: #e9a016; /* default BACKGROUND color */
-	color: #fff;            /* default TEXT color */
-	}	
-	
-.PreOutro {
-	border-color: #f8d930;     /* default BORDER color */
-	background-color: #f3d76a; /* default BACKGROUND color */
-	color: #fff;            /* default TEXT color */
-	}	
 	
 .fc-event-inner {
 	position: relative;
