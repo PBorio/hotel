@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+ <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -21,7 +22,7 @@
 		<div class="container">
 			<div class="header">
 			<ul class="nav nav-pills pull-right">
-				<li class="active"><a href="<c:url value='/'/>">Home</a></li>
+				<li class="active"><a href="<c:url value='/painel/'/>">Home</a></li>
 			</ul>
 			</div>
 			  <form class="form-horizontal" action='<c:url value="/categorias/salva"/>' method="post">
@@ -46,14 +47,26 @@
 								<input type="text" class="col-xs-10" name="categoria.valor" id="categoria.valor" value="${categoria.valor}" />
 							</div>
 					  </div> 
-					  <div class="form-group">
-						<label class="control-label col-xs-2" for="singlebutton"></label>
-						<div class="col-xs-10">
-							<button id="singlebutton" name="singlebutton" class="btn btn-primary btn-lg">
-								Salvar
-							</button>
-						</div>
-					 </div>
+				<security:authorize ifAnyGranted="ROLE_ADMIN">
+				   <div class="form-group">
+					<label class="control-label col-xs-2" for="singlebutton"></label>
+					<div class="col-xs-10">
+						<button id="singlebutton" name="singlebutton" class="btn btn-primary btn-lg">
+							Salvar
+						</button>
+					</div>
+				</div>
+				</security:authorize>
+				<security:authorize ifAnyGranted="ROLE_DEMO">
+				   <div class="form-group">
+					<label class="control-label col-xs-2" for="singlebutton"></label>
+					<div class="col-xs-10">
+						<button id="singlebutton" name="singlebutton" class="btn btn-primary btn-lg" disabled="disabled">
+							Salvar (desabilitado na versão de demonstração)
+						</button>
+					</div>
+				</div>
+				</security:authorize>
 				 </fieldset>
 			  </form>
 			 </div>

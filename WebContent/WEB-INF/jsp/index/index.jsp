@@ -17,9 +17,9 @@
     <![endif]-->
 
     <!-- Styesheets-->
-	<link rel="stylesheet" type="text/css" media="screen" href="<c:url value='/resources/land/css/bootstrap.min.css'/>" />
+	<link rel="stylesheet" type="text/css" media="screen" href="<c:url value='/resources/land/css/bootstrap.min.css'/>"/>
 	<link rel="stylesheet" type="text/css" media="screen" href="<c:url value='/resources/land/css/form.css'/>" />
-	<link rel="stylesheet" type="text/css" media="screen" href="<c:url value='/resources/land/css/style.css'/>" href="css/style.css"/>
+	<link rel="stylesheet" type="text/css" media="screen" href="<c:url value='/resources/land/css/style.css'/>"/>
 	<!-- End Stylesheets-->
 	
 	<!-- Google Font-->
@@ -75,8 +75,10 @@
 					<form method="post" action='<c:url value="/solicitar/acesso/"/>' name="form-area" id="form-area"  class="form-area">
 						<h1>Comece <strong>Hoje</strong></h1>
 						<p>Solicite a senha de acesso à versão de demonstração, veja o que o sistema lhe oferece e já comece a analisar de que forma ele pode melhorar pra lhe atender.</p>
-						<input type="text" id="name" name="name" placeholder="Informe o seu Nome">
-						<input type="text" id="email" name="email" placeholder="Informe o seu Email">
+						<c:forEach var="error" items="${errors}">
+								<h4>${error.message}</h4>
+						</c:forEach>
+						<input type="text" id="email" name="acesso.email" placeholder="Informe o seu Email">
 						<input type="submit" name="submit" value="Enviar">
 						<div class="form-area-bottom">&nbsp;</div>
 					</form>

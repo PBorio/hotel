@@ -19,13 +19,13 @@
 				<button type="button" class="navbar-toggle"
 						data-toggle="collapse" data-target=".navbar-collapse">
 				</button>
-				<a class="navbar-brand" href="<c:url value='/'/>">Hotel</a>
+				<a class="navbar-brand" href="<c:url value='/painel/'/>">Home</a>
 			</div>
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="<c:url value='/checkin/list'/>">Checkin</a></li>
 					<li><a href="<c:url value='/reservas/'/>">Reservas</a></li> 
-					<li><a href="<c:url value='/consultas/consulta'/>">Consulta</a></li>
+					<li><a href="<c:url value='/consultas/'/>">Consulta</a></li>
 					<li><a href="<c:url value='/quartos/list'/>">Quartos</a></li>
 					<li><a href="<c:url value='/categorias/list'/>">Categorias</a></li>
 					<li><a href="<c:url value='/politicas/list'/>">Preços</a></li>

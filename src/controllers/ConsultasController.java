@@ -31,6 +31,8 @@ public class ConsultasController {
 		this.reservasView = reservasView;
 	}
 	
+	@Get
+	@Path("/consultas/")
 	public void consulta(){
 		DateTime inicioPeriodo = new DateTime();
 		HotelCalendario hotelCalendario = criarCalendario(inicioPeriodo);

@@ -35,18 +35,26 @@
 	<security:http pattern="/decorators/**" security="none"/>
 	<security:http pattern="/reservas/**" security="none"/>
 	<security:http pattern="/login/**" security="none"/>
-	<security:http pattern="/" security="none"/>
 	<security:http auto-config="true" use-expressions="true">
 	    <!-- <security:form-login login-page="/login/login" default-target-url="/" authentication-success-handler-ref="borioSuccessHandler"/>  -->
-	    <security:form-login login-page="/login/" default-target-url="/"/>
+	    <security:form-login login-page="/login/" default-target-url="/consultas/"/>
 	    <security:access-denied-handler error-page="/login/"/>
-	    <security:intercept-url pattern="/**" access="hasAnyRole('ROLE_SYSADMIN')" />
+	    <security:intercept-url pattern="/checkin/**" access="hasAnyRole('ROLE_SYSADMIN', 'ROLE_DEMO')" />
+	    <security:intercept-url pattern="/categorias/**" access="hasAnyRole('ROLE_SYSADMIN', 'ROLE_DEMO')" />
+	    <security:intercept-url pattern="/checkout/**" access="hasAnyRole('ROLE_SYSADMIN', 'ROLE_DEMO')" />
+	    <security:intercept-url pattern="/consultas/**" access="hasAnyRole('ROLE_SYSADMIN', 'ROLE_DEMO')" />
+	    <security:intercept-url pattern="/pagamentos/**" access="hasAnyRole('ROLE_SYSADMIN', 'ROLE_DEMO')" />
+	    <security:intercept-url pattern="/painel/**" access="hasAnyRole('ROLE_SYSADMIN', 'ROLE_DEMO')" />
+	    <security:intercept-url pattern="/politicas/**" access="hasAnyRole('ROLE_SYSADMIN', 'ROLE_DEMO')" />
+	    <security:intercept-url pattern="/quartos/**" access="hasAnyRole('ROLE_SYSADMIN', 'ROLE_DEMO')" />
+	    <security:intercept-url pattern="/" access="isAnonymous()" />
 	</security:http>
 	
 	<security:authentication-manager>
 	    <security:authentication-provider>
 	         <security:user-service>
-	            <security:user name="demonstracao" password="demonstracao" authorities="ROLE_SYSADMIN" />
+	            <security:user name="admin" password="borios_admin" authorities="ROLE_SYSADMIN" />
+	            <security:user name="demonstracao" password="demonstracao" authorities="ROLE_DEMO" />
 	        </security:user-service>
 	    </security:authentication-provider>   
 	    <security:authentication-provider> 

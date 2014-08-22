@@ -271,99 +271,101 @@ function replaceVirgula(campo)
 	</c:forEach>
 
 
-		<div class="container">
-			<div class="header">
-				<ul class="nav nav-pills pull-right">
-					<li class="active"><a href="<c:url value='/'/>">Home</a></li>
-				</ul>								
-			</div>
-			<%@include file="fragmentos/estadia.jspf" %>
-			<fieldset>
-			<div class="form-actions">				
-				<ul class="nav nav-pills pull-right">
-					<li class="active"><a href="<c:url value='/checkout/${estadia.id}'/>">Finalizar Estadia</a></li>
-				</ul>					
-			</div>
-			</fieldset>
-			<fieldset>
-			  <legend>Consumo</legend>
-			  <form class="form-horizontal" method="post" action='<c:url value="/painel/add/consumo/"/>'>
-		    		<input type="hidden" name="consumo.estadia.id" value="${estadia.id}" />
-					<div class="widget-title">
-						<span class="icon">
-							<i class="icon-align-justify"></i>									
-						</span>
-					</div>
-					<table id="consumos"class="table table-striped table-bordered" 
-							cellpadding="0" cellspacing="0" border="0" width="100%">
-						<thead>
-							<tr>
-								<th width="40%">Descrição</th>
-								<th width="15%">Quantidade</th>
-								<th width="15%">Preço</th>
-								<th width="15%">Total</th>
-								<th width="5%"> Deletar</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="consumo" items="${estadia.consumos}" varStatus="nContItems">
-								<tr id="row-${nContItems.index}" class="alt-row-son" >
-									<td> ${consumo.produto.descricao}</td>
-									<td> ${consumo.quantidade}</td>
-									<td><fmt:formatNumber value="${consumo.preco}" type="number" pattern="#,##0.00"/> </td>
-									<td><fmt:formatNumber value="${consumo.valor}" type="number" pattern="#,##0.00"/>  </td>
-									<td> <a href="<c:url value='/painel/deleta/consumo/${consumo.id}'/>" title="Delete" tabindex="-1"> <img src="../resources/imagens/icons/cross.png" alt="Delete" tabindex="-1"/> </a> </td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-					
-					<div class="form-actions" id="btnNovoConsumo">
+<div class="container">
+	<div class="header">
+		<ul class="nav nav-pills">
+			<li class="active"><a href="<c:url value='/checkout/${estadia.id}'/>">Finalizar Estadia</a></li>
+		</ul>	
+	</div>
+	<%@include file="fragmentos/estadia.jspf" %>
+			
+	 <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="text-center"><strong>Consumo</strong></h3>
+                </div>
+                <div class="panel-body">
+                <form class="form-horizontal" method="post" action='<c:url value="/painel/add/consumo/"/>'>
+                    <div class="table-responsive">
+                        <table id="consumos" class="table table-condensed">
+                            <thead>
+                                <tr>
+                                	<td width="40%" class="text-left">Descrição</td>
+									<td width="15%" class="text-right">Quantidade</td>
+									<td width="15%" class="text-right">Preço</td>
+									<td width="15%" class="text-right">Total</td>
+									<td width="5%"> Deletar</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            	<c:forEach var="consumo" items="${estadia.consumos}" varStatus="nContItems">
+									<tr id="row-${nContItems.index}" class="alt-row-son" >
+										<td class="text-left"> ${consumo.produto.descricao}</td>
+										<td class="text-right"> ${consumo.quantidade}</td>
+										<td class="text-right"><fmt:formatNumber value="${consumo.preco}" type="number" pattern="#,##0.00"/> </td>
+										<td class="text-right"><fmt:formatNumber value="${consumo.valor}" type="number" pattern="#,##0.00"/>  </td>
+										<td> <a href="<c:url value='/painel/deleta/consumo/${consumo.id}'/>" title="Delete" tabindex="-1"> <img src="../resources/imagens/icons/cross.png" alt="Delete" tabindex="-1"/> </a> </td>
+									</tr>
+								</c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="form-actions" id="btnNovoConsumo">
 						<button type="button" id="adiciona-produto" class="btn btn-primary">Adicionar Consumo</button>
 				    </div>
 				    <div class="form-actions" id="btnSalvaConsumo">
 						<button type="submit" id="salva-produto" class="btn btn-primary">Salvar</button>
 				    </div>
-			  </form>
-			 </fieldset>
-			 <fieldset>
-			  <legend>Serviços</legend>
-			  <form class="form-horizontal" method="post" action='<c:url value="/painel/add/servico/"/>'> 
-					<div class="widget-title">
-						<span class="icon">
-							<i class="icon-align-justify"></i>									
-						</span>
-					</div>
-					<table id="servicos" class="table table-striped table-bordered" 
-						   cellpadding="0" cellspacing="0" border="0" width="100%">
-						<thead>
-							<tr>
-								<th width="35%">Descrição</th>
-								<th width="55%">Observação</th>
-								<th width="15%">Valor</th>
-								<th width="5%"> Deletar</th>
-							</tr>
-						</thead>
-						<tbody>
-						  <c:forEach var="servico" items="${estadia.servicosPrestados}" varStatus="nContItems">
-							<tr id="row-${nContItems.index}" class="alt-row-son" >
-							<td> ${servico.servico.descricao} </td>
-							<td> ${servico.observacao}</td>
-							<td><fmt:formatNumber value="${servico.valor}" type="number" pattern="#,##0.00"/></td>
-							<td> <a href="<c:url value='/painel/deleta/servico/${servico.id}'/>" title="Delete" tabindex="-1"> <img src="../resources/imagens/icons/cross.png" alt="Delete" tabindex="-1"/> </a> </td>
-							</tr>
-						  </c:forEach>
-						</tbody>
-					</table>
-					
-					<div class="form-actions" id="btnNovoServico">
-						<button type="button" id="adiciona-servico" class="btn btn-primary">Adicionar Serviço</button>
-				    </div>
-				    <div class="form-actions" id="btnSalvaServico">
-						<button type="submit" id="salva-servico" class="btn btn-primary">Salvar</button>
-				    </div>
-			  </form>
-			 </fieldset>
-		</div>
+				   </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<div class="row">
+	        <div class="col-md-12">
+	            <div class="panel panel-default">
+	                <div class="panel-heading">
+	                    <h3 class="text-center"><strong>Serviços</strong></h3>
+	                </div>
+	                <div class="panel-body">
+	                <form class="form-horizontal" method="post" action='<c:url value="/painel/add/servico/"/>'>
+	                    <div class="table-responsive">
+	                        <table id="servicos" class="table table-condensed">
+	                            <thead>
+	                                <tr>
+	                                	<th width="35%" class="text-left">Descrição</th>
+										<th width="55%" class="text-left">Observação</th>
+										<th width="15%" class="text-right">Valor</th>
+										<th width="5%"> Deletar</th>
+	                                </tr>
+	                            </thead>
+	                            <tbody>
+	                            	 <c:forEach var="servico" items="${estadia.servicosPrestados}" varStatus="nContItems">
+										<tr id="row-${nContItems.index}" class="alt-row-son" >
+										<td class="text-left"> ${servico.servico.descricao} </td>
+										<td class="text-left"> ${servico.observacao}</td>
+										<td class="text-right"><fmt:formatNumber value="${servico.valor}" type="number" pattern="#,##0.00"/></td>
+										<td> <a href="<c:url value='/painel/deleta/servico/${servico.id}'/>" title="Delete" tabindex="-1"> <img src="../resources/imagens/icons/cross.png" alt="Delete" tabindex="-1"/> </a> </td>
+										</tr>
+							 		 </c:forEach>
+	                            </tbody>
+	                        </table>
+	                    </div>
+	                    <div class="form-actions" id="btnNovoServico">
+							<button type="button" id="adiciona-servico" class="btn btn-primary">Adicionar Serviço</button>
+					    </div>
+					    <div class="form-actions" id="btnSalvaServico">
+							<button type="submit" id="salva-servico" class="btn btn-primary">Salvar</button>
+					    </div>
+					   </form>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+</div>
+
+
 </body>
 </html>

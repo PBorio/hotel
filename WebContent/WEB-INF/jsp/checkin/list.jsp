@@ -21,8 +21,8 @@
 		<div class="container">
 			<div class="header">
 				<ul class="nav nav-pills pull-right">
-					<li class="active"><a href="<c:url value='/quartos/novo'/>">Sem Reserva</a></li>
-					<li class="active"><a href="/">Home</a></li>
+					<!-- <li class="active"><a href="<c:url value='/quartos/novo'/>">Sem Reserva</a></li>  -->
+					<li class="active"><a href="<c:url value='/painel/'/>">Home</a></li>
 				</ul>
 				<h3 class="text-muted">Checkin</h3>
 			</div>

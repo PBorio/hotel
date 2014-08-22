@@ -21,7 +21,7 @@
 		<div class="header">
 			<ul class="nav nav-pills pull-right">
 				<li class="active"><a href="<c:url value='/quartos/novo'/>">Novo Quarto</a></li>
-				<li class="active"><a href="<c:url value='/'/>">Home</a></li>
+				<li class="active"><a href="<c:url value='/painel/'/>">Home</a></li>
 			</ul>
 			<h3 class="text-muted">Quartos</h3>
 		</div>
