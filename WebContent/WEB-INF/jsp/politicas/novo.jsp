@@ -74,7 +74,7 @@
 						</div>
 				  </div> 
 				 
-				 	<security:authorize ifAnyGranted="ROLE_ADMIN">
+				 	<security:authorize ifAnyGranted="ROLE_SYSADMIN">
 				   <div class="form-group">
 					<label class="control-label col-xs-2" for="singlebutton"></label>
 					<div class="col-xs-10">

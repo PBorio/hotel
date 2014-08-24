@@ -21,7 +21,15 @@
 <link rel="stylesheet" href="<c:url value='/resources/public/css/smoothness/jquery-ui-1.10.4.custom.min.css'/>" >
 <link rel="stylesheet" href="<c:url value='/resources/public/rs-plugin/css/settings.css'/>" >
 <link rel="stylesheet" href="<c:url value='/resources/public/css/theme.css'/>" >
-<link rel="stylesheet" href="<c:url value='/resources/public/css/colors/blue.css'/>" >
+
+<c:choose>
+  <c:when test="${empty hotel}">
+	<link rel="stylesheet" href="<c:url value='/resources/public/css/colors/demonstracao.css'/>" >
+  </c:when>
+  <c:otherwise>
+  	<link rel="stylesheet" href="<c:url value='/resources/public/css/colors/pordosol.css'/>" >
+  </c:otherwise>
+</c:choose>
 <link rel="stylesheet" href="<c:url value='/resources/public/css/responsive.css'/>" >
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600,700">
 

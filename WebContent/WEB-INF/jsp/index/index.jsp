@@ -26,6 +26,18 @@
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,800,700,300" />
 	<!-- End Google Font-->
 	
+	
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-54084127-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+	
   </head>
 
   <body>
@@ -127,7 +139,7 @@
 				<!-- Main Point 1 -->
 				<div class="span4 left-icon">
 					<img src="<c:url value='/resources/land/img/icons/photos.png'/>" alt="" title="" />
-					<h4>R$ 185,00/mês</h4>
+					<h4>R$ 284,00/mês</h4>
 					<p>Produto totalmente web. Nesse preço já estão inclusos instalação e manutenção de servidores, configuração inicial do sistema, treinamento a distância e customização do produto.</p>
 				</div>
 				<!-- End Main Point 1 -->
@@ -136,9 +148,5 @@
 		</div>
 	</section>
 	<!-- End Intro -->
-
-
-	
-	
   </body>
 </html>

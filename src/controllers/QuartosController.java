@@ -64,19 +64,19 @@ public class QuartosController {
 		result.of(this).novo();
 	}
 	
-	public void salva(Quarto quarto, UploadedFile foto) throws IOException{
+	public void salva(Quarto quarto, UploadedFile fotografia) throws IOException{
 		
 		validarQuarto(quarto);
 		if (validator.hasErrors()){
 			result.include("quarto", quarto);
 			result.include("categoriaList",this.categoriaRepositorio.buscaTodos());
-			result.include("foto", foto);
+			result.include("foto", fotografia);
 		    validator.onErrorUsePageOf(this).novo();
 		}
 		
 		try{
-			if (foto != null){
-				URI imagem = arquivosRepositorio.grava(new Arquivo(foto.getFileName(), ByteStreams.toByteArray(foto.getFile()), foto.getContentType(), new Date()));
+			if (fotografia != null){
+				URI imagem = arquivosRepositorio.grava(new Arquivo(fotografia.getFileName(), ByteStreams.toByteArray(fotografia.getFile()), fotografia.getContentType(), new Date()));
 				quarto.setCaminhoFoto(imagem);
 			}
 			if (quarto.getId() == null){
@@ -91,7 +91,7 @@ public class QuartosController {
 			e.printStackTrace();
 			result.include(quarto);
 			result.include("categoriaList", categoriaRepositorio.buscaTodos());
-			result.include("foto", foto);
+			result.include("fotografia", fotografia);
 			validator. add(new ValidationMessage(e.getMessage(),"erro.no.quarto",e.getMessage()));
 			validator.onErrorUsePageOf(this).novo();
 		}
