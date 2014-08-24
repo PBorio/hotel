@@ -13,11 +13,11 @@ a {
 }
 /* Secondary text color */
 #reservation-form .price, label span, .room-thumb .main .price, .room-thumb .content p span, .blog-author span, #owl-reviews .text-balloon span, .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight, .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus, .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, aside .widget ul a:hover, .yamm a:hover {
-	color: #c20808 !important;
+	color: #0f4e8c !important;
 }
 /* Icon color */
 #reservation-form .fa.infield, #reservation-form .form-inline .fa.infield, .room-thumb .content i, .box-icon i, table i, #go-top i, .testimonials .owl-theme .owl-controls .owl-buttons div i, .standard-slider .owl-theme .owl-controls .owl-buttons div i, .testimonials .owl-theme .owl-controls .owl-buttons div, .standard-slider .owl-theme .owl-controls .owl-buttons div, #go-top {
-	color: #c20808;
+	color: #0f4e8c;
 }
 /* UI border color */ 
 header, .navbar-nav .dropdown-menu, .blog-author img, .comment .avatar img, aside h3, blockquote, .ui-widget-header, .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight, .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus, .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, #owl-gallery, #owl-reviews img, .parallax-effect, .revolution-slider, .testimonials .owl-theme .owl-controls .owl-buttons div, .standard-slider .owl-theme .owl-controls .owl-buttons div, #go-top, .box-icon .circle, .testimonials .owl-theme .owl-controls .owl-buttons div, .standard-slider .owl-theme .owl-controls .owl-buttons div, #map {
@@ -56,13 +56,15 @@ header, .navbar-nav .dropdown-menu, .blog-author img, .comment .avatar img, asid
 	color: #c20808;
 }
 .btn-primary {
-	background-color: #c20808;
-	border-color: #ba3535;
+	background-color:  #f7b41b;
+	border-color:  #e59114;
 	text-shadow: 0 -1px 0 #760202;
+	color: #776527;
 }
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
-	background-color: #e51f1f;
-	border-color: #ba3535;
+	background-color: #f9cf4c; 
+	border-color:#d5a511;
+	color: #776527;
 }
 
 
@@ -70,21 +72,21 @@ header, .navbar-nav .dropdown-menu, .blog-author img, .comment .avatar img, asid
 -------------------------------------------------- */
 /* Base */
 footer {
-	color: #c1c1c1;
-	background: #3c3c3c;
+	color: #5a290d;
+	background: #eea218;
 	font-size: 12px;
 	padding: 50px 0 0 0;
 	margin-top: 100px;
 }
 footer a {
-	color: #c1c1c1;
+	color: #5a290d;
 }
 footer a:hover, footer a:focus {
 	color: #fff;
 }
 footer h4 {
 	font-size: 14px;
-	color: #898989;
+	color: #5a290d;
 	text-transform: uppercase;
 	margin: 0 0 30px 0;
 }
@@ -139,4 +141,23 @@ body{
 
 .navbar-default {
 	background-color: #3589e3;
+}
+#reservation-form .reservation-horizontal, #reservation-form .reservation-vertical, #contact-form .contact-vertical {
+	-webkit-border-radius: 5px 5px 5px 5px;
+	border-radius: 5px 5px 5px 5px;
+	border: 1px solid #ebebeb;
+	-webkit-box-shadow: 0 3px 0 0 rgba(0,0,0,0.12);
+	box-shadow: 0 3px 0 0 rgba(0,0,0,0.12);
+	padding: 30px 30px;
+	z-index: 9999;
+	background-color: #c8e3fe;
+}
+/* Form */
+label {
+	color: #0f4e8c;
+}
+/* Icons */
+#reservation-form .popover-icon i {
+	color: #0f4e8c;
+	font-size: 18px;
 }
