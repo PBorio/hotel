@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="<c:url value='/resources/public/css/theme.css'/>" >
 
 <c:choose>
-  <c:when test="${empty hotel}">
+  <c:when test="${not empty hotel}">
 	<link rel="stylesheet" href="<c:url value='/resources/public/css/colors/demonstracao.css'/>" >
   </c:when>
   <c:otherwise>
@@ -69,7 +69,7 @@
         <button type="button" data-toggle="collapse" data-target="#navbar-collapse-grid" class="navbar-toggle"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
         <a href="index.html" class="navbar-brand">         
         <!-- Logo -->
-        <div id="logo"> <img id="default-logo" src="<c:url value='/resources/public/images/logo.png'/>" alt="Starhotel" style="height:44px;"> <img id="retina-logo" src="images/logo-retina.png" alt="Starhotel" style="height:44px;"> </div>
+        <div class="logo">Logo</div>
         </a> </div>
       <div id="navbar-collapse-grid" class="navbar-collapse collapse">
        
