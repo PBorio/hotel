@@ -32,7 +32,7 @@ public class ConsultasController {
 	}
 	
 	@Get
-	@Path("/consultas/")
+	@Path("/consultas")
 	public void consulta(){
 		DateTime inicioPeriodo = new DateTime();
 		HotelCalendario hotelCalendario = criarCalendario(inicioPeriodo);

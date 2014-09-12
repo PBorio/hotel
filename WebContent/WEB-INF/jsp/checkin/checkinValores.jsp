@@ -109,10 +109,10 @@
 					 <div class="form-group">
 						<label class="control-label col-xs-2" for="singlebutton"></label>
 						<div class="col-xs-10">
-							<button type="button" class="btn btn-primary" onClick="this.form.action='<c:url value="/checkin/recalcula/valores/"/>';this.form.submit()">
+							<button type="button" class="btn btn-primary" onClick="this.form.action='<c:url value="/checkin/recalcula/valores"/>';this.form.submit()">
 								Realcular Valor Da Diária
 							</button>
-							<button type="submit" class="btn btn-primary" onClick="this.form.action='<c:url value="/checkin/ir/para/pagamento/"/>';this.form.submit()">
+							<button type="submit" class="btn btn-primary" onClick="this.form.action='<c:url value="/checkin/ir/para/pagamento"/>';this.form.submit()">
 								Ir Para Pagamento
 							</button>
 						</div>

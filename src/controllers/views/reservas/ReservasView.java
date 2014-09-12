@@ -1,5 +1,6 @@
 package controllers.views.reservas;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,8 +13,13 @@ import domain.Reserva;
 
 @Component
 @SessionScoped
-public class ReservasView {
+public class ReservasView implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2117445091151435359L;
+
 	private Date chegada;
 	
 	private Date saida;

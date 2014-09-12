@@ -31,6 +31,8 @@
 		<property name="password" value="borios" />
     </bean>
 	
+	<bean id="customUserDetailsService" class="repositorios.daos.UsuarioDAO"/>
+	
 	<security:http pattern="/resources/**" security="none"/>
 	<security:http pattern="/decorators/**" security="none"/>
 	<security:http pattern="/reservas/**" security="none"/>
@@ -38,7 +40,7 @@
 	<security:http pattern="/**/foto" security="none"/>
 	<security:http auto-config="true" use-expressions="true">
 	    <!-- <security:form-login login-page="/login/login" default-target-url="/" authentication-success-handler-ref="borioSuccessHandler"/>  -->
-	    <security:form-login login-page="/login/" default-target-url="/consultas/"/>
+	    <security:form-login login-page="/login/" default-target-url="/consultas"/>
 	    <security:access-denied-handler error-page="/login/"/>
 	    <security:intercept-url pattern="/checkin/**" access="hasAnyRole('ROLE_SYSADMIN', 'ROLE_DEMO')" />
 	    <security:intercept-url pattern="/categorias/**" access="hasAnyRole('ROLE_SYSADMIN', 'ROLE_DEMO')" />
@@ -58,15 +60,17 @@
 	            <security:user name="demonstracao" password="demonstracao" authorities="ROLE_DEMO" />
 	        </security:user-service>
 	    </security:authentication-provider>   
-	    <security:authentication-provider> 
-	        <security:password-encoder hash="md5" />
-	        <security:jdbc-user-service data-source-ref="ds"
-	            users-by-username-query="SELECT login as username, senha as password, 'true' as enable FROM usuarios WHERE login=?"
-	            authorities-by-username-query="SELECT u.login as username, 
-	            									  p.role as authority 
-	            								FROM usuarios u
-	            								  join papeis p on p.id = u.papel_id 
-	            								WHERE login=?" />
+	    <security:authentication-provider user-service-ref="customUserDetailsService">
+<!-- 	        <security:user-service> -->
+	            
+<!-- 	        </security:user-service>  -->
+<!-- 	        <security:jdbc-user-service data-source-ref="ds" -->
+<!-- 	            users-by-username-query="SELECT login as username, senha as password, 'true' as enable FROM usuarios WHERE login=?" -->
+<!-- 	            authorities-by-username-query="SELECT u.login as username,  -->
+<!-- 	            									  p.role as authority  -->
+<!-- 	            								FROM usuarios u -->
+<!-- 	            								  join papeis p on p.id = u.papel_id  -->
+<!-- 	            								WHERE login=?" /> -->
 	    </security:authentication-provider>
 	</security:authentication-manager>
 	

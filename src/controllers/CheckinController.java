@@ -61,7 +61,7 @@ public class CheckinController {
 	}
 	
 	@Get
-	@Path("/checkin/pesquisar/")
+	@Path("/checkin/pesquisar")
 	public void pesquisar(String pesquisa) {
 		
 		List<Reserva> reservaList = new ArrayList<Reserva>();
@@ -102,7 +102,7 @@ public class CheckinController {
 	}
 	
 	@Get
-	@Path("/checkin/responsavel/estadia/")
+	@Path("/checkin/responsavel/estadia")
 	public void hospedeResponsavelNaEstadia(){
 		checkin.addHospede(checkin.getReserva().getHospede());
 		result.of(this).checkin();
@@ -132,13 +132,13 @@ public class CheckinController {
 		}
 	}
 	
-	@Post("/checkin/recalcula/valores/")
+	@Post("/checkin/recalcula/valores")
 	public void recalculaValores(Checkin checkinLocal){
 		recalcular(checkinLocal);
 		result.of(this).checkinValores();
 	}
 	
-	@Post("/checkin/ir/para/pagamento/")
+	@Post("/checkin/ir/para/pagamento")
 	public void checkinPagamento(Checkin checkinLocal){
 		recalcular(checkinLocal);
 	}

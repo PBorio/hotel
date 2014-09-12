@@ -30,7 +30,7 @@
 			<!-- End .content-box-header -->
 			<div class="widget-box">
 				<div class="widget-content nopadding">
-				 <form class="form-horizontal" action="<c:url value='/checkin/pesquisar/'/>">
+				 <form class="form-horizontal" action="<c:url value='/checkin/pesquisar'/>">
 					<div class="form-group">
 						<label class="control-label col-xs-2">Nome do Hóspede:</label>
 						<div class="col-xs-10">

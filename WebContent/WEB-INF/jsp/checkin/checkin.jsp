@@ -63,7 +63,7 @@
 					<tfoot>
 						<tr>
 							<th>${checkin.reserva.hospede.nomeCompleto} - ${checkin.reserva.hospede.email} - ${checkin.reserva.hospede.telefone}</th>
-						   	<th><a href="<c:url value='/checkin/responsavel/estadia/'/>" title="title">Marcar como Hóspede</a></th>
+						   	<th><a href="<c:url value='/checkin/responsavel/estadia'/>" title="title">Marcar como Hóspede</a></th>
 						</tr>
 					</tfoot>
 				</table>
