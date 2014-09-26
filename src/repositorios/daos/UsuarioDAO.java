@@ -7,11 +7,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
-import br.com.caelum.vraptor.ioc.Component;
 import repositorios.UsuarioRepositorio;
 import controllers.session.UserSession;
 import domain.Quarto;
-import domain.Usuario;
 
 @Service
 public class UsuarioDAO implements UsuarioRepositorio, UserDetailsService {

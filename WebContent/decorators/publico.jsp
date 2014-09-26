@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="<c:url value='/resources/public/css/theme.css'/>" >
 
 <c:choose>
-  <c:when test="${not empty hotel}">
+  <c:when test="${empty hotel}">
 	<link rel="stylesheet" href="<c:url value='/resources/public/css/colors/demonstracao.css'/>" >
   </c:when>
   <c:otherwise>
