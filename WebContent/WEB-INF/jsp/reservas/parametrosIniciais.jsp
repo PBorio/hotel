@@ -4,6 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+   <script type="text/javascript" src="<c:url value='/resources/scripts/jquery-1.7.1.min.js'/>"></script>
   <script type="text/javascript" src="<c:url value='/resources/scripts/jquery.maskedinput-1.3.min.js'/>"></script>
   <script type="text/javascript">
   jQuery(document).ready(function() {
