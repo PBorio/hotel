@@ -30,18 +30,20 @@ $(function() {
 		        	  <fieldset class="molduraLegenda">
 		  	   			<legend>${reserva.quarto.descricao}</legend>
 		        		<div class="row">
-			                <div class="col-sm-3">
+			                <div class="col-sm-6">
 				              <div class="form-group">
 				                <label for="checkin">Check-in</label>
 				                <input type="text" value="<joda:format pattern='dd/MM/yyyy' value='${reserva.inicio}'/>" class="form-control" readonly="readonly"/>
 				              </div>
 				            </div>
-				            <div class="col-sm-3">
+				            <div class="col-sm-6">
 				              <div class="form-group">
 				                <label for="checkin">Check-out</label>
 				                 <input type="text" class="form-control" value="<joda:format pattern='dd/MM/yyyy' value='${reserva.fim}'/>" readonly="readonly"/>
 				              </div>
 				            </div>
+				          </div>
+				          <div class="row">
 			              <div class="col-sm-3">
 				              <div class="form-group">
 				                <label>Adultos:</label>
@@ -54,7 +56,20 @@ $(function() {
 			           			<input type="text" value="${reserva.numeroCriancas0a5}" class="form-control" readonly="readonly"/>		      
 				              </div>
 			              </div>
-			            </div>
+			               <div class="col-sm-3">
+				              <div class="form-group">
+				                <label>Crianças (6 a 16):</label>
+			           			<input type="text" value="${reserva.numeroCriancas6a16}" class="form-control" readonly="readonly"/>		      
+				              </div>
+			              </div>
+			              <div class="col-sm-3">
+				              <div class="form-group">
+				                <label>Crianças (17 e 18):</label>
+			           			<input type="text" value="${reserva.numeroCriancas17a18}" class="form-control" readonly="readonly"/>		      
+				              </div>
+			              </div>
+			              
+			              </div>
 			           </fieldset>
 		        	</c:forEach>
 		        </fieldset>

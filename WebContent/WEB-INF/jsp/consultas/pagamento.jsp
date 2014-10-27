@@ -19,7 +19,7 @@
   <div class="container">
 			<div class="header">
 				<ul class="nav nav-pills pull-right">
-					<li class="active"><a href="/">Limpar</a></li>
+					<li class="active"><a href="<c:url value='/consultas'/>">Voltar</a></li>
 				</ul>
 			</div>
 		<fieldset>
@@ -60,6 +60,17 @@
 				<input type="text" class="col-xs-10" value="${reserva.saldoAPagar}" readonly="readonly" />
 			</div>
 	   </div>
+	    <div class="form-group">
+			<label class="control-label col-xs-2">Valor em Aberto:</label>
+			<div class="col-xs-10">
+				<input type="text" class="col-xs-10" value="${reserva.saldoAPagar}" readonly="readonly" />
+			</div>
+	   </div>
+	   <div class="header">
+		<ul class="nav nav-pills">
+			<li class="active"><a href="<c:url value='/reservas/cancelar/${reserva.id}'/>">Cancelar Reserva</a></li>
+		</ul>	
+	</div>
 	 </fieldset>
 	   <c:if test="${reserva.possuiPagamentoOuPrevisao}">
 	     <%@include file="fragmentos/pagamentosrealizados.jspf" %>

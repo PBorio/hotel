@@ -31,7 +31,7 @@ public class IndexController {
 	@Get
 	@Path("/")
 	public void index(){
-		
+		result.redirectTo(ConsultasController.class).consulta();
 	}
 	
 	@Post("/solicitar/acesso/")

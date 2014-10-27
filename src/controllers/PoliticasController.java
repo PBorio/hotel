@@ -82,6 +82,14 @@ public class PoliticasController {
 		result.include("categoriaList", categoriaRepositorio.buscaTodos());
 		result.include("politicaDePrecos", novaPolitica());
 	}
+	
+	@Get
+	@Path("/politicas/excluir/{id}")
+	public void excluir(Long id){
+		PoliticaDePrecos politica = politicaPrecoRepositorio.buscaPorId(id);
+		politicaPrecoRepositorio.excluir(politica);
+		result.redirectTo(this).list();
+	}
 
 	private PoliticaDePrecos novaPolitica() {
 		return new PoliticaDePrecos();

@@ -142,6 +142,14 @@ public class ReservasController {
 		}
 	}
 
+	@Get
+	@Path("/reservas/cancelar/{id}")
+	public void cancelar(Long id){
+		Reserva reserva = reservaRepositorio.buscaPorId(id);
+		reserva.cancelar();
+		reservaRepositorio.atualiza(reserva);
+		result.redirectTo(ConsultasController.class).consulta();
+	}
 	
 	public void parametrosDetalhes(ParametrosReserva parametrosReserva){
 		

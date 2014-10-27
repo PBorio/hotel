@@ -45,8 +45,7 @@
 							<td><a href="<c:url value='/politicas/${politicaDePrecos.id}'/>" title="title">${politicaDePrecos.categoria.descricao}</a></td>
 							<td>${politicaDePrecos.valorDiaria}</td>
 							<td>
-								<a href="" title="Delete"
-								onclick="remove(${politicaDePrecos.id}); return false;"><img width="16px" height="16px"
+								<a href="<c:url value='/politicas/excluir/${politicaDePrecos.id}'/>" title="Delete" ><img width="16px" height="16px"
 									src="<c:url value="/resources/imagens/icons/cross.png"/>" alt="Delete"/></a> 
 							</td>
 						</tr>

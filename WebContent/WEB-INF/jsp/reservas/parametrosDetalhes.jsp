@@ -17,18 +17,20 @@
 		        <fieldset>
 		        <legend>Reserva N. ${reservasView.numeroDeQuartosJaSelecionados + 1}</legend>
 	            <div class="row">
-	                <div class="col-sm-3">
+	                <div class="col-sm-6">
 		              <div class="form-group">
 		                <label for="checkin">Check-in</label>
 		                <input type="text" value="<fmt:formatDate value='${reservasView.chegada}' pattern='dd/MM/yyyy'/>" class="form-control" readonly="readonly"/>
 		              </div>
 		            </div>
-		            <div class="col-sm-3">
+		            <div class="col-sm-6">
 		              <div class="form-group">
 		                <label for="checkin">Check-out</label>
 		                 <input type="text" class="form-control" value="<fmt:formatDate value='${reservasView.saida}' pattern='dd/MM/yyyy'/>" readonly="readonly"/>
 		              </div>
 		            </div>
+		           </div>
+		           <div class="row">
 	              <div class="col-sm-3">
 		              <div class="form-group">
 		                <label>Adultos:</label>
@@ -37,11 +39,24 @@
 	              </div>
 	              <div class="col-sm-3">
 		              <div class="form-group">
-		                <label>Crianças:</label>
+		                <label>Crianças (0 a 5):</label>
 	           			<input type="text" value="${detalhesDosParametros.numeroCriancas0a5}" class="form-control" readonly="readonly"/>		      
 		              </div>
 	              </div>
-	            </div>
+	              <div class="col-sm-3">
+		              <div class="form-group">
+		                <label>Crianças (6 a 16):</label>
+	           			<input type="text" value="${detalhesDosParametros.numeroCriancas6a16}" class="form-control" readonly="readonly"/>		      
+		              </div>
+	              </div>
+	              <div class="col-sm-3">
+		              <div class="form-group">
+		                <label>Crianças (17 e 18):</label>
+	           			<input type="text" value="${detalhesDosParametros.numeroCriancas17a18}" class="form-control" readonly="readonly"/>		      
+		              </div>
+	              </div>
+	              </div>
+	            
 	            </fieldset>
 	          </div>
 	        </div>
@@ -91,22 +106,7 @@
 		            </div>
 		            <div class="content">
 		              <p><span>${quarto.descricao}</span> ${quarto.observacao}</p>
-		              <div class="row">
-		                <div class="col-xs-6">
-		                  <ul class="list-unstyled">
-		                    <li><i class="fa fa-check-circle"></i> Café da Manhã</li>
-		                    <li><i class="fa fa-check-circle"></i> Sacada Privativa</li>
-		                    <li><i class="fa fa-check-circle"></i> Vista Para o Mar</li>
-		                  </ul>
-		                </div>
-		                <div class="col-xs-6">
-		                  <ul class="list-unstyled">
-		                    <li><i class="fa fa-check-circle"></i> Wi-Fi Grátis</li>
-		                    <li><i class="fa fa-check-circle"></i> Banheiro Privativo</li>
-		                    <li><i class="fa fa-check-circle"></i> 80m2</li>
-		                  </ul>
-		                </div>
-		              </div>
+		              
 		              <form class="form-horizontal" action='<c:url value="/reservas/reservar"/>' method="post">
                	        <input type="hidden" name="reservasView.chegada" value="<fmt:formatDate value='${quarto.inicio}'/>" />
                	        <input type="hidden" name="reservasView.saida" value="<fmt:formatDate value='${quarto.fim}'/>" />

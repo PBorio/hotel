@@ -261,6 +261,10 @@ public class Reserva implements CalculavelPorPeriodo {
 	public List<PagamentoReserva> getPagamentosReservas(){
 		return this.pagamentosReservas;
 	}
+	
+	public void cancelar() {
+		this.cancelamento = new DateTime();
+	}
 
 	@Override
 	public int hashCode() {

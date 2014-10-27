@@ -14,5 +14,6 @@ public interface PoliticaPrecoRepositorio {
 	
 	void atualiza(PoliticaDePrecos politica);
 
+	void excluir(PoliticaDePrecos politica);
 
 }
