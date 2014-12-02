@@ -6,7 +6,7 @@ public class ModificadorDeValoresDaDiariaService {
 
 	public Double aplicarModificadores(Reserva reserva, Double valorDaDiaria) {
 		if (reserva.isSoParaUmAdulto())
-			valorDaDiaria *= 0.6;
+			valorDaDiaria *= 0.7;
 		
 		valorDaDiaria += (40.0 * reserva.getParDeCriancasDe0a5());
 		

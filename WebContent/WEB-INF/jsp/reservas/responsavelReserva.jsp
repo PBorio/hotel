@@ -20,9 +20,6 @@
 	        	<input id="nome" placeholder="Nome" type="text" name="hospede.nome" value="${hospede.nome}" />
 	        </p>
 	        <p>
-	        	<input id="sobrenome" type="text" placeholder="Sobrenome" name="hospede.sobrenome" value="${hospede.sobrenome}" />
-	        </p>
-	        <p>
 	        	<input id="cpf" type="text" placeholder="CPF" name="hospede.cpf" value="${hospede.cpf}" />
 	        </p>
 	        <p>

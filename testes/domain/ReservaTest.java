@@ -118,6 +118,15 @@ public class ReservaTest {
 		
 		Assert.assertEquals((Double)30.6, r.getValorReserva());
 	}
+	
+	@Test
+	public void oValorDaReservaPodeSerAlteradoManualmente(){
+		Reserva r = new FakeReserva().iniciandoEm("01/03/2014").terminandoEm("04/03/2014").comNumeroDeAdultos(2).build();
+		r.setValorDiaria(10.2);
+		Assert.assertEquals((Double)30.6, r.getValorReserva());
+		r.setValorReserva(40.0);
+		Assert.assertEquals((Double)40.0, r.getValorReserva());
+	}
 
 	@Test
 	public void aReservaEhSoParaUmAdultoSeTiverApenasUmAdulto(){

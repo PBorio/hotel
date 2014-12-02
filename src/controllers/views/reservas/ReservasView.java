@@ -122,6 +122,10 @@ public class ReservasView implements Serializable {
 		return reservas;
 	}
 	
+	public void setReservas(List<Reserva> reservas){
+		this.reservas = reservas;
+	}
+	
 	public Integer getNumeroDeQuartosJaSelecionados(){
 		if (parametrosReserva == null)
 			return 0;
@@ -145,6 +149,10 @@ public class ReservasView implements Serializable {
 		this.setChegada(null);
 		this.setSaida(null);
 		this.setValorReserva(0.0);
+	}
+
+	public boolean ehParaUmQuartoSo() {
+		return this.parametrosReserva.ehParaUmQuartoSo();
 	}
 
 }

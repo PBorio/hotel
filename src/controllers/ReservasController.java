@@ -11,6 +11,7 @@ import repositorios.QuartoRepositorio;
 import repositorios.ReservaRepositorio;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
+import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
@@ -73,6 +74,13 @@ public class ReservasController {
 		try{
 			quarto = quartoRepositorio.buscaPorId(quarto.getId());
 			DetalhesDosParametros detalhe = reservasView.getParametrosReserva().primeiroDetalheSemQuarto();
+			
+			if (detalhe == null)
+				throw new HotelException("Erro: Não foi possível alterar o quarto da reserva");
+			
+			if (reservasView.ehParaUmQuartoSo())
+				reservasView.getReservas().clear();
+			
 			detalhe.setQuarto(quarto);
 			Reserva reserva = new Reserva();
 			reserva.setQuarto(quarto);
@@ -149,6 +157,24 @@ public class ReservasController {
 		reserva.cancelar();
 		reservaRepositorio.atualiza(reserva);
 		result.redirectTo(ConsultasController.class).consulta();
+	}
+	
+	@Post
+	@Path("/reservas/atualizar/valores")
+	public void atualizarValores(List<Reserva> reservas){
+		for (Reserva r : reservas){
+			for (Reserva jaReservada : this.reservasView.getReservas()){
+				if (r.getValorReserva() == null || r.getValorReserva().doubleValue() == 0)
+					continue;
+				
+				if (!r.getQuarto().equals(jaReservada.getQuarto()))
+					continue;
+				
+				if (r.getValorReserva().doubleValue() != jaReservada.getValorReserva().doubleValue())
+					jaReservada.setValorReserva(r.getValorReserva());
+			}
+		}
+		result.of(this).showReserva();
 	}
 	
 	public void parametrosDetalhes(ParametrosReserva parametrosReserva){

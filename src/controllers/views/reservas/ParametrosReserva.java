@@ -1,6 +1,7 @@
 package controllers.views.reservas;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -51,10 +52,16 @@ public class ParametrosReserva {
 	}
 
 	public DetalhesDosParametros primeiroDetalheSemQuarto() {
+
+		Collections.sort(this.detalhes);
 		for (DetalhesDosParametros detalhe : this.detalhes){
 			if (detalhe.getQuarto() == null)
 				return detalhe;
 		}
+		
+		if (detalhes.size() == 1) 
+			return detalhes.get(0);
+		
 		return null;
 	}
 
@@ -83,6 +90,10 @@ public class ParametrosReserva {
 				return true;
 		}
 		return false;
+	}
+
+	public boolean ehParaUmQuartoSo() {
+		return this.detalhes.size() == 1;
 	}
 
 }

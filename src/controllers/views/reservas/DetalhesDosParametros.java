@@ -2,13 +2,15 @@ package controllers.views.reservas;
 
 import domain.Quarto;
 
-public class DetalhesDosParametros {
+public class DetalhesDosParametros implements Comparable<DetalhesDosParametros> {
 	
 	private Integer numeroCriancas0a5;
 	private Integer numeroCriancas6a16;
 	private Integer numeroCriancas17a18;
 	private Integer numeroAdultos;
 	private Quarto quarto;
+	private Integer ordem;
+	
 	public Integer getNumeroCriancas0a5() {
 		return numeroCriancas0a5;
 	}
@@ -38,6 +40,15 @@ public class DetalhesDosParametros {
 	}
 	public void setQuarto(Quarto quarto) {
 		this.quarto = quarto;
+	}
+	public Integer getOrdem() {
+		return ordem;
+	}
+	public void setOrdem(Integer ordem) {
+		this.ordem = ordem;
+	}
+	public int compareTo(DetalhesDosParametros o) {
+		return this.ordem.compareTo(o.getOrdem());
 	}
 
 }

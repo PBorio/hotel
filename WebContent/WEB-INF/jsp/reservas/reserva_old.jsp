@@ -127,10 +127,7 @@
 							    <span>Nome: </span>
 								<input name="reservasView.nomeHospede" type="text" id="reservasView.nomeHospede"  />		
 							</p>
-							<p>
-								 <span>Sobrenome: </span>
-								<input name=reservasView.sobrenomeHospede type="text" id="reservasView.sobrenomeHospede" />		
-							</p>
+							
 							<p class="half">
 								 <span>Email: </span>
 								<input name="reservasView.emailHospede" type="text" id="reservasView.emailHospede" />		

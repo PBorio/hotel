@@ -69,6 +69,9 @@ public class Reserva implements CalculavelPorPeriodo {
 
 	@Column(name="valor_diaria")
 	private Double valorDiaria;
+	
+	@Column(name="valor_reserva")
+	private Double valorReserva;
 
 	@OneToMany(mappedBy="reserva")
 	private List<PagamentoReserva> pagamentosReservas = new ArrayList<PagamentoReserva>();
@@ -157,6 +160,24 @@ public class Reserva implements CalculavelPorPeriodo {
 		this.cancelamento = cancelamento;
 	}
 	
+	public void setValorReserva(double valorReserva) {
+		if (valorReserva > 0.0)
+			this.valorReserva = valorReserva;
+	}
+	
+	public Double getValorReserva() {
+		if (this.valorReserva != null && this.valorReserva.doubleValue() >= 0.0)
+			return this.valorReserva;
+		
+		return getValorCalculado();
+	}
+
+	public Double getValorCalculado() {
+		Double valor = new CalculoDeValorPorPeriodoService().calcularValor(this);
+		BigDecimal bd = new BigDecimal(valor.toString());
+	  	return bd.setScale(2, RoundingMode.HALF_EVEN).doubleValue();
+	}
+	
 	public boolean contemAData(DateTime dia) {
 		
 		dia = dia.withTimeAtStartOfDay();
@@ -170,12 +191,6 @@ public class Reserva implements CalculavelPorPeriodo {
 		Periodo periodoDestaReserva = new Periodo(inicio, fim);
 		Periodo periodoDaOutraReserva = new Periodo(outraReserva.getInicio(), outraReserva.getFim());
  		return periodoDestaReserva.coincideCom(periodoDaOutraReserva);
-	}
-
-	public Double getValorReserva() {
-		Double valor = new CalculoDeValorPorPeriodoService().calcularValor(this);
-		BigDecimal bd = new BigDecimal(valor.toString());
-	  	return bd.setScale(2, RoundingMode.HALF_EVEN).doubleValue();
 	}
 	
 	public Double getValorPago() {
@@ -290,5 +305,6 @@ public class Reserva implements CalculavelPorPeriodo {
 			return false;
 		return true;
 	}
+
 
 }

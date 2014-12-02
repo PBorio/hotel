@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +37,7 @@ public class UserSession implements UserDetails {
 	}
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> as = new ArrayList<GrantedAuthority>();
-		as.add(new GrantedAuthorityImpl("ROLE_SYSADMIN") );
+//		as.add(new GrantedAuthorityImpl("ROLE_SYSADMIN") );
 		return as;
 	}
 	public String getPassword() {

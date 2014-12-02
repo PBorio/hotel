@@ -117,12 +117,6 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-xs-2" >Sobrenome:</label>
-						<div class="col-xs-10">
-							<input type="text" class="col-xs-10" name="hospede.sobrenome" id="hospede.sobrenome" value="${hospede.sobrenome}" />
-						</div>
-					</div>
-					<div class="form-group">
 						<label class="control-label col-xs-2">Email:</label>
 						<div class="col-xs-10">
 							<input type="text" class="col-xs-10" name="hospede.email" id="hospede.email" value="${hospede.email}" />

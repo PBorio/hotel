@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import repositorios.UsuarioRepositorio;
 import controllers.session.UserSession;
-import domain.Quarto;
 
 @Service
 public class UsuarioDAO implements UsuarioRepositorio, UserDetailsService {
@@ -22,7 +21,7 @@ public class UsuarioDAO implements UsuarioRepositorio, UserDetailsService {
 	        System.out.println("Getting access details from employee dao !!");
 	 
 	        try{
-	        	Quarto u = entityManager.find(Quarto.class, 1l);
+//	        	Quarto u = entityManager.find(Quarto.class, 1l);
 	        	System.out.println("chamou e não achou");
 	        }catch(Throwable e){
 	        	e.printStackTrace();

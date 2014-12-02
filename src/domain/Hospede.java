@@ -149,7 +149,7 @@ public class Hospede {
 	}
 	
 	public String getNomeCompleto(){
-		return this.nome+" "+this.sobrenome;
+		return this.nome;
 	}
 
 	@Override

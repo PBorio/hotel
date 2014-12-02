@@ -52,6 +52,7 @@ function addParametrosDeReservas(indiceDosParametros){
 	var num = indiceDosParametros + 1;
 	cHtml = "<fieldset class='molduraLegenda'>"+
 			"<legend>Reserva N. "+num+"</legend>"+
+			" <input type='hidden' name='parametrosReserva.detalhes["+indiceDosParametros+"].ordem' value='"+num+"' />"+
 			"<div class='row'>"+
 			"<div class='col-sm-6'>"+
             "<div class='form-group'>"+

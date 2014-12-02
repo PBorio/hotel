@@ -142,7 +142,7 @@ body{
 .navbar-default {
 	background-color: #3589e3;
 }
-#reservation-form .reservation-horizontal, #reservation-form .reservation-vertical, #contact-form .contact-vertical {
+#reservation-form .reservation-horizontal, #hospedes-form .reservation-vertical, #contact-form .contact-vertical, #form-hospedes {
 	-webkit-border-radius: 5px 5px 5px 5px;
 	border-radius: 5px 5px 5px 5px;
 	border: 1px solid #ebebeb;
@@ -163,3 +163,8 @@ label {
 }
 
 .logo{background:url(../../images/pordosol-logo.png) no-repeat; background-position:0 0; cursor:pointer; display:inline-block; float:left; font-size:1px; height:127px; margin:0 0 0 30px; overflow:hidden; text-indent:-999px; width:152px;}
+
+h2 span{
+	background: none;
+	color:#0f4e8c;
+}

@@ -48,7 +48,7 @@
     <div class="container">
       <div class="navbar-header">
         <button type="button" data-toggle="collapse" data-target="#navbar-collapse-grid" class="navbar-toggle"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-        <a href="index.html" class="navbar-brand">         
+        <a href="<c:url value='/reservas/'/>" class="navbar-brand">         
         <!-- Logo -->
         <div class="logo">Logo</div>
         </a> </div>

@@ -14,7 +14,7 @@
         </category>
         
         <category name="org.springframework">
-                <priority value="WARN" />
+                <priority value="INFO" />
                 <appender-ref ref="stdout" />
         </category>
  

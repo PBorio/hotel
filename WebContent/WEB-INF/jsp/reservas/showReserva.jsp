@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.joda.org/joda/time/tags" prefix="joda"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -25,10 +26,19 @@ $(function() {
 	        <div class="col-md-12">
 	          <div class="form-inline reservation-horizontal clearfix">
 	            <fieldset>
-		        	<h2 class="lined-heading"><span>Informações da Reserva</span></h2>
-		        	<c:forEach var="reserva" items="${reservasView.reservas}">
+		        	<h2><span>Informações da Reserva</span></h2>
+		        	<form class="reservation-horizontal clearfix" id="form-reservas" action='<c:url value="/reservas/atualizar/valores"/>' method="post">
+			            <div id="message">
+			            	<c:forEach var="error" items="${errors}">
+								<div class="alert alert-danger">
+									${error.message}
+								</div>
+							</c:forEach>
+			            </div><!-- Error message display -->
+		        	<c:forEach var="reserva" items="${reservasView.reservas}" varStatus="idx">
 		        	  <fieldset class="molduraLegenda">
 		  	   			<legend>${reserva.quarto.descricao}</legend>
+		  	   			<input type="hidden" value="${reserva.quarto.id}" name="reservas[${idx.index}].quarto.id" />
 		        		<div class="row">
 			                <div class="col-sm-6">
 				              <div class="form-group">
@@ -65,13 +75,26 @@ $(function() {
 			              <div class="col-sm-3">
 				              <div class="form-group">
 				                <label>Crianças (17 e 18):</label>
-			           			<input type="text" value="${reserva.numeroCriancas17a18}" class="form-control" readonly="readonly"/>		      
+			           			<input type="text"  value="${reserva.numeroCriancas17a18}" class="form-control" readonly="readonly"/>		      
 				              </div>
 			              </div>
-			              
+			              </div>
+			               <div class="row">
+			               <div class="col-sm-6">
+				              <div class="form-group">
+				                <label>Valor:</label>
+			           			<input type="text" name="reservas[${idx.index}].valorReserva" value="<fmt:formatNumber value="${reserva.valorReserva}" pattern="#,##0.00"/>" class="form-control"/>		      
+				              </div>
+			              </div>
 			              </div>
 			           </fieldset>
 		        	</c:forEach>
+		        	<div class="row">
+			              	<div class="col-sm-2">
+			              		<button type="submit" class="btn btn-primary btn-block">Atualiza Valores</button>
+			            	</div>
+			              </div>
+		        	</form>
 		        </fieldset>
 	          </div>
 	        </div>
@@ -79,14 +102,14 @@ $(function() {
 	</div>
 </section>
 
-<section class="mt100">
+<section id="hospedes-form" class="mt100">
     <div class="container">
     
 	    <div class="row">
 	        <div class="col-md-12">
 	          <fieldset>
-		         <h2 class="lined-heading"><span>Informações do Responsável</span></h2>
-	          	 <form class="reservation-horizontal clearfix" id="form-reservas" action='<c:url value="/reservas/confirmar"/>' method="post">
+		         <h2><span>Informações do Responsável</span></h2>
+	          	 <form class="reservation-horizontal clearfix" id="form-hospedes" action='<c:url value="/reservas/confirmar"/>' method="post">
 	          	   <input type="hidden" name="hospede.id" value="${hospede.id}" />
 	          	   <div id="message">
 		            	<c:forEach var="error" items="${errors}">
@@ -103,14 +126,7 @@ $(function() {
 			              </div>
 			            </div>
 			        </div>
-			        <div class="row">
-		                <div class="col-sm-12">
-			              <div class="form-group">
-			                <label>Sobrenome</label>
-			                <input id="nome" type="text" name="hospede.sobrenome" value="${hospede.sobrenome}" class="form-control" />
-			              </div>
-			            </div>
-			        </div>
+			       
 			        <div class="row">
 		                <div class="col-sm-12">
 			              <div class="form-group">
