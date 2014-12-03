@@ -9,8 +9,7 @@ import domain.helpers.FakeReserva;
 public class ModificadorDeValoresDaDiariaServiceTest {
 	
 	@Test
-	public void seUmaReservaForDeApenasUmAdultoOValorDaReservaSera60PorCentoDoValorCalculado(){
-
+	public void seUmaReservaForDeApenasUmAdultoOValorDaReservaSera70PorCentoDoValorCalculado(){
 		
 		Reserva reserva = new FakeReserva().iniciandoEm("01/03/2014").terminandoEm("02/03/2014").build();
 		reserva.setNumeroAdultos(1);
@@ -20,7 +19,7 @@ public class ModificadorDeValoresDaDiariaServiceTest {
 		ModificadorDeValoresDaDiariaService modificador = new ModificadorDeValoresDaDiariaService();
 		valorDiaria = modificador.aplicarModificadores(reserva, valorDiaria);
 		reserva.setValorDiaria(valorDiaria);
-		Assert.assertEquals((Double)60.0, reserva.getValorDiaria());
+		Assert.assertEquals((Double)70.0, reserva.getValorDiaria());
 	}
 	
 	@Test

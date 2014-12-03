@@ -1,5 +1,7 @@
 package domain.servicos;
 
+import java.util.Locale;
+
 import org.joda.time.DateTime;
 
 public class DiaCabecalho {
@@ -11,7 +13,7 @@ public class DiaCabecalho {
 	}
 
 	public String getTexto() {
-		return dia.dayOfWeek().getAsShortText()+"  "+dia.dayOfMonth().getAsString();
+		return dia.dayOfWeek().getAsShortText(new Locale("pt", "BR"))+"  "+dia.dayOfMonth().getAsString();
 	}
 
 	public boolean isFimDeSemana() {

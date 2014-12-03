@@ -23,6 +23,9 @@ public class DiaMesCalendario {
 		if (reserva instanceof ReservaNulo) 
 			return TipoStatusQuarto.LIVRE.getDescription();
 		
+		if (dia.withTimeAtStartOfDay().equals(reserva.getFim().withTimeAtStartOfDay()))
+			return TipoStatusQuarto.LIVRE.getDescription();
+		
 		if (!reserva.isPossuiPagamento()){
 			if (dia.withTimeAtStartOfDay().equals(reserva.getInicio().withTimeAtStartOfDay()))
 				return TipoStatusQuarto.RESERVA_NAO_CONFIRMADA_PRIMEIRODIA.getDescription();
@@ -38,7 +41,10 @@ public class DiaMesCalendario {
 	
 	public String getMarcacao() {
 		if (reserva instanceof ReservaNulo) 
-			return TipoStatusQuarto.LIVRE.getMarcacao();
+			return "";
+		
+		if (dia.withTimeAtStartOfDay().equals(reserva.getFim().withTimeAtStartOfDay()))
+			return "";
 		
 		if (!reserva.isPossuiPagamento()){
 			if (dia.withTimeAtStartOfDay().equals(reserva.getInicio().withTimeAtStartOfDay()))

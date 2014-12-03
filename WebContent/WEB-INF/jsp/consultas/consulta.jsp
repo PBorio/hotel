@@ -42,7 +42,7 @@
 	              <c:choose>
 	              	<c:when test="${empty dia.idReserva}"><td class="fc-widget-content"><a href="<c:url value='/nova/reserva'/>">${dia.texto}</a></td></c:when>
 	              	<c:otherwise>
-	              	    <td class="${dia.marcacao}">
+	              	    <td class="fc-widget-content ${dia.marcacao}">
 	              	        <a href="<c:url value='/pagamento/${dia.idReserva}'/>">${dia.texto}</a>
 	              	    </td>
 	              	</c:otherwise>

@@ -2,6 +2,7 @@ package domain.servicos;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import org.joda.time.DateTime;
 import org.joda.time.Days;
@@ -38,14 +39,14 @@ public class HotelCalendario {
 	}
 
 	public String getNomeDoMesAtual() {
-		return primeiraSegundaFeira.monthOfYear().getAsText();
+		return primeiraSegundaFeira.monthOfYear().getAsText(new Locale("pt", "BR"));
 	}
 	
 	public String getNomeDoProximoMes() {
 		DateTime ultimoSegundaFeira = primeiraSegundaFeira.plusDays(28).withTimeAtStartOfDay();
 		if (ultimoSegundaFeira.monthOfYear().equals(primeiraSegundaFeira.monthOfYear()))
 			return "";
-		return ultimoSegundaFeira.monthOfYear().getAsText();
+		return ultimoSegundaFeira.monthOfYear().getAsText(new Locale("pt", "BR"));
 	}
 	
 	public Integer getProximoMes(){
