@@ -2,6 +2,7 @@ package repositorios;
 
 import java.util.List;
 
+import domain.AgrupadorReservas;
 import domain.Reserva;
 public interface ReservaRepositorio {
 	
@@ -17,8 +18,10 @@ public interface ReservaRepositorio {
 
 	List<Reserva> buscaReservasEmAberto();
 
-	void salvarVariasReservas(List<Reserva> reservas);
+	void salvarReservas(AgrupadorReservas agrupadorReservas);
 
 	Reserva buscaReservaPorIdComPagamentos(Long idReserva);
+
+	AgrupadorReservas buscarAgrupadorPorId(Long idAgrupador);
 
 }

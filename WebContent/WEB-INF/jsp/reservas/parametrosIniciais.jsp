@@ -186,6 +186,13 @@ function addParametrosDeReservas(indiceDosParametros){
 							<option value="8" <c:if test="${8 == reservasView.numeroDeQuartos}">selected="true"</c:if>>8</option>
 							<option value="9" <c:if test="${9 == reservasView.numeroDeQuartos}">selected="true"</c:if>>9</option>
 							<option value="10" <c:if test="${10 == reservasView.numeroDeQuartos}">selected="true"</c:if>>10</option>
+							<option value="11" <c:if test="${11 == reservasView.numeroDeQuartos}">selected="true"</c:if>>11</option>
+							<option value="12" <c:if test="${12 == reservasView.numeroDeQuartos}">selected="true"</c:if>>12</option>
+							<option value="13" <c:if test="${13 == reservasView.numeroDeQuartos}">selected="true"</c:if>>13</option>
+							<option value="14" <c:if test="${14 == reservasView.numeroDeQuartos}">selected="true"</c:if>>14</option>
+							<option value="15" <c:if test="${15 == reservasView.numeroDeQuartos}">selected="true"</c:if>>15</option>
+							<option value="16" <c:if test="${16 == reservasView.numeroDeQuartos}">selected="true"</c:if>>16</option>
+							<option value="17" <c:if test="${17 == reservasView.numeroDeQuartos}">selected="true"</c:if>>17</option>
 						 </select>
 		              </div>
 		           </div>

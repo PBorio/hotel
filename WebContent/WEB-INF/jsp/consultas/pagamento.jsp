@@ -19,59 +19,33 @@
   <div class="container">
 			<div class="header">
 				<ul class="nav nav-pills pull-right">
+					<c:if test="${not empty reserva.agrupadorReservas}">
+						<li class="active"><a href="<c:url value='/pagamento/lote/${reserva.agrupadorReservas.id}'/>">Pagamentos em Lote</a></li>
+					</c:if>
 					<li class="active"><a href="<c:url value='/consultas'/>">Voltar</a></li>
 				</ul>
 			</div>
-		<fieldset>
-	  	  <legend>Reserva</legend>
-	  	  <div class="form-group">
-				<label class="control-label col-xs-2">Responsável:</label>
-				<div class="col-xs-10">
-					<input type="text" class="col-xs-10" value="${reserva.hospede.nomeCompleto}" readonly="readonly" />
-				</div>
-		  </div>
-		   <div class="form-group">
-				<label class="control-label col-xs-2">Contato:</label>
-				<div class="col-xs-10">
-					<input type="text" class="col-xs-10" value="${reserva.hospede.email} - ${reserva.hospede.telefone}" readonly="readonly" />
-				</div>
-		  </div>
-			<div class="form-group">
-				<label class="control-label col-xs-2">Quarto:</label>
-				<div class="col-xs-10">
-					<input type="text" class="col-xs-10" value="${reserva.quarto.numero}" readonly="readonly" />
-				</div>
+			<div class="row">
+				 <div class="col-xs-12 col-md-12 col-lg-12">
+                    <div class="panel panel-default height">
+                        <div class="panel-heading">Reserva</div>
+                        <div class="panel-body">
+                            <strong>Responsável: </strong> ${reserva.hospede.nomeCompleto}<br>
+                            <strong>Contato: </strong> ${reserva.hospede.email} - ${reserva.hospede.telefone}<br>
+                            <strong>Quarto: </strong> ${reserva.quarto.numero}<br>
+                             <strong>Periodo: </strong> De <joda:format value="${reserva.inicio}" pattern="dd/MM/yyyy"/> a <joda:format value="${reserva.fim}" pattern="dd/MM/yyyy"/><br>
+                            <strong>Valor Total:</strong> <fmt:formatNumber value="${reserva.valorReserva}" type="number" pattern="#,##0.00"/><br>
+                            <strong>Valor Pago:</strong> <fmt:formatNumber value="${reserva.valorPago}" type="number" pattern="#,##0.00"/> <br>
+                            <strong>Valor em Aberto:</strong> <fmt:formatNumber value="${reserva.saldoAPagar}" type="number" pattern="#,##0.00"/> <br>
+                        </div>
+                    </div>
+                </div>
 			</div>
-		<div class="form-group">
-			<label class="control-label col-xs-2">Periodo:</label>
-			<div class="col-xs-10">
-				<input type="text" class="col-xs-10" value="De <joda:format value="${reserva.inicio}" pattern="dd/MM/yyyy"/> a <joda:format value="${reserva.fim}" pattern="dd/MM/yyyy"/>" readonly="readonly" />
-			</div>
-	   </div>
-	    <div class="form-group">
-			<label class="control-label col-xs-2">Valor Total:</label>
-			<div class="col-xs-10">
-				<input type="text" class="col-xs-10" value="${reserva.valorReserva}" readonly="readonly" />
-			</div>
-	   </div>
-	   <div class="form-group">
-			<label class="control-label col-xs-2">Valor em Aberto:</label>
-			<div class="col-xs-10">
-				<input type="text" class="col-xs-10" value="${reserva.saldoAPagar}" readonly="readonly" />
-			</div>
-	   </div>
-	    <div class="form-group">
-			<label class="control-label col-xs-2">Valor em Aberto:</label>
-			<div class="col-xs-10">
-				<input type="text" class="col-xs-10" value="${reserva.saldoAPagar}" readonly="readonly" />
-			</div>
-	   </div>
 	   <div class="header">
 		<ul class="nav nav-pills">
 			<li class="active"><a href="<c:url value='/reservas/cancelar/${reserva.id}'/>">Cancelar Reserva</a></li>
 		</ul>	
-	</div>
-	 </fieldset>
+		</div>
 	   <c:if test="${reserva.possuiPagamentoOuPrevisao}">
 	     <%@include file="fragmentos/pagamentosrealizados.jspf" %>
 	   </c:if>

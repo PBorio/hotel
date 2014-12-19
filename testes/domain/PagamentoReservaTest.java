@@ -82,6 +82,44 @@ public class PagamentoReservaTest {
 		Assert.assertEquals(hoje, pagamento.getDataPagamento());
 	}
 	
+	@Test
+	public void umPagamentoPodeSerFeitaParaDuasReservas(){
+		Pagamento pagamento =criarPagamento(TipoPagamento.CARTAO);
+		pagamento.setValor(500.0);
+		
+		
+		Reserva reserva1 = new FakeReserva().comNumeroDeAdultos(2).iniciandoEm("18/07/2014").terminandoEm("19/07/2014").comValorDaDiariaDe(500).build();
+		Reserva reserva2 = new FakeReserva().comNumeroDeAdultos(2).iniciandoEm("18/07/2014").terminandoEm("19/07/2014").comValorDaDiariaDe(500).build();
+		
+		AgrupadorReservas agrupador = new AgrupadorReservas();
+		agrupador.addReserva(reserva1);
+		agrupador.addReserva(reserva2);
+		
+		agrupador.addPagamento(pagamento);
+		
+		Assert.assertTrue(reserva1.isPossuiPagamento());
+		Assert.assertTrue(reserva2.isPossuiPagamento());
+	}
+	
+	@Test
+	public void umPagamentoParaReservasDiferentesDeveSerDivididoProporcionalmente(){
+		Pagamento pagamento =criarPagamento(TipoPagamento.CARTAO);
+		pagamento.setValor(500.0);
+		
+		
+		Reserva reserva1 = new FakeReserva().comNumeroDeAdultos(2).iniciandoEm("18/07/2014").terminandoEm("19/07/2014").comValorDaDiariaDe(500).build();
+		Reserva reserva2 = new FakeReserva().comNumeroDeAdultos(2).iniciandoEm("18/07/2014").terminandoEm("19/07/2014").comValorDaDiariaDe(500).build();
+		
+		AgrupadorReservas agrupador = new AgrupadorReservas();
+		agrupador.addReserva(reserva1);
+		agrupador.addReserva(reserva2);
+		
+		agrupador.addPagamento(pagamento);
+		
+		Assert.assertEquals((Double)250.0, reserva1.getValorPago());
+		Assert.assertEquals((Double)250.0, reserva2.getValorPago());
+	}
+	
 	private Pagamento criarPagamento(TipoPagamento tipo) {
 		Pagamento pagamento = new Pagamento();
 		pagamento.setTipoPagamento(tipo.getValue());

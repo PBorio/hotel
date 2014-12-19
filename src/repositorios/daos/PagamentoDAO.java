@@ -29,7 +29,8 @@ public class PagamentoDAO extends DAO<Pagamento> implements
 		super.salva(pagamento);
 		super.getEntityManager().flush();
 		for (PagamentoReserva pr : pagamento.getPagamentoReservas()){
-			getEntityManager().persist(pr);
+			if (pr.getId() == null)
+				getEntityManager().persist(pr);
 		}
 	}
 }

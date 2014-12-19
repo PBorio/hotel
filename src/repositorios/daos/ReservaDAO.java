@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import repositorios.ReservaRepositorio;
 import br.com.caelum.vraptor.ioc.Component;
+import domain.AgrupadorReservas;
 import domain.Reserva;
 
 @Component
@@ -54,8 +55,9 @@ public class ReservaDAO extends DAO<Reserva> implements ReservaRepositorio {
 	}
 
 	@Transactional
-	public void salvarVariasReservas(List<Reserva> reservas) {
-		for (Reserva reserva : reservas){
+	public void salvarReservas(AgrupadorReservas agrupadorReservas) {
+		entityManager.persist(agrupadorReservas);
+		for (Reserva reserva : agrupadorReservas.getReservas()){
 			super.salva(reserva);
 		}
 	}
@@ -71,5 +73,9 @@ public class ReservaDAO extends DAO<Reserva> implements ReservaRepositorio {
 		Query query = entityManager.createQuery(sql.toString());
 		query.setParameter(1, idReserva);
 		return (Reserva) query.getSingleResult();
+	}
+
+	public AgrupadorReservas buscarAgrupadorPorId(Long idAgrupador) {
+		return entityManager.find(AgrupadorReservas.class, idAgrupador);
 	}
 }

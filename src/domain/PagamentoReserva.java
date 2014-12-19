@@ -25,6 +25,8 @@ public class PagamentoReserva {
 	@JoinColumn(name="pagamento_id")
 	private Pagamento pagamento;
 
+	private Double valor;
+
 	public PagamentoReserva() {	}
 	
 	public PagamentoReserva(Reserva reserva, Pagamento pagamento){
@@ -54,6 +56,17 @@ public class PagamentoReserva {
 
 	public void setPagamento(Pagamento pagamento) {
 		this.pagamento = pagamento;
+	}
+
+	public void setValor(Double valor) {
+		this.valor= valor;
+	}
+
+	public Double getValor() {
+		if (this.valor != null)
+			return valor;
+		
+		return this.pagamento.getValor();
 	}
 
 }

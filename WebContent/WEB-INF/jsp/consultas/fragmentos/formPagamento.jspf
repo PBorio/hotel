@@ -11,7 +11,6 @@
 				</div>
 			 </div>
 		  	 <div id="cartao">
-		  	 	<input type="hidden" value="${reserva.id}" name="pagamento.reserva.id"/>
 			  	 <div class="form-group">
 			  	  	<label class="control-label col-xs-2">Data Pagamento:</label>
 				    <div class="col-xs-10">
@@ -67,7 +66,7 @@
 				 <div class="form-group">
 			  	  	<label class="control-label col-xs-2">Valor:</label>
 				    <div class="col-xs-10">
-				 	  <input type="text" class="col-xs-10" value="${pagamento.valorDeposito}" name="pagamento.valorDeposito" />
+				 	  <input type="text" id="valorDeposito" class="col-xs-10" value="${pagamento.valorDeposito}" name="pagamento.valorDeposito" />
 					</div>
 				 </div>
 				 <div class="form-group">
@@ -141,5 +140,6 @@ $(function() {
     });
 	$("#dataPagamento").mask("99/99/9999");
 	$("#numeroCartao").mask("9999.9999");
+	
 });
  </script>

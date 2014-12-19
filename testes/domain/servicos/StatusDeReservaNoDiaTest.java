@@ -34,7 +34,7 @@ public class StatusDeReservaNoDiaTest {
 	
 	@Test
 	public void oStatusDeveIndicarQueUmQuartoEstaLivreEOutroReservado(){
-		DateTime dia = parser.parseData("21/02/2014");
+		DateTime dia = parser.parseData("20/02/2014");
 		
 		Reserva reserva = new FakeReserva().iniciandoEm("15/02/2014").terminandoEm("21/02/2014").build();
 		

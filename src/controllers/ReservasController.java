@@ -22,6 +22,7 @@ import controllers.views.reservas.DetalhesDosParametros;
 import controllers.views.reservas.InformativoDeQuartos;
 import controllers.views.reservas.ParametrosReserva;
 import controllers.views.reservas.ReservasView;
+import domain.AgrupadorReservas;
 import domain.Hospede;
 import domain.PoliticaDePrecos;
 import domain.Quarto;
@@ -132,14 +133,16 @@ public class ReservasController {
 
 			Hospede hospedeExistente = hospedeService.buscarESalvarOuAtualizar(hospede);
 			
+			AgrupadorReservas agrupadorReservas = new AgrupadorReservas();
 			for (Reserva reserva : reservasView.getReservas()){
 				Quarto quarto = reserva.getQuarto();
 				if (quarto.possuiReservasNoMesmoPeriodo(reserva))
 					throw new HotelException("Já existe reserva para o quarto "+quarto.getNumero()+" para este período.");
 				reserva.setHospede(hospedeExistente);
+				agrupadorReservas.addReserva(reserva);
 			}
 			
-			reservaRepositorio.salvarVariasReservas(reservasView.getReservas());
+			reservaRepositorio.salvarReservas(agrupadorReservas);
 			result.redirectTo(ConsultasController.class).consulta();
 			
 		}catch(HotelException e){
@@ -197,7 +200,20 @@ public class ReservasController {
 		result.include("detalhesDosParametros", detalhesDosParametros);
 		result.include("quartoList", quartosParaReserva);
 	}
-
+	
+	public void limparReserva(){
+		reservasView.clear();
+		result.of(this).parametrosIniciais();
+	}
+	
+	public void responsavelReserva(){}
+	
+	@Get
+	@Path("/reserva/interna")
+	public void reservaInterna(){
+		
+	}
+	
 	private List<InformativoDeQuartos> buscarQuartosDisponiveis() {
 		
 		Reserva reservaComTodosOsQuartos = new Reserva();
@@ -223,11 +239,4 @@ public class ReservasController {
 		
 		return result;
 	}
-	
-	public void limparReserva(){
-		reservasView.clear();
-		result.of(this).parametrosIniciais();
-	}
-	
-	public void responsavelReserva(){}
 }

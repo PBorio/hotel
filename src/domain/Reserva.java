@@ -76,6 +76,10 @@ public class Reserva implements CalculavelPorPeriodo {
 	@OneToMany(mappedBy="reserva")
 	private List<PagamentoReserva> pagamentosReservas = new ArrayList<PagamentoReserva>();
 
+	@ManyToOne
+	@JoinColumn(name="agrupador_reservas_id")
+	private AgrupadorReservas agrupadorReservas;
+
 	public Long getId() {
 		return id;
 	}
@@ -143,6 +147,11 @@ public class Reserva implements CalculavelPorPeriodo {
 	public Hospede getHospede() {
 		return hospede;
 	}
+	
+
+	public void setAgrupador(AgrupadorReservas agrupadorReservas) {
+		this.agrupadorReservas = agrupadorReservas;
+	}
 
 	public DateTime getCheckin() {
 		return checkin;
@@ -179,26 +188,28 @@ public class Reserva implements CalculavelPorPeriodo {
 	}
 	
 	public boolean contemAData(DateTime dia) {
+		if (this.fim == null)
+			return false;
 		
 		dia = dia.withTimeAtStartOfDay();
-		if (dia.equals(inicio.withTimeAtStartOfDay()) || dia.equals(fim.withTimeAtStartOfDay()))
+		if (dia.equals(inicio.withTimeAtStartOfDay()) || dia.equals(getUltimoPernoite().withTimeAtStartOfDay()))
 			return true;
 		
-		return new Interval(inicio, fim).contains(dia);
+		return new Interval(inicio, getUltimoPernoite()).contains(dia);
 	}
 
 	public boolean coincideCom(Reserva outraReserva) {
-		Periodo periodoDestaReserva = new Periodo(inicio, fim);
-		Periodo periodoDaOutraReserva = new Periodo(outraReserva.getInicio(), outraReserva.getFim());
+		Periodo periodoDestaReserva = new Periodo(inicio, getUltimoPernoite());
+		Periodo periodoDaOutraReserva = new Periodo(outraReserva.getInicio(), outraReserva.getFim().minusDays(1));
  		return periodoDestaReserva.coincideCom(periodoDaOutraReserva);
 	}
 	
 	public Double getValorPago() {
 		Double result = 0.0;
-		for (PagamentoReserva pr : this.pagamentosReservas){
-			Pagamento pg = pr.getPagamento();
+		for (PagamentoReserva pagamentoReserva : this.pagamentosReservas){
+			Pagamento pg = pagamentoReserva.getPagamento();
 			if (pg.getDataPagamento() != null)
-				result += pg.getValorPagamento();
+				result += pagamentoReserva.getValor();
 		}
 		BigDecimal bd = new BigDecimal(result.toString());
 	  	return bd.setScale(2, RoundingMode.HALF_EVEN).doubleValue();
@@ -305,6 +316,23 @@ public class Reserva implements CalculavelPorPeriodo {
 			return false;
 		return true;
 	}
+
+	public DateTime getUltimoPernoite() {
+		return this.fim.minusDays(1);
+	}
+
+	public AgrupadorReservas getAgrupadorReservas() {
+		return agrupadorReservas;
+	}
+
+	public void setAgrupadorReservas(AgrupadorReservas agrupadorReservas) {
+		this.agrupadorReservas = agrupadorReservas;
+	}
+
+	public void addPagamentoReserva(PagamentoReserva pagamentoReserva) {
+		this.pagamentosReservas.add(pagamentoReserva);
+	}
+
 
 
 }

@@ -94,7 +94,7 @@ public class ReservaTest {
 	}
 	
 	@Test
-	public void seOUltimoDiaDeUmaReservaEhIgualAoPrimeiroDiaDeOutraEntaoElasCoincidem(){
+	public void seOUltimoDiaDeUmaReservaEhIgualAoPrimeiroDiaDeOutraEntaoElasNaoCoincidem(){
 		DateTime sabado = new DateTime(2014,7,19,0,0,0);
 		DateTime terca1 = new DateTime(2014,7,22,0,0,0);
 		DateTime terca2 = new DateTime(2014,7,22,0,0,0);
@@ -108,7 +108,7 @@ public class ReservaTest {
 		segundaReserva.setInicio(terca2);
 		segundaReserva.setFim(sexta);
 		
-		Assert.assertTrue(primeiraReserva.coincideCom(segundaReserva));
+		Assert.assertFalse(primeiraReserva.coincideCom(segundaReserva));
 	}
 	
 	@Test

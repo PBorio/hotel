@@ -57,4 +57,9 @@ public class PagamentoEstadia {
 		this.pagamento = pagamento;
 	}
 
+
+	public Double getValor() {
+		return this.pagamento.getValor();
+	}
+
 }

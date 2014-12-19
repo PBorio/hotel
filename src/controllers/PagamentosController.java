@@ -4,10 +4,12 @@ import repositorios.PagamentoRepositorio;
 import repositorios.ReservaRepositorio;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
+import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.validator.ValidationMessage;
+import domain.AgrupadorReservas;
 import domain.Pagamento;
 import domain.Reserva;
 import domain.exceptions.HotelException;
@@ -33,6 +35,30 @@ public class PagamentosController {
 			pagamento.arrumaValores();
 			ValidadorPagamentoReserva validador = new ValidadorPagamentoReserva(pagamento);
 			validador.validar();
+			
+			if (pagamento.getId() == null)
+				pagamentoRepositorio.salva(pagamento);
+			else
+				pagamentoRepositorio.atualiza(pagamento);
+			
+			result.redirectTo(ConsultasController.class).consulta();
+		}catch(HotelException e){
+			e.printStackTrace();
+			validator. add(new ValidationMessage(e.getMessage(),"erro.no.reserva",e.getMessage()));
+			validator.onErrorRedirectTo(ConsultasController.class).pagamento(pagamento.getReserva().getId());
+		}
+	}
+	
+	@Post
+	@Path("/pagamentos/lote/registrar")
+	public void registrarLote(Pagamento pagamento, AgrupadorReservas agrupadorReservas){
+		try{
+			pagamento.arrumaValores();
+			ValidadorPagamentoReserva validador = new ValidadorPagamentoReserva(pagamento);
+			validador.validar();
+			
+			AgrupadorReservas agrupador = reservaRepositorio.buscarAgrupadorPorId(agrupadorReservas.getId());
+			agrupador.addPagamento(pagamento);
 			
 			if (pagamento.getId() == null)
 				pagamentoRepositorio.salva(pagamento);

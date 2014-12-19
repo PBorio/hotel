@@ -264,7 +264,7 @@ public class Estadia implements CalculavelPorPeriodo {
 		
 		for (PagamentoEstadia pe : this.pagamentosEstadias){
 			if (pe.getPagamento().getDataPagamento() != null)
-				result += pe.getPagamento().getValor();
+				result += pe.getValor();
 		}
 		BigDecimal bd = new BigDecimal(result.toString());
 	  	return bd.setScale(2, RoundingMode.HALF_EVEN).doubleValue();

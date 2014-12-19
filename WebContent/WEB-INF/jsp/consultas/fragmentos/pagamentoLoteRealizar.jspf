@@ -1,0 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<fieldset> 
+<legend>Informar Pagamento</legend>
+ <form class="form-horizontal" action='<c:url value="/pagamentos/lote/registrar"/>' method="post">
+ 	 <input type="hidden" value="${agrupadorReservas.id}" name="agrupadorReservas.id"/>
+ 	   <%@include file="formPagamento.jspf" %>
+</form>
+</fieldset>

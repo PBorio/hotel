@@ -11,6 +11,31 @@
 </head>
 <body>
   <div class="container" id="containerConsulta">
+  		<c:forEach var="error" items="${errors}">
+		<div class="alert alert-danger">
+			${error.message}
+		</div>
+	</c:forEach>
+    <c:if test="${not empty reservasInternasView.reservas}">
+  		<div class="row">
+			 <div class="col-xs-12 col-md-12 col-lg-12">
+	                  <div class="panel panel-default height">
+	                      <div class="panel-heading">Reservas Pendentes</div>
+	                      <div class="panel-body">
+	                       	 <c:forEach var="reserva" items="${reservasInternasView.reservas}">
+	                          <strong>Reserva: </strong> ${reserva.quarto.numero} - A Partir de <joda:format value="${reserva.inicio}" pattern="dd/MM/yyyy"/><br>
+	                         </c:forEach>
+	                       <div class="header">
+							<ul class="nav nav-pills pull-right">
+								<li class="active"><a href="<c:url value='/reserva/interna'/>">Confirmar</a></li>
+								<li class="active"><a href="<c:url value='/limpar/nova/reserva/${hotelCalendario.primeiraSegundaFeira}/${hotelCalendario.mesAtual}/${hotelCalendario.anoAtual}'/>">Limpar</a></li>
+							</ul>
+						</div>
+                      </div>
+                  </div>
+              </div>
+		</div>
+	</c:if>
 	<table>
 	 <thead>
    	 <tr>
@@ -25,7 +50,7 @@
    	 	<th class="registroData fc-widget-header"></th>	
    	    <c:forEach var="dia" items="${hotelCalendario.cabecalho.dias}">
    	         <th <c:choose>
-   	               <c:when test="${dia.hoje}">class="destaque fc-widget-header"</c:when>
+   	               <c:when test="${dia.hoje}">class="fc-widget-header destaque"</c:when>
    	               <c:when test="${dia.fimDeSemana}">class="fimDeSemana fc-widget-header"</c:when>
    	               <c:otherwise>class="registroData fc-widget-header"</c:otherwise>
    	             </c:choose> > 
@@ -40,7 +65,11 @@
 	            <td class="fc-widget-header">${linha.numeroQuarto}</td>
 	            <c:forEach var="dia" items="${linha.dias}">
 	              <c:choose>
-	              	<c:when test="${empty dia.idReserva}"><td class="fc-widget-content"><a href="<c:url value='/nova/reserva'/>">${dia.texto}</a></td></c:when>
+	              	<c:when test="${empty dia.idReserva}">
+	              	  <td class="fc-widget-content">
+	              		<a href="<c:url value='/nova/reserva/${dia.quarto.id}/${dia.diaDoMes}/${dia.mes}/${dia.ano}/${hotelCalendario.primeiraSegundaFeira}/${hotelCalendario.mesAtual}/${hotelCalendario.anoAtual}'/>">${dia.texto}</a>
+	              	  </td>
+	              	</c:when>
 	              	<c:otherwise>
 	              	    <td class="fc-widget-content ${dia.marcacao}">
 	              	        <a href="<c:url value='/pagamento/${dia.idReserva}'/>">${dia.texto}</a>

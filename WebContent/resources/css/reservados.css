@@ -33,13 +33,6 @@ a{
   color: white;
 }
 
-.destaque{
-  background-color: white;
-  cursor: default;
-  border: 2px solid black;
-  color: black;
-}
-
 .Livre{
   background-color: #008000;
   border: 1px solid black;

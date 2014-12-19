@@ -192,4 +192,8 @@ public class Pagamento {
 				TipoPagamento.CARTAO.getValue().equals(this.tipoPagamento) ||
 				TipoPagamento.DINHEIRO.getValue().equals(this.tipoPagamento));
 	}
+
+	public void addPagamentoReserva(PagamentoReserva pagamentoReserva) {
+		this.pagamentoReservas.add(pagamentoReserva);
+	}
 }
