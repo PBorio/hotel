@@ -1,19 +1,41 @@
 package controllers.converters;
 
+import java.util.Locale;
 import java.util.ResourceBundle;
 
-import org.joda.time.DateTime;
+import javax.inject.Inject;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
+import br.com.caelum.iogi.exceptions.ConversionException;
 import br.com.caelum.vraptor.Convert;
 import br.com.caelum.vraptor.Converter;
+import br.com.caelum.vraptor.ioc.RequestScoped;
 
 @Convert(DateTime.class)  
-public class DateTimeConverter implements Converter<DateTime> {  
-	public DateTime convert(String arg0, Class<? extends DateTime> arg1,
-			ResourceBundle arg2) {
-		// TODO Auto-generated method stub
-		return null;
-	}  
+@RequestScoped
+public class DateTimeConverter implements Converter<DateTime> {
+
+
+	public DateTime convert(String value, Class<? extends DateTime> type, ResourceBundle bundle) {
+		if (value == null || "".equals(value.trim())) {
+			return null;
+		}
+		
+		try {
+			return getFormatter().parseDateTime(value);
+		} catch (Exception e) {
+			throw new RuntimeException(e.getMessage());
+		}
+	}
+
+	protected DateTimeFormatter getFormatter() {
+		return DateTimeFormat.shortDate().withLocale(new Locale("pt","BR")); 
+	}
+
+
 }
 
 	

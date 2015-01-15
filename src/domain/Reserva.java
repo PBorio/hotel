@@ -169,14 +169,17 @@ public class Reserva implements CalculavelPorPeriodo {
 		this.cancelamento = cancelamento;
 	}
 	
-	public void setValorReserva(double valorReserva) {
-		if (valorReserva > 0.0)
+	public void setValorReserva(Double valorReserva) {
+		if (valorReserva != null && valorReserva > 0.0)
 			this.valorReserva = valorReserva;
 	}
 	
 	public Double getValorReserva() {
 		if (this.valorReserva != null && this.valorReserva.doubleValue() >= 0.0)
 			return this.valorReserva;
+		
+		if (this.fim == null)
+			return 0.0;
 		
 		return getValorCalculado();
 	}

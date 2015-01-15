@@ -83,4 +83,8 @@ public class ReservasInternasView implements Serializable {
 		this.reservas.clear();
 	}
 
+	public void setReservas(List<Reserva> reservas) {
+		this.reservas = reservas;
+	}
+
 }

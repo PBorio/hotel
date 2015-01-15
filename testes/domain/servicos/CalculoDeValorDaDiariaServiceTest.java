@@ -160,5 +160,4 @@ public class CalculoDeValorDaDiariaServiceTest {
 		Assert.assertEquals((Double)50.0, valorDiaria);
 	}
 	
-	
 }

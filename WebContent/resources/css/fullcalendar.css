@@ -653,3 +653,10 @@ table.fc-border-separate {
   border: 2px solid black;
   color: black;
 }
+
+.fimDeSemana{
+  background: #535857;
+  cursor: default;
+  border: 1px solid white;
+  color: white;
+}

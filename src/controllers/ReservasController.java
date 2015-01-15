@@ -208,12 +208,6 @@ public class ReservasController {
 	
 	public void responsavelReserva(){}
 	
-	@Get
-	@Path("/reserva/interna")
-	public void reservaInterna(){
-		
-	}
-	
 	private List<InformativoDeQuartos> buscarQuartosDisponiveis() {
 		
 		Reserva reservaComTodosOsQuartos = new Reserva();
