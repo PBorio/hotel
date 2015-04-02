@@ -47,6 +47,30 @@
 								<input type="text" class="col-xs-10" name="categoria.valor" id="categoria.valor" value="${categoria.valor}" />
 							</div>
 					  </div> 
+					  <div class="form-group">
+						<label class="control-label col-xs-2">2 Crianças de 0 a 5:</label>
+						<div class="col-xs-10">
+							<input type="text" class="col-xs-10" name="categoria.valorACada2CriancasDe0a5" id="categoria.valorACada2CriancasDe0a5" value="${categoria.valorACada2CriancasDe0a5}" />
+						</div>
+				  </div> 
+				   <div class="form-group">
+						<label class="control-label col-xs-2">Crianças de 6 a 16:</label>
+						<div class="col-xs-10">
+							<input type="text" class="col-xs-10" name="categoria.valorCadaCrianca0a16" id="categoria.valorCadaCrianca0a16" value="${categoria.valorCadaCrianca0a16}" />
+						</div>
+				  </div> 
+				   <div class="form-group">
+						<label class="control-label col-xs-2">Adulto Extra:</label>
+						<div class="col-xs-10">
+							<input type="text" class="col-xs-10" name="categoria.valorCadaAdultoExtra" id="categoria.valorCadaAdultoExtra" value="${categoria.valorCadaAdultoExtra}" />
+						</div>
+				  </div> 
+				   <div class="form-group">
+						<label class="control-label col-xs-2">Um Adulto:</label>
+						<div class="col-xs-10">
+							<input type="text" class="col-xs-10" name="categoria.valorParaUmAdulto" id="categoria.valorParaUmAdulto" value="${categoria.valorParaUmAdulto}" />
+						</div>
+				  </div> 
 				<security:authorize ifAnyGranted="ROLE_SYSADMIN">
 				   <div class="form-group">
 					<label class="control-label col-xs-2" for="singlebutton"></label>

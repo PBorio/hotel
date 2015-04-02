@@ -70,6 +70,12 @@
 					</div>
 				</div>
 				<div class="form-group">
+					<label class="control-label col-xs-2">Capacidade:</label>
+					<div class="col-xs-10">
+						<input type="text" class="col-xs-10" name="quarto.capacidade" id="quarto.capacidade" value="${quarto.capacidade}" />
+					</div>
+				</div>
+				<div class="form-group">
 					<label class="control-label col-xs-2">Observação:</label>
 					<div class="col-xs-10">
 						<textarea name="quarto.observacao" class="col-xs-10" id="quarto.observacao">${quarto.observacao}</textarea>

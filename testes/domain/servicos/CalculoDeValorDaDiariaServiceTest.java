@@ -13,7 +13,6 @@ import domain.Reserva;
 import domain.exceptions.HotelException;
 import domain.helpers.FakeReserva;
 import domain.servicos.helpers.ParserDeStringParaData;
-import domain.servicos.helpers.Periodo;
 
 public class CalculoDeValorDaDiariaServiceTest {
 	
@@ -137,7 +136,7 @@ public class CalculoDeValorDaDiariaServiceTest {
 		quarto.setId(1l);
 		quarto.setCategoria(categoria);
 		
-		Periodo periodo = new Periodo(parser.parseData("01/04/2014"), parser.parseData("05/04/2014"));
+		Reserva reserva = new FakeReserva().comNumeroDeAdultos(2).iniciandoEm("01/04/2014").terminandoEm("05/04/2014").build();
 		
 		PoliticaDePrecos politica = new PoliticaDePrecos();
 		politica.setCategoria(categoria);
@@ -155,7 +154,7 @@ public class CalculoDeValorDaDiariaServiceTest {
 		politicas.add(padrao);
 		
 		CalculoDeValorDaDiariaService servico = new CalculoDeValorDaDiariaService(politicas);
-		Double valorDiaria = servico.calcularValorDaDiaria(periodo, quarto);
+		Double valorDiaria = servico.calcularValorDaDiaria(reserva, quarto);
 		
 		Assert.assertEquals((Double)50.0, valorDiaria);
 	}

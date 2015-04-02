@@ -14,18 +14,13 @@ public class ServicoDeReserva {
 		this.quartos = quartos;
 	}
 
-	public Quarto quartoDisponivelParaAReserva(Reserva reserva) {
-		for (Quarto q : quartos){
-			if (!q.possuiReservasNoMesmoPeriodo(reserva)){
-				return q;
-			}
-		}
-		return null;
-	}
-
 	public List<Quarto> quartosDisponiveisParaAReserva(Reserva reserva) {
 		List<Quarto> disponiveis = new ArrayList<Quarto>();
 		for (Quarto q : quartos){
+			
+			if (q.getCapacidade().intValue() < reserva.getNumeroDePessoas().intValue())
+				continue;
+			
 			if (!q.possuiReservasNoMesmoPeriodo(reserva)){
 				disponiveis.add(q);
 			}

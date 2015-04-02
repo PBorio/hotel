@@ -18,16 +18,17 @@ public class CalculoDeValorDaDiariaService {
 		this.politicas = politicas;
 	}
 	
-	public Double calcularValorDaDiaria(Periodo periodo, Quarto quarto) {
+	public Double calcularValorDaDiaria(Reserva reserva, Quarto quarto) {
 		Double valorDaDiaria = 0.0;
-		
+			Periodo periodo = new Periodo(reserva.getInicio(), reserva.getFim());
+
 			for (PoliticaDePrecos politica : this.politicas){
 				if (!politica.getCategoria().equals(quarto.getCategoria()))
 					continue;
 				
 				Periodo outroPeriodo = new Periodo(new DateTime(politica.getInicio()), new DateTime(politica.getFim()));
 				if (periodo.coincideCom(outroPeriodo))
-					valorDaDiaria = politica.getValorDiaria();
+					valorDaDiaria = politica.valorParaAReserva(reserva);
 				
 			}
 			
@@ -35,7 +36,7 @@ public class CalculoDeValorDaDiariaService {
 				if (quarto.getCategoria() == null || quarto.getCategoria().getValor() == null)
 					throw new HotelException("Valor para a categoria do quarto: "+quarto.getCategoria().getDescricao());
 				
-				valorDaDiaria = quarto.getCategoria().getValor();
+				valorDaDiaria = quarto.getCategoria().valorParaAReserva(reserva);
 			}
 			
 			if (naoEncontrouPoliticaParaAReserva(valorDaDiaria))
@@ -46,15 +47,8 @@ public class CalculoDeValorDaDiariaService {
 
 
 	public void calcularEInformarValorNaReserva(Reserva reserva) {
-		Periodo periodo = new Periodo(reserva.getInicio(), reserva.getFim());
-		Double valorDaDiaria = this.calcularValorDaDiaria(periodo, reserva.getQuarto());
+		Double valorDaDiaria = this.calcularValorDaDiaria(reserva, reserva.getQuarto());
 		reserva.setValorDiaria(valorDaDiaria);
-		valorDaDiaria = aplicarModificadoresDeValor(reserva, valorDaDiaria);
-		reserva.setValorDiaria(valorDaDiaria);
-	}
-
-	private Double aplicarModificadoresDeValor(Reserva reserva, Double valorDaDiaria) {
-		return new ModificadorDeValoresDaDiariaService().aplicarModificadores(reserva, valorDaDiaria);
 	}
 
 	private boolean naoEncontrouPoliticaParaAReserva(Double valorDaReserva) {

@@ -31,7 +31,6 @@ import domain.exceptions.HotelException;
 import domain.servicos.CalculoDeValorDaDiariaService;
 import domain.servicos.InformativoService;
 import domain.servicos.ServicoDeReserva;
-import domain.servicos.helpers.Periodo;
 import domain.servicos.interfaces.HospedeService;
 
 @Resource
@@ -101,7 +100,7 @@ public class ReservasController {
 			reservasView.addReserva(reserva);
 			
 			if (reservasView.precisaDeMaisQuartos()){
-				List<InformativoDeQuartos> quartosParaReserva = buscarQuartosDisponiveis();
+				List<InformativoDeQuartos> quartosParaReserva = buscarQuartosDisponiveis(detalhe);
 				result.include("quartoList", quartosParaReserva);
 				result.redirectTo(this).parametrosDetalhes(reservasView.getParametrosReserva());
 			}
@@ -191,11 +190,12 @@ public class ReservasController {
 		validator = validation.validarBusca();
 		
 		if (validator.hasErrors()){
+			result.include("parametrosReserva", parametrosReserva);
 		    validator.onErrorUsePageOf(this).parametrosIniciais();
 		}
 		
-		List<InformativoDeQuartos> quartosParaReserva = buscarQuartosDisponiveis();
 		DetalhesDosParametros detalhesDosParametros = reservasView.getParametrosReserva().primeiroDetalheSemQuarto();
+		List<InformativoDeQuartos> quartosParaReserva = buscarQuartosDisponiveis(detalhesDosParametros);
 		
 		result.include("detalhesDosParametros", detalhesDosParametros);
 		result.include("quartoList", quartosParaReserva);
@@ -208,11 +208,14 @@ public class ReservasController {
 	
 	public void responsavelReserva(){}
 	
-	private List<InformativoDeQuartos> buscarQuartosDisponiveis() {
+	private List<InformativoDeQuartos> buscarQuartosDisponiveis(DetalhesDosParametros detalhesDosParametros) {
 		
 		Reserva reservaComTodosOsQuartos = new Reserva();
 		reservaComTodosOsQuartos.setInicio(new DateTime(reservasView.getChegada().getTime()));
 		reservaComTodosOsQuartos.setFim(new DateTime(reservasView.getSaida().getTime()));
+		reservaComTodosOsQuartos.setNumeroAdultos(detalhesDosParametros.getNumeroAdultos());
+		reservaComTodosOsQuartos.setNumeroCriancas0a5(detalhesDosParametros.getNumeroCriancas0a5());
+		reservaComTodosOsQuartos.setNumeroCriancas6a16(detalhesDosParametros.getNumeroCriancas6a16());
 		
 		List<Quarto> quartos = quartoRepositorio.buscaTodos();
 		List<PoliticaDePrecos> politicas = politicaPrecoRepositorio.buscaTodos();
@@ -220,8 +223,7 @@ public class ReservasController {
 		ServicoDeReserva servicoReserva = new ServicoDeReserva(quartos);
 		List<Quarto> quartosDisponiveis = servicoReserva.quartosDisponiveisParaAReserva(reservaComTodosOsQuartos);
 		
-		Periodo periodo = new Periodo(reservaComTodosOsQuartos.getInicio(), reservaComTodosOsQuartos.getFim());
-		List<InformativoDeQuartos> quartosParaReserva = new InformativoService(politicas).criarInformativoDeQuartos(periodo,quartosDisponiveis);
+		List<InformativoDeQuartos> quartosParaReserva = new InformativoService(politicas).criarInformativoDeQuartos(reservaComTodosOsQuartos,quartosDisponiveis);
 		List<InformativoDeQuartos> result = new ArrayList<InformativoDeQuartos>();
 
 		for (InformativoDeQuartos infoq : quartosParaReserva){

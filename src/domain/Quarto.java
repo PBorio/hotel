@@ -42,6 +42,8 @@ public class Quarto {
 
 	private String foto;
 	
+	private Integer capacidade = 0;
+	
 	public Long getId() {
 		return id;
 	}
@@ -160,5 +162,13 @@ public class Quarto {
 	 */
 	public void setFoto(String foto) {
 		this.foto = foto;
+	}
+
+	public Integer getCapacidade() {
+		return capacidade;
+	}
+
+	public void setCapacidade(Integer capacidade) {
+		this.capacidade = capacidade;
 	}
 }

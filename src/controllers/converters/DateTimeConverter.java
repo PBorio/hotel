@@ -3,13 +3,10 @@ package controllers.converters;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import javax.inject.Inject;
-
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import br.com.caelum.iogi.exceptions.ConversionException;
 import br.com.caelum.vraptor.Convert;
 import br.com.caelum.vraptor.Converter;
 import br.com.caelum.vraptor.ioc.RequestScoped;

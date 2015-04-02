@@ -29,6 +29,8 @@
 					<li><a href="<c:url value='/quartos/list'/>">Quartos</a></li>
 					<li><a href="<c:url value='/categorias/list'/>">Categorias</a></li>
 					<li><a href="<c:url value='/politicas/list'/>">Preços</a></li>
+					<li><a href="<c:url value='/produtos/list'/>">Produtos</a></li>
+					<li><a href="<c:url value='/servicos/list'/>">Serviços</a></li>
 				</ul>
 				<div class="nav navbar-nav navbar-right">
 					<div class="panel panel-default">

@@ -3,8 +3,6 @@ package controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.joda.time.DateTime;
-
 import repositorios.EstadiaRepositorio;
 import repositorios.PoliticaPrecoRepositorio;
 import repositorios.ReservaRepositorio;
@@ -24,8 +22,6 @@ import domain.exceptions.HotelException;
 import domain.helpers.ValidadorPagamentoReserva;
 import domain.servicos.CalculoDeValorDaDiariaService;
 import domain.servicos.Checkin;
-import domain.servicos.ModificadorDeValoresDaDiariaService;
-import domain.servicos.helpers.Periodo;
 import domain.servicos.interfaces.HospedeService;
 
 @Resource
@@ -173,10 +169,15 @@ public class CheckinController {
 		this.checkin.setDataCheckout(checkinLocal.getDataCheckout());
 		this.checkin.setDesconto(checkinLocal.getDesconto());
 		
+		Reserva reservaParaCalculo = new Reserva();
+		reservaParaCalculo.setInicio(checkin.getInicio());
+		reservaParaCalculo.setFim(checkin.getFim());
+		reservaParaCalculo.setNumeroAdultos(checkin.getReserva().getNumeroAdultos());
+		reservaParaCalculo.setNumeroCriancas0a5(checkin.getReserva().getNumeroCriancas0a5());
+		reservaParaCalculo.setNumeroCriancas6a16(checkin.getReserva().getNumeroCriancas6a16());
+		
 		CalculoDeValorDaDiariaService calculoDiaria = new CalculoDeValorDaDiariaService(politicaRepositorio.buscaTodos());
-		Periodo periodo = new Periodo(new DateTime(this.checkin.getDataCheckin()), new DateTime(this.checkin.getDataCheckout()));
-		Double valorDiaria = calculoDiaria.calcularValorDaDiaria(periodo, checkin.getQuarto());
-		valorDiaria = new ModificadorDeValoresDaDiariaService().aplicarModificadores(this.checkin.getReserva(), valorDiaria);
+		Double valorDiaria = calculoDiaria.calcularValorDaDiaria(reservaParaCalculo, checkin.getQuarto());
 		this.checkin.setValorDiaria(valorDiaria);
 		
 		Estadia estadia = checkin.iniciarEstadiaAPartirDeUmaReserva();

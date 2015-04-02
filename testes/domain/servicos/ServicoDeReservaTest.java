@@ -26,7 +26,7 @@ public class ServicoDeReservaTest {
 		quartos.add(quarto);
 		
 		ServicoDeReserva servico = new ServicoDeReserva(quartos);
-		Assert.assertNull(servico.quartoDisponivelParaAReserva(reserva));
+		Assert.assertEquals(0, servico.quartosDisponiveisParaAReserva(reserva).size());
 	}
 	
 	@Test
@@ -42,7 +42,7 @@ public class ServicoDeReservaTest {
 		quartos.add(quarto);
 		
 		ServicoDeReserva servico = new ServicoDeReserva(quartos);
-		Assert.assertNotNull(servico.quartoDisponivelParaAReserva(reserva));
+		Assert.assertTrue(servico.quartosDisponiveisParaAReserva(reserva).size() > 0);
 	}
 	
 	@Test
@@ -65,8 +65,43 @@ public class ServicoDeReservaTest {
 		quartos.add(outroQuarto);
 		
 		ServicoDeReserva servico = new ServicoDeReserva(quartos);
-		Assert.assertEquals(outroQuarto, servico.quartoDisponivelParaAReserva(reserva));
+		Assert.assertEquals(outroQuarto, servico.quartosDisponiveisParaAReserva(reserva).get(0));
 	}
+	
+	@Test
+	public void seACapacidadeDoQuartoForMenorQueONumeroDePessoasDaReservaEleNaoEstaraDisponivelParaAReserva(){
+
+		Reserva reserva = criarReserva("01/03/2015", "06/03/2015");
+		reserva.setNumeroAdultos(8);
+		
+		Quarto quarto = new Quarto();
+		quarto.setId(1l);
+		quarto.setCapacidade(5);
+		
+		List<Quarto> quartos = new ArrayList<Quarto>();
+		quartos.add(quarto);
+		
+		ServicoDeReserva servico = new ServicoDeReserva(quartos);
+		Assert.assertEquals(0,servico.quartosDisponiveisParaAReserva(reserva).size());
+	}
+	
+	@Test
+	public void umQuartoSoEstaDisponivelParaAReservaSeSuaCapacidadeForMaiorQueOuIgualaoONumeroDePessoasParaAReserva(){
+
+		Reserva reserva = criarReserva("01/03/2015", "06/03/2015");
+		reserva.setNumeroAdultos(5);
+		
+		Quarto quarto = new Quarto();
+		quarto.setId(1l);
+		quarto.setCapacidade(5);
+		
+		List<Quarto> quartos = new ArrayList<Quarto>();
+		quartos.add(quarto);
+		
+		ServicoDeReserva servico = new ServicoDeReserva(quartos);
+		Assert.assertEquals(quarto, servico.quartosDisponiveisParaAReserva(reserva).get(0));
+	}
+	
 
 	private Reserva criarReserva(String inicio, String fim) {
 		Reserva reservaJaExistente = new Reserva();

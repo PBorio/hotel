@@ -113,25 +113,6 @@ function addParametrosDeReservas(indiceDosParametros){
 			"	</select>"+
 			"</div>"+
 			"</div>"+
-			"<div class='col-sm-3'>"+
-            "<div class='form-group'>"+
-            "<label>Crianças de 17 e 18</label>"+
-			"	<select name='parametrosReserva.detalhes["+indiceDosParametros+"].numeroCriancas17a18' class='form-control'>"+
-			"		<option value=''>Crianças de 17 e 18</option>"+
-			"		<option value='0'>0</option>"+
-			"		<option value='1'>1</option>"+
-			"		<option value='2'>2</option>"+
-			"		<option value='3'>3</option>"+
-			"		<option value='4'>4</option>"+
-			"	    <option value='5'>5</option>"+
-			"		<option value='6'>6</option>"+
-			"		<option value='7'>7</option>"+
-			"		<option value='8'>8</option>"+
-			"		<option value='9'>9</option>"+
-			"		<option value='10'>10</option>"+
-			"	</select>"+
-			"</div>"+
-			"</div>"+
 			"</div>"+
 			"</fieldset>";
 
@@ -200,7 +181,7 @@ function addParametrosDeReservas(indiceDosParametros){
 		        <div class="row">
 		            <div id="reservas">
 		              <c:choose>
-	           			<c:when test="${empty reservasView.parametrosReserva || empty reservasView.parametrosReserva.detalhes }">
+	           			<c:when test="${empty parametrosReserva || empty parametrosReserva.detalhes }">
 	           			   
 				          <fieldset class="molduraLegenda">
 				          	  <legend>Reserva N. 1</legend>
@@ -208,7 +189,7 @@ function addParametrosDeReservas(indiceDosParametros){
 					          <div class="col-sm-4">
 					              <div class="form-group">
 					                <label>Adultos</label>
-					            	 <select name="parametrosReserva.detalhes[${idx.index}].numeroAdultos" class="form-control">
+					            	 <select name="parametrosReserva.detalhes[0].numeroAdultos" class="form-control">
 										<option value="">Nº de adultos</option>
 										<option value="1" <c:if test="${1 == reservasView.parametrosReserva.detalhes[idx.index].numeroAdultos}">selected="true"</c:if>>1</option>
 										<option value="2" <c:if test="${2 == reservasView.parametrosReserva.detalhes[idx.index].numeroAdultos}">selected="true"</c:if>>2</option>
@@ -247,7 +228,7 @@ function addParametrosDeReservas(indiceDosParametros){
 					          <div class="col-sm-4">
 					              <div class="form-group">
 					                <label>Crianças de 6 a 16</label>
-					            	 <select name="parametrosReserva.detalhes[${idx.index}].numeroCriancas6a16" class="form-control">
+					            	 <select name="parametrosReserva.detalhes[0].numeroCriancas6a16" class="form-control">
 										<option value="">Crianças de 6 a 16</option>
 										<option value="0">0</option>
 										<option value="1">1</option>
@@ -263,32 +244,14 @@ function addParametrosDeReservas(indiceDosParametros){
 									</select>
 					              </div>
 					           </div>
-					          <div class="col-sm-2">
-				              	<div class="form-group">
-				              	   <label>Crianças de 17 e 18</label>
-				                   <select name="parametrosReserva.detalhes[0].numeroCriancas17a18" class="form-control">
-										<option value="">Crianças de 17 e 18</option>
-										<option value="0">0</option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-					                    <option value="5">5</option>
-										<option value="6">6</option>
-										<option value="7">7</option>
-										<option value="8">8</option>
-										<option value="9">9</option>
-										<option value="10">10</option>
-									</select>
-				                </div>
-				            	</div>
 				            </div>
 			              </fieldset>
 			             
 			            </c:when> 
 			            <c:otherwise>
-		                    <c:forEach var="detalhe" items="${ reservasView.parametrosReserva.detalhes }" varStatus="idx" >
+		                    <c:forEach var="detalhe" items="${ parametrosReserva.detalhes }" varStatus="idx" >
 			              		<fieldset class="molduraLegenda">
+			              		    <input type="hidden" name="parametrosReserva.detalhes[${idx.index}].ordem" value="${detalhe.ordem}">
 		           			    	<legend>Reserva n. ${idx.index+1}</legend>
 		           			    	<div class="row">
 							          <div class="col-sm-6">
@@ -351,25 +314,6 @@ function addParametrosDeReservas(indiceDosParametros){
 							                
 										</div>
 									</div>
-									<div class="col-sm-3">
-				              	<div class="form-group">
-				              	   <label>Crianças de 17 e 18</label>
-				                   <select name="parametrosReserva.detalhes[${idx.index}].numeroCriancas0a5" class="form-control">
-										<option value="">Crianças de 17 e 18</option>
-										<option value="0" <c:if test="${0 == reservasView.parametrosReserva.detalhes[idx.index].numeroCriancas17a18}">selected="true"</c:if>>0</option>
-										<option value="1" <c:if test="${1 == reservasView.parametrosReserva.detalhes[idx.index].numeroCriancas17a18}">selected="true"</c:if>>1</option>
-										<option value="2" <c:if test="${2 == reservasView.parametrosReserva.detalhes[idx.index].numeroCriancas17a18}">selected="true"</c:if>>2</option>
-										<option value="3" <c:if test="${3 == reservasView.parametrosReserva.detalhes[idx.index].numeroCriancas17a18}">selected="true"</c:if>>3</option>
-										<option value="4" <c:if test="${4 == reservasView.parametrosReserva.detalhes[idx.index].numeroCriancas17a18}">selected="true"</c:if>>4</option>
-					                    <option value="5" <c:if test="${5 == reservasView.parametrosReserva.detalhes[idx.index].numeroCriancas17a18}">selected="true"</c:if>>5</option>
-										<option value="6" <c:if test="${6 == reservasView.parametrosReserva.detalhes[idx.index].numeroCriancas17a18}">selected="true"</c:if>>6</option>
-										<option value="7" <c:if test="${7 == reservasView.parametrosReserva.detalhes[idx.index].numeroCriancas17a18}">selected="true"</c:if>>7</option>
-										<option value="8" <c:if test="${8 == reservasView.parametrosReserva.detalhes[idx.index].numeroCriancas17a18}">selected="true"</c:if>>8</option>
-										<option value="9" <c:if test="${9 == reservasView.parametrosReserva.detalhes[idx.index].numeroCriancas17a18}">selected="true"</c:if>>9</option>
-										<option value="10" <c:if test="${10 == reservasView.parametrosReserva.detalhes[idx.index].numeroCriancas17a18}">selected="true"</c:if>>10</option>
-									</select>
-				                </div>
-				            	</div>
 				            	</div>
 		           				</fieldset>
 		           			</c:forEach>

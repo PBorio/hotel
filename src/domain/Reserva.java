@@ -40,16 +40,16 @@ public class Reserva implements CalculavelPorPeriodo {
 	private DateTime fim;
 	
 	@Column(name="numero_adultos")
-	private Integer numeroAdultos;
+	private Integer numeroAdultos = 0;
 	
 	@Column(name="numero_criancas_05")
-	private Integer numeroCriancas0a5;
+	private Integer numeroCriancas0a5 = 0;
 	
 	@Column(name="numero_criancas_6_16")
-	private Integer numeroCriancas6a16;
+	private Integer numeroCriancas6a16 = 0;
 	
 	@Column(name="numero_criancas_17_18")
-	private Integer numeroCriancas17a18;
+	private Integer numeroCriancas17a18 = 0;
 	
 	@ManyToOne
 	@JoinColumn(name="hospede_id")
@@ -334,6 +334,21 @@ public class Reserva implements CalculavelPorPeriodo {
 
 	public void addPagamentoReserva(PagamentoReserva pagamentoReserva) {
 		this.pagamentosReservas.add(pagamentoReserva);
+	}
+
+	public Integer getNumeroDePessoas() {
+		
+		int pessoas = 0;
+		if (this.numeroAdultos != null)
+			pessoas += numeroAdultos;
+		
+		if (this.numeroCriancas0a5 != null )
+			pessoas += numeroCriancas0a5;
+		
+		if (this.numeroCriancas6a16 != null)
+			pessoas += numeroCriancas6a16;
+		
+		return pessoas;
 	}
 
 

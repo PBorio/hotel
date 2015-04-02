@@ -5351,11 +5351,11 @@ button.close {
 .modal-open {
   overflow: hidden;
 }
-.modal {
+.modal{
   display: none;
   overflow: hidden;
   position: fixed;
-  top: 0;
+  top: 10%;
   right: 0;
   bottom: 0;
   left: 0;
